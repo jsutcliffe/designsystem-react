@@ -165,24 +165,12 @@ export default function Home() {
                             entitled to priority treatment based on clinical need.</p>
                     </AccordionItem>
                     <AccordionItem open id="accordion-2" title="Employability for veterans">
-                        <p>
-                            Veterans are entitled to the same healthcare as any citizen. And there
-                            are health care options and support available specifically for veterans.
-                        </p>
-                        <p>
-                            If you have a health condition that’s related to your service, you’re
-                            entitled to priority treatment based on clinical need.
-                        </p>
+                        <p>If you're looking for a job, there are several organisations that can help
+                            you <a href="#accordion-link">find a job or develop new skills</a>.</p>
                     </AccordionItem>
                     <AccordionItem id="accordion-3" title="Housing for veterans">
-                        <p>
-                            Veterans are entitled to the same healthcare as any citizen. And there
-                            are health care options and support available specifically for veterans.
-                        </p>
-                        <p>
-                            If you have a health condition that’s related to your service, you’re
-                            entitled to priority treatment based on clinical need.
-                        </p>
+                        <p>If you need <a href="#accordion-link">help finding a place to live</a>{' '}
+                            there's support specifically for veterans.</p>
                     </AccordionItem>
                 </Accordion>
             </Example>
@@ -199,13 +187,13 @@ export default function Home() {
 
             <Example>
                 <AspectBox>
-                    <img className="ds_aspect-box__inner" src="./highland-cow.jpg" alt="" />
+                    <img src="./highland-cow.jpg" alt="" />
                 </AspectBox>
             </Example>
 
             <Example>
                 <AspectBox ratio="1:1">
-                    <img className="ds_aspect-box__inner" src="./highland-cow.jpg" alt="" />
+                    <img src="./highland-cow.jpg" alt="" />
                 </AspectBox>
             </Example>
 
@@ -230,6 +218,14 @@ export default function Home() {
                 <BackToTop />
             </Example>
 
+            <Configuration componentName="Back to top">
+                <p>Back to top components can use the following prop:</p>
+                <dl>
+                    <dt><code>href</code></dt>
+                    <dd>Fragment identifier for the target element. Default is <code>#page-top</code>.</dd>
+                </dl>
+            </Configuration>
+
             <h2 className="dsjsx_example-title" id="section-breadcrumbs">Breadcrumbs</h2>
 
             <Example>
@@ -245,7 +241,7 @@ export default function Home() {
                 <p>Omit the <code>href</code> prop from the last breadcrumb item to make it display without a link. This is the preferred way of presenting breadcrumbs in the Design System.</p>
             </Configuration>
 
-            <h2 className="dsjsx_example-title" id="section-buttons">Buttons</h2>
+            <h2 className="dsjsx_example-title" id="section-button">Button</h2>
 
             <Example title="Button styles">
                 <Button>Primary button</Button><br />
@@ -262,17 +258,14 @@ export default function Home() {
             </Example>
 
             <Example title="Buttons with icons">
-                <Button hasIcon>
+                <Button icon="chevron_right">
                     Button with icon
-                    <Icon icon='chevron_right' />
                 </Button><br />
-                <Button hasIcon iconLeft>
+                <Button iconLeft icon="chevron_left">
                     Button with left icon
-                    <Icon icon='chevron_left' />
                 </Button><br />
-                <Button>
-                    <ScreenReaderText>Search</ScreenReaderText>
-                    <Icon icon='search' />
+                <Button iconOnly icon="search">
+                    Search
                 </Button>
             </Example>
 
@@ -284,10 +277,12 @@ export default function Home() {
             <Configuration componentName="Button">
                 <p>Button components can use the following props:</p>
                 <dl>
-                    <dt><code>hasIcon</code></dt>
-                    <dd>Whether the button should include space for an icon. Boolean.</dd>
+                    <dt><code>icon</code></dt>
+                    <dd>Name of the icon to use from the icon stack.</dd>
                     <dt><code>iconLeft</code></dt>
                     <dd>Whether a button's icon is aligned to the left (default is aligned to the right). Boolean.</dd>
+                    <dt><code>iconOnly</code></dt>
+                    <dd>Whether this is an 'icon only' button. This will make the button's text (its child) be visually hidden but available to screen readers. Boolean, default is <code>false</code>.</dd>
                     <dt><code>href</code></dt>
                     <dd><code>href</code> attribute to use on the button. If a href is specified, the button will use the HTML 'a' element.</dd>
                     <dt><code>small</code></dt>
@@ -528,14 +523,31 @@ export default function Home() {
                     label="Guide"
                     title="Apply for or renew a disabled parking permit"
                 >
+                </PageHeader>
+            </Example>
+
+            <Example>
+                <PageHeader
+                    label="Publication - FOI/EIR release"
+                    title="Constitutional Futures Division documents mentioning the Treaty on the Prohibition of Nuclear Weapons: FOI Release"
+                >
                     <Metadata>
-                        <MetadataItem name="Last updated">21/04/2020</MetadataItem>
+                        <MetadataItem name="Last updated">15 August 2024</MetadataItem>
                         <MetadataItem name="Directorate">
-                            <a href="#one">Equality, Inclusion and Human Rights Directorate</a>
+                            <a href="#one">Constitution Directorate</a>
                         </MetadataItem>
                         <MetadataItem name="Part of">
-                            <a href="#two">Equality and rights</a>,
-                            <a href="#three">Law and order</a>
+                            <a href="#two">Constitution and democracy</a>,{' '}
+                            <a href="#three">Public sector</a>
+                        </MetadataItem>
+                        <MetadataItem name="FOI reference">
+                            FOI/202400423236
+                        </MetadataItem>
+                        <MetadataItem name="Date received">
+                            18 July 2024
+                        </MetadataItem>
+                        <MetadataItem name="Date responded">
+                            15 August 2024
                         </MetadataItem>
                     </Metadata>
                 </PageHeader>
@@ -561,7 +573,7 @@ export default function Home() {
                         <a href="#one">Equality, Inclusion and Human Rights Directorate</a>
                     </MetadataItem>
                     <MetadataItem name="Part of">
-                        <a href="#two">Equality and rights</a>,
+                        <a href="#two">Equality and rights</a>,{' '}
                         <a href="#three">Law and order</a>
                     </MetadataItem>
                 </Metadata>
@@ -695,7 +707,7 @@ export default function Home() {
             </Example>
 
             <Example title="Radio buttons with hint text">
-                <RadioGroup name="propertyType">
+                <RadioGroup name="paymentType">
                     <Radio label="Advance" id="advance-radio" hintText="This means you're paid for the period coming up, e.g. the month ahead" />
                     <Radio label="Arrears" id="arrears-radio" hintText="This means you're paid for the time that's just passed, e.g. for the last month" />
                 </RadioGroup>
@@ -768,7 +780,7 @@ export default function Home() {
             </Configuration>
 
             <Configuration componentName="Option">
-                <code>Select</code> components can have any number of <code>Option</code> children. Option components can use the following props:
+                <p><code>Select</code> components can have any number of <code>Option</code> children. Option components can use the following props:</p>
                 <dl>
                     <dt><code>text</code></dt>
                     <dd>The text of the <code>option</code> element.</dd>
@@ -926,7 +938,11 @@ export default function Home() {
             <h2 className="dsjsx_example-title" id="section-tag">Tag</h2>
 
             <Example>
-                <Tag colour="red" title="Beta"></Tag>
+                <Tag title="Beta"/>
+            </Example>
+
+            <Example>
+                <Tag colour="green" title="Completed"/>
             </Example>
 
             <Configuration componentName="Tag">
@@ -935,7 +951,20 @@ export default function Home() {
                     <dt><code>className</code></dt>
                     <dd>A CSS class name to pass to the component.</dd>
                     <dt><code>colour</code></dt>
-                    <dd>The tag colour to use.</dd>
+                    <dd>The tag colour to use. Supported values are:
+                        <ul>
+                            <li><code>grey</code></li>
+                            <li><code>green</code></li>
+                            <li><code>teal</code></li>
+                            <li><code>darkblue</code></li>
+                            <li><strong><code>blue</code> (default)</strong></li>
+                            <li><code>purple</code></li>
+                            <li><code>pink</code></li>
+                            <li><code>red</code></li>
+                            <li><code>orange</code></li>
+                            <li><code>yellow</code></li>
+                        </ul>
+                    </dd>
                     <dt><code>title</code></dt>
                     <dd>The text content of the tag.</dd>
                 </dl>
@@ -1102,15 +1131,12 @@ export default function Home() {
 
             <Example title="Text input with associated button">
                 <TextInput
-                    button
+                    buttonIcon="search"
+                    buttonText="Search"
+                    hasButton
                     id="text-input-button"
                     label="Search"
-                >
-                    <Button>
-                        <ScreenReaderText>Search</ScreenReaderText>
-                        <Icon icon='search' />
-                    </Button>
-                </TextInput>
+                />
             </Example>
 
             <Example title="Text input with character count">
@@ -1175,8 +1201,15 @@ export default function Home() {
             </Configuration>
 
             <Configuration componentName="Text input with button">
-                <p>Text inputs with an associated button should have a <code>Button</code> component as a child.</p>
-                <p>Add the boolean <code>button</code> prop to the text input for correct display.</p>
+                <p>Use these additional props for a text input with an associated button:</p>
+                <dl>
+                    <dt><code>buttonIcon</code></dt>
+                    <dd>Name of the icon to use from the icon stack.</dd>
+                    <dt><code>buttonText</code></dt>
+                    <dd>Text content for the button (for screen readers).</dd>
+                    <dt><code>hasButton</code></dt>
+                    <dd>Whether the component has an associated button. Boolean.</dd>
+                </dl>
             </Configuration>
 
             <Configuration componentName="Character count">
@@ -1193,7 +1226,7 @@ export default function Home() {
                 <p>Use these additional props for a currency text input:</p>
                 <dl>
                     <dt><code>currency</code></dt>
-                    <dd>Whether the component is a currency field.</dd>
+                    <dd>Whether the component is a currency field. Boolean.</dd>
                     <dt><code>currencySymbol</code></dt>
                     <dd>Currency symbol to use. Default is <code>£</code>.</dd>
                 </dl>
@@ -1205,16 +1238,16 @@ export default function Home() {
                 <Textarea
                     id="textarea"
                     label="Description"
-                    rows="4"
+                    rows="2"
                 />
             </Example>
 
             <Example title="Textarea with character count">
                 <Textarea
+                    defaultValue="Mygov.scot gives people and businesses information about and access to public services in Scotland. We work closely with public sector organisations to make public services easy to find and understand."
                     id="textarea-character-count"
                     label="Description"
-                    maxlength="400"
-                    rows="4"
+                    maxlength="250"
                 />
             </Example>
 
@@ -1236,7 +1269,7 @@ export default function Home() {
                     <dt><code>placeholder</code></dt>
                     <dd>Value to use for the <code>placeholder</code> attribute of the <code>textarea</code> element.</dd>
                     <dt><code>rows</code></dt>
-                    <dd>Value to use for the <code>rows</code> attribute of the <code>textarea</code> element.</dd>
+                    <dd>Value to use for the <code>rows</code> attribute of the <code>textarea</code> element. Default is <code>4</code>.</dd>
                     <dt><code>value</code></dt>
                     <dd>The default value of the <code>textarea</code> element.</dd>
                     <dt><code>width</code></dt>

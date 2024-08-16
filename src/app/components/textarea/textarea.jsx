@@ -19,7 +19,7 @@ const Textarea = function ({
     maxlength,
     name,
     placeholder,
-    rows,
+    rows = 4,
     value,
     ...props
 }) {
@@ -55,7 +55,7 @@ const Textarea = function ({
                 placeholder={placeholder}
                 rows={rows}
                 {...props}
-            ></textarea>
+            />
 
         </ConditionalWrapper>
     );

@@ -89,12 +89,12 @@ const DatePicker = function ({
                         />
                     </div>
                 </div>
-            ): (
+            ) : (
                 <TextInput
-                    button
                     error={!!error}
                     errorMessage={errorMessage}
                     id={id}
+                    hasButton
                     hintText={hintText}
                     label={label}
                     name={name}

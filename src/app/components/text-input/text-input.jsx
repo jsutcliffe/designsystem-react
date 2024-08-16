@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import DSCharacterCount from '../../../../node_modules/@scottish-government/design-system/src/forms/character-count/character-count';
+import Button from '../button/button';
 import ConditionalWrapper from '../common/conditional-wrapper';
 import ErrorMessage from '../error-message/error-message';
 import HintText from '../common/hint-text';
@@ -10,7 +11,8 @@ import HintText from '../common/hint-text';
  * @returns {JSX.Element} - The element
  */
 const TextInput = function ({
-    button,
+    buttonIcon,
+    buttonText,
     children,
     className,
     countThreshold,
@@ -18,6 +20,7 @@ const TextInput = function ({
     currencySymbol,
     error,
     errorMessage,
+    hasButton,
     hintText,
     id,
     label,
@@ -33,7 +36,7 @@ const TextInput = function ({
     const hintTextId = `hint-text-${id}`;
     const ref = useRef(null);
 
-    const inputWrapperClasses = `ds_input__wrapper ${button ? 'ds_input__wrapper--has-icon' : ''} ${currency ? 'ds_currency-wrapper' : ''}`;
+    const inputWrapperClasses = `ds_input__wrapper ${hasButton ? 'ds_input__wrapper--has-icon' : ''} ${currency ? 'ds_currency-wrapper' : ''}`;
 
     useEffect(() => {
         if (ref.current) {
@@ -50,7 +53,7 @@ const TextInput = function ({
             {hintText && <HintText id={hintTextId} text={hintText} />}
             {errorMessage && <ErrorMessage id={errorMessageId} text={errorMessage}/>}
             <ConditionalWrapper
-                condition={button || currency}
+                condition={hasButton || currency}
                 wrapper={children => <div className={inputWrapperClasses} data-symbol={currencySymbol}>{children}</div>}
             >
                 <input
@@ -69,21 +72,22 @@ const TextInput = function ({
                     type={type}
                     {...props}
                 />
-                {children}
+                {hasButton && <Button iconOnly icon={buttonIcon}>{buttonText}</Button>}
             </ConditionalWrapper>
-
         </ConditionalWrapper>
     );
 };
 TextInput.propTypes = {
-    button: PropTypes.bool,
+    buttonIcon: PropTypes.string,
+    buttonText: PropTypes.string,
     children: PropTypes.element,
     className: PropTypes.string,
-    countThreshold: PropTypes.string,
     currency: PropTypes.bool,
+    countThreshold: PropTypes.string,
     currencySymbol: PropTypes.string,
     error: PropTypes.bool,
     errorMessage: PropTypes.string,
+    hasButton: PropTypes.bool,
     id: PropTypes.string.isRequired,
     hintText: PropTypes.string,
     label: PropTypes.string.isRequired,
