@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Icon from '../common/icon';
+import ScreenReaderText from '../common/screen-reader-text';
 import WrapperTag from '../common/wrapper-tag';
+
 
 /**
  * @param {Object} props - Properties for the element
@@ -9,8 +12,9 @@ import WrapperTag from '../common/wrapper-tag';
 
 const Button = function ({
     children,
-    hasIcon,
+    icon,
     iconLeft,
+    iconOnly = false,
     href,
     small,
     style,
@@ -34,21 +38,24 @@ const Button = function ({
                 width && `ds_button--${width}`,
                 style && `ds_button--${style}`,
                 small && 'ds_button--small',
-                hasIcon && 'ds_button--has-icon',
+                (icon && !iconOnly) && 'ds_button--has-icon',
                 iconLeft && 'ds_button--has-icon--left'
             ].join(' ')}
             href={href}
             type={type}
             {...props}
         >
-            { children }
+            {iconOnly ? <ScreenReaderText>{children}</ScreenReaderText> : children}
+
+            {icon && <Icon icon={icon}></Icon>}
         </WrapperTag>
     )
 };
 Button.propTypes = {
     children: PropTypes.element,
-    hasIcon: PropTypes.bool,
+    icon: PropTypes.string,
     iconLeft: PropTypes.bool,
+    iconOnly: PropTypes.bool,
     href: PropTypes.string,
     styleAsLink: PropTypes.bool,
     small: PropTypes.bool,

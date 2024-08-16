@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { Children, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import DSAspectBox from '../../../../node_modules/@scottish-government/design-system/src/components/aspect-box/aspect-box-fallback';
 
@@ -18,6 +18,13 @@ const AspectBox = function({
             new DSAspectBox(ref.current).init();
         }
     }, [ref]);
+
+    // set className on image children
+    children = Children.map(children, child => {
+        if (['img', 'svg', 'picture'].includes(child.type)) {
+            return React.cloneElement(child, { className: 'ds_aspect-box__inner' });
+        }
+    });
 
     let ratioClassName;
     switch (ratio) {

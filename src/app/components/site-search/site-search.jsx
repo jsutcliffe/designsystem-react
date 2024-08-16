@@ -78,10 +78,7 @@ const SiteSearch = function ({
                         spellCheck="false"
                         type="search"
                     />
-                    <Button type="submit">
-                        <ScreenReaderText>Search</ScreenReaderText>
-                        <Icon icon='search' />
-                    </Button>
+                    <Button type="submit" icon="search" iconOnly>Search</Button>
 
                     {hasAutocomplete && (
                         <div id="autocomplete-suggestions" className="ds_autocomplete__suggestions">
