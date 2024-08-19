@@ -336,6 +336,10 @@ export default function Home() {
                     <dd>Text to use for the checkbox&apos;s associated label.</dd>
                     <dt><code>name</code></dt>
                     <dd>Value to use for the checkbox&apos;s <code>name</code> attribute. Will fall back to using the <code>id</code> prop if not provided.</dd>
+                    <dt><code>onBlur</code></dt>
+                    <dd>Function to fire in response to a blur event.</dd>
+                    <dt><code>onChange</code></dt>
+                    <dd>Function to fire in response to a change event.</dd>
                     <dt><code>small</code></dt>
                     <dd>Whether to use the &lsquo;small&rsquo; checkbox variant. Boolean.</dd>
                 </dl>
@@ -432,6 +436,10 @@ export default function Home() {
                     <dd>Whether to display the day, month and year as separate fields. Boolean.</dd>
                     <dt><code>name</code></dt>
                     <dd>Value to use for the <code>name</code> attribute of the date picker. The behaviour of this on date pickers with multiple input fields is the same as the behaviour of the <code>id</code> prop.</dd>
+                    <dt><code>onBlur</code></dt>
+                    <dd>Function to fire in response to a blur event.</dd>
+                    <dt><code>onChange</code></dt>
+                    <dd>Function to fire in response to a change event.</dd>
                     <dt><code>value</code></dt>
                     <dd>The default value of the date picker.</dd>
                     <dt><code>width</code></dt>
@@ -726,6 +734,10 @@ export default function Home() {
                     <dd>Text to use for the radio button&apos;s associated label.</dd>
                     <dt><code>name</code></dt>
                     <dd>Value to use for the radio button&apos;s <code>name</code> attribute. It is better to set a name on a parent <code>RadioGroup</code> element instead.</dd>
+                    <dt><code>onBlur</code></dt>
+                    <dd>Function to fire in response to a blur event.</dd>
+                    <dt><code>onChange</code></dt>
+                    <dd>Function to fire in response to a change event.</dd>
                     <dt><code>small</code></dt>
                     <dd>Whether to use the &lsquo;small&rsquo; radio button variant. Boolean.</dd>
                 </dl>
@@ -744,10 +756,10 @@ export default function Home() {
 
             <Example>
                 <Select
+                    defaultValue="button"
                     id="select-component"
                     label="Choose a component"
                     placeholder="Choose a component"
-                    defaultValue="button"
                 >
                     <Option value="button" text="Accordion"/>
                     <Option value="breadcrumbs" text="Breadcrumbs"/>
@@ -772,6 +784,10 @@ export default function Home() {
                     <dd>Text to use for the select&apos;s associated label.</dd>
                     <dt><code>name</code></dt>
                     <dd>Value to use for the select&apos;s <code>name</code> attribute. Will fall back to using the <code>id</code> prop if not provided.</dd>
+                    <dt><code>onBlur</code></dt>
+                    <dd>Function to fire in response to a blur event.</dd>
+                    <dt><code>onChange</code></dt>
+                    <dd>Function to fire in response to a change event.</dd>
                     <dt><code>placeholder</code></dt>
                     <dd>Text to use for an optional unselected first option.</dd>
                     <dt><code>width</code></dt>
@@ -1175,6 +1191,10 @@ export default function Home() {
                     <dd>Text to use for the text input&apos;s associated label.</dd>
                     <dt><code>name</code></dt>
                     <dd>Value to use for the <code>name</code> attribute of the <code>input</code> element.</dd>
+                    <dt><code>onBlur</code></dt>
+                    <dd>Function to fire in response to a blur event.</dd>
+                    <dt><code>onChange</code></dt>
+                    <dd>Function to fire in response to a change event.</dd>
                     <dt><code>placeholder</code></dt>
                     <dd>Value to use for the <code>placeholder</code> attribute of the <code>input</code> element.</dd>
                     <dt><code>type</code></dt>
@@ -1266,6 +1286,10 @@ export default function Home() {
                     <dd>Text to use for the textarea&apos;s associated label.</dd>
                     <dt><code>name</code></dt>
                     <dd>Value to use for the <code>name</code> attribute of the <code>textarea</code> element.</dd>
+                    <dt><code>onBlur</code></dt>
+                    <dd>Function to fire in response to a blur event.</dd>
+                    <dt><code>onChange</code></dt>
+                    <dd>Function to fire in response to a change event.</dd>
                     <dt><code>placeholder</code></dt>
                     <dd>Value to use for the <code>placeholder</code> attribute of the <code>textarea</code> element.</dd>
                     <dt><code>rows</code></dt>

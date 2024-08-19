@@ -33,12 +33,26 @@ const Select = function ({
     id,
     label,
     name,
+    onBlur,
+    onChange,
     placeholder,
     width,
     ...props
 }) {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
+
+    function handleBlur(event) {
+        if (typeof onBlur === 'function') {
+            onBlur(event);
+        }
+    }
+
+    function handleChange(event) {
+        if (typeof onChange === 'function') {
+            onChange(event);
+        }
+    }
 
     return (
         <>
@@ -53,7 +67,14 @@ const Select = function ({
                 ].join(' ')}
                 {...props}
             >
-                <select defaultValue={defaultValue} className="ds_select" id={id} name={name || id}>
+                <select
+                    className="ds_select"
+                    defaultValue={defaultValue}
+                    id={id}
+                    name={name || id}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                >
                     <option value="">{placeholder}</option>
                     {children}
                 </select>
@@ -71,6 +92,8 @@ Select.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     name: PropTypes.string,
+    onBlur: PropTypes.event,
+    onChange: PropTypes.event,
     placeholder: PropTypes.string,
     width: PropTypes.string
 }

@@ -19,6 +19,8 @@ const DatePicker = function ({
     minDate,
     multiple,
     name,
+    onBlur,
+    onChange,
     value,
     width = 'fixed-10',
     ...props
@@ -34,6 +36,18 @@ const DatePicker = function ({
             new DSDatePicker(ref.current, {imagePath: iconPath}).init();
         }
     }, [ref, iconPath]);
+
+    function handleBlur(event) {
+        if (typeof onBlur === 'function') {
+            onBlur(event);
+        }
+    }
+
+    function handleChange(event) {
+        if (typeof onChange === 'function') {
+            onChange(event);
+        }
+    }
 
     return (
         <div
@@ -58,6 +72,8 @@ const DatePicker = function ({
                             hintText={hintText}
                             label="Day"
                             name={name + "-day"}
+                            onBlur={handleBlur}
+                            onChange={handleChange}
                             value={value.split('/')[0]}
                             width="fixed-2"
                         />
@@ -71,6 +87,8 @@ const DatePicker = function ({
                             hintText={hintText}
                             label="Month"
                             name={name + "-month"}
+                            onBlur={handleBlur}
+                            onChange={handleChange}
                             value={value.split('/')[1]}
                             width="fixed-2"
                         />
@@ -84,6 +102,8 @@ const DatePicker = function ({
                             hintText={hintText}
                             label="Year"
                             name={name + "-year"}
+                            onBlur={handleBlur}
+                            onChange={handleChange}
                             value={value.split('/')[2]}
                             width="fixed-4"
                         />
@@ -98,6 +118,8 @@ const DatePicker = function ({
                     hintText={hintText}
                     label={label}
                     name={name}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
                     placeholder="dd/mm/yyyy"
                     value={value}
                     width={width}
@@ -118,6 +140,8 @@ DatePicker.propTypes = {
     minDate: PropTypes.string,
     multiple: PropTypes.bool,
     name: PropTypes.string,
+    onBlur: PropTypes.event,
+    onChange: PropTypes.event,
     value: PropTypes.string,
     width: PropTypes.string
 };

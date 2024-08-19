@@ -46,9 +46,23 @@ const Radio = function ({
     id,
     label,
     name,
+    onBlur,
+    onChange,
     small
 }) {
     const hintTextId = `hint-text-${id}`;
+
+    function handleBlur(event) {
+        if (typeof onBlur === 'function') {
+            onBlur(event);
+        }
+    }
+
+    function handleChange(event) {
+        if (typeof onChange === 'function') {
+            onChange(event);
+        }
+    }
 
     return (
         <div
@@ -56,18 +70,27 @@ const Radio = function ({
                 'ds_radio',
                 small && 'ds_radio--small'
             ].join(' ')}>
-            <input defaultChecked={!!checked} className="ds_radio__input" id={id} name={name} type="radio" />
+            <input
+                className="ds_radio__input"
+                defaultChecked={!!checked}
+                id={id}
+                name={name}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                type="radio" />
             <label className="ds_radio__label" htmlFor={id} aria-describedby={hintTextId}>{label}</label>
             {hintText && <HintText id={hintTextId} text={hintText} />}
         </div>
     );
 };
-RadioGroup.propTypes = {
+Radio.propTypes = {
     checked: PropTypes.bool,
     hintText: PropTypes.string,
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     name: PropTypes.string,
+    onBlur: PropTypes.event,
+    onChange: PropTypes.event,
     small: PropTypes.bool
 };
 

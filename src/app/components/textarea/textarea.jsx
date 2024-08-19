@@ -18,6 +18,8 @@ const Textarea = function ({
     label,
     maxlength,
     name,
+    onBlur,
+    onChange,
     placeholder,
     rows = 4,
     value,
@@ -32,6 +34,18 @@ const Textarea = function ({
             new DSCharacterCount(ref.current).init();
         }
     }, [ref]);
+
+    function handleBlur(event) {
+        if (typeof onBlur === 'function') {
+            onBlur(event);
+        }
+    }
+
+    function handleChange(event) {
+        if (typeof onChange === 'function') {
+            onChange(event);
+        }
+    }
 
     return (
         <ConditionalWrapper
@@ -52,6 +66,8 @@ const Textarea = function ({
                 id={id}
                 maxLength={maxlength}
                 name={name || id}
+                onBlur={handleBlur}
+                onChange={handleChange}
                 placeholder={placeholder}
                 rows={rows}
                 {...props}
@@ -69,6 +85,8 @@ Textarea.propTypes = {
     label: PropTypes.string.isRequired,
     maxlength: PropTypes.string,
     name: PropTypes.string,
+    onBlur: PropTypes.event,
+    onChange: PropTypes.event,
     placeholder: PropTypes.string,
     rows: PropTypes.string,
     value: PropTypes.string

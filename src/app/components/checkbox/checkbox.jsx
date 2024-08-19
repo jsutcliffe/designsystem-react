@@ -45,10 +45,24 @@ const Checkbox = function ({
     exclusive,
     label,
     name,
+    onBlur,
+    onChange,
     small
 }) {
     const hintTextId = `hint-text-${id}`;
     const behaviour = exclusive && 'exclusive';
+
+    function handleBlur(event) {
+        if (typeof onBlur === 'function') {
+            onBlur(event);
+        }
+    }
+
+    function handleChange(event) {
+        if (typeof onChange === 'function') {
+            onChange(event);
+        }
+    }
 
     return (
         <>
@@ -59,7 +73,15 @@ const Checkbox = function ({
                     small && 'ds_checkbox--small'
                 ].join(' ')}>
 
-                <input data-behaviour={behaviour} defaultChecked={!!checked} className="ds_checkbox__input" id={id} name={name || id} type="checkbox" />
+                <input
+                    className="ds_checkbox__input"
+                    data-behaviour={behaviour}
+                    defaultChecked={!!checked}
+                    id={id}
+                    name={name || id}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    type="checkbox" />
                 <label className="ds_checkbox__label" htmlFor={id} aria-describedby={hintTextId}>{label}</label>
                 {hintText && <HintText id={hintTextId} text={hintText} />}
             </div>
@@ -73,6 +95,8 @@ Checkbox.propTypes = {
     exclusive: PropTypes.bool,
     label: PropTypes.string.isRequired,
     name: PropTypes.string,
+    onBlur: PropTypes.event,
+    onChange: PropTypes.event,
     small: PropTypes.bool
 };
 

@@ -26,6 +26,8 @@ const TextInput = function ({
     label,
     maxlength,
     name,
+    onBlur,
+    onChange,
     placeholder,
     type = 'text',
     value,
@@ -36,13 +38,25 @@ const TextInput = function ({
     const hintTextId = `hint-text-${id}`;
     const ref = useRef(null);
 
-    const inputWrapperClasses = `ds_input__wrapper ${hasButton ? 'ds_input__wrapper--has-icon' : ''} ${currency ? 'ds_currency-wrapper' : ''}`;
+    const inputWrapperClasses = `${hasButton ? 'ds_input__wrapper  ds_input__wrapper--has-icon' : ''} ${currency ? 'ds_currency-wrapper' : ''}`;
 
     useEffect(() => {
         if (ref.current) {
             new DSCharacterCount(ref.current).init();
         }
     }, [ref]);
+
+    function handleBlur(event) {
+        if (typeof onBlur === 'function') {
+            onBlur(event);
+        }
+    }
+
+    function handleChange(event) {
+        if (typeof onChange === 'function') {
+            onChange(event);
+        }
+    }
 
     return (
         <ConditionalWrapper
@@ -68,11 +82,13 @@ const TextInput = function ({
                     id={id}
                     maxLength={maxlength}
                     name={name || id}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
                     placeholder={placeholder}
                     type={type}
                     {...props}
                 />
-                {hasButton && <Button iconOnly icon={buttonIcon}>{buttonText}</Button>}
+                {hasButton && (buttonText || buttonIcon) && <Button iconOnly icon={buttonIcon}>{buttonText}</Button>}
             </ConditionalWrapper>
         </ConditionalWrapper>
     );
@@ -93,6 +109,8 @@ TextInput.propTypes = {
     label: PropTypes.string.isRequired,
     maxlength: PropTypes.string,
     name: PropTypes.string,
+    onBlur: PropTypes.event,
+    onChange: PropTypes.event,
     placeholder: PropTypes.string,
     type: PropTypes.string,
     value: PropTypes.string,
