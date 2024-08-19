@@ -58,7 +58,7 @@ import ScreenReaderText from './components/common/screen-reader-text';
 // category list
 // content label
 import ContentsNav, { ContentsLink } from './components/contents-nav/contents-nav';
-import Icon from './components/common/icon';
+import Icon from './components/common/dsicon';
 // link item (basically category item?)
 // link list (found in a page block on dynamic issue hub)
 // search controls
@@ -165,18 +165,18 @@ export default function Home() {
                             entitled to priority treatment based on clinical need.</p>
                     </AccordionItem>
                     <AccordionItem open id="accordion-2" title="Employability for veterans">
-                        <p>If you're looking for a job, there are several organisations that can help
+                        <p>If you&apos;re looking for a job, there are several organisations that can help
                             you <a href="#accordion-link">find a job or develop new skills</a>.</p>
                     </AccordionItem>
                     <AccordionItem id="accordion-3" title="Housing for veterans">
                         <p>If you need <a href="#accordion-link">help finding a place to live</a>{' '}
-                            there's support specifically for veterans.</p>
+                            there&apos;s support specifically for veterans.</p>
                     </AccordionItem>
                 </Accordion>
             </Example>
 
             <Configuration componentName="Accordion">
-                <p>Accordion components' <code>AccordionItem</code> children can use the following prop:</p>
+                <p>Accordion components&apos; <code>AccordionItem</code> children can use the following prop:</p>
                 <dl>
                     <dt><code>open</code></dt>
                     <dd>Makes the accordion item display in an open state on page load.</dd>
@@ -280,13 +280,13 @@ export default function Home() {
                     <dt><code>icon</code></dt>
                     <dd>Name of the icon to use from the icon stack.</dd>
                     <dt><code>iconLeft</code></dt>
-                    <dd>Whether a button's icon is aligned to the left (default is aligned to the right). Boolean.</dd>
+                    <dd>Whether a button&apos;s icon is aligned to the left (default is aligned to the right). Boolean.</dd>
                     <dt><code>iconOnly</code></dt>
-                    <dd>Whether this is an 'icon only' button. This will make the button's text (its child) be visually hidden but available to screen readers. Boolean, default is <code>false</code>.</dd>
+                    <dd>Whether this is an &lsquo;icon only&rsquo; button. This will make the button&apos;s text (its child) be visually hidden but available to screen readers. Boolean, default is <code>false</code>.</dd>
                     <dt><code>href</code></dt>
-                    <dd><code>href</code> attribute to use on the button. If a href is specified, the button will use the HTML 'a' element.</dd>
+                    <dd><code>href</code> attribute to use on the button. If a href is specified, the button will use the HTML <code>a</code> element.</dd>
                     <dt><code>small</code></dt>
-                    <dd>Whether to use the 'small' variant of a button. Boolean.</dd>
+                    <dd>Whether to use the &lsquo;small&rsquo; variant of a button. Boolean.</dd>
                     <dt><code>style</code></dt>
                     <dd>The button style to use. Options are:
                         <ul>
@@ -298,7 +298,7 @@ export default function Home() {
                     <dt><code>styleAsLink</code></dt>
                     <dd>Whether to make the button look like a link. Boolean.</dd>
                     <dt><code>type</code></dt>
-                    <dd>The value for the <code>type</code> attribute of the button. Default is 'button' but sometimes 'submit' might be more appropriate.</dd>
+                    <dd>The value for the <code>type</code> attribute of the button. Default is <code>button</code> but sometimes <code>submit</code> might be more appropriate.</dd>
                     <dt><code>width</code></dt>
                     <dd>The button width to use. Options are:
                         <ul>
@@ -327,17 +327,17 @@ export default function Home() {
                     <dt><code>checked</code></dt>
                     <dd>Whether the checkbox should be checked on load.</dd>
                     <dt><code>hintText</code></dt>
-                    <dd>Text to use for a checkbox's hint text.</dd>
+                    <dd>Text to use for a checkbox&apos;s hint text.</dd>
                     <dt><code>id</code></dt>
-                    <dd>Value to use for the checkbox's <code>id</code> attribute.</dd>
+                    <dd>Value to use for the checkbox&apos;s <code>id</code> attribute.</dd>
                     <dt><code>exclusive</code></dt>
-                    <dd>Whether this checkbox is an an exclusive checkbox (a 'none' option). Boolean.</dd>
+                    <dd>Whether this checkbox is an an exclusive checkbox (a &lsquo;none&rsquo; option). Boolean.</dd>
                     <dt><code>label</code></dt>
-                    <dd>Text to use for the checkbox's associated label.</dd>
+                    <dd>Text to use for the checkbox&apos;s associated label.</dd>
                     <dt><code>name</code></dt>
-                    <dd>Value to use for the checkbox's <code>name</code> attribute. Will fall back to using the <code>id</code> prop if not provided.</dd>
+                    <dd>Value to use for the checkbox&apos;s <code>name</code> attribute. Will fall back to using the <code>id</code> prop if not provided.</dd>
                     <dt><code>small</code></dt>
-                    <dd>Whether to use the 'small' checkbox variant. Boolean.</dd>
+                    <dd>Whether to use the &lsquo;small&rsquo; checkbox variant. Boolean.</dd>
                 </dl>
             </Configuration>
 
@@ -353,7 +353,7 @@ export default function Home() {
                 <p>Confirmation message components can use the following prop:</p>
                 <dl>
                     <dt><code>headerLevel</code></dt>
-                    <dd>The header level for the confirmation message's title. The default is H3. Changing the heading level does not alter the confirmation message's appearance.</dd>
+                    <dd>The header level for the confirmation message&apos;s title. The default is H3. Changing the heading level does not alter the confirmation message&apos;s appearance.</dd>
                 </dl>
             </Configuration>
 
@@ -373,9 +373,9 @@ export default function Home() {
                 <p>Contents nav components can use the following props:</p>
                 <dl>
                     <dt><code>label</code></dt>
-                    <dd>Text to use for the content nav's <code>aria-label</code> property, which is required for accessibility.</dd>
+                    <dd>Text to use for the content nav&apos;s <code>aria-label</code> property, which is required for accessibility.</dd>
                     <dt><code>title</code></dt>
-                    <dd>The title for the contents nav. Default is 'Contents'.</dd>
+                    <dd>The title for the contents nav. Default is &lsquo;Contents&rsquo;.</dd>
                 </dl>
             </Configuration>
 
@@ -419,11 +419,11 @@ export default function Home() {
                     <dt><code>hintText</code></dt>
                     <dd>Text to use for a date picker hint text.</dd>
                     <dt><code>id</code></dt>
-                    <dd>Value to use for the <code>id</code> attribute of the date picker's <code>input</code> element. If the date picker is using multiple inputs, each field starts with the ID. For example, <code>myId-day</code>, <code>myId-month</code>, <code>myId-year</code>.</dd>
+                    <dd>Value to use for the <code>id</code> attribute of the date picker&apos;s <code>input</code> element. If the date picker is using multiple inputs, each field starts with the ID. For example, <code>myId-day</code>, <code>myId-month</code>, <code>myId-year</code>.</dd>
                     <dt><code>iconPath</code></dt>
                     <dd>Path to the icon file.</dd>
                     <dt><code>label</code></dt>
-                    <dd>Text to use for the date picker's associated label.</dd>
+                    <dd>Text to use for the date picker&apos;s associated label.</dd>
                     <dt><code>maxDate</code></dt>
                     <dd>Latest selectable date in the date picker. Uses the format <code>dd/mm/yyyy</code>.</dd>
                     <dt><code>minDate</code></dt>
@@ -456,7 +456,7 @@ export default function Home() {
                 <p>Details components can use the following prop:</p>
                 <dl>
                     <dt><code>summary</code></dt>
-                    <dd>Text to use for the details component's 'summary' element.</dd>
+                    <dd>Text to use for the details componen&apos;s &lsquo;summary&rsquo; element.</dd>
                 </dl>
             </Configuration>
 
@@ -486,15 +486,15 @@ export default function Home() {
                 <p>Notification banner components can use the following props:</p>
                 <dl>
                     <dt><code>close</code></dt>
-                    <dd>Shows the 'close' button on the notification banner. Boolean.</dd>
+                    <dd>Shows the &lsquo;close&rsquo; button on the notification banner. Boolean.</dd>
                     <dt><code>icon</code></dt>
-                    <dd>Shows the 'high priority' icon on the notification banner. Boolean.</dd>
+                    <dd>Shows the &lsquo;high priority&rsquo; icon on the notification banner. Boolean.</dd>
                     <dt><code>iconColour</code></dt>
                     <dd>Makes the icon display in the alternative colour scheme (yellow). Boolean.</dd>
                     <dt><code>iconInverse</code></dt>
                     <dd>Makes the icon be inverted against a circle background. Boolean.</dd>
                     <dt><code>title</code></dt>
-                    <dd>A hidden title for the notification banner, useful for screen reader users. Default is 'Information'.</dd>
+                    <dd>A hidden title for the notification banner, useful for screen reader users. Default is &lsquo;Information&rsquo;.</dd>
                 </dl>
 
                 <p>Both <code>iconColour</code> and <code>iconInverse</code> can be used together. This combines the effects of both modifiers.</p>
@@ -512,7 +512,7 @@ export default function Home() {
                 <p>Notification panel components can use the following prop:</p>
                 <dl>
                     <dt><code>headerLevel</code></dt>
-                    <dd>The header level for the notification panel's message's title. The default is H1. Changing the heading level does not alter the notification panel's appearance.</dd>
+                    <dd>The header level for the notification panel&apos;s message&apos;s title. The default is H1. Changing the heading level does not alter the notification panel&apos;s appearance.</dd>
                 </dl>
             </Configuration>
 
@@ -559,7 +559,7 @@ export default function Home() {
                     <dt><code>label</code></dt>
                     <dd>Text to use for a label shown above the H1 element. No label is displayed if there is no <code>label</code> prop provided.</dd>
                     <dt><code>title</code></dt>
-                    <dd>Text to use for the page header's H1 element.</dd>
+                    <dd>Text to use for the page header&apos;s H1 element.</dd>
                 </dl>
                 <p>Page header components can show metadata below the H1 element. Do this by including a <a href="#section-page-metadata">page metadata</a> component as a child.</p>
             </Configuration>
@@ -590,7 +590,7 @@ export default function Home() {
                 <p>Page metadata components can use the following prop:</p>
                 <dl>
                     <dt><code>inline</code></dt>
-                    <dd>Makes the page metadata use the truncated 'inline' display. Boolean.</dd>
+                    <dd>Makes the page metadata use the truncated &lsquo;inline&rsquo; display. Boolean.</dd>
                 </dl>
             </Configuration>
             <Configuration componentName="Medatata item">
@@ -614,7 +614,7 @@ export default function Home() {
                 <p>Phase banner components can use the following prop:</p>
                 <dl>
                     <dt><code>phaseName</code></dt>
-                    <dd>The text for the phase banner's tag component.</dd>
+                    <dd>The text for the phase banner&apos;s tag component.</dd>
                 </dl>
             </Configuration>
 
@@ -681,11 +681,11 @@ export default function Home() {
                     <dt><code>error</code></dt>
                     <dd>Whether the question is in an error state. Boolean.</dd>
                     <dt><code>errorMessage</code></dt>
-                    <dd>Text for a question's <code>ErrorMessage</code> component. For use when the question uses a fieldset.</dd>
+                    <dd>Text for a question&apos;s <code>ErrorMessage</code> component. For use when the question uses a fieldset.</dd>
                     <dt><code>hintText</code></dt>
-                    <dd>Text for a question's <code>HintText</code> component. For use when the question uses a fieldset.</dd>
+                    <dd>Text for a question&apos;s <code>HintText</code> component. For use when the question uses a fieldset.</dd>
                     <dt><code>legend</code></dt>
-                    <dd>Text for a question's <code>legend</code> element. Use when the question has a <code>tagName</code> of 'fieldset'.</dd>
+                    <dd>Text for a question&apos;s <code>legend</code> element. Use when the question has a <code>tagName</code> of &lsquo;fieldset&rsquo;.</dd>
                     <dt><code>tagName</code></dt>
                     <dd>HTML tag name to use for the question. Default is <code>div</code>, but <code>fieldset</code> will sometimes be more appropriate.</dd>
                 </dl>
@@ -719,15 +719,15 @@ export default function Home() {
                     <dt><code>checked</code></dt>
                     <dd>Whether the radio should be selected on load.</dd>
                     <dt><code>hintText</code></dt>
-                    <dd>Text to use for a radio button's hint text.</dd>
+                    <dd>Text to use for a radio button&apos;s hint text.</dd>
                     <dt><code>id</code></dt>
-                    <dd>Value to use for the radio button's <code>id</code> attribute.</dd>
+                    <dd>Value to use for the radio button&apos;s <code>id</code> attribute.</dd>
                     <dt><code>label</code></dt>
-                    <dd>Text to use for the radio button's associated label.</dd>
+                    <dd>Text to use for the radio button&apos;s associated label.</dd>
                     <dt><code>name</code></dt>
-                    <dd>Value to use for the radio button's <code>name</code> attribute. It is better to set a name on a parent <code>RadioGroup</code> element instead.</dd>
+                    <dd>Value to use for the radio button&apos;s <code>name</code> attribute. It is better to set a name on a parent <code>RadioGroup</code> element instead.</dd>
                     <dt><code>small</code></dt>
-                    <dd>Whether to use the 'small' radio button variant. Boolean.</dd>
+                    <dd>Whether to use the &lsquo;small&rsquo; radio button variant. Boolean.</dd>
                 </dl>
             </Configuration>
             <Configuration componentName="Radio group">
@@ -765,13 +765,13 @@ export default function Home() {
                     <dt><code>errorMessage</code></dt>
                     <dd>Text to use for an error message.</dd>
                     <dt><code>hintText</code></dt>
-                    <dd>Text to use for a select's hint text.</dd>
+                    <dd>Text to use for a select&apos;s hint text.</dd>
                     <dt><code>id</code></dt>
-                    <dd>Value to use for the select's <code>id</code> attribute.</dd>
+                    <dd>Value to use for the select&apos;s <code>id</code> attribute.</dd>
                     <dt><code>label</code></dt>
-                    <dd>Text to use for the select's associated label.</dd>
+                    <dd>Text to use for the select&apos;s associated label.</dd>
                     <dt><code>name</code></dt>
-                    <dd>Value to use for the select's <code>name</code> attribute. Will fall back to using the <code>id</code> prop if not provided.</dd>
+                    <dd>Value to use for the select&apos;s <code>name</code> attribute. Will fall back to using the <code>id</code> prop if not provided.</dd>
                     <dt><code>placeholder</code></dt>
                     <dd>Text to use for an optional unselected first option.</dd>
                     <dt><code>width</code></dt>
@@ -887,15 +887,15 @@ export default function Home() {
                 <p>Site search can use the following props:</p>
                 <dl>
                     <dt><code>action</code></dt>
-                    <dd>The value of the search form's <code>action</code> atttribute. Default is <code>/search</code>.</dd>
+                    <dd>The value of the search form&apos;s <code>action</code> atttribute. Default is <code>/search</code>.</dd>
                     <dt><code>id</code></dt>
-                    <dd>The value of the search input field's <code>id</code> attribute. Default is <code>site-search</code></dd>
+                    <dd>The value of the search input field&apos;s <code>id</code> attribute. Default is <code>site-search</code></dd>
                     <dt><code>method</code></dt>
                     <dd>The form method to use. Default is <code>GET</code>.</dd>
                     <dt><code>name</code></dt>
-                    <dd>The value of the search field's <code>name</code> attribute. Default is <code>q</code>.</dd>
+                    <dd>The value of the search field&apos;s <code>name</code> attribute. Default is <code>q</code>.</dd>
                     <dt><code>placeholder</code></dt>
-                    <dd>The value of the search field's <code>placeholder</code> attribute. Default is <code>Search</code>.</dd>
+                    <dd>The value of the search field&apos;s <code>placeholder</code> attribute. Default is <code>Search</code>.</dd>
                 </dl>
             </Configuration>
 
@@ -923,7 +923,7 @@ export default function Home() {
                 <p>Skip links components can use the following prop:</p>
                 <dl>
                     <dt><code>id</code></dt>
-                    <dd>The <code>id</code> attribute of the 'main content' element to link to.</dd>
+                    <dd>The <code>id</code> attribute of the &lsquo;main content&rsquo; element to link to.</dd>
                 </dl>
 
                 <p><code>SkipLink</code> children can use the following props:</p>
@@ -1088,13 +1088,13 @@ export default function Home() {
                     <dt><code>href</code></dt>
                     <dd>The URL of the page to link to.</dd>
                     <dt><code>id</code></dt>
-                    <dd>The value of the task's <code>id</code> attribute.</dd>
+                    <dd>The value of the task&apos;s <code>id</code> attribute.</dd>
                     <dt><code>isComplete</code></dt>
                     <dd>Whether the task is complete. Boolean.</dd>
                     <dt><code>statusText</code></dt>
-                    <dd>The text to use for the task's status tag.</dd>
+                    <dd>The text to use for the task&apos;s status tag.</dd>
                     <dt><code>tagColour</code></dt>
-                    <dd>The colour to use for the task's status tag. Default is <code>grey</code>.</dd>
+                    <dd>The colour to use for the task&apos;s status tag. Default is <code>grey</code>.</dd>
                     <dt><code>title</code></dt>
                     <dd>The title of the task list.</dd>
                 </dl>
@@ -1106,7 +1106,7 @@ export default function Home() {
                 <p>Task groups can use the following props:</p>
                 <dl>
                     <dt><code>intro</code></dt>
-                    <dd>Text to put into an introduction paragraph above the group's tasks.</dd>
+                    <dd>Text to put into an introduction paragraph above the group&apos;s tasks.</dd>
                     <dt><code>title</code></dt>
                     <dd>The title of the task group.</dd>
                 </dl>
@@ -1168,11 +1168,11 @@ export default function Home() {
                     <dt><code>errorMessage</code></dt>
                     <dd>Text to use for an error message.</dd>
                     <dt><code>hintText</code></dt>
-                    <dd>Text to use for a text input's hint text.</dd>
+                    <dd>Text to use for a text input&apos;s hint text.</dd>
                     <dt><code>id</code></dt>
                     <dd>Value to use for the <code>id</code> attribute of the <code>input</code> element.</dd>
                     <dt><code>label</code></dt>
-                    <dd>Text to use for the text input's associated label.</dd>
+                    <dd>Text to use for the text input&apos;s associated label.</dd>
                     <dt><code>name</code></dt>
                     <dd>Value to use for the <code>name</code> attribute of the <code>input</code> element.</dd>
                     <dt><code>placeholder</code></dt>
@@ -1259,11 +1259,11 @@ export default function Home() {
                     <dt><code>errorMessage</code></dt>
                     <dd>Text to use for an error message.</dd>
                     <dt><code>hintText</code></dt>
-                    <dd>Text to use for a textarea's hint text.</dd>
+                    <dd>Text to use for a textarea&apos;s hint text.</dd>
                     <dt><code>id</code></dt>
                     <dd>Value to use for the <code>id</code> attribute of the <code>textarea</code> element.</dd>
                     <dt><code>label</code></dt>
-                    <dd>Text to use for the textarea's associated label.</dd>
+                    <dd>Text to use for the textarea&apos;s associated label.</dd>
                     <dt><code>name</code></dt>
                     <dd>Value to use for the <code>name</code> attribute of the <code>textarea</code> element.</dd>
                     <dt><code>placeholder</code></dt>

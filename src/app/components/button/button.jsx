@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from '../common/icon';
+import Icon from '../common/dsicon';
 import ScreenReaderText from '../common/screen-reader-text';
 import WrapperTag from '../common/wrapper-tag';
 
@@ -47,7 +47,7 @@ const Button = function ({
         >
             {iconOnly ? <ScreenReaderText>{children}</ScreenReaderText> : children}
 
-            {icon && <Icon icon={icon}></Icon>}
+            {icon && <Icon icon={icon}/>}
         </WrapperTag>
     )
 };

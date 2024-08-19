@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import DSBackToTop from '../../../../node_modules/@scottish-government/design-system/src/components/back-to-top/back-to-top';
-import Icon from '../common/icon';
+import Icon from '../common/dsicon';
 
 /**
  * @param {Object} props - Properties for the element

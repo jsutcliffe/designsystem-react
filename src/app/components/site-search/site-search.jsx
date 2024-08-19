@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import DSAutocomplete from '../../../../node_modules/@scottish-government/design-system/src/components/autocomplete/autocomplete';
 import Button from '../button/button';
-import Icon from '../common/icon';
-import ScreenReaderText from '../common/screen-reader-text';
 
 /**
  * @param {Object} props - Properties for the element
@@ -44,7 +42,7 @@ const SiteSearch = function ({
 
             autocomplete.init();
         }
-    }, [ref, autocompleteId, minLength, autocompleteSuggestionMappingFunction]);
+    }, [ref, autocompleteEndpoint, autocompleteId, hasAutocomplete, minLength, autocompleteSuggestionMappingFunction]);
 
     return (
         <div

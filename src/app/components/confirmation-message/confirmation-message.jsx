@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from '../common/icon';
+import Icon from '../common/dsicon';
 import WrapperTag from '../common/wrapper-tag';
 
 /**
