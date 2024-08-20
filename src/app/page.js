@@ -1317,6 +1317,8 @@ export default function Home() {
                     Call 999 if you or someone else is in immediate danger, or if the crime is in progress.
                 </WarningText>
             </Example>
+
+            <BackToTop />
         </main>
     );
 }

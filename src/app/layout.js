@@ -3,6 +3,8 @@ import "./design-system.css";
 import "./app.css";
 import "./highlight.css";
 
+import SkipLinks from './components/skip-links/skip-links';
+
 
 export const metadata = {
     title: "SG Design System React/JSX",
@@ -17,11 +19,7 @@ export default function RootLayout({ children }) {
             </head>
             <body>
                 <StrictMode>
-                    <div className="ds_skip-links">
-                        <ul className="ds_skip-links__list">
-                            <li className="ds_skip-links__item"><a className="ds_skip-links__link" href="#main-content">Skip to main content</a></li>
-                        </ul>
-                    </div>
+                    <SkipLinks/>
                     <span id="page-top"></span>
                     <div className="ds_page">
                         <div className="ds_page__top">

@@ -25,7 +25,7 @@ const BackToTop = function({
             {...props}
         >
             <a href={href} className="ds_back-to-top__button">Back to top
-                <Icon icon="arrow_upward"/>
+                <Icon className="ds_back-to-top__icon" icon="arrow_upward"/>
             </a>
        </div>
     );
