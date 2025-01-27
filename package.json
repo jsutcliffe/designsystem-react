@@ -15,15 +15,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.2.5",
+    "next": "^15.1.6",
     "prismjs": "^1.29.0",
-    "react": "^18",
-    "react-dom": "^18"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@scottish-government/design-system": "^2.2.0",
+    "@scottish-government/design-system": "^2.3.1",
     "eslint": "^8",
-    "eslint-config-next": "14.2.5",
-    "react-element-to-jsx-string": "^15.0.0"
+    "eslint-config-next": "^14.2.5",
+    "react-element-to-jsx-string": "^17.0.0"
   }
 }

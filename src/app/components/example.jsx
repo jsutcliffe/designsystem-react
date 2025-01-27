@@ -16,7 +16,7 @@ const Example = function ({
     title
 }) {
     if (Array.isArray(children)) {
-       children = React.createElement('div', '', children)
+        children = <div>{children}</div>;
     }
 
     const highlightedCode = Prism.highlight(
@@ -36,7 +36,7 @@ const Example = function ({
                 summary="JSX for this example"
             >
                 <pre>
-                    <code className="language-xml"
+                    <code
                         dangerouslySetInnerHTML={{ __html: highlightedCode }}
                     />
                 </pre>

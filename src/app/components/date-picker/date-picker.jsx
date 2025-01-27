@@ -63,7 +63,8 @@ const DatePicker = function ({
             {...props}
         >
             {(multiple ? (
-                <div className="ds_datepicker__input-wrapper">
+                <fieldset className="ds_datepicker__input-wrapper">
+                    <legend>{label}</legend>
                     <div>
                         <TextInput
                             className="js-datepicker-date"
@@ -108,7 +109,7 @@ const DatePicker = function ({
                             width="fixed-4"
                         />
                     </div>
-                </div>
+                </fieldset>
             ) : (
                 <TextInput
                     error={!!error}

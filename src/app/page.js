@@ -109,12 +109,11 @@ const suggestionMappingFunction = function (suggestionsObj) {
 export default function Home() {
     return (
         <main className="ds_wrapper" id="main-content">
-
             <PageHeader
                 title="Design System JSX components"
             >
                 <Metadata>
-                    <MetadataItem name="Last updated">09/08/2024</MetadataItem>
+                    <MetadataItem name="Last updated">27/01/2025</MetadataItem>
                 </Metadata>
             </PageHeader>
 
@@ -376,6 +375,8 @@ export default function Home() {
             <Configuration componentName="Contents nav">
                 <p>Contents nav components can use the following props:</p>
                 <dl>
+                    <dt><code>current</code></dt>
+                    <dd>Whether the nav item is for the current page. Boolean.</dd>
                     <dt><code>label</code></dt>
                     <dd>Text to use for the content nav&apos;s <code>aria-label</code> property, which is required for accessibility.</dd>
                     <dt><code>title</code></dt>
@@ -405,6 +406,7 @@ export default function Home() {
 
             <Example title="Date picker with separate fields">
                 <DatePicker
+                    label="Date of birth"
                     id="date-picker-separate"
                     multiple
                     value="12/08/2024"
@@ -936,13 +938,15 @@ export default function Home() {
             </Example>
 
             <Configuration componentName="Skip links">
-                <p>Skip links components can use the following prop:</p>
+                <p>Skip links always contain a link to the main content of a page. You can include additional links as <code>SkipLink</code> children. Skip links components can use the following prop:</p>
                 <dl>
                     <dt><code>id</code></dt>
-                    <dd>The <code>id</code> attribute of the &lsquo;main content&rsquo; element to link to.</dd>
+                    <dd>The <code>id</code> attribute of the &lsquo;main content&rsquo; element to link to. Default is <code>main-content</code>.</dd>
                 </dl>
+            </Configuration>
 
-                <p><code>SkipLink</code> children can use the following props:</p>
+            <Configuration componentName="Skip link">
+                <p>Skip link components use the following props:</p>
                 <dl>
                     <dt><code>href</code></dt>
                     <dd>The destination fragment identifier.</dd>
@@ -972,7 +976,6 @@ export default function Home() {
                             <li><code>grey</code></li>
                             <li><code>green</code></li>
                             <li><code>teal</code></li>
-                            <li><code>darkblue</code></li>
                             <li><strong><code>blue</code> (default)</strong></li>
                             <li><code>purple</code></li>
                             <li><code>pink</code></li>
