@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import "./design-system.css";
+import "@scottish-government/design-system/dist/css/design-system.css";
 import "./app.css";
 import "./highlight.css";
 

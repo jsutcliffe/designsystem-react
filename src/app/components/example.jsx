@@ -20,7 +20,16 @@ const Example = function ({
     }
 
     const highlightedCode = Prism.highlight(
-        reactElementToJSXString(children),
+        // reactElementToJSXString(children),
+        reactElementToJSXString(children, {
+            displayName: (p) => {
+                if (typeof p.type === 'function') {
+                    return p.type.displayName || p.type.name;
+                } else if (typeof p.type === 'string') {
+                    return p.type;
+                }
+            }
+        }),
         Prism.languages.xml,
         'xml'
     );

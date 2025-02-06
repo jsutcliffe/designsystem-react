@@ -83,16 +83,6 @@ import TaskList, { Task, TaskGroup } from './components/task-list/task-list';
 import Configuration from './components/configuration';
 import Example from './components/example';
 
-// Design System fixes we might want to make:
-// todo: exclusive checkbox failure when there are multiple exclusives
-
-// JSX/React queries/fixes
-// todo: do we need event listeners (e.g. focus/blur/click/etc) on interactive elements?
-
-// site fixes
-// todo: use a copy of the DS CSS from node_modules, not a checked-in clone
-
-
 const suggestionMappingFunction = function (suggestionsObj) {
     const responseObj = JSON.parse(suggestionsObj.response).map(suggestionsObj => ({
         key: '',
@@ -105,6 +95,54 @@ const suggestionMappingFunction = function (suggestionsObj) {
 
     return filteredResults.slice(0,6);
 }
+
+Accordion.displayName = 'Accordion';
+AccordionItem.displayName = 'AccordionItem';
+AspectBox.displayName = 'AspectBox';
+BackToTop.displayName = 'BackToTop';
+Breadcrumbs.displayName = 'Breadcrumbs';
+Breadcrumb.displayName = 'Breadcrumb';
+Button.displayName = 'Button';
+Checkbox.displayName = 'Checkbox';
+CheckboxGroup.displayName = 'CheckboxGroup';
+ConfirmationMessage.displayName = 'ConfirmationMessage';
+DatePicker.displayName = 'DatePicker';
+Details.displayName = 'Details';
+ErrorMessage.displayName = 'ErrorMessage';
+InsetText.displayName = 'InsetText';
+Metadata.displayName = 'Metadata';
+MetadataItem.displayName = 'MetadataItem';
+NotificationBanner.displayName = 'NotificationBanner';
+NotificationPanel.displayName = 'NotificationPanel';
+PageHeader.displayName = 'PageHeader';
+PhaseBanner.displayName = 'PhaseBanner';
+Question.displayName = 'Question';
+Radio.displayName = 'Radio';
+RadioGroup.displayName = 'RadioGroup';
+Select.displayName = 'Select';
+Option.displayName = 'Option';
+SequentialNavigation.displayName = 'SequentialNavigation';
+NextLink.displayName = 'NextLink';
+PrevLink.displayName = 'PrevLink';
+SideNavigation.displayName = 'SideNavigation';
+SideNavItems.displayName = 'SideNavItems';
+SideNavLink.displayName = 'SideNavLink';
+SiteNavigation.displayName = 'SiteNavigation';
+SiteNavLink.displayName = 'SiteNavLink';
+SiteSearch.displayName = 'SiteSearch';
+SkipLinks.displayName = 'SkipLinks';
+SkipLink.displayName = 'SkipLink';
+Tag.displayName = 'Tag';
+Textarea.displayName = 'Textarea';
+TextInput.displayName = 'TextInput';
+WarningText.displayName = 'WarningText';
+ScreenReaderText.displayName = 'ScreenReaderText';
+ContentsNav.displayName = 'ContentsNav';
+ContentsLink.displayName = 'ContentsLink';
+Icon.displayName = 'Icon';
+TaskList.displayName = 'TaskList';
+Task.displayName = 'Task';
+TaskGroup.displayName = 'TaskGroup';
 
 export default function Home() {
     return (
