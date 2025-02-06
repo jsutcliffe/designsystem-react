@@ -166,7 +166,7 @@ export default function Home() {
                 <ContentsLink href="#section-contents-nav">Contents nav</ContentsLink>
                 <ContentsLink href="#section-date-picker">Date picker</ContentsLink>
                 <ContentsLink href="#section-details">Details</ContentsLink>
-                <ContentsLink href="#section-error-message">Error message</ContentsLink>
+                {/* <ContentsLink href="#section-error-message">Error message</ContentsLink> */}
                 {/* <ContentsLink href="#section-hint-text">Hint text</ContentsLink> */}
                 {/* <ContentsLink href="#section-icon">Icon</ContentsLink> */}
                 <ContentsLink href="#section-inset-text">Inset text</ContentsLink>

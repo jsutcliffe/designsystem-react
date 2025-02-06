@@ -60,6 +60,7 @@ Task.propTypes = {
     tagColour: PropTypes.string,
     title: PropTypes.string.isRequired
 };
+Task.internalName = 'Task';
 
 export const TaskGroup = function ({
     children,
@@ -85,6 +86,7 @@ TaskGroup.propTypes = {
     intro: PropTypes.string,
     title: PropTypes.string.isRequired,
 };
+TaskGroup.internalName = 'TaskGroup';
 
 /**
  * @param {Object} props - Properties for the element
@@ -99,7 +101,7 @@ const TaskList = function ({
     let completedTasksCount = 0;
 
     function processChild(item) {
-        if (item.type.name === 'Task') {
+        if (item.type.internalName === 'Task') {
             taskCount = taskCount + 1;
 
             if (item.props.isComplete) {
@@ -107,7 +109,7 @@ const TaskList = function ({
             } else {
                 incompleteTaskIds.push(item.props.id);
             }
-        } else if (item.type.name === 'TaskGroup') {
+        } else if (item.type.internalName === 'TaskGroup') {
             Children.forEach(item.props.children, child => {
                 processChild(child);
             });
