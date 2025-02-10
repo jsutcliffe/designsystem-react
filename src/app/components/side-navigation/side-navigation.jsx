@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import DSSideNavigation from '../../../../node_modules/@scottish-government/design-system/src/components/side-navigation/side-navigation';
+import DSSideNavigation from '@scottish-government/design-system/src/components/side-navigation/side-navigation';
 
 
 /**

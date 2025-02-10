@@ -13,7 +13,7 @@ export const RadioGroup = function ({
     ...props
 }) {
     // pass {name} to child radio buttons
-    children = Children.map(children, child =>
+    const processedChildren = Children.map(children, child =>
         React.cloneElement(child, { name: name })
     );
 
@@ -26,7 +26,7 @@ export const RadioGroup = function ({
             ].join(' ')}
             {...props}
         >
-            {children}
+            {processedChildren}
         </div>
     )
 };

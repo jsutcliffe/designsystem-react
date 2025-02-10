@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -7,20 +7,14 @@ import PropTypes from 'prop-types';
  * @param {Object} props - Properties for the element
  * @returns {JSX.Element} - The element
  */
-const WrapperTag = forwardRef(function WrapperTag({
+const WrapperTag = function ({
     children,
     tagName = 'div',
     ...props
-}, ref) {
-    return React.createElement(
-        tagName,
-        {
-            ...props,
-            ref
-        },
-        children
-    )
-});
+}) {
+    const TagName = tagName;
+    return <TagName {...props}>{children}</TagName>;
+};
 WrapperTag.propTypes = {
     children: PropTypes.element,
     tagName: PropTypes.string

@@ -10,13 +10,11 @@ const Icon = function ({
     className,
     fill,
     icon,
-    iconPath,
+    iconPath = './icons.stack.svg',
     size,
     title,
     ...props
 }) {
-    iconPath = iconPath || './icons.stack.svg';
-
     return (
         <svg
             aria-hidden={!accessible}

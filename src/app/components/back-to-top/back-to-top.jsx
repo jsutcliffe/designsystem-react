@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import DSBackToTop from '../../../../node_modules/@scottish-government/design-system/src/components/back-to-top/back-to-top';
+import DSBackToTop from '@scottish-government/design-system/src/components/back-to-top/back-to-top';
 import Icon from '../common/dsicon';
 
 /**

@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import DSAccordion from '../../../../node_modules/@scottish-government/design-system/src/components/accordion/accordion';
+import DSAccordion from '@scottish-government/design-system/src/components/accordion/accordion';
 let accordionItemCounter = 0;
 
 /**
@@ -15,31 +15,32 @@ export const AccordionItem = function({
     title,
     ...props
 }) {
-    const [id] = useState(rawId || `accordion-item-${accordionItemCounter += 1}`);
+    accordionItemCounter = accordionItemCounter + 1;
+    const processedId = rawId || `accordion-item-${accordionItemCounter}`;
     return (
         <div
             className="ds_accordion-item"
-            id={id}
+            id={processedId}
             {...props}
         >
             <input
-                aria-labelledby={`panel-${id}-heading`}
+                aria-labelledby={`panel-${processedId}-heading`}
                 className={[
                     'ds_accordion-item__control',
                     'visually-hidden'
                 ].join(' ')}
                 defaultChecked={open}
-                id={`${id}-control`}
+                id={`${processedId}-control`}
                 type="checkbox"
             />
             <div className="ds_accordion-item__header">
-                <h3 id={`panel-${id}-heading`} className="ds_accordion-item__title">
+                <h3 id={`panel-${processedId}-heading`} className="ds_accordion-item__title">
                     { title }
                 </h3>
                 <span className='ds_accordion-item__indicator' />
                 <label
                     className="ds_accordion-item__label"
-                    htmlFor={`${id}-control`}
+                    htmlFor={`${processedId}-control`}
                 >
                     <span className="visually-hidden">Show this section</span>
                 </label>
@@ -70,7 +71,7 @@ const Accordion = function({
 
     useEffect(() => {
         if (ref.current) {
-            // new DSAccordion(ref.current).init();
+            new DSAccordion(ref.current).init();
         }
     }, [ref]);
 

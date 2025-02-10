@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import DSCharacterCount from '../../../../node_modules/@scottish-government/design-system/src/forms/character-count/character-count';
+import DSCharacterCount from '@scottish-government/design-system/src/forms/character-count/character-count';
 import Button from '../button/button';
 import ConditionalWrapper from '../common/conditional-wrapper';
 import ErrorMessage from '../error-message/error-message';

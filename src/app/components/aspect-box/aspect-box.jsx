@@ -1,6 +1,6 @@
 import React, { Children, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import DSAspectBox from '../../../../node_modules/@scottish-government/design-system/src/components/aspect-box/aspect-box-fallback';
+import DSAspectBox from '@scottish-government/design-system/src/components/aspect-box/aspect-box-fallback';
 
 /**
  * @param {Object} props - Properties for the element

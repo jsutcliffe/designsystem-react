@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import DSDatePicker from '../../../../node_modules/@scottish-government/design-system/src/components/date-picker/date-picker';
+import DSDatePicker from '@scottish-government/design-system/src/components/date-picker/date-picker';
 import TextInput from '../text-input/text-input';
 
 /**
@@ -13,7 +13,7 @@ const DatePicker = function ({
     errorMessage,
     hintText,
     id,
-    iconPath,
+    iconPath = './',
     label,
     maxDate,
     minDate,
@@ -26,8 +26,6 @@ const DatePicker = function ({
     ...props
 }) {
     // todo: dateSelectCallback function
-
-    iconPath = iconPath || './';
 
     const ref = useRef(null);
 

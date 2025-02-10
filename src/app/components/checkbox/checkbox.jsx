@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import DSCheckboxes from '../../../../node_modules/@scottish-government/design-system/src/forms/checkbox/checkboxes'
+import DSCheckboxes from '@scottish-government/design-system/src/forms/checkbox/checkboxes'
 import HintText from '../common/hint-text';
 
 /**

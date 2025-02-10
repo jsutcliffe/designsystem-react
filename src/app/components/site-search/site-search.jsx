@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import DSAutocomplete from '../../../../node_modules/@scottish-government/design-system/src/components/autocomplete/autocomplete';
+import DSAutocomplete from '@scottish-government/design-system/src/components/autocomplete/autocomplete';
 import Button from '../button/button';
 
 /**
