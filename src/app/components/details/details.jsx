@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.summary - Summary text
  * @returns {JSX.Element} - The element
  */
 const Details = function({

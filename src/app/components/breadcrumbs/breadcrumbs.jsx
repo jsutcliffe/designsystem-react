@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} [props.href] - href attribute of the breadcrumb link
+ * @param {string} props.title - Text for the breadcrumb link
  * @returns {JSX.Element} - The element
  */
 export const Breadcrumb = function ({

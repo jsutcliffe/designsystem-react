@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import WrapperTag from '../common/wrapper-tag';
+import '../../typedefs';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {AriaLive} [props.ariaLive] - Value to use for aria-live
+ * @param {HeaderLevel} [props.headerLevel='h1'] - Header level to use
+ * @param {string} props.title - Title text
  * @returns {JSX.Element} - The element
  */
 const NotificationPanel = function ({

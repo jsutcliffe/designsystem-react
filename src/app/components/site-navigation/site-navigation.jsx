@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {boolean} [props.current=false]
+ * @param {string} props.href - URL of the link
+ * @param {string} props.title - Text of the link
  * @returns {JSX.Element} - The element
  */
-
 export const SiteNavLink = function ({
     current=false,
     href,

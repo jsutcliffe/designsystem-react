@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ErrorMessage from '../error-message/error-message';
 import HintText from '../common/hint-text';
+import '../../typedefs';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.text - Option text
+ * @param {string} props.value - Option value
  * @returns {JSX.Element} - The element
  */
 export const Option = function ({
@@ -22,6 +25,17 @@ Option.propTypes = {
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} [props.defaultValue] - Value of the option to be selected on load
+ * @param {boolean} [props.error] - Select is in error
+ * @param {string} [props.errorMessage] - Error text
+ * @param {string} [props.hintText] - Hint text
+ * @param {string} props.id - Select's id attribute
+ * @param {string} props.label - Label text
+ * @param {string} [props.name] - Select's name attribute
+ * @param {function} [props.onBlur] - Function to fire in response to a blur event
+ * @param {function} [props.onChange] - Function to fire in response to a change event
+ * @param {string} [props.placeholder] - Text for a valueless first option
+ * @param {InputWidth} [props.width] - Width CSS class
  * @returns {JSX.Element} - The element
  */
 const Select = function ({

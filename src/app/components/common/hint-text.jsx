@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.id - ID of the hint text
+ * @param {string} props.string - Text content of the hint text
  * @returns {JSX.Element} - The element
  */
 const HintText = function ({

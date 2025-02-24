@@ -4,6 +4,8 @@ import HintText from '../common/hint-text';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {boolean} [props.inline] - Whether to display its children inline
+ * @param {string} props.name - The 'name' attribute of the child radios
  * @returns {JSX.Element} - The element
  */
 export const RadioGroup = function ({
@@ -38,6 +40,14 @@ RadioGroup.propTypes = {
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {boolean} [props.checked] - Chcked on load
+ * @param {string} [props.hintText] - Hint text content
+ * @param {string} props.id - Radio button's id attribute
+ * @param {string} props.label - Label text
+ * @param {string} [props.name] - Radio button's name attribute
+ * @param {function} [props.onBlur] - Function to fire in response to a blur event
+ * @param {function} [props.onChange] - Function to fire in response to a change event
+ * @param {boolean} [props.small] - Use the small variant
  * @returns {JSX.Element} - The element
  */
 const Radio = function ({

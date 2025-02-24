@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.href - URL of the link
+ * @param {string} props.title - Text of the link
  * @returns {JSX.Element} - The element
  */
-
 export const SkipLink = function ({
     href,
     title,
@@ -27,14 +28,15 @@ SkipLink.propTypes = {
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} [props.mainContentId='main-content'] - ID of the main content element
  * @returns {JSX.Element} - The element
  */
 const SkipLinks = function ({
     children,
-    id = 'main-content',
+    mainContentId = 'main-content',
     ...props
 }) {
-    const href = `#${id}`;
+    const href = `#${mainContentId}`;
 
     return (
         <div
@@ -52,7 +54,7 @@ const SkipLinks = function ({
 };
 SkipLinks.propTypes = {
     children: PropTypes.element.isRequired,
-    id: PropTypes.string.isRequired
+    mainContentId: PropTypes.string.isRequired
 };
 
 export default SkipLinks;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.name - Text label for the metadata item
  * @returns {JSX.Element} - The element
  */
 export const MetadataItem = function({
@@ -30,6 +31,7 @@ MetadataItem.propTypes = {
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {boolean} props.inline - Use the 'inline' option
  * @returns {JSX.Element} - The element
  */
 const Metadata = function({

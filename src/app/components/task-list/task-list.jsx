@@ -4,9 +4,16 @@ import ConditionalWrapper from '../common/conditional-wrapper';
 import HintText from '../common/hint-text';
 import ScreenReaderText from '../common/screen-reader-text';
 import Tag from '../tag/tag';
+import '../../typedefs';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.href - The URL of the page to link to
+ * @param {string} props.id - Task id attribute
+ * @param {boolean} [props.isComplete=false] - Task is complete
+ * @param {string} [props.statusText] - Tag text
+ * @param {TagColour} [props.tagColour='grey'] - Tag colour
+ * @param {string} props.title - The title of the task list
  * @returns {JSX.Element} - The element
  */
 export const Task = function ({
@@ -62,6 +69,12 @@ Task.propTypes = {
 };
 Task.internalName = 'Task';
 
+/**
+ * @param {Object} props
+ * @param {string} props.intro - Intro text
+ * @param {string} props.title - The title of the task group
+ * @returns {JSX.Element} - The element
+ */
 export const TaskGroup = function ({
     children,
     intro,
@@ -90,6 +103,7 @@ TaskGroup.internalName = 'TaskGroup';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.title - Title of the task list
  * @returns {JSX.Element} - The element
  */
 const TaskList = function ({

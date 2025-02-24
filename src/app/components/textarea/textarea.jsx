@@ -4,9 +4,24 @@ import DSCharacterCount from '@scottish-government/design-system/src/forms/chara
 import ConditionalWrapper from '../common/conditional-wrapper';
 import ErrorMessage from '../error-message/error-message';
 import HintText from '../common/hint-text';
+import '../../typedefs';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {number} [props.countThreshold] - Character count threshold
+ * @param {boolean} [props.error] - Textarea is in error
+ * @param {string} [props.errorMessage] - Error message text
+ * @param {string} [props.hintText] - Hint text
+ * @param {string} props.id - Textarea id attribute
+ * @param {string} props.label - Label text
+ * @param {number} [props.maxlength] - Max characters permitted
+ * @param {string} [props.name] - Textarea name attribute
+ * @param {function} [props.onBlur] - Function to fire in response to a blur event
+ * @param {function} [props.onChange] - Function to fire in response to a change event
+ * @param {string} [props.placeholder] - Textarea placeholder attribute
+ * @param {number} [props.rows='4'] - Textarea rows attribute
+ * @param {string} [props.value] - Default value/content
+ * @param {InputWidth} [props.width] - Width CSS class
  * @returns {JSX.Element} - The element
  */
 const Textarea = function ({

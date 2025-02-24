@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.id
+ * @param {string} props.text
  * @returns {JSX.Element} - The element
  */
 const ErrorMessage = function ({

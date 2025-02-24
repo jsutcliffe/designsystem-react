@@ -5,6 +5,14 @@ import Button from '../button/button';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.action - Search form's 'action' attribute
+ * @param {string} props.autocompleteEndpoint
+ * @param {function} props.autocompleteSuggestionMappingFunction
+ * @param {string} [props.id='site-search'] - Search input field's id attribute
+ * @param {string} [props.method='GET'] - The form method to use
+ * @param {number} [props.minLength=3] - Minimum number of characters needed to trigger autocomplete
+ * @param {string} [props.name='q'] - Search field's name attribute
+ * @param {string} [props.placeholder='search'] - Search field's placeholder attribute
  * @returns {JSX.Element} - The element
  */
 const SiteSearch = function ({
@@ -18,8 +26,6 @@ const SiteSearch = function ({
     placeholder = 'Search',
     ...props
 }) {
-    // todo: some Autocomplete console errors to investigate
-
     const ref = useRef(null);
     const autocompleteId = id + '-autocomplete';
     const hasAutocomplete = !!autocompleteEndpoint;

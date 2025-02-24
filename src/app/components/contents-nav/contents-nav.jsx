@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import WrapperTag from '../common/wrapper-tag';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {boolean} props.current
+ * @param {string} props.href
  * @returns {JSX.Element} - The element
  */
 export const ContentsLink = function ({
@@ -33,9 +36,16 @@ export const ContentsLink = function ({
         </li>
     );
 };
+ContentsLink.propTypes = {
+    children: PropTypes.element,
+    current: PropTypes.boolean,
+    href: PropTypes.string
+};
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.label
+ * @param {string} [props.title='Contents']
  * @returns {JSX.Element} - The element
  */
 const ContentsNav = function({
@@ -56,6 +66,11 @@ const ContentsNav = function({
             </ul>
         </nav>
     );
+};
+ContentsNav.propTypes = {
+    children: PropTypes.element,
+    label: PropTypes.string,
+    title: PropTypes.string
 };
 
 export default ContentsNav;

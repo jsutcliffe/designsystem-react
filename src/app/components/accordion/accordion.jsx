@@ -6,6 +6,9 @@ let accordionItemCounter = 0;
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} [props.id] - ID
+ * @param {boolean} [props.open=false] - Whether the accordion item is opened by default
+ * @param {string} props.title - Title/heading of the accordion item
  * @returns {JSX.Element} - The element
  */
 export const AccordionItem = function({
@@ -60,6 +63,7 @@ AccordionItem.propTypes = {
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {boolean} props.hideOpenAll - Whether to hide the "open all" button
  * @returns {JSX.Element} - The element
  */
 const Accordion = function({

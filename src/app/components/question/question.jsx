@@ -6,7 +6,14 @@ import HintText from '../common/hint-text';
 import WrapperTag from '../common/wrapper-tag';
 
 /**
- * @param {SObject} props - Properties for the element
+ * @typedef {'div'|'feldset'} QuestionElement
+ *
+ * @param {Object} props - Properties for the element
+ * @param {boolean} [props.error] - Question is in error
+ * @param {string} [props.errorMessage] - Error message text
+ * @param {string} [props.hintText] - Hint text content
+ * @param {string} [props.legend] - Legend text
+ * @param {QuestionElement} [props.tagName='div']
  * @returns {JSX.Element} - The element
  */
 const Question = function ({

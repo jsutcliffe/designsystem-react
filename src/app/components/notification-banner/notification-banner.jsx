@@ -7,6 +7,11 @@ import ScreenReaderText from '../common/screen-reader-text';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {boolean} [props.close] - Include a 'close' button
+ * @param {boolean} props.icon - Include a 'high priority' icon
+ * @param {boolean} props.iconColour - Show icon in alt colour
+ * @param {boolean} props.iconInverse - Show icon inverted
+ * @param {string} [props.title='Information']
  * @returns {JSX.Element} - The element
  */
 const NotificationBanner = function({
@@ -69,7 +74,7 @@ const NotificationBanner = function({
     );
 };
 NotificationBanner.propTypes = {
-    children: PropTypes.string,
+    children: PropTypes.element,
     close: PropTypes.bool,
     icon: PropTypes.bool,
     iconColour: PropTypes.bool,

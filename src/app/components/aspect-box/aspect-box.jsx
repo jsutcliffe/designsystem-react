@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import DSAspectBox from '@scottish-government/design-system/src/components/aspect-box/aspect-box-fallback';
 
 /**
- * @param {Object} props - Properties for the element
+ * @typedef {Object} AspectRatioProps
+ * @property {'1:1'|'4:3'|'16:9'|'21:9'} ratio
+ *
+ * @param {AspectRatioProps} props - Properties for the element
  * @returns {JSX.Element} - The element
  */
 const AspectBox = function({

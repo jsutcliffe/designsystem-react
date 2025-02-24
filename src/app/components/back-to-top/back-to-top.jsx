@@ -5,6 +5,7 @@ import Icon from '../common/dsicon';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} [props.href='#page-top'] - URL/fragment for the page top element
  * @returns {JSX.Element} - The element
  */
 const BackToTop = function({

@@ -4,12 +4,22 @@ import Icon from '../common/dsicon';
 import ScreenReaderText from '../common/screen-reader-text';
 import WrapperTag from '../common/wrapper-tag';
 
-
 /**
+ * @typedef {'primary'|'secondary'|'cancel'} ButtonStyle
+ * @typedef {'fluid'|'fixed'|'max'} ButtonWidth
+ *
  * @param {Object} props - Properties for the element
+ * @param {string} props.icon - Icon to use
+ * @param {boolean} [props.iconLeft] - Button's icon is aligned to the left
+ * @param {boolean} [props.iconOnly=false] - Button is an icon-only button
+ * @param {string} [props.href] - URL of the button
+ * @param {boolean} [props.small] - Use the small variant
+ * @param {ButtonStyle} props.style - Style of the button
+ * @param {boolean} props.styleAsLink - Whether to make the button look like a link
+ * @param {ButtonType} [props.type='button'] - Button type attribute
+ * @param {ButtonWidth} props.width - Width of the button
  * @returns {JSX.Element} - The element
  */
-
 const Button = function ({
     children,
     icon,

@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../common/dsicon';
 import WrapperTag from '../common/wrapper-tag';
+import '../../typedefs';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {AriaLive} [props.ariaLive='polite'] - Value to use for aria-live
+ * @param {HeaderLevel} [props.headerLevel='h3'] - Header level to use
+ * @param {string} props.title - Title text
  * @returns {JSX.Element} - The element
  */
 const ConfirmationMessage = function ({
@@ -41,7 +45,7 @@ const ConfirmationMessage = function ({
 };
 ConfirmationMessage.propTypes = {
     ariaLive: PropTypes.string,
-    children: PropTypes.string,
+    children: PropTypes.element,
     headerLevel: PropTypes.string,
     title: PropTypes.string.isRequired
 };

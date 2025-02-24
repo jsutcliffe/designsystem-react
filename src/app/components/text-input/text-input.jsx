@@ -5,9 +5,30 @@ import Button from '../button/button';
 import ConditionalWrapper from '../common/conditional-wrapper';
 import ErrorMessage from '../error-message/error-message';
 import HintText from '../common/hint-text';
+import '../../typedefs';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} [props.buttonIcon] - Icon to use
+ * @param {string} [props.buttonText] - Screen reader text for button
+ * @param {string} [props.className] - Additional CSS class(es)
+ * @param {number} [props.countThreshold] - PCharacter count threshold
+ * @param {boolean} [props.currency] - Input is a currency field
+ * @param {string} [props.currencySymbol] - Currency symbol to use
+ * @param {boolean} [props.error] - Input is in error
+ * @param {string} [props.errorMessage] - Error text
+ * @param {boolean} [props.hasButton] - Input has a button
+ * @param {string} [props.hintText] - Hint text
+ * @param {string} props.id - Input id attribute
+ * @param {string} props.label - Label text
+ * @param {number} [props.maxlength] - Max characters permitted
+ * @param {string} [props.name] - Input name attribute
+ * @param {function} [props.onBlur] - Function to fire in response to a blur event
+ * @param {function} [props.onChange] - Function to fire in response to a change event
+ * @param {string} [props.placeholder] - Input placeholder attribute
+ * @param {string} [props.type='text'] - Input type attribute
+ * @param {string} [props.value] - Default value
+ * @param {InputWidth} [props.width] - Width CSS class
  * @returns {JSX.Element} - The element
  */
 const TextInput = function ({

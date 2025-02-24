@@ -4,6 +4,7 @@ import Tag from '../tag/tag';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} [props.phaseName] - Tag text
  * @returns {JSX.Element} - The element
  */
 const PhaseBanner = function ({

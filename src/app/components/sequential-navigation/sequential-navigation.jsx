@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.href - URL of the link
+ * @param {string} props.title - Text of the link
  * @returns {JSX.Element} - The element
  */
 export const NextLink = function ({
@@ -30,6 +32,8 @@ NextLink.propTypes = {
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} props.href - URL of the link
+ * @param {string} props.title - Text of the link
  * @returns {JSX.Element} - The element
  */
 export const PrevLink = function ({

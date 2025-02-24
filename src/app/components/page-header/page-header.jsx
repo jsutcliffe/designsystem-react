@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 /**
  * @param {Object} props - Properties for the element
+ * @param {string} [props.label]
+ * @param {string} props.title
  * @returns {JSX.Element} - The element
  */
 const PageHeader = function({
