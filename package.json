@@ -3,7 +3,7 @@
   "description": "A React/JSX implementation of the Scottish Government Design System",
   "version": "0.1.0",
   "author": {
-    "name": "Scottish Government Digital Design system team",
+    "name": "Scottish Government Digital Design System team",
     "email": "designsystem@gov.scot",
     "url": "https://designsystem.gov.scot"
   },
@@ -15,7 +15,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^15.1.6",
+    "next": "^15.2.3",
     "prismjs": "^1.29.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
