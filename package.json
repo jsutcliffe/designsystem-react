@@ -1,7 +1,8 @@
 {
-  "name": "@scottish-government/designsystem-react",
+  "name": "designsystem-react",
   "description": "A React/JSX implementation of the Scottish Government Design System",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "license": "MIT",
   "author": {
     "name": "Scottish Government Digital Design System team",
     "email": "designsystem@gov.scot",
@@ -9,21 +10,17 @@
   },
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "tsc": "node ./node_modules/typescript/bin/tsc"
   },
   "dependencies": {
-    "next": "^15.2.3",
-    "prismjs": "^1.29.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@scottish-government/design-system": "^3.0.1"
   },
   "devDependencies": {
-    "@scottish-government/design-system": "^3.0.0",
-    "eslint": "^8",
-    "eslint-config-next": "^14.2.5",
-    "react-element-to-jsx-string": "^17.0.0"
+    "@types/node": "22.15.19",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "typescript": "^5.8.3"
   }
 }

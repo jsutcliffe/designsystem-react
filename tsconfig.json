@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "jsx": "preserve",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "outDir": "./dist",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@design-system/*": [
+        "./node_modules/@scottish-government/design-system/src/*"
+      ]
+    },
+    "target": "esnext",
+    "types": [],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./@types"
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true
+  },
+  "include": [
+    "@types",
+    "src/**/*.tsx",
+    "vitest.setup.ts"
+  ],
+  "exclude": [
+    "node_modules/**/*",
+    "src/**/*.test.tsx"
+  ]
+}

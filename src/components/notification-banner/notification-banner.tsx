@@ -1,0 +1,77 @@
+import { useEffect, useRef } from 'react';
+// @ts-ignore
+import DSNotificationBanner from '@scottish-government/design-system/src/components/notification-banner/notification-banner';
+import Button from '../button/button';
+import Icon from '../../common/icon';
+import ScreenReaderText from '../../common/screen-reader-text';
+
+/**
+ * @param {Object} props - Properties for the element
+ * @param {boolean} [props.close] - Include a 'close' button
+ * @param {boolean} props.icon - Include a 'high priority' icon
+ * @param {boolean} props.iconColour - Show icon in alt colour
+ * @param {boolean} props.iconInverse - Show icon inverted
+ * @param {string} [props.title='Information']
+ * @returns {JSX.Element} - The element
+ */
+const NotificationBanner: React.FC<SGDS.Component.NotificationBanner> = ({
+    children,
+    close,
+    icon,
+    iconColour,
+    iconInverse,
+    title = 'Information',
+    ...props
+}) => {
+    const ref = useRef(null);
+
+    useEffect(() => {
+        if (ref.current) {
+            new DSNotificationBanner(ref.current).init();
+        }
+    }, [ref]);
+
+    return (
+        <div
+            className="ds_notification  ds_reversed"
+            data-module="ds-notification"
+            ref={ref}
+            {...props}
+        >
+            <div className="ds_wrapper">
+                <div className={
+                    [
+                        'ds_notification__content',
+                        close && 'ds_notification__content--has-close'
+                    ].join(' ')}
+                >
+                    <h2 className="visually-hidden">{title}</h2>
+
+                    {icon &&
+                        <span
+                        className={[
+                                'ds_notification__icon',
+                                iconInverse && 'ds_notification__icon--inverse',
+                                iconColour && 'ds_notification__icon--colour'
+                            ].join(' ')} aria-hidden="true">
+                            <Icon icon="priority_high" />
+                        </span>
+                    }
+
+                    <div className="ds_notification__text">
+                        {children}
+                    </div>
+
+                    {close &&
+                        <Button className="ds_notification__close js-close-notification">
+                            <ScreenReaderText>Close this notification</ScreenReaderText>
+                            <Icon fill icon="close" aria-hidden="true" />
+                        </Button>
+                    }
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default NotificationBanner;
