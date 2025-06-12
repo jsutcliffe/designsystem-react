@@ -5,25 +5,7 @@ import ConditionalWrapper from '../../common/conditional-wrapper';
 import ErrorMessage from '../error-message/error-message';
 import HintText from '../../common/hint-text';
 
-/**
- * @param {Object} props - Properties for the element
- * @param {number} [props.countThreshold] - Character count threshold
- * @param {boolean} [props.error] - Textarea is in error
- * @param {string} [props.errorMessage] - Error message text
- * @param {string} [props.hintText] - Hint text
- * @param {string} props.id - Textarea id attribute
- * @param {string} props.label - Label text
- * @param {number} [props.maxlength] - Max characters permitted
- * @param {string} [props.name] - Textarea name attribute
- * @param {function} [props.onBlur] - Function to fire in response to a blur event
- * @param {function} [props.onChange] - Function to fire in response to a change event
- * @param {string} [props.placeholder] - Textarea placeholder attribute
- * @param {number} [props.rows='4'] - Textarea rows attribute
- * @param {string} [props.value] - Default value/content
- * @returns {JSX.Element} - The element
- */
 const Textarea: React.FC<SGDS.Component.Textarea> = ({
-    children,
     countThreshold,
     error,
     errorMessage,
@@ -42,6 +24,10 @@ const Textarea: React.FC<SGDS.Component.Textarea> = ({
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
     const ref = useRef(null);
+    const describedbys: string[] = [];
+
+    if (hintText) { describedbys.push(hintTextId) };
+    if (errorMessage) { describedbys.push(errorMessageId) };
 
     useEffect(() => {
         if (ref.current) {
@@ -64,14 +50,14 @@ const Textarea: React.FC<SGDS.Component.Textarea> = ({
     return (
         <ConditionalWrapper
             condition={typeof maxlength !== 'undefined' && maxlength > 0}
-            wrapper={(children: React.JSX.Element) => <div ref={ref} data-module="ds-character-count">{children}</div>}
+            wrapper={(children: React.JSX.Element) => <div ref={ref} data-threshold={countThreshold} data-module="ds-character-count">{children}</div>}
         >
-            <label className="ds_label" htmlFor={id} aria-describedby={hintTextId}>{label}</label>
+            <label className="ds_label" htmlFor={id}>{label}</label>
             {hintText && <HintText id={hintTextId} text={hintText} />}
             {errorMessage && <ErrorMessage id={errorMessageId} text={errorMessage}/>}
 
             <textarea
-                aria-describedby={`${errorMessageId} ${hintTextId}`}
+                aria-describedby={describedbys.join(' ')}
                 className={[
                     'ds_input',
                     error && 'ds_input--error',
@@ -90,5 +76,7 @@ const Textarea: React.FC<SGDS.Component.Textarea> = ({
         </ConditionalWrapper>
     );
 };
+
+Textarea.displayName = 'Textarea';
 
 export default Textarea;

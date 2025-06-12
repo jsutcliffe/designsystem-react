@@ -1,12 +1,5 @@
 import WrapperTag from '../../common/wrapper-tag';
 
-/**
- * @param {Object} props - Properties for the element
- * @param {AriaLive} [props.ariaLive] - Value to use for aria-live
- * @param {HeaderLevel} [props.headerLevel='h1'] - Header level to use
- * @param {string} props.title - Title text
- * @returns {JSX.Element} - The element
- */
 const NotificationPanel: React.FC<SGDS.Component.NotificationPanel> = function ({
     ariaLive,
     children,
@@ -14,20 +7,15 @@ const NotificationPanel: React.FC<SGDS.Component.NotificationPanel> = function (
     title,
     ...props
 }) {
-    // make sure that the header uses a heading element.
-    // use H1 if an invalid element is provided.
-    const allowedLevels = 'h1,h2,h3,h4,h5,h6'.split(',');
-    const tagName = allowedLevels.includes(headerLevel) ? headerLevel : 'h1';
-
     return (
         <div
             aria-live={ariaLive}
-            className="ds_notification-panel ds_notification-panel--success"
+            className="ds_notification-panel"
             {...props}
         >
             <WrapperTag
                 className="ds_notification-panel__title"
-                tagName={tagName}
+                tagName={headerLevel}
             >
                 {title}
             </WrapperTag>
@@ -37,5 +25,7 @@ const NotificationPanel: React.FC<SGDS.Component.NotificationPanel> = function (
         </div>
     );
 };
+
+NotificationPanel.displayName = 'NotificationPanel';
 
 export default NotificationPanel;

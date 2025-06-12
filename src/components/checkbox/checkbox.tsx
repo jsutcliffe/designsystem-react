@@ -3,48 +3,7 @@ import { useEffect, useRef } from 'react';
 import DSCheckboxes from '@scottish-government/design-system/src/forms/checkbox/checkboxes'
 import HintText from '../../common/hint-text';
 
-/**
- * @param {Object} props - Properties for the element
- * @returns {JSX.Element} - The element
- */
-export const CheckboxGroup: React.FC<SGDS.Component.Checkbox.Group> = ({
-    children,
-    ...props
-}) => {
-    const ref = useRef(null);
-
-    useEffect(() => {
-        if (ref.current) {
-            new DSCheckboxes(ref.current).init();
-        }
-    }, [ref]);
-
-    return (
-        <div
-            className="ds_checkboxes ds_field-group"
-            data-module="ds-checkboxes"
-            ref={ref}
-            {...props}
-        >
-            {children}
-        </div>
-    )
-};
-
-/**
- * @param {Object} props - Properties for the element
- * @param {boolean} [props.checked] - Whether the checkbox should be checked on load
- * @param {string} [props.hintText] - Hint text
- * @param {string} props.id - Checkbox's id attribute
- * @param {boolean} [props.exclusive] - Is exclusive checkbox
- * @param {string} props.label - Label text
- * @param {string} [props.name] - Checkbox's name attribute
- * @param {function} [props.onBlur] - Function to fire in response to a blur event
- * @param {function} [props.onChange] - Function to fire in response to a change event
- * @param {boolean} [props.small] - Use the small variant
- * @returns {JSX.Element} - The element
- */
-const Checkbox: React.FC<SGDS.Component.Checkbox> = ({
+export const Checkbox: React.FC<SGDS.Component.Checkbox> = ({
     checked,
     hintText,
     id,
@@ -80,6 +39,7 @@ const Checkbox: React.FC<SGDS.Component.Checkbox> = ({
                 ].join(' ')}>
 
                 <input
+                    aria-describedby={hintText ? hintTextId : undefined}
                     className="ds_checkbox__input"
                     data-behaviour={behaviour}
                     defaultChecked={!!checked}
@@ -88,11 +48,60 @@ const Checkbox: React.FC<SGDS.Component.Checkbox> = ({
                     onBlur={handleBlur}
                     onChange={handleChange}
                     type="checkbox" />
-                <label className="ds_checkbox__label" htmlFor={id} aria-describedby={hintTextId}>{label}</label>
+                <label
+                    className="ds_checkbox__label"
+                    htmlFor={id}
+                >{label}</label>
                 {hintText && <HintText id={hintTextId} text={hintText} />}
             </div>
         </>
     );
 };
 
-export default Checkbox;
+/**
+ * @param {Object} props - Properties for the element
+ * @param {Array} items - Checkboxes
+ * @param {boolean} small - Use the small display style for all checkboxes
+ * @returns {JSX.Element} - The element
+ */
+export const CheckboxGroup: React.FC<SGDS.Component.Checkbox.Group> = ({
+    items,
+    small,
+    ...props
+}) => {
+    const ref = useRef(null);
+
+    useEffect(() => {
+        if (ref.current) {
+            new DSCheckboxes(ref.current).init();
+        }
+    }, [ref])
+
+    return (
+        <div
+            className="ds_checkboxes ds_field-group"
+            data-module="ds-checkboxes"
+            ref={ref}
+            {...props}
+        >
+            {items && items.map((item, index: number) => (
+                <Checkbox
+                    exclusive={item.exclusive}
+                    checked={item.checked}
+                    hintText={item.hintText}
+                    id={item.id}
+                    key={'checkbox' + index}
+                    label={item.label}
+                    onBlur={item.onBlur}
+                    onChange={item.onChange}
+                    small={small || item.small}
+                />
+            ))}
+        </div>
+    )
+};
+
+Checkbox.displayName = 'Checkbox';
+CheckboxGroup.displayName = 'CheckboxGroup';
+
+export default CheckboxGroup;

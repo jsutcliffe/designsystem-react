@@ -1,9 +1,3 @@
-/**
- * @param {Object} props - Properties for the element
- * @param {string} props.id
- * @param {string} props.text
- * @returns {JSX.Element} - The element
- */
 const ErrorMessage: React.FC<SGDS.Component.ErrorMessage> = ({
     children,
     id,
@@ -23,5 +17,7 @@ const ErrorMessage: React.FC<SGDS.Component.ErrorMessage> = ({
         </p>
     );
 };
+
+ErrorMessage.displayName = 'ErrorMessage';
 
 export default ErrorMessage;

@@ -1,13 +1,7 @@
 import ErrorMessage from '../error-message/error-message';
 import HintText from '../../common/hint-text';
 
-/**
- * @param {Object} props - Properties for the element
- * @param {string} props.text - Option text
- * @param {string} props.value - Option value
- * @returns {JSX.Element} - The element
- */
-export const Option: React.FC<SGDS.Component.Select.Option> = function ({
+const Option: React.FC<SGDS.Component.Select.Option> = function ({
     text,
     value
 }) {
@@ -16,24 +10,7 @@ export const Option: React.FC<SGDS.Component.Select.Option> = function ({
     );
 };
 
-/**
- * @param {Object} props - Properties for the element
- * @param {string} [props.defaultValue] - Value of the option to be selected on load
- * @param {boolean} [props.error] - Select is in error
- * @param {string} [props.errorMessage] - Error text
- * @param {string} [props.hintText] - Hint text
- * @param {string} props.id - Select's id attribute
- * @param {string} props.label - Label text
- * @param {string} [props.name] - Select's name attribute
- * @param {function} [props.onBlur] - Function to fire in response to a blur event
- * @param {function} [props.onChange] - Function to fire in response to a change event
- * @param {string} [props.placeholder] - Text for a valueless first option
- * @param {InputWidth} [props.width] - Width CSS class
- * @returns {JSX.Element} - The element
- */
 const Select: React.FC<SGDS.Component.Select> = function ({
-    children,
-    width,
     defaultValue,
     error,
     errorMessage,
@@ -43,11 +20,17 @@ const Select: React.FC<SGDS.Component.Select> = function ({
     name,
     onBlur,
     onChange,
+    options,
     placeholder,
+    width,
     ...props
 }) {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
+    const describedbys: string[] = [];
+
+    if (hintText) { describedbys.push(hintTextId) };
+    if (errorMessage) { describedbys.push(errorMessageId) };
 
     function handleBlur(event: React.FocusEvent) {
         if (typeof onBlur === 'function') {
@@ -75,6 +58,7 @@ const Select: React.FC<SGDS.Component.Select> = function ({
                 {...props}
             >
                 <select
+                    aria-describedby={describedbys.join(' ')}
                     className="ds_select"
                     defaultValue={defaultValue}
                     id={id}
@@ -83,12 +67,20 @@ const Select: React.FC<SGDS.Component.Select> = function ({
                     onChange={handleChange}
                 >
                     <option value="">{placeholder}</option>
-                    {children}
+                    {options && options.map((option, index: number) => (
+                        <Option
+                            value={option.value}
+                            text={option.text}
+                            key={`option-${index}`}
+                        />
+                    ))}
                 </select>
                 <span className="ds_select-arrow" aria-hidden="true"></span>
             </div>
         </>
     );
 };
+
+Select.displayName = 'Select';
 
 export default Select;

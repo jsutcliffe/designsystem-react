@@ -2,19 +2,6 @@ import Icon from '../../common/icon';
 import ScreenReaderText from '../../common/screen-reader-text';
 import WrapperTag from '../../common/wrapper-tag';
 
-/**
- * @param {Object} props - Properties for the element
- * @param {string} props.style - Style of the button
- * @param {string} props.icon - Icon to use
- * @param {boolean} [props.iconLeft] - Button's icon is aligned to the left
- * @param {boolean} [props.iconOnly=false] - Button is an icon-only button
- * @param {string} [props.href] - URL of the button
- * @param {boolean} [props.small] - Use the small variant
- * @param {boolean} props.styleAsLink - Whether to make the button look like a link
- * @param {string} [props.type='button'] - Button type attribute
- * @param {string} props.width - Width of the button
- * @returns {JSX.Element} - The element
- */
 const Button: React.FC<SGDS.Component.Button> = ({
     children,
     buttonStyle,
@@ -42,7 +29,7 @@ const Button: React.FC<SGDS.Component.Button> = ({
                 width && `ds_button--${width}`,
                 buttonStyle && `ds_button--${buttonStyle}`,
                 small && 'ds_button--small',
-                (icon && !iconOnly) && 'ds_button--has-icon',
+                (icon && !iconOnly) ? 'ds_button--has-icon' : undefined,
                 iconLeft && 'ds_button--has-icon--left'
             ].join(' ')}
             href={href}
@@ -55,5 +42,7 @@ const Button: React.FC<SGDS.Component.Button> = ({
         </WrapperTag>
     )
 };
+
+Button.displayName = 'Button';
 
 export default Button;

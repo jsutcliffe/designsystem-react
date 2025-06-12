@@ -1,9 +1,3 @@
-/**
- * @param {Object} props - Properties for the element
- * @param {string} props.id - ID of the hint text
- * @param {string} props.string - Text content of the hint text
- * @returns {JSX.Element} - The element
- */
 const HintText: React.FC<SGDS.Common.HintText> = ({
     children,
     id,
@@ -12,9 +6,7 @@ const HintText: React.FC<SGDS.Common.HintText> = ({
 }) => {
     return (
         <p
-            className={[
-                'ds_hint-text',
-            ].join(' ')}
+            className="ds_hint-text"
             dangerouslySetInnerHTML={text ? { __html: text } : undefined}
             id={id}
             {...props}
@@ -23,5 +15,7 @@ const HintText: React.FC<SGDS.Common.HintText> = ({
         </p>
     );
 };
+
+HintText.displayName = 'HintText';
 
 export default HintText;

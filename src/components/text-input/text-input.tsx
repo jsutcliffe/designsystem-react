@@ -6,30 +6,6 @@ import ConditionalWrapper from '../../common/conditional-wrapper';
 import ErrorMessage from '../error-message/error-message';
 import HintText from '../../common/hint-text';
 
-/**
- * @param {Object} props - Properties for the element
- * @param {string} [props.buttonIcon] - Icon to use
- * @param {string} [props.buttonText] - Screen reader text for button
- * @param {string} [props.className] - Additional CSS class(es)
- * @param {number} [props.countThreshold] - PCharacter count threshold
- * @param {boolean} [props.currency] - Input is a currency field
- * @param {string} [props.currencySymbol] - Currency symbol to use
- * @param {boolean} [props.error] - Input is in error
- * @param {string} [props.errorMessage] - Error text
- * @param {boolean} [props.hasButton] - Input has a button
- * @param {string} [props.hintText] - Hint text
- * @param {string} props.id - Input id attribute
- * @param {string} props.label - Label text
- * @param {number} [props.maxlength] - Max characters permitted
- * @param {string} [props.name] - Input name attribute
- * @param {function} [props.onBlur] - Function to fire in response to a blur event
- * @param {function} [props.onChange] - Function to fire in response to a change event
- * @param {string} [props.placeholder] - Input placeholder attribute
- * @param {string} [props.type='text'] - Input type attribute
- * @param {string} [props.value] - Default value
- * @param {InputWidth} [props.width] - Width CSS class
- * @returns {JSX.Element} - The element
- */
 const TextInput: React.FC<SGDS.Component.TextInput> = ({
     buttonIcon,
     buttonText,
@@ -57,8 +33,11 @@ const TextInput: React.FC<SGDS.Component.TextInput> = ({
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
     const ref = useRef(null);
-
     const inputWrapperClasses = `${hasButton ? 'ds_input__wrapper  ds_input__wrapper--has-icon' : ''} ${currency ? 'ds_currency-wrapper' : ''}`;
+    const describedbys: string[] = [];
+
+    if (hintText) { describedbys.push(hintTextId) };
+    if (errorMessage) { describedbys.push(errorMessageId) };
 
     useEffect(() => {
         if (ref.current) {
@@ -83,7 +62,7 @@ const TextInput: React.FC<SGDS.Component.TextInput> = ({
             condition={typeof maxlength !== 'undefined' && maxlength > 0}
             wrapper={(children: React.JSX.Element) => <div ref={ref} data-threshold={countThreshold} data-module="ds-character-count">{children}</div>}
         >
-            <label className="ds_label" htmlFor={id} aria-describedby={hintTextId}>{label}</label>
+            <label className="ds_label" htmlFor={id}>{label}</label>
             {hintText && <HintText id={hintTextId} text={hintText} />}
             {errorMessage && <ErrorMessage id={errorMessageId} text={errorMessage}/>}
             <ConditionalWrapper
@@ -91,12 +70,12 @@ const TextInput: React.FC<SGDS.Component.TextInput> = ({
                 wrapper={(children: React.JSX.Element) => <div className={inputWrapperClasses} data-symbol={currencySymbol}>{children}</div>}
             >
                 <input
-                    aria-describedby={`${errorMessageId} ${hintTextId}`}
+                    aria-describedby={describedbys.join(' ')}
                     className={[
                         'ds_input',
                         className,
-                        error && 'ds_input--error',
-                        width && `ds_input--${width}`,
+                        error ? 'ds_input--error' : '',
+                        width ? `ds_input--${width}` : '',
                     ].join(' ')}
                     defaultValue={value}
                     id={id}
@@ -113,5 +92,7 @@ const TextInput: React.FC<SGDS.Component.TextInput> = ({
         </ConditionalWrapper>
     );
 };
+
+TextInput.displayName = 'TextInput';
 
 export default TextInput;

@@ -5,15 +5,6 @@ import Button from '../button/button';
 import Icon from '../../common/icon';
 import ScreenReaderText from '../../common/screen-reader-text';
 
-/**
- * @param {Object} props - Properties for the element
- * @param {boolean} [props.close] - Include a 'close' button
- * @param {boolean} props.icon - Include a 'high priority' icon
- * @param {boolean} props.iconColour - Show icon in alt colour
- * @param {boolean} props.iconInverse - Show icon inverted
- * @param {string} [props.title='Information']
- * @returns {JSX.Element} - The element
- */
 const NotificationBanner: React.FC<SGDS.Component.NotificationBanner> = ({
     children,
     close,
@@ -73,5 +64,7 @@ const NotificationBanner: React.FC<SGDS.Component.NotificationBanner> = ({
         </div>
     );
 };
+
+NotificationBanner.displayName = 'NotificationBanner';
 
 export default NotificationBanner;

@@ -2,10 +2,6 @@ import React, { Children, useEffect, useRef } from 'react';
 // @ts-ignore
 import DSAspectBox from '@scottish-government/design-system/src/components/aspect-box/aspect-box-fallback';
 
-/**
- * @param {AspectRatioProps} props - Properties for the element
- * @returns {JSX.Element} - The element
- */
 const AspectBox: React.FC<SGDS.Component.AspectBox> = ({
     children,
     ratio,
@@ -48,12 +44,14 @@ const AspectBox: React.FC<SGDS.Component.AspectBox> = ({
                 'ds_aspect-box',
                 `${ratioClassName}`
             ].join(' ')}
-            {...props}
             ref={ref}
+            {...props}
         >
             {Children.map(children, child => processChild(child))}
         </div>
     );
 };
+
+AspectBox.displayName = 'AspectBox';
 
 export default AspectBox;

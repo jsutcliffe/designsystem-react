@@ -1,7 +1,3 @@
-/**
- * @param {Object} props - Properties for the element
- * @returns {JSX.Element} - The element
- */
 const ScreenReaderText: React.FC<SGDS.Common.ScreenReaderText> = ({
     children,
     ...props
@@ -15,5 +11,7 @@ const ScreenReaderText: React.FC<SGDS.Common.ScreenReaderText> = ({
         </span>
     );
 };
+
+ScreenReaderText.displayName = 'ScreenReaderText';
 
 export default ScreenReaderText;

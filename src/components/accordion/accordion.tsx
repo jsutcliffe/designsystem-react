@@ -1,17 +1,13 @@
-import { useEffect, useRef } from 'react';
+import React, { Children, useEffect, useRef } from 'react';
+import WrapperTag from '../../common/wrapper-tag';
 // @ts-ignore
 import DSAccordion from '@scottish-government/design-system/src/components/accordion/accordion';
+
 let accordionItemCounter = 0;
 
-/**
- * @param {Object} props - Properties for the element
- * @param {string} [props.id] - ID
- * @param {boolean} [props.open=false] - Whether the accordion item is opened by default
- * @param {string} props.title - Title/heading of the accordion item
- * @returns {JSX.Element} - The element
- */
 export const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
     children,
+    headerLevel = 'h3',
     id: rawId,
     open = false,
     title,
@@ -36,9 +32,13 @@ export const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
                 type="checkbox"
             />
             <div className="ds_accordion-item__header">
-                <h3 id={`panel-${processedId}-heading`} className="ds_accordion-item__title">
-                    { title }
-                </h3>
+                <WrapperTag
+                    id={`panel-${processedId}-heading`}
+                    className="ds_accordion-item__title"
+                    tagName={headerLevel}
+                >
+                    {title}
+                </WrapperTag>
                 <span className='ds_accordion-item__indicator' />
                 <label
                     className="ds_accordion-item__label"
@@ -54,13 +54,9 @@ export const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
     );
 };
 
-/**
- * @param {Object} props - Properties for the element
- * @param {boolean} props.hideOpenAll - Whether to hide the "open all" button
- * @returns {JSX.Element} - The element
- */
 const Accordion: React.FC<SGDS.Component.Accordion> = ({
     children,
+    headerLevel = 'h3',
     hideOpenAll,
     ...props
 }) => {
@@ -76,11 +72,15 @@ const Accordion: React.FC<SGDS.Component.Accordion> = ({
         hideOpenAll = true;
     }
 
+    function processChild(child: any) {
+        return React.cloneElement(child, { headerLevel: headerLevel });
+    }
+
     return (
         <div
             className='ds_accordion'
-            {...props}
             ref={ref}
+            {...props}
         >
             { !hideOpenAll && (
                 <button
@@ -96,9 +96,13 @@ const Accordion: React.FC<SGDS.Component.Accordion> = ({
                     <span className="visually-hidden">sections</span>
                 </button>
             )}
-            {children}
+
+            {Children.map(children, child => processChild(child))}
         </div>
     );
 };
+
+Accordion.displayName = 'Accordion';
+AccordionItem.displayName = 'AccordionItem';
 
 export default Accordion;

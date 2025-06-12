@@ -14,6 +14,6 @@ declare namespace SGDS.Component {
         onBlur?: React.EventHandler<any>,
         onChange?: React.EventHandler<any>,
         value?: string,
-        width?: string
+        width?: SGDS.InputWidth
     }
 }

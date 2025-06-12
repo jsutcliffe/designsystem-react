@@ -4,16 +4,6 @@ import HintText from '../../common/hint-text';
 import ScreenReaderText from '../../common/screen-reader-text';
 import Tag from '../tag/tag';
 
-/**
- * @param {Object} props - Properties for the element
- * @param {string} props.href - The URL of the page to link to
- * @param {string} props.id - Task id attribute
- * @param {boolean} [props.isComplete=false] - Task is complete
- * @param {string} [props.statusText] - Tag text
- * @param {TagColour} [props.tagColour='grey'] - Tag colour
- * @param {string} props.title - The title of the task list
- * @returns {JSX.Element} - The element
- */
 export const Task: React.FC<SGDS.Component.TaskList.Task> = ({
     children,
     href,
@@ -41,7 +31,7 @@ export const Task: React.FC<SGDS.Component.TaskList.Task> = ({
                     wrapper={(children: React.JSX.Element) => <a className="ds_task-list__task-link" href={href}>{children}</a>}
                 >
                     {title}
-                    <ScreenReaderText>({statusText})</ScreenReaderText>
+                    {statusText && <ScreenReaderText>({statusText})</ScreenReaderText>}
                 </ConditionalWrapper>
                 </h3>
                 <HintText className="ds_task-list__task-summary">{children}</HintText>
@@ -50,7 +40,6 @@ export const Task: React.FC<SGDS.Component.TaskList.Task> = ({
             {typeof statusText !== 'undefined' &&
                 <Tag
                     aria-hidden="true"
-                    className="ds_tag"
                     colour={tagColour}
                     title={statusText}
                 />
@@ -77,7 +66,7 @@ export const TaskGroup: React.FC<SGDS.Component.TaskList.Group> = ({
             {...props}
         >
             <h2 className="ds_task-list-heading">{title}</h2>
-            <p className="ds_task-list-intro">{intro}</p>
+            {intro && <p className="ds_task-list-intro">{intro}</p>}
             <ul className="ds_task-list">
                 {children}
             </ul>
@@ -85,13 +74,9 @@ export const TaskGroup: React.FC<SGDS.Component.TaskList.Group> = ({
     );
 };
 
-/**
- * @param {Object} props - Properties for the element
- * @param {string} props.title - Title of the task list
- * @returns {JSX.Element} - The element
- */
 const TaskList: React.FC<SGDS.Component.TaskList> = ({
     children,
+    headingId = 'task-list',
     title
 }) => {
     let taskCount = 0;
@@ -128,8 +113,8 @@ const TaskList: React.FC<SGDS.Component.TaskList> = ({
 
     return (
         <>
-            <h2 id="task-list-status" className="ds_task-list-status-heading">{title}</h2>
-            <nav aria-labelledby="task-list-status" className="ds_task-list-status">
+            <h2 id={`${headingId}-status`} className="ds_task-list-status-heading">{title}</h2>
+            <nav aria-labelledby={`${headingId}-status`} className="ds_task-list-status">
                 <p>You have completed {completedTasksCount} of {taskCount} sections.</p>
                 {firstIncompleteTaskLink()}
             </nav>
@@ -139,5 +124,9 @@ const TaskList: React.FC<SGDS.Component.TaskList> = ({
         </>
     );
 };
+
+TaskList.displayName = 'TaskList';
+Task.displayName = 'Task';
+TaskGroup.displayName = 'TaskGroup';
 
 export default TaskList;

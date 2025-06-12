@@ -1,7 +1,3 @@
-/**
- * @param {React.PropsWithChildren} props - Properties for the element
- * @returns {JSX.Element} - The element
- */
 const InsetText: React.FC<React.PropsWithChildren> = ({
     children,
     ...props
@@ -17,5 +13,7 @@ const InsetText: React.FC<React.PropsWithChildren> = ({
         </div>
     );
 };
+
+InsetText.displayName = 'InsetText';
 
 export default InsetText;

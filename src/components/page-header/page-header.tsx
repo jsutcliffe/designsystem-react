@@ -1,9 +1,3 @@
-/**
- * @param {Object} props - Properties for the element
- * @param {string} [props.label]
- * @param {string} props.title
- * @returns {JSX.Element} - The element
- */
 const PageHeader: React.FC<SGDS.Component.PageHeader> = ({
     children,
     label,
@@ -22,5 +16,7 @@ const PageHeader: React.FC<SGDS.Component.PageHeader> = ({
         </header>
     );
 };
+
+PageHeader.displayName = 'PageHeader';
 
 export default PageHeader;

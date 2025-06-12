@@ -1,9 +1,5 @@
 /**
- * Wraps any given children in a given `tag`.
- *
- * @param {Object} props - Properties for the element
- * @param {string} [props.tagName='div'] - Element type to use
- * @returns {JSX.Element} - The element
+ * Wraps all children in a specified HTML tag.
  */
 const WrapperTag: React.FC<SGDS.Common.WrapperTag> = ({
     children,
@@ -13,5 +9,7 @@ const WrapperTag: React.FC<SGDS.Common.WrapperTag> = ({
     const TagName = tagName;
     return <TagName {...props}>{children}</TagName>;
 };
+
+WrapperTag.displayName = 'WrapperTag';
 
 export default WrapperTag;

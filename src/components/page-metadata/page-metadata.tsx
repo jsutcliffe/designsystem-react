@@ -1,8 +1,3 @@
-/**
- * @param {Object} props - Properties for the element
- * @param {string} props.name - Text label for the metadata item
- * @returns {JSX.Element} - The element
- */
 export const MetadataItem: React.FC<SGDS.Component.Metadata.Item> = ({
     children,
     name,
@@ -20,11 +15,6 @@ export const MetadataItem: React.FC<SGDS.Component.Metadata.Item> = ({
     );
 };
 
-/**
- * @param {Object} props - Properties for the element
- * @param {boolean} props.inline - Use the 'inline' option
- * @returns {JSX.Element} - The element
- */
 const Metadata: React.FC<SGDS.Component.Metadata> = ({
     children,
     inline,
@@ -42,5 +32,8 @@ const Metadata: React.FC<SGDS.Component.Metadata> = ({
         </dl>
     );
 };
+
+Metadata.displayName = 'Metadata';
+MetadataItem.displayName = 'MetadataItem';
 
 export default Metadata;
