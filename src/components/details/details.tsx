@@ -1,8 +1,3 @@
-/**
- * @param {Object} props - Properties for the element
- * @param {string} props.summary - Summary text
- * @returns {JSX.Element} - The element
- */
 const Details: React.FC<SGDS.Component.Details> = ({
     children,
     summary,
@@ -24,5 +19,7 @@ const Details: React.FC<SGDS.Component.Details> = ({
         </details>
     );
 };
+
+Details.displayName = 'Details';
 
 export default Details;

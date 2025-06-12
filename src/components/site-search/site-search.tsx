@@ -3,18 +3,6 @@ import { useEffect, useRef } from 'react';
 import DSAutocomplete from '@scottish-government/design-system/src/components/autocomplete/autocomplete';
 import Button from '../button/button';
 
-/**
- * @param {Object} props - Properties for the element
- * @param {string} props.action - Search form's 'action' attribute
- * @param {string} props.autocompleteEndpoint
- * @param {function} props.autocompleteSuggestionMappingFunction
- * @param {string} [props.id='site-search'] - Search input field's id attribute
- * @param {string} [props.method='GET'] - The form method to use
- * @param {number} [props.minLength=3] - Minimum number of characters needed to trigger autocomplete
- * @param {string} [props.name='q'] - Search field's name attribute
- * @param {string} [props.placeholder='search'] - Search field's placeholder attribute
- * @returns {JSX.Element} - The element
- */
 const SiteSearch: React.FC<SGDS.Component.SiteSearch> = function ({
     action = '/search',
     autocompleteEndpoint,
@@ -27,8 +15,8 @@ const SiteSearch: React.FC<SGDS.Component.SiteSearch> = function ({
     ...props
 }) {
     const ref = useRef(null);
-    const autocompleteId = id + '-autocomplete';
     const hasAutocomplete = !!autocompleteEndpoint;
+    let autocompleteId = hasAutocomplete ? id + '-autocomplete' : '';
 
     type AutoCompleteOptions = {
         minLength?: number,
@@ -60,9 +48,9 @@ const SiteSearch: React.FC<SGDS.Component.SiteSearch> = function ({
         <div
             className={[
                 'ds_site-search',
-                hasAutocomplete && 'ds_autocomplete'
+                hasAutocomplete ? 'ds_autocomplete' : undefined
             ].join(' ')}
-            id={autocompleteId}
+            id={autocompleteId ? autocompleteId : undefined}
             ref={ref}
             {...props}
         >
@@ -72,15 +60,17 @@ const SiteSearch: React.FC<SGDS.Component.SiteSearch> = function ({
 
                 {hasAutocomplete && (
                     <div role="status" aria-live="polite" id="autocomplete-status" className="visually-hidden"></div>
-
                 )}
 
                 <div className="ds_input__wrapper  ds_input__wrapper--has-icon">
-                    <input aria-autocomplete="list"
-                        aria-haspopup="listbox"
-                        aria-owns="autocomplete-suggestions"
-                        autoComplete="off"
-                        className="ds_input  ds_site-search__input  js-autocomplete-input"
+                    <input aria-autocomplete={hasAutocomplete ? 'list' : undefined}
+                        aria-owns={hasAutocomplete ? 'autocomplete-suggestions' : undefined}
+                        autoComplete={hasAutocomplete ? 'off' : undefined}
+                        className={[
+                            'ds_input',
+                            'ds_site-search__input',
+                            hasAutocomplete ? 'js-autocomplete-input' : undefined
+                        ].join(' ')}
                         id={id}
                         name={name}
                         placeholder={placeholder}
@@ -88,6 +78,7 @@ const SiteSearch: React.FC<SGDS.Component.SiteSearch> = function ({
                         spellCheck="false"
                         type="search"
                     />
+
                     <Button type="submit" icon="search" iconOnly>Search</Button>
 
                     {hasAutocomplete && (
@@ -100,5 +91,7 @@ const SiteSearch: React.FC<SGDS.Component.SiteSearch> = function ({
         </div>
     );
 };
+
+SiteSearch.displayName = 'SiteSearch';
 
 export default SiteSearch;

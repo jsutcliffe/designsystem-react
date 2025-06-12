@@ -10,17 +10,28 @@
   },
   "private": true,
   "scripts": {
+    "coverage": "vitest run --coverage",
+    "test": "vitest",
     "tsc": "node ./node_modules/typescript/bin/tsc"
   },
   "dependencies": {
     "@scottish-government/design-system": "^3.0.1"
   },
   "devDependencies": {
+    "@scottish-government/design-system": "^3.0.1",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "22.15.19",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
+    "@vitejs/plugin-react-swc": "^3.10.0",
+    "@vitest/coverage-v8": "^3.2.0",
+    "jsdom": "^26.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.0"
   }
 }

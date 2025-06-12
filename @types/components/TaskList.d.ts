@@ -2,7 +2,7 @@ declare namespace SGDS.Component {
     namespace TaskList {
         interface Group extends React.AllHTMLAttributes<HTMLElement> {
             intro?: string,
-            title: string,
+            title: string
         }
 
         interface Task extends React.AllHTMLAttributes<HTMLElement> {
@@ -11,11 +11,11 @@ declare namespace SGDS.Component {
             isComplete?: boolean,
             statusText?: string,
             tagColour?: TagColour,
-            title: string,
+            title: string
         }
     }
 
     interface TaskList extends React.AllHTMLAttributes<HTMLElement> {
-        hideOpenAll: boolean
+        headingId?: string
     }
 }

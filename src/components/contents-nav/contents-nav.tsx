@@ -1,25 +1,17 @@
 import WrapperTag from '../../common/wrapper-tag';
 
-/**
- * @param {Object} props - Properties for the element
- * @param {boolean} props.current
- * @param {string} props.href
- * @returns {JSX.Element} - The element
- */
-export const ContentsLink: React.FC<SGDS.Component.ContentsNav.Link> = ({
-    children,
+export const Link: React.FC<SGDS.Component.ContentsNav.Link> = ({
+    content,
     current,
-    href,
-    ...props
+    href
 }) => {
     // determine which HTML tag to use
     const tagName = href && !current ? 'a' : 'span';
 
     return (
         <li
-            aria-current={current && 'page' || false}
+            aria-current={current && 'page' || undefined}
             className="ds_contents-nav__item"
-            {...props}
         >
             <WrapperTag
                 tagName={tagName}
@@ -29,21 +21,15 @@ export const ContentsLink: React.FC<SGDS.Component.ContentsNav.Link> = ({
                 ].join(' ')}
                 href={!current ? href : undefined}
             >
-                {children}
+                {content}
             </WrapperTag>
         </li>
     );
 };
 
-/**
- * @param {Object} props - Properties for the element
- * @param {string} props.label
- * @param {string} [props.title='Contents']
- * @returns {JSX.Element} - The element
- */
 const ContentsNav: React.FC<SGDS.Component.ContentsNav> = function({
-    children,
-    label,
+    items,
+    label = 'Pages in this section',
     title = 'Contents',
     ...props
 }) {
@@ -55,10 +41,14 @@ const ContentsNav: React.FC<SGDS.Component.ContentsNav> = function({
         >
             <h2 className="ds_contents-nav__title">{title}</h2>
             <ul className="ds_contents-nav__list">
-                {children}
+                {items && items.map((item, index: number) => (
+                    <Link current={item.current} href={item.href} content={item.content} key={'link' + index} />
+                ))}
             </ul>
         </nav>
     );
 };
+
+ContentsNav.displayName = 'ContentsNav';
 
 export default ContentsNav;

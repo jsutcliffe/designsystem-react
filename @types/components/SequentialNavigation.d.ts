@@ -7,6 +7,8 @@ declare namespace SGDS.Component {
     }
 
     interface SequentialNavigation extends React.AllHTMLAttributes<HTMLElement> {
-        hideOpenAll: boolean
+        ariaLabel?: string,
+        next?: SequentialNavigation.Link,
+        previous?: SequentialNavigation.Link
     }
 }

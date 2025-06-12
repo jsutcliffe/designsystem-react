@@ -1,7 +1,3 @@
-/**
- * @param {React.PropsWithChildren} props - Properties for the element
- * @returns {JSX.Element} - The element
- */
 const WarningText: React.FC<React.PropsWithChildren> = ({
     children,
     ...props
@@ -19,5 +15,7 @@ const WarningText: React.FC<React.PropsWithChildren> = ({
         </div>
     );
 };
+
+WarningText.displayName = 'WarningText';
 
 export default WarningText;

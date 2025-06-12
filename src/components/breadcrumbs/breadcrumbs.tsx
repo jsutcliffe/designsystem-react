@@ -1,9 +1,3 @@
-/**
- * @param {Object} props - Properties for the element
- * @param {string} [props.href] - href attribute of the breadcrumb link
- * @param {string} props.title - Text for the breadcrumb link
- * @returns {JSX.Element} - The element
- */
 const Breadcrumb: React.FC<SGDS.Component.Breadcrumbs.Item> = ({
     hidden,
     href,
@@ -25,6 +19,8 @@ const Breadcrumb: React.FC<SGDS.Component.Breadcrumbs.Item> = ({
 };
 
 /**
+ * @param {boolean} hideLastItem
+ * @param {Array} items
  * @param {Object} props - Properties for the element
  * @returns {JSX.Element} - The element
  */
@@ -51,5 +47,7 @@ const Breadcrumbs: React.FC<SGDS.Component.Breadcrumbs> = ({
         </nav>
     );
 };
+
+Breadcrumbs.displayName = 'Breadcrumbs';
 
 export default Breadcrumbs;

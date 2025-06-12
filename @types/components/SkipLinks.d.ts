@@ -1,12 +1,14 @@
 declare namespace SGDS.Component {
     namespace SkipLinks {
         interface Link extends React.AllHTMLAttributes<HTMLLIElement> {
-            href: string,
+            targetId: string,
             title: string
         }
     }
 
     interface SkipLinks extends React.AllHTMLAttributes<HTMLDivElement> {
-        mainContentId?: string
+        items?: SkipLinks.Link[],
+        mainContentId?: string,
+        mainLinkText?: string
     }
 }

@@ -18,4 +18,6 @@ const Tag: React.FC<SGDS.Component.Tag> = ({
     );
 };
 
+Tag.displayName = 'Tag';
+
 export default Tag;

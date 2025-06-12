@@ -7,6 +7,7 @@ declare namespace SGDS.Component {
 
     interface Select extends FormFieldBase<HTMLDivElement> {
         defaultValue?: string,
+        options: Select.Option[],
         placeholder?: string,
         width?: InputWidth
     }

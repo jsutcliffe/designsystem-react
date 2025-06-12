@@ -3,25 +3,6 @@ import { useEffect, useRef } from 'react';
 import DSDatePicker from '@scottish-government/design-system/src/components/date-picker/date-picker';
 import TextInput from '../text-input/text-input';
 
-/**
- * @param {Object} props - Properties for the element
- * @param {string} [props.disabledDates] - Space-separated list of disabled dates in dd/mm/yyyy format
- * @param {boolean} [props.error] - Picker is in an error state
- * @param {string} [props.errorMessage] - Error text
- * @param {string} [props.hintText] - Hint text content
- * @param {string} props.id - Picker input ID attribute
- * @param {string} [props.iconPath='./'] - Path to the icon file
- * @param {string} props.label - Label text
- * @param {string} [props.maxDate] - Latest selectable date in dd/mm/yyyy
- * @param {string} [props.minDate] - Earliest selectable date in dd/mm/yyyy
- * @param {boolean} [props.multiple] - Use separate fields for day, month and year
- * @param {string} props.name - Picker input name attribute
- * @param {function} [props.onBlur] - Function to fire in response to a blur event
- * @param {function} [props.onChange] - Function to fire in response to a change event
- * @param {string} [props.value] - Default value of the picker
- * @param {InputWidth} [props.width='fixed-10'] - Width CSS class
- * @returns {JSX.Element} - The element
- */
 const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
     width = 'fixed-10',
     disabledDates,
@@ -136,12 +117,13 @@ const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
                     onChange={handleChange}
                     placeholder="dd/mm/yyyy"
                     value={value}
-                    width="fixed-10"
-                    // todo: this width does not work
+                    width={width}
                 />
             ))}
         </div>
     );
 };
+
+DatePicker.displayName = 'DatePicker';
 
 export default DatePicker;
