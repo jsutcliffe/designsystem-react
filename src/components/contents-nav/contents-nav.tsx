@@ -1,7 +1,7 @@
 import WrapperTag from '../../common/wrapper-tag';
 
 export const Link: React.FC<SGDS.Component.ContentsNav.Link> = ({
-    content,
+    title,
     current,
     href
 }) => {
@@ -21,7 +21,7 @@ export const Link: React.FC<SGDS.Component.ContentsNav.Link> = ({
                 ].join(' ')}
                 href={!current ? href : undefined}
             >
-                {content}
+                {title}
             </WrapperTag>
         </li>
     );

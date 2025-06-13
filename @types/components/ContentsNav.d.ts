@@ -1,7 +1,7 @@
 declare namespace SGDS.Component {
     namespace ContentsNav {
         interface Link extends React.AllHTMLAttributes<HTMLElement> {
-            content: string,
+            title: string,
             current: boolean,
             href: string
         }
