@@ -1,10 +1,14 @@
-const WarningText: React.FC<React.PropsWithChildren> = ({
+const WarningText: React.FC<SGDS.Component.WarningText> = ({
     children,
+    className,
     ...props
 }) => {
     return (
         <div
-            className="ds_warning-text"
+            className={[
+                'ds_warning-text',
+                className
+            ].join(' ')}
             {...props}
         >
             <strong className="ds_warning-text__icon" aria-hidden="true"></strong>

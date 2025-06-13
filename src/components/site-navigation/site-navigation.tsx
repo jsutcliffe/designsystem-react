@@ -18,12 +18,16 @@ const SiteNavLink: React.FC<SGDS.Component.SiteNavigation.Link> = ({
 };
 
 const SiteNavigation: React.FC<SGDS.Component.SiteNavigation> = ({
+    className,
     items,
     ...props
 }) => {
     return (
         <nav
-            className="ds_site-navigation"
+            className={[
+                'ds_site-navigation',
+                className
+            ].join(' ')}
             {...props}
         >
             <ul className="ds_site-navigation__list">

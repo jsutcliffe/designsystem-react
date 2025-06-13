@@ -43,3 +43,13 @@ test('passing additional props', () => {
     const container = button.parentElement;
     expect(container?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <BackToTop className="foo" />
+    );
+
+    const button = screen.getByRole('link');
+    const container = button.parentElement;
+    expect(container).toHaveClass('foo');
+});

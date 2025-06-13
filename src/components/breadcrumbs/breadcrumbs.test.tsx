@@ -75,3 +75,15 @@ test('passing additional props', () => {
     const nav = screen.getByRole('navigation');
     expect(nav.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <Breadcrumbs
+            items={items}
+            className="foo"
+        />
+    );
+
+    const nav = screen.getByRole('navigation');
+    expect(nav).toHaveClass('foo');
+});

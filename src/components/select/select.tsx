@@ -11,6 +11,7 @@ const Option: React.FC<SGDS.Component.Select.Option> = function ({
 };
 
 const Select: React.FC<SGDS.Component.Select> = function ({
+    className,
     defaultValue,
     error,
     errorMessage,
@@ -54,6 +55,7 @@ const Select: React.FC<SGDS.Component.Select> = function ({
                     "ds_select-wrapper",
                     error && 'ds_input--error',
                     width && `ds_input--${width}`,
+                    className
                 ].join(' ')}
                 {...props}
             >

@@ -38,3 +38,14 @@ test('passing additional props', () => {
     const warningTextOuter = document.querySelector('.ds_warning-text');
     expect(warningTextOuter?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <WarningText className="foo">
+            {text}
+        </WarningText>
+    )
+
+    const warningTextOuter = document.querySelector('.ds_warning-text');
+    expect(warningTextOuter).toHaveClass('foo');
+});

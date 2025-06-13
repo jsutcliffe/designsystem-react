@@ -3,6 +3,7 @@ import WrapperTag from '../../common/wrapper-tag';
 const NotificationPanel: React.FC<SGDS.Component.NotificationPanel> = function ({
     ariaLive,
     children,
+    className,
     headerLevel = 'h1',
     title,
     ...props
@@ -10,7 +11,10 @@ const NotificationPanel: React.FC<SGDS.Component.NotificationPanel> = function (
     return (
         <div
             aria-live={ariaLive}
-            className="ds_notification-panel"
+            className={[
+                'ds_notification-panel',
+                className
+            ].join(' ')}
             {...props}
         >
             <WrapperTag

@@ -4,7 +4,7 @@ import DSDatePicker from '@scottish-government/design-system/src/components/date
 import TextInput from '../text-input/text-input';
 
 const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
-    width = 'fixed-10',
+    className,
     disabledDates,
     error,
     errorMessage,
@@ -19,6 +19,7 @@ const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
     onBlur,
     onChange,
     value,
+    width = 'fixed-10',
     ...props
 }) => {
     // todo: dateSelectCallback function
@@ -47,7 +48,8 @@ const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
         <div
             className={[
                 "ds_datepicker",
-                multiple && "ds_datepicker--multiple"
+                multiple && "ds_datepicker--multiple",
+                className
             ].join(' ')}
             data-disableddates={disabledDates}
             data-maxdate={maxDate}

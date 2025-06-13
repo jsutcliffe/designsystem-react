@@ -61,3 +61,12 @@ test('passing additional props', () => {
     const nav = screen.getByRole('navigation');
     expect(nav.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <SiteNavigation className="foo" items={items}/>
+    );
+
+    const nav = screen.getByRole('navigation');
+    expect(nav).toHaveClass('foo', 'ds_site-navigation');
+});

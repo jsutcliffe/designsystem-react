@@ -207,3 +207,16 @@ test('passing additional props', () => {
     const datePicker = screen.getAllByRole('generic')[1];
     expect(datePicker?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <DatePicker
+            id={id}
+            label={labelText}
+            className="foo"
+        />
+    )
+
+    const datePicker = screen.getAllByRole('generic')[1];
+    expect(datePicker).toHaveClass('foo', 'ds_datepicker');
+});

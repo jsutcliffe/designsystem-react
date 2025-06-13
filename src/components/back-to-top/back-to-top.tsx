@@ -4,6 +4,7 @@ import DSBackToTop from '@scottish-government/design-system/src/components/back-
 import Icon from '../../common/icon';
 
 const BackToTop: React.FC<SGDS.Component.BackToTop> = ({
+    className,
     href = '#page-top',
     ...props
 }) => {
@@ -17,7 +18,10 @@ const BackToTop: React.FC<SGDS.Component.BackToTop> = ({
 
     return (
         <div
-            className='ds_back-to-top'
+            className={[
+                'ds_back-to-top',
+                className
+            ].join(' ')}
             ref={ref}
             {...props}
         >

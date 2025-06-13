@@ -65,6 +65,7 @@ export const Checkbox: React.FC<SGDS.Component.Checkbox> = ({
  * @returns {JSX.Element} - The element
  */
 export const CheckboxGroup: React.FC<SGDS.Component.Checkbox.Group> = ({
+    className,
     items,
     small,
     ...props
@@ -79,7 +80,11 @@ export const CheckboxGroup: React.FC<SGDS.Component.Checkbox.Group> = ({
 
     return (
         <div
-            className="ds_checkboxes ds_field-group"
+            className={[
+                'ds_checkboxes',
+                'ds_field-group',
+                className
+            ].join(' ')}
             data-module="ds-checkboxes"
             ref={ref}
             {...props}

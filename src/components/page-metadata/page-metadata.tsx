@@ -1,10 +1,14 @@
 export const MetadataItem: React.FC<SGDS.Component.Metadata.Item> = ({
     children,
+    className,
     name,
     ...props
 }) => {
     return (
-        <div className="ds_metadata__item"
+        <div className={[
+            'ds_metadata__item',
+            className
+        ].join(' ')}
             {...props}
         >
             <dt className="ds_metadata__key">{name}</dt>{' '}
@@ -17,6 +21,7 @@ export const MetadataItem: React.FC<SGDS.Component.Metadata.Item> = ({
 
 const Metadata: React.FC<SGDS.Component.Metadata> = ({
     children,
+    className,
     inline,
     ...props
 }) => {
@@ -25,6 +30,7 @@ const Metadata: React.FC<SGDS.Component.Metadata> = ({
             className={[
                 'ds_metadata',
                 inline && 'ds_metadata--inline',
+                className
             ].join(' ')}
             {...props}
         >

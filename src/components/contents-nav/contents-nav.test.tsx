@@ -134,3 +134,16 @@ test('passing additional props', () => {
     const contentsNav = screen.getByRole('navigation');
     expect(contentsNav?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <ContentsNav className="foo" items={[
+            {
+                title: 'Apply for Blue Badge',
+            }
+        ]} />
+    )
+
+    const contentsNav = screen.getByRole('navigation');
+    expect(contentsNav).toHaveClass('foo', 'ds_contents-nav');
+});

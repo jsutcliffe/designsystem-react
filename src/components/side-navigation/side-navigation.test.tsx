@@ -154,3 +154,21 @@ test('side nav list renders correctly', () => {
     expect(link).toHaveAttribute('href', '#bramley');
     expect(link.textContent).toEqual('Bramley');
 });
+
+test('passing additional props', () => {
+    render(
+        <SideNavigation data-test="foo" items={items} />
+    );
+
+    const sideNavigation = screen.getByRole('navigation');
+    expect(sideNavigation?.dataset.test).toEqual('foo');
+});
+
+test('passing additional CSS classes', () => {
+    render(
+        <SideNavigation className="foo" items={items} />
+    );
+
+    const sideNavigation = screen.getByRole('navigation');
+    expect(sideNavigation).toHaveClass('foo', 'ds_side-navigation');
+});

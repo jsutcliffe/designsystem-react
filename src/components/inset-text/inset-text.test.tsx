@@ -31,3 +31,14 @@ test('passing additional props', () => {
     const insetTextOuter = document.querySelector('.ds_inset-text');
     expect(insetTextOuter?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <InsetText className="foo">
+            {text}
+        </InsetText>
+    )
+
+    const insetTextOuter = document.querySelector('.ds_inset-text');
+    expect(insetTextOuter).toHaveClass('foo', 'ds_inset-text');
+});

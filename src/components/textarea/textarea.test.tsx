@@ -210,3 +210,16 @@ test('passing additional props', () => {
     const textarea = screen.getByRole('textbox');
     expect(textarea?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <Textarea
+            id={id}
+            label={labelText}
+            className="foo"
+        />
+    );
+
+    const textarea = screen.getByRole('textbox');
+    expect(textarea).toHaveClass('foo');
+});

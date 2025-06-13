@@ -7,6 +7,7 @@ import ScreenReaderText from '../../common/screen-reader-text';
 
 const NotificationBanner: React.FC<SGDS.Component.NotificationBanner> = ({
     children,
+    className,
     close,
     icon,
     iconColour,
@@ -24,7 +25,11 @@ const NotificationBanner: React.FC<SGDS.Component.NotificationBanner> = ({
 
     return (
         <div
-            className="ds_notification  ds_reversed"
+            className={[
+                'ds_notification',
+                'ds_reversed',
+                className
+            ].join(' ')}
             data-module="ds-notification"
             ref={ref}
             {...props}

@@ -4,6 +4,7 @@ import WrapperTag from '../../common/wrapper-tag';
 
 const Question: React.FC<SGDS.Component.Question> = function ({
     children,
+    className,
     error,
     errorMessage,
     hintText,
@@ -16,7 +17,8 @@ const Question: React.FC<SGDS.Component.Question> = function ({
             tagName={tagName}
             className={[
                 'ds_question',
-                error && 'ds_question--error'
+                error && 'ds_question--error',
+                className
             ].join(' ')}
             {...props}
         >

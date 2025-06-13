@@ -38,3 +38,12 @@ test('passing additional props', () => {
     const errorMessageElement = screen.getByRole('paragraph');
     expect(errorMessageElement?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <ErrorMessage className="foo" text={errorText} id={errorId}/>
+    )
+
+    const errorMessageElement = screen.getByRole('paragraph');
+    expect(errorMessageElement).toHaveClass('foo', 'ds_question__error-message');
+});

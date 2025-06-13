@@ -101,7 +101,7 @@ test('accordion with custom header level', () => {
     );
 
     const firstAccordionTitle = document.querySelector('.ds_accordion-item__title');
-    expect(firstAccordionTitle.tagName).toEqual(headerLevel.toUpperCase());
+    expect(firstAccordionTitle?.tagName).toEqual(headerLevel.toUpperCase());
 });
 
 test('passing additional props to accordion', () => {
@@ -112,6 +112,16 @@ test('passing additional props to accordion', () => {
 
     const accordion = screen.getByTestId(id);
     expect(accordion?.dataset.test).toEqual('foo');
+});
+
+test('passing additional CSS classes', () => {
+    render(
+        <Accordion id={id} data-testid={id} className="foo">
+        </Accordion>
+    );
+
+    const accordion = screen.getByTestId(id);
+    expect(accordion).toHaveClass('foo', 'ds_accordion');
 });
 
 test('accordion item renders correctly', () => {
@@ -209,4 +219,18 @@ test('passing additional props to accordion item', () => {
 
     const accordionItem = screen.getByTestId(itemId);
     expect(accordionItem?.dataset.test).toEqual('foo');
+});
+
+test('passing additional CSS classes', () => {
+    render(
+        <AccordionItem id={itemId} data-testid={itemId} title="Healthcare for veterans" className="foo">
+            <p>Veterans are entitled to the same healthcare as any citizen. And there
+                are health care options and support available specifically for veterans.</p>
+            <p>If you have a health condition that’s related to your service, you’re
+                entitled to priority treatment based on clinical need.</p>
+        </AccordionItem>
+    );
+
+    const accordionItem = screen.getByTestId(itemId);
+    expect(accordionItem).toHaveClass('foo', 'ds_accordion-item');
 });

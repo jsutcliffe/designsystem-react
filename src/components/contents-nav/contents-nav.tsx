@@ -1,9 +1,9 @@
 import WrapperTag from '../../common/wrapper-tag';
 
 export const Link: React.FC<SGDS.Component.ContentsNav.Link> = ({
-    title,
     current,
-    href
+    href,
+    title
 }) => {
     // determine which HTML tag to use
     const tagName = href && !current ? 'a' : 'span';
@@ -27,7 +27,8 @@ export const Link: React.FC<SGDS.Component.ContentsNav.Link> = ({
     );
 };
 
-const ContentsNav: React.FC<SGDS.Component.ContentsNav> = function({
+const ContentsNav: React.FC<SGDS.Component.ContentsNav> = function ({
+    className,
     items,
     label = 'Pages in this section',
     title = 'Contents',
@@ -36,7 +37,10 @@ const ContentsNav: React.FC<SGDS.Component.ContentsNav> = function({
     return (
         <nav
             aria-label={label}
-            className="ds_contents-nav"
+            className={[
+                'ds_contents-nav',
+                className
+            ].join(' ')}
             {...props}
         >
             <h2 className="ds_contents-nav__title">{title}</h2>

@@ -305,3 +305,16 @@ test('passing additional props', () => {
     const textInput = screen.getByRole('textbox');
     expect(textInput?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <TextInput
+            id={id}
+            label={labelText}
+            className="foo"
+        />
+    );
+
+    const textInput = screen.getByRole('textbox');
+    expect(textInput).toHaveClass('foo', 'ds_input');
+});

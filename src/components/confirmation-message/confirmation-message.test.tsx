@@ -44,3 +44,25 @@ test('renders confirmation message with custom aria live and custom heaer level'
 
     expect(header.tagName).toEqual('H2');
 });
+
+test('passing additional props', () => {
+    render(
+        <ConfirmationMessage data-test="foo" title={titleString}>
+            <p>You have added the landlord <strong>John Smith</strong> to the application.</p>
+        </ConfirmationMessage>
+    );
+
+    const container = document.querySelector('.ds_confirmation-message');
+    expect(container?.dataset.test).toEqual('foo');
+});
+
+test('passing additional CSS classes', () => {
+    render(
+        <ConfirmationMessage className="foo" title={titleString}>
+            <p>You have added the landlord <strong>John Smith</strong> to the application.</p>
+        </ConfirmationMessage>
+    );
+
+    const container = document.querySelector('.ds_confirmation-message');
+    expect(container).toHaveClass('foo', 'ds_confirmation-message');
+})

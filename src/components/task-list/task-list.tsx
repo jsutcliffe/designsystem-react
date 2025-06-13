@@ -6,6 +6,7 @@ import Tag from '../tag/tag';
 
 export const Task: React.FC<SGDS.Component.TaskList.Task> = ({
     children,
+    className,
     href,
     id,
     isComplete = false,
@@ -20,7 +21,10 @@ export const Task: React.FC<SGDS.Component.TaskList.Task> = ({
 
     return (
         <li
-            className="ds_task-list__task"
+            className={[
+                'ds_task-list__task',
+                className
+            ].join(' ')}
             id={id}
             {...props}
         >
@@ -56,13 +60,17 @@ export const Task: React.FC<SGDS.Component.TaskList.Task> = ({
  */
 export const TaskGroup: React.FC<SGDS.Component.TaskList.Group> = ({
     children,
+    className,
     intro,
     title,
     ...props
 }) => {
     return (
         <li
-            className="ds_task-list-group__section"
+            className={[
+                'ds_task-list-group__section',
+                className
+            ].join(' ')}
             {...props}
         >
             <h2 className="ds_task-list-heading">{title}</h2>
@@ -76,8 +84,10 @@ export const TaskGroup: React.FC<SGDS.Component.TaskList.Group> = ({
 
 const TaskList: React.FC<SGDS.Component.TaskList> = ({
     children,
+    className,
     headingId = 'task-list',
-    title
+    title,
+    ...props
 }) => {
     let taskCount = 0;
     let incompleteTaskIds: string[] = [];
@@ -112,7 +122,10 @@ const TaskList: React.FC<SGDS.Component.TaskList> = ({
     });
 
     return (
-        <>
+        <div
+            className={className}
+            {...props}
+        >
             <h2 id={`${headingId}-status`} className="ds_task-list-status-heading">{title}</h2>
             <nav aria-labelledby={`${headingId}-status`} className="ds_task-list-status">
                 <p>You have completed {completedTasksCount} of {taskCount} sections.</p>
@@ -121,7 +134,7 @@ const TaskList: React.FC<SGDS.Component.TaskList> = ({
             <ul className="ds_task-list">
                 {children}
             </ul>
-        </>
+        </div>
     );
 };
 

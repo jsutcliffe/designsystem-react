@@ -2,12 +2,16 @@ import Tag from "../tag/tag";
 
 const PhaseBanner: React.FC<SGDS.Component.PhaseBanner> = ({
     children,
+    className,
     phaseName,
     ...props
 }) => {
     return (
         <div
-            className="ds_phase-banner"
+            className={[
+                'ds_phase-banner',
+                className
+            ].join(' ')}
             {...props}
         >
             <div className="ds_wrapper">

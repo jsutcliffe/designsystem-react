@@ -4,13 +4,19 @@ import WrapperTag from '../../common/wrapper-tag';
 const ConfirmationMessage: React.FC<SGDS.Component.ConfirmationMessage> = ({
     ariaLive = 'polite',
     children,
+    className,
     headerLevel = 'h3',
-    title
+    title,
+    ...props
 }) => {
     return (
         <div
             aria-live={ariaLive}
-            className="ds_confirmation-message"
+            className={[
+                'ds_confirmation-message',
+                className
+            ].join(' ')}
+            {...props}
         >
             <Icon className="ds_confirmation-message__icon" icon="check_circle" iconSize="24" />
 

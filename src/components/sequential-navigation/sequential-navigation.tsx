@@ -34,13 +34,17 @@ const PrevLink: React.FC<SGDS.Component.SequentialNavigation.Link> = ({
 
 const SequentialNavigation: React.FC<SGDS.Component.SequentialNavigation> = ({
     ariaLabel = 'Article navigation',
+    className,
     next,
     previous,
     ...props
 }) => {
     return (
         <nav
-            className="ds_sequential-nav"
+            className={[
+                'ds_sequential-nav',
+                className
+            ].join(' ')}
             aria-label={ariaLabel}
             {...props}
         >

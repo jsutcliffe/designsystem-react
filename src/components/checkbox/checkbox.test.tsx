@@ -178,3 +178,16 @@ test('passing additional props', () => {
     const groupContainer = checkboxes[0]?.parentNode?.parentNode;
     expect(groupContainer?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <CheckboxGroup className="foo" items={[{
+            id: 'universal-credit',
+            label: 'Universal Credit'
+        }]} />
+    );
+
+    const checkboxes = screen.getAllByRole('checkbox');
+    const groupContainer = checkboxes[0]?.parentNode?.parentNode;
+    expect(groupContainer).toHaveClass('foo', 'ds_checkboxes');
+});

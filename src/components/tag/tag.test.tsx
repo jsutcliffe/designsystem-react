@@ -25,16 +25,6 @@ test('tag with custom colour', () => {
     expect(tag).toHaveClass('ds_tag--red');
 });
 
-test('tag with additional CSS class', () => {
-    render(
-        <Tag className="foo" title={tagText}/>
-    );
-
-    const tag = screen.getByText(tagText);
-
-    expect(tag).toHaveClass('foo');
-});
-
 test('passing additional props', () => {
     render(
         <Tag data-test="foo" title={tagText}/>
@@ -42,4 +32,14 @@ test('passing additional props', () => {
 
     const tag = screen.getByText(tagText);
     expect(tag?.dataset.test).toEqual('foo');
+});
+
+test('tag with additional CSS class', () => {
+    render(
+        <Tag className="foo" title={tagText}/>
+    );
+
+    const tag = screen.getByText(tagText);
+
+    expect(tag).toHaveClass('foo', 'ds_tag');
 });

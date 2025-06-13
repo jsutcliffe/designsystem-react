@@ -91,3 +91,14 @@ test('passing additional props', () => {
     const bannerContainer = document.querySelector('.ds_notification');
     expect(bannerContainer?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <NotificationBanner className="foo">
+            {text}
+        </NotificationBanner>
+    )
+
+    const bannerContainer = document.querySelector('.ds_notification');
+    expect(bannerContainer).toHaveClass('foo', 'ds_notification');
+});

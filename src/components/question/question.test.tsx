@@ -67,3 +67,13 @@ test('passing additional props', () => {
     const questionElement = document.querySelector('.ds_question');
     expect(questionElement?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <Question className="foo">
+        </Question>
+    )
+
+    const questionElement = document.querySelector('.ds_question');
+    expect(questionElement).toHaveClass('foo', 'ds_question');
+});

@@ -65,3 +65,14 @@ test('passing additional props', () => {
     const phaseBanner = document.querySelector('.ds_phase-banner');
     expect(phaseBanner?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <PhaseBanner className="foo">
+            This is a new service. Your <a href="#feedback">feedback</a> will help us to improve it.
+        </PhaseBanner>
+    )
+
+    const phaseBanner = document.querySelector('.ds_phase-banner');
+    expect(phaseBanner).toHaveClass('foo', 'ds_phase-banner');
+});

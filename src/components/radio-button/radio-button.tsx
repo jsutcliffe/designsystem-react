@@ -49,6 +49,7 @@ export const Radio: React.FC<SGDS.Component.RadioButton> = ({
 };
 
 const RadioGroup: React.FC<SGDS.Component.RadioButton.Group> = ({
+    className,
     inline,
     items,
     name,
@@ -60,7 +61,8 @@ const RadioGroup: React.FC<SGDS.Component.RadioButton.Group> = ({
             className={[
                 'ds_radios',
                 'ds_field-group',
-                inline && 'ds_field-group--inline'
+                inline && 'ds_field-group--inline',
+                className
             ].join(' ')}
             {...props}
         >

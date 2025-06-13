@@ -388,6 +388,19 @@ test('task list counts completed items from all groups for its status text and t
     expect(taskListStatusLink).toHaveAttribute('href', `#${tasks[0].id + '2'}`);
 });
 
+test('passing additional props to task list', () => {
+    render(
+        <TaskList
+            title={taskListHeadingText}
+            data-test="foo"
+        />
+    );
+
+    const taskList = screen.getByRole('list');
+    const taskListWrapper = taskList.parentNode;
+    expect(taskListWrapper?.dataset.test).toEqual('foo');
+});
+
 test('passing additional props to task group', () => {
     render(
         <TaskGroup data-test="foo">
@@ -406,4 +419,37 @@ test('passing additional props to task', () => {
 
     const task = document.querySelector('.ds_task-list__task');
     expect(task?.dataset.test).toEqual('foo');
+});
+
+test('passing additional CSS classes to task list', () => {
+    render(
+        <TaskList
+            title={taskListHeadingText}
+            className="foo"
+        />
+    );
+
+    const taskList = screen.getByRole('list');
+    const taskListWrapper = taskList.parentNode;
+    expect(taskListWrapper).toHaveClass('foo');
+});
+
+test('passing additional CSS classes to task group', () => {
+    render(
+        <TaskGroup className="foo">
+        </TaskGroup>
+    );
+
+    const taskGroup = document.querySelector('.ds_task-list-group__section');
+    expect(taskGroup).toHaveClass('foo', 'ds_task-list-group__section');
+});
+
+test('passing additional CSS classes to task', () => {
+    render(
+        <Task className="foo">
+        </Task>
+    );
+
+    const task = document.querySelector('.ds_task-list__task');
+    expect(task).toHaveClass('foo', 'ds_task-list__task');
 });

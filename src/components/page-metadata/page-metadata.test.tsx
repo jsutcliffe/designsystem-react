@@ -54,3 +54,18 @@ test('passing additional props', () => {
     expect(metadata?.dataset.test).toEqual('foo');
     expect(metadataItem?.dataset.test).toEqual('bar');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <Metadata className="foo">
+            <MetadataItem className="bar" name="Last updated">
+                21/04/2020
+            </MetadataItem>
+        </Metadata>
+    )
+
+    const metadata = document.querySelector('.ds_metadata');
+    const metadataItem = document.querySelector('.ds_metadata__item');
+    expect(metadata).toHaveClass('foo');
+    expect(metadataItem).toHaveClass('bar');
+});

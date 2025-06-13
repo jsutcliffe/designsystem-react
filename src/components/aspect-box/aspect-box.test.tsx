@@ -79,3 +79,15 @@ test('passing additional props', () => {
     const imageContainer = image?.parentNode;
     expect(imageContainer?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <AspectBox className="foo">
+            <img src="./highland-cow.jpg" alt="" />
+        </AspectBox>
+    );
+
+    const image = document.querySelector('img');
+    const imageContainer = image?.parentNode;
+    expect(imageContainer).toHaveClass('foo', 'ds_aspect-box');
+});

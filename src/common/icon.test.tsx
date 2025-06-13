@@ -36,7 +36,7 @@ test('icon with class name', () => {
 
     const icon = screen.getByRole('img', {hidden: true});
 
-    expect(icon).toHaveClass('foo');
+    expect(icon).toHaveClass('foo', 'ds_icon');
 });
 
 test('icon with fill', () => {

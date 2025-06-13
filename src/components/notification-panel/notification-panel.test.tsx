@@ -75,3 +75,15 @@ test('passing additional props', () => {
     const notificationPanel = notificationPanelHeading.parentNode;
     expect(notificationPanel?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <NotificationPanel title={headingText} className="foo">
+            {text}
+        </NotificationPanel>
+    )
+
+    const notificationPanelHeading = screen.getByRole('heading');
+    const notificationPanel = notificationPanelHeading.parentNode;
+    expect(notificationPanel).toHaveClass('foo', 'ds_notification-panel');
+});

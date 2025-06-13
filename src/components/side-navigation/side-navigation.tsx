@@ -48,6 +48,7 @@ export const Link: React.FC<SGDS.Component.SideNavigation.Link> = function ({
 
 const SideNavigation: React.FC<SGDS.Component.SideNavigation> = function ({
     children,
+    className,
     items,
     ...props
 }) {
@@ -62,7 +63,10 @@ const SideNavigation: React.FC<SGDS.Component.SideNavigation> = function ({
     return (
         <nav
             aria-label="Sections"
-            className="ds_side-navigation"
+            className={[
+                'ds_side-navigation',
+                className
+            ].join(' ')}
             data-module="ds-side-navigation"
             ref={ref}
             {...props}

@@ -123,3 +123,12 @@ test('passing additional props', () => {
     const button = screen.getByRole('button');
     expect(button.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <Button className="foo">Button text</Button>
+    );
+
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass('foo', 'ds_button');
+});

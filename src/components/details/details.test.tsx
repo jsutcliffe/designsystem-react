@@ -36,3 +36,15 @@ test('passing additional props', () => {
     const detailsElement = summaryElement.parentNode;
     expect(detailsElement?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <Details className="foo" summary={summaryText}>
+            <p>hello</p>
+        </Details>
+    )
+
+    const summaryElement = screen.getByText(summaryText);
+    const detailsElement = summaryElement.parentNode;
+    expect(detailsElement).toHaveClass('foo', 'ds_details');
+});

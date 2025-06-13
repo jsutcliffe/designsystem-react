@@ -4,6 +4,7 @@ import DSAspectBox from '@scottish-government/design-system/src/components/aspec
 
 const AspectBox: React.FC<SGDS.Component.AspectBox> = ({
     children,
+    className,
     ratio,
     ...props
 }) => {
@@ -42,7 +43,8 @@ const AspectBox: React.FC<SGDS.Component.AspectBox> = ({
         <div
             className={[
                 'ds_aspect-box',
-                `${ratioClassName}`
+                ratioClassName,
+                className
             ].join(' ')}
             ref={ref}
             {...props}

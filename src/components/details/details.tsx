@@ -1,5 +1,6 @@
 const Details: React.FC<SGDS.Component.Details> = ({
     children,
+    className,
     summary,
     ...props
 }) => {
@@ -7,6 +8,7 @@ const Details: React.FC<SGDS.Component.Details> = ({
         <details
             className={[
                 "ds_details",
+                className
             ].join(' ')}
             {...props}
         >

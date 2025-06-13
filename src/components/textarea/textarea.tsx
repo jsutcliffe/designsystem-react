@@ -6,6 +6,7 @@ import ErrorMessage from '../error-message/error-message';
 import HintText from '../../common/hint-text';
 
 const Textarea: React.FC<SGDS.Component.Textarea> = ({
+    className,
     countThreshold,
     error,
     errorMessage,
@@ -61,6 +62,7 @@ const Textarea: React.FC<SGDS.Component.Textarea> = ({
                 className={[
                     'ds_input',
                     error && 'ds_input--error',
+                    className
                 ].join(' ')}
                 defaultValue={value}
                 id={id}

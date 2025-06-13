@@ -206,3 +206,18 @@ test('passing additional props', () => {
     const selectWrapper = select.parentNode;
     expect(selectWrapper?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <Select
+            id={id}
+            label={labelText}
+            options={options}
+            className="foo"
+        />
+    );
+
+    const select = screen.getByRole('combobox');
+    const selectWrapper = select.parentNode;
+    expect(selectWrapper).toHaveClass('foo', 'ds_select-wrapper');
+});

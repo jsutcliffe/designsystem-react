@@ -1,10 +1,14 @@
-const InsetText: React.FC<React.PropsWithChildren> = ({
+const InsetText: React.FC<SGDS.Component.InsetText> = ({
     children,
+    className,
     ...props
 }) => {
     return (
         <div
-            className="ds_inset-text"
+            className={[
+                'ds_inset-text',
+                className
+            ].join(' ')}
             {...props}
         >
             <div className="ds_inset-text__text">

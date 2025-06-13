@@ -151,3 +151,13 @@ test('passing additional props', () => {
     const searchFormContainer = searchForm.parentNode;
     expect(searchFormContainer?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <SiteSearch className="foo" />
+    );
+
+    const searchForm = screen.getByRole('search');
+    const searchFormContainer = searchForm.parentNode;
+    expect(searchFormContainer).toHaveClass('foo', 'ds_site-search');
+});

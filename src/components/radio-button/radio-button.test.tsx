@@ -188,3 +188,16 @@ test('passing additional props', () => {
     const groupContainer = radios[0]?.parentNode?.parentNode;
     expect(groupContainer?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <RadioGroup className="foo" items={[{
+            id: 'universal-credit',
+            label: 'Universal Credit'
+        }]} />
+    );
+
+    const radios = screen.getAllByRole('radio');
+    const groupContainer = radios[0]?.parentNode?.parentNode;
+    expect(groupContainer).toHaveClass('foo', 'ds_radios');
+});

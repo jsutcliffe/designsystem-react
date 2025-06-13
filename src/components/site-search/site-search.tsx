@@ -7,6 +7,7 @@ const SiteSearch: React.FC<SGDS.Component.SiteSearch> = function ({
     action = '/search',
     autocompleteEndpoint,
     autocompleteSuggestionMappingFunction,
+    className,
     id = 'site-search',
     method = 'GET',
     minLength = 3,
@@ -47,7 +48,8 @@ const SiteSearch: React.FC<SGDS.Component.SiteSearch> = function ({
     return (
         <div
             className={[
-                'ds_site-search',
+                'ds_site-search', ,
+                className,
                 hasAutocomplete ? 'ds_autocomplete' : undefined
             ].join(' ')}
             id={autocompleteId ? autocompleteId : undefined}

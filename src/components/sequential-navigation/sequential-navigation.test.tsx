@@ -65,3 +65,16 @@ test('passing additional props', () => {
     const sequentialNavigation = screen.getByRole('navigation');
     expect(sequentialNavigation?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <SequentialNavigation
+            className="foo"
+            next={nextLinkObj}
+            previous={prevLinkObj}
+        />
+    );
+
+    const sequentialNavigation = screen.getByRole('navigation');
+    expect(sequentialNavigation).toHaveClass('foo', 'ds_sequential-nav');
+});

@@ -46,3 +46,12 @@ test('passing additional props', () => {
     const header = screen.getByRole('banner');
     expect(header?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+       <PageHeader className="foo" label={labelText} title={titleText}/>
+    )
+
+    const header = screen.getByRole('banner');
+    expect(header).toHaveClass('foo', 'ds_page-header');
+});

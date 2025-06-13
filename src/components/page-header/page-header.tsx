@@ -1,12 +1,16 @@
 const PageHeader: React.FC<SGDS.Component.PageHeader> = ({
     children,
+    className,
     label,
     title,
     ...props
 }) => {
     return (
         <header
-            className="ds_page-header"
+            className={[
+                'ds_page-header',
+                className
+            ].join(' ')}
             {...props}
         >
             {label && <span className="ds_page-header__label  ds_content-label">{label}</span>}

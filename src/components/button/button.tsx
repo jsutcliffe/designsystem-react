@@ -3,8 +3,9 @@ import ScreenReaderText from '../../common/screen-reader-text';
 import WrapperTag from '../../common/wrapper-tag';
 
 const Button: React.FC<SGDS.Component.Button> = ({
-    children,
     buttonStyle,
+    children,
+    className,
     icon,
     iconLeft,
     iconOnly = false,
@@ -30,7 +31,8 @@ const Button: React.FC<SGDS.Component.Button> = ({
                 buttonStyle && `ds_button--${buttonStyle}`,
                 small && 'ds_button--small',
                 (icon && !iconOnly) ? 'ds_button--has-icon' : undefined,
-                iconLeft && 'ds_button--has-icon--left'
+                iconLeft && 'ds_button--has-icon--left',
+                className
             ].join(' ')}
             href={href}
             {...(tagName === 'button' ? { type: type } : {})}

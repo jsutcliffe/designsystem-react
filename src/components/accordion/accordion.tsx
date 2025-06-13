@@ -7,6 +7,7 @@ let accordionItemCounter = 0;
 
 export const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
     children,
+    className,
     headerLevel = 'h3',
     id: rawId,
     open = false,
@@ -17,7 +18,10 @@ export const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
     const processedId = rawId || `accordion-item-${accordionItemCounter}`;
     return (
         <div
-            className="ds_accordion-item"
+            className={[
+                'ds_accordion-item',
+                className
+            ].join(' ')}
             id={processedId}
             {...props}
         >
@@ -56,6 +60,7 @@ export const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
 
 const Accordion: React.FC<SGDS.Component.Accordion> = ({
     children,
+    className,
     headerLevel = 'h3',
     hideOpenAll,
     ...props
@@ -78,7 +83,10 @@ const Accordion: React.FC<SGDS.Component.Accordion> = ({
 
     return (
         <div
-            className='ds_accordion'
+            className={[
+                'ds_accordion',
+                className
+            ].join(' ')}
             ref={ref}
             {...props}
         >
