@@ -1,15 +1,15 @@
 {
-  "name": "designsystem-react",
+  "name": "@scottish-government/designsystem-react",
   "description": "A React/JSX implementation of the Scottish Government Design System",
-  "version": "0.2.0",
+  "version": "0.0.0",
   "license": "MIT",
   "author": {
     "name": "Scottish Government Digital Design System team",
     "email": "designsystem@gov.scot",
     "url": "https://designsystem.gov.scot"
   },
-  "private": true,
   "scripts": {
+    "build": "npm run tsc",
     "coverage": "vitest run --coverage",
     "test": "vitest",
     "tsc": "node ./node_modules/typescript/bin/tsc"
@@ -18,7 +18,6 @@
     "@scottish-government/design-system": "^3.0.1"
   },
   "devDependencies": {
-    "@scottish-government/design-system": "^3.0.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
