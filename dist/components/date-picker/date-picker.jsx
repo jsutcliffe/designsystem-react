@@ -7,7 +7,7 @@ const react_1 = require("react");
 // @ts-ignore
 const date_picker_1 = __importDefault(require("@scottish-government/design-system/src/components/date-picker/date-picker"));
 const text_input_1 = __importDefault(require("../text-input/text-input"));
-const DatePicker = ({ width = 'fixed-10', disabledDates, error, errorMessage, hintText, id, iconPath = './', label, maxDate, minDate, multiple, name, onBlur, onChange, value, ...props }) => {
+const DatePicker = ({ className, disabledDates, error, errorMessage, hintText, id, iconPath = './', label, maxDate, minDate, multiple, name, onBlur, onChange, value, width = 'fixed-10', ...props }) => {
     // todo: dateSelectCallback function
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
@@ -27,7 +27,8 @@ const DatePicker = ({ width = 'fixed-10', disabledDates, error, errorMessage, hi
     }
     return (<div className={[
             "ds_datepicker",
-            multiple && "ds_datepicker--multiple"
+            multiple && "ds_datepicker--multiple",
+            className
         ].join(' ')} data-disableddates={disabledDates} data-maxdate={maxDate} data-mindate={minDate} data-module="ds-datepicker" ref={ref} {...props}>
             {(multiple ? (<fieldset className="ds_datepicker__input-wrapper">
                     <legend>{label}</legend>

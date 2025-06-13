@@ -26,14 +26,17 @@ const Link = function ({ current = false, href, items, title }) {
         </li>);
 };
 exports.Link = Link;
-const SideNavigation = function ({ children, items, ...props }) {
+const SideNavigation = function ({ children, className, items, ...props }) {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         if (ref.current) {
             new side_navigation_1.default(ref.current).init();
         }
     }, [ref]);
-    return (<nav aria-label="Sections" className="ds_side-navigation" data-module="ds-side-navigation" ref={ref} {...props}>
+    return (<nav aria-label="Sections" className={[
+            'ds_side-navigation',
+            className
+        ].join(' ')} data-module="ds-side-navigation" ref={ref} {...props}>
             <input type="checkbox" className="fully-hidden  js-toggle-side-navigation" id="show-side-navigation" aria-controls="side-navigation-root"/>
             <label className="ds_side-navigation__expand  ds_link" htmlFor="show-side-navigation">
                 <span className="visually-hidden">Show all</span> Pages in this section

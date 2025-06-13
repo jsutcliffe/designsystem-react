@@ -41,14 +41,18 @@ exports.Checkbox = Checkbox;
  * @param {boolean} small - Use the small display style for all checkboxes
  * @returns {JSX.Element} - The element
  */
-const CheckboxGroup = ({ items, small, ...props }) => {
+const CheckboxGroup = ({ className, items, small, ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         if (ref.current) {
             new checkboxes_1.default(ref.current).init();
         }
     }, [ref]);
-    return (<div className="ds_checkboxes ds_field-group" data-module="ds-checkboxes" ref={ref} {...props}>
+    return (<div className={[
+            'ds_checkboxes',
+            'ds_field-group',
+            className
+        ].join(' ')} data-module="ds-checkboxes" ref={ref} {...props}>
             {items && items.map((item, index) => (<exports.Checkbox exclusive={item.exclusive} checked={item.checked} hintText={item.hintText} id={item.id} key={'checkbox' + index} label={item.label} onBlur={item.onBlur} onChange={item.onChange} small={small || item.small}/>))}
         </div>);
 };

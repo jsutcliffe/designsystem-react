@@ -7,7 +7,7 @@ const react_1 = require("react");
 // @ts-ignore
 const autocomplete_1 = __importDefault(require("@scottish-government/design-system/src/components/autocomplete/autocomplete"));
 const button_1 = __importDefault(require("../button/button"));
-const SiteSearch = function ({ action = '/search', autocompleteEndpoint, autocompleteSuggestionMappingFunction, id = 'site-search', method = 'GET', minLength = 3, name = 'q', placeholder = 'Search', ...props }) {
+const SiteSearch = function ({ action = '/search', autocompleteEndpoint, autocompleteSuggestionMappingFunction, className, id = 'site-search', method = 'GET', minLength = 3, name = 'q', placeholder = 'Search', ...props }) {
     const ref = (0, react_1.useRef)(null);
     const hasAutocomplete = !!autocompleteEndpoint;
     let autocompleteId = hasAutocomplete ? id + '-autocomplete' : '';
@@ -25,7 +25,8 @@ const SiteSearch = function ({ action = '/search', autocompleteEndpoint, autocom
         }
     }, [ref, autocompleteEndpoint, autocompleteId, hasAutocomplete, minLength, autocompleteSuggestionMappingFunction]);
     return (<div className={[
-            'ds_site-search',
+            'ds_site-search', ,
+            className,
             hasAutocomplete ? 'ds_autocomplete' : undefined
         ].join(' ')} id={autocompleteId ? autocompleteId : undefined} ref={ref} {...props}>
 

@@ -1,7 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const InsetText = ({ children, ...props }) => {
-    return (<div className="ds_inset-text" {...props}>
+const InsetText = ({ children, className, ...props }) => {
+    return (<div className={[
+            'ds_inset-text',
+            className
+        ].join(' ')} {...props}>
             <div className="ds_inset-text__text">
                 {children}
             </div>

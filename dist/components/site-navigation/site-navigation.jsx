@@ -8,8 +8,11 @@ const SiteNavLink = ({ current = false, href, title }) => {
         ].join(' ')}>{title}</a>
         </li>);
 };
-const SiteNavigation = ({ items, ...props }) => {
-    return (<nav className="ds_site-navigation" {...props}>
+const SiteNavigation = ({ className, items, ...props }) => {
+    return (<nav className={[
+            'ds_site-navigation',
+            className
+        ].join(' ')} {...props}>
             <ul className="ds_site-navigation__list">
                 {items && items.map((item, index) => (<SiteNavLink current={item.current} href={item.href} title={item.title} key={`link-${index}`}/>))}
             </ul>

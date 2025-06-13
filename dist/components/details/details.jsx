@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Details = ({ children, summary, ...props }) => {
+const Details = ({ children, className, summary, ...props }) => {
     return (<details className={[
             "ds_details",
+            className
         ].join(' ')} {...props}>
             <summary className="ds_details__summary">
                 {summary}

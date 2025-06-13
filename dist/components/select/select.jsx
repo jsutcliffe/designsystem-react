@@ -8,7 +8,7 @@ const hint_text_1 = __importDefault(require("../../common/hint-text"));
 const Option = function ({ text, value }) {
     return (<option value={value}>{text}</option>);
 };
-const Select = function ({ defaultValue, error, errorMessage, hintText, id, label, name, onBlur, onChange, options, placeholder, width, ...props }) {
+const Select = function ({ className, defaultValue, error, errorMessage, hintText, id, label, name, onBlur, onChange, options, placeholder, width, ...props }) {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
     const describedbys = [];
@@ -38,6 +38,7 @@ const Select = function ({ defaultValue, error, errorMessage, hintText, id, labe
             "ds_select-wrapper",
             error && 'ds_input--error',
             width && `ds_input--${width}`,
+            className
         ].join(' ')} {...props}>
                 <select aria-describedby={describedbys.join(' ')} className="ds_select" defaultValue={defaultValue} id={id} name={name || id} onBlur={handleBlur} onChange={handleChange}>
                     <option value="">{placeholder}</option>

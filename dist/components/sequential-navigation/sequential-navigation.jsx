@@ -18,8 +18,11 @@ const PrevLink = ({ href, title, }) => {
             </a>
         </div>);
 };
-const SequentialNavigation = ({ ariaLabel = 'Article navigation', next, previous, ...props }) => {
-    return (<nav className="ds_sequential-nav" aria-label={ariaLabel} {...props}>
+const SequentialNavigation = ({ ariaLabel = 'Article navigation', className, next, previous, ...props }) => {
+    return (<nav className={[
+            'ds_sequential-nav',
+            className
+        ].join(' ')} aria-label={ariaLabel} {...props}>
             {previous && <PrevLink href={previous.href} title={previous.title}></PrevLink>}
             {next && <NextLink href={next.href} title={next.title}></NextLink>}
         </nav>);

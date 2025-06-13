@@ -9,11 +9,14 @@ const conditional_wrapper_1 = __importDefault(require("../../common/conditional-
 const hint_text_1 = __importDefault(require("../../common/hint-text"));
 const screen_reader_text_1 = __importDefault(require("../../common/screen-reader-text"));
 const tag_1 = __importDefault(require("../tag/tag"));
-const Task = ({ children, href, id, isComplete = false, statusText, tagColour = 'grey', title, ...props }) => {
+const Task = ({ children, className, href, id, isComplete = false, statusText, tagColour = 'grey', title, ...props }) => {
     if (isComplete) {
         tagColour = 'green';
     }
-    return (<li className="ds_task-list__task" id={id} {...props}>
+    return (<li className={[
+            'ds_task-list__task',
+            className
+        ].join(' ')} id={id} {...props}>
             <div className="ds_task-list__task-details">
                 <h3 className="ds_task-list__task-heading">
                 <conditional_wrapper_1.default condition={typeof href !== 'undefined'} wrapper={(children) => <a className="ds_task-list__task-link" href={href}>{children}</a>}>
@@ -35,8 +38,11 @@ exports.Task = Task;
  * @param {string} props.title - The title of the task group
  * @returns {JSX.Element} - The element
  */
-const TaskGroup = ({ children, intro, title, ...props }) => {
-    return (<li className="ds_task-list-group__section" {...props}>
+const TaskGroup = ({ children, className, intro, title, ...props }) => {
+    return (<li className={[
+            'ds_task-list-group__section',
+            className
+        ].join(' ')} {...props}>
             <h2 className="ds_task-list-heading">{title}</h2>
             {intro && <p className="ds_task-list-intro">{intro}</p>}
             <ul className="ds_task-list">
@@ -45,7 +51,7 @@ const TaskGroup = ({ children, intro, title, ...props }) => {
         </li>);
 };
 exports.TaskGroup = TaskGroup;
-const TaskList = ({ children, headingId = 'task-list', title }) => {
+const TaskList = ({ children, className, headingId = 'task-list', title, ...props }) => {
     let taskCount = 0;
     let incompleteTaskIds = [];
     let completedTasksCount = 0;
@@ -73,7 +79,7 @@ const TaskList = ({ children, headingId = 'task-list', title }) => {
     react_1.Children.forEach(children, child => {
         processChild(child);
     });
-    return (<>
+    return (<div className={className} {...props}>
             <h2 id={`${headingId}-status`} className="ds_task-list-status-heading">{title}</h2>
             <nav aria-labelledby={`${headingId}-status`} className="ds_task-list-status">
                 <p>You have completed {completedTasksCount} of {taskCount} sections.</p>
@@ -82,7 +88,7 @@ const TaskList = ({ children, headingId = 'task-list', title }) => {
             <ul className="ds_task-list">
                 {children}
             </ul>
-        </>);
+        </div>);
 };
 TaskList.displayName = 'TaskList';
 exports.Task.displayName = 'Task';

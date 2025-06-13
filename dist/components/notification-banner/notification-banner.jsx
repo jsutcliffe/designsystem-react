@@ -9,14 +9,18 @@ const notification_banner_1 = __importDefault(require("@scottish-government/desi
 const button_1 = __importDefault(require("../button/button"));
 const icon_1 = __importDefault(require("../../common/icon"));
 const screen_reader_text_1 = __importDefault(require("../../common/screen-reader-text"));
-const NotificationBanner = ({ children, close, icon, iconColour, iconInverse, title = 'Information', ...props }) => {
+const NotificationBanner = ({ children, className, close, icon, iconColour, iconInverse, title = 'Information', ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         if (ref.current) {
             new notification_banner_1.default(ref.current).init();
         }
     }, [ref]);
-    return (<div className="ds_notification  ds_reversed" data-module="ds-notification" ref={ref} {...props}>
+    return (<div className={[
+            'ds_notification',
+            'ds_reversed',
+            className
+        ].join(' ')} data-module="ds-notification" ref={ref} {...props}>
             <div className="ds_wrapper">
                 <div className={[
             'ds_notification__content',

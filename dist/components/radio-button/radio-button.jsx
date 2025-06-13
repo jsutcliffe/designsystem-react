@@ -27,11 +27,12 @@ const Radio = ({ checked, hintText, id, label, name, onBlur, onChange, small }) 
         </div>);
 };
 exports.Radio = Radio;
-const RadioGroup = ({ inline, items, name, small, ...props }) => {
+const RadioGroup = ({ className, inline, items, name, small, ...props }) => {
     return (<div className={[
             'ds_radios',
             'ds_field-group',
-            inline && 'ds_field-group--inline'
+            inline && 'ds_field-group--inline',
+            className
         ].join(' ')} {...props}>
 
             {items && items.map((item, index) => (<exports.Radio checked={item.checked} hintText={item.hintText} id={item.id} key={'radio' + index} label={item.label} name={name} onBlur={item.onBlur} onChange={item.onChange} small={small || item.small}/>))}

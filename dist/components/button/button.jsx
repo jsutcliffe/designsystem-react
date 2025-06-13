@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const icon_1 = __importDefault(require("../../common/icon"));
 const screen_reader_text_1 = __importDefault(require("../../common/screen-reader-text"));
 const wrapper_tag_1 = __importDefault(require("../../common/wrapper-tag"));
-const Button = ({ children, buttonStyle, icon, iconLeft, iconOnly = false, href, small, styleAsLink, type = 'button', width, ...props }) => {
+const Button = ({ buttonStyle, children, className, icon, iconLeft, iconOnly = false, href, small, styleAsLink, type = 'button', width, ...props }) => {
     // determine which HTML tag to use
     let tagName = 'button';
     if (href) {
@@ -18,7 +18,8 @@ const Button = ({ children, buttonStyle, icon, iconLeft, iconOnly = false, href,
             buttonStyle && `ds_button--${buttonStyle}`,
             small && 'ds_button--small',
             (icon && !iconOnly) ? 'ds_button--has-icon' : undefined,
-            iconLeft && 'ds_button--has-icon--left'
+            iconLeft && 'ds_button--has-icon--left',
+            className
         ].join(' ')} href={href} {...(tagName === 'button' ? { type: type } : {})} {...props}>
             {iconOnly ? <screen_reader_text_1.default>{children}</screen_reader_text_1.default> : children}
 

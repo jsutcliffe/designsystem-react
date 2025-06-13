@@ -9,7 +9,7 @@ const character_count_1 = __importDefault(require("@scottish-government/design-s
 const conditional_wrapper_1 = __importDefault(require("../../common/conditional-wrapper"));
 const error_message_1 = __importDefault(require("../error-message/error-message"));
 const hint_text_1 = __importDefault(require("../../common/hint-text"));
-const Textarea = ({ countThreshold, error, errorMessage, hintText, id, label, maxlength, name, onBlur, onChange, placeholder, rows = 4, value, ...props }) => {
+const Textarea = ({ className, countThreshold, error, errorMessage, hintText, id, label, maxlength, name, onBlur, onChange, placeholder, rows = 4, value, ...props }) => {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
     const ref = (0, react_1.useRef)(null);
@@ -45,6 +45,7 @@ const Textarea = ({ countThreshold, error, errorMessage, hintText, id, label, ma
             <textarea aria-describedby={describedbys.join(' ')} className={[
             'ds_input',
             error && 'ds_input--error',
+            className
         ].join(' ')} defaultValue={value} id={id} maxLength={maxlength} name={name || id} onBlur={handleBlur} onChange={handleChange} placeholder={placeholder} rows={rows} {...props}/>
 
         </conditional_wrapper_1.default>);

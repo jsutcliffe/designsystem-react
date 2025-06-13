@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 // @ts-ignore
 const aspect_box_fallback_1 = __importDefault(require("@scottish-government/design-system/src/components/aspect-box/aspect-box-fallback"));
-const AspectBox = ({ children, ratio, ...props }) => {
+const AspectBox = ({ children, className, ratio, ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         if (ref.current) {
@@ -69,7 +69,8 @@ const AspectBox = ({ children, ratio, ...props }) => {
     }
     return (<div className={[
             'ds_aspect-box',
-            `${ratioClassName}`
+            ratioClassName,
+            className
         ].join(' ')} ref={ref} {...props}>
             {react_1.Children.map(children, child => processChild(child))}
         </div>);

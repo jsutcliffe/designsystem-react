@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Link = void 0;
 const wrapper_tag_1 = __importDefault(require("../../common/wrapper-tag"));
-const Link = ({ title, current, href }) => {
+const Link = ({ current, href, title }) => {
     // determine which HTML tag to use
     const tagName = href && !current ? 'a' : 'span';
     return (<li aria-current={current && 'page' || undefined} className="ds_contents-nav__item">
@@ -18,8 +18,11 @@ const Link = ({ title, current, href }) => {
         </li>);
 };
 exports.Link = Link;
-const ContentsNav = function ({ items, label = 'Pages in this section', title = 'Contents', ...props }) {
-    return (<nav aria-label={label} className="ds_contents-nav" {...props}>
+const ContentsNav = function ({ className, items, label = 'Pages in this section', title = 'Contents', ...props }) {
+    return (<nav aria-label={label} className={[
+            'ds_contents-nav',
+            className
+        ].join(' ')} {...props}>
             <h2 className="ds_contents-nav__title">{title}</h2>
             <ul className="ds_contents-nav__list">
                 {items && items.map((item, index) => (<exports.Link current={item.current} href={item.href} title={item.title} key={'link' + index}/>))}

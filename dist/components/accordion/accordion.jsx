@@ -42,10 +42,13 @@ const wrapper_tag_1 = __importDefault(require("../../common/wrapper-tag"));
 // @ts-ignore
 const accordion_1 = __importDefault(require("@scottish-government/design-system/src/components/accordion/accordion"));
 let accordionItemCounter = 0;
-const AccordionItem = ({ children, headerLevel = 'h3', id: rawId, open = false, title, ...props }) => {
+const AccordionItem = ({ children, className, headerLevel = 'h3', id: rawId, open = false, title, ...props }) => {
     accordionItemCounter = accordionItemCounter + 1;
     const processedId = rawId || `accordion-item-${accordionItemCounter}`;
-    return (<div className="ds_accordion-item" id={processedId} {...props}>
+    return (<div className={[
+            'ds_accordion-item',
+            className
+        ].join(' ')} id={processedId} {...props}>
             <input aria-labelledby={`panel-${processedId}-heading`} className={[
             'ds_accordion-item__control',
             'visually-hidden'
@@ -65,7 +68,7 @@ const AccordionItem = ({ children, headerLevel = 'h3', id: rawId, open = false, 
         </div>);
 };
 exports.AccordionItem = AccordionItem;
-const Accordion = ({ children, headerLevel = 'h3', hideOpenAll, ...props }) => {
+const Accordion = ({ children, className, headerLevel = 'h3', hideOpenAll, ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         if (ref.current) {
@@ -78,7 +81,10 @@ const Accordion = ({ children, headerLevel = 'h3', hideOpenAll, ...props }) => {
     function processChild(child) {
         return react_1.default.cloneElement(child, { headerLevel: headerLevel });
     }
-    return (<div className='ds_accordion' ref={ref} {...props}>
+    return (<div className={[
+            'ds_accordion',
+            className
+        ].join(' ')} ref={ref} {...props}>
             {!hideOpenAll && (<button className={[
                 'ds_accordion__open-all',
                 'ds_link',

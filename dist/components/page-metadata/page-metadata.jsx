@@ -1,8 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MetadataItem = void 0;
-const MetadataItem = ({ children, name, ...props }) => {
-    return (<div className="ds_metadata__item" {...props}>
+const MetadataItem = ({ children, className, name, ...props }) => {
+    return (<div className={[
+            'ds_metadata__item',
+            className
+        ].join(' ')} {...props}>
             <dt className="ds_metadata__key">{name}</dt>{' '}
             <dd className="ds_metadata__value">
                 {children}
@@ -10,10 +13,11 @@ const MetadataItem = ({ children, name, ...props }) => {
         </div>);
 };
 exports.MetadataItem = MetadataItem;
-const Metadata = ({ children, inline, ...props }) => {
+const Metadata = ({ children, className, inline, ...props }) => {
     return (<dl className={[
             'ds_metadata',
             inline && 'ds_metadata--inline',
+            className
         ].join(' ')} {...props}>
             {children}
         </dl>);
