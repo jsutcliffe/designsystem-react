@@ -9,14 +9,14 @@
     "url": "https://designsystem.gov.scot"
   },
   "scripts": {
-    "build": "npm run tsc",
+    "build": "npm run svgr && npm run tsc",
     "coverage": "vitest run --coverage",
     "svgr": "npx @svgr/cli node_modules/@scottish-government/design-system/src/images/icons/svg --config-file .svgrrc",
     "test": "vitest",
     "tsc": "node ./node_modules/typescript/bin/tsc"
   },
   "dependencies": {
-    "@scottish-government/design-system": "^3.0.1"
+    "@scottish-government/design-system": "^3.0.2"
   },
   "devDependencies": {
     "@svgr/cli": "^8.1.0",
