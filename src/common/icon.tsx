@@ -1,25 +1,30 @@
+import React from 'react';
+import * as Icons from '../icons';
+
 const Icon: React.FC<SGDS.Common.Icon> = ({
+    ariaLabel,
     className,
     fill,
     icon,
-    iconPath = './icons.stack.svg',
-    iconSize,
-    title
+    iconSize
 }) => {
-    return (
-        <svg
-            aria-hidden={title ? undefined : true}
-            aria-label={title}
-            className={[
+    const Component = React.createElement(Icons[icon],
+        {
+            'aria-hidden': ariaLabel ? undefined : true,
+            'aria-label': ariaLabel,
+            className: [
                 'ds_icon',
                 className,
                 fill && 'ds_icon--fill',
                 iconSize && `ds_icon--${iconSize}`
-            ].join(' ')}
-            role="img"
-        >
-            <use xlinkHref={`${iconPath}#${icon}`} />
-        </svg>
+            ].join(' ')
+        }
+    );
+
+    return (
+        <>
+            {Component}
+        </>
     );
 };
 

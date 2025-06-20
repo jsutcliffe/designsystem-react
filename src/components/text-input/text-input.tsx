@@ -71,6 +71,7 @@ const TextInput: React.FC<SGDS.Component.TextInput> = ({
             >
                 <input
                     aria-describedby={describedbys.join(' ')}
+                    aria-invalid={error}
                     className={[
                         'ds_input',
                         className,

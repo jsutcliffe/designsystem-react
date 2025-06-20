@@ -18,7 +18,7 @@ const ConfirmationMessage: React.FC<SGDS.Component.ConfirmationMessage> = ({
             ].join(' ')}
             {...props}
         >
-            <Icon className="ds_confirmation-message__icon" icon="check_circle" iconSize="24" />
+            <Icon className="ds_confirmation-message__icon" icon="CheckCircle" iconSize="24" />
 
             <WrapperTag
                 className="ds_confirmation-message__title"

@@ -81,7 +81,7 @@ const SiteSearch: React.FC<SGDS.Component.SiteSearch> = function ({
                         type="search"
                     />
 
-                    <Button type="submit" icon="search" iconOnly>Search</Button>
+                    <Button type="submit" icon="Search" iconOnly>Search</Button>
 
                     {hasAutocomplete && (
                         <div id="autocomplete-suggestions" className="ds_autocomplete__suggestions">

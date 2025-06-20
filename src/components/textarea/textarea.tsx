@@ -59,6 +59,7 @@ const Textarea: React.FC<SGDS.Component.Textarea> = ({
 
             <textarea
                 aria-describedby={describedbys.join(' ')}
+                aria-invalid={error}
                 className={[
                     'ds_input',
                     error && 'ds_input--error',

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
+
 // @ts-ignore
 import DSNotificationBanner from '@scottish-government/design-system/src/components/notification-banner/notification-banner';
-import Button from '../button/button';
 import Icon from '../../common/icon';
 import ScreenReaderText from '../../common/screen-reader-text';
 
@@ -50,7 +50,7 @@ const NotificationBanner: React.FC<SGDS.Component.NotificationBanner> = ({
                                 iconInverse && 'ds_notification__icon--inverse',
                                 iconColour && 'ds_notification__icon--colour'
                             ].join(' ')} aria-hidden="true">
-                            <Icon icon="priority_high" />
+                            <Icon icon="PriorityHigh" />
                         </span>
                     }
 
@@ -59,10 +59,10 @@ const NotificationBanner: React.FC<SGDS.Component.NotificationBanner> = ({
                     </div>
 
                     {close &&
-                        <Button className="ds_notification__close js-close-notification">
+                        <button type="button" className="ds_notification__close js-close-notification">
                             <ScreenReaderText>Close this notification</ScreenReaderText>
-                            <Icon fill icon="close" aria-hidden="true" />
-                        </Button>
+                            <Icon fill icon="Close" aria-hidden="true" />
+                        </button>
                     }
                 </div>
             </div>

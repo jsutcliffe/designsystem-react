@@ -1,0 +1,15 @@
+{
+    "dimensions": false,
+    "icon": true,
+    "outDir": "src/icons",
+    "svgo": true,
+    "svgoConfig": {
+        "plugins": [
+            "removeDimensions"
+        ]
+    },
+    "svgProps": {
+        "role": "img"
+    },
+    "typescript": true
+}

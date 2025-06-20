@@ -195,6 +195,27 @@ test('date picker with multiple inputs', () => {
     expect(yearLabel).toHaveAttribute('for', yearInput.id);
 });
 
+test('date picker with error message', () => {
+    const errorMessage = 'This is a required field';
+    render(
+        <DatePicker
+            id={id}
+            label={labelText}
+            error
+            errorMessage={errorMessage}
+        />
+    );
+
+    const textInput = screen.getByRole('textbox');
+    const errorMessageElement = screen.getByText(errorMessage);
+
+    expect(textInput).toHaveClass('ds_input--error')
+    expect(textInput).toHaveAttribute('aria-describedby', errorMessageElement.id);
+    expect(textInput).toHaveAttribute('aria-invalid', 'true');
+    expect(errorMessageElement).toBeInTheDocument();
+    expect(errorMessageElement).toHaveClass('ds_question__error-message');
+});
+
 test('passing additional props', () => {
     render(
         <DatePicker

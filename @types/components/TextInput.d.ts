@@ -1,6 +1,6 @@
 declare namespace SGDS.Component {
     interface TextInput extends TextInputBase<HTMLInputElement> {
-        buttonIcon?: string,
+        buttonIcon?: IconName,
         buttonText?: string,
         className?: string,
         currency?: boolean,

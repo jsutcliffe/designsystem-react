@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 // @ts-ignore
 import DSDatePicker from '@scottish-government/design-system/src/components/date-picker/date-picker';
+import ErrorMessage from '../error-message/error-message';
 import TextInput from '../text-input/text-input';
 
 const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
@@ -61,6 +62,7 @@ const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
             {(multiple ? (
                 <fieldset className="ds_datepicker__input-wrapper">
                     <legend>{label}</legend>
+                    {errorMessage && <ErrorMessage text={errorMessage}/>}
                     <div>
                         <TextInput
                             className="js-datepicker-date"

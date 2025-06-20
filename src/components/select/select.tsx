@@ -61,6 +61,7 @@ const Select: React.FC<SGDS.Component.Select> = function ({
             >
                 <select
                     aria-describedby={describedbys.join(' ')}
+                    aria-invalid={error}
                     className="ds_select"
                     defaultValue={defaultValue}
                     id={id}

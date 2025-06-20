@@ -5,7 +5,7 @@ import PhaseBanner from './phase-banner';
 const text = 'This is a new service. Your feedback will help us to improve it.';
 const defaultText = 'This is a new service';
 
-test('inset text renders correctly', () => {
+test('phase banner renders correctly', () => {
     render(
         <PhaseBanner>
             {text}

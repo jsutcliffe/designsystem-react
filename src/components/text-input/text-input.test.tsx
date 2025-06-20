@@ -133,13 +133,13 @@ test('text input with custom currency symbol', () => {
 
 test('text input with button', () => {
     const buttonText = 'Search';
-    const buttonIcon = 'search';
+    const buttonIcon = 'Search';
     render(
         <TextInput
             id={id}
             label={labelText}
-            buttonIcon="search"
-            buttonText="Search"
+            buttonIcon={buttonIcon}
+            buttonText={buttonText}
             hasButton
         />
     );
@@ -159,7 +159,7 @@ test('text input with button', () => {
     expect(buttonTextElement).toHaveClass('visually-hidden');
     expect(buttonTextElement.tagName).toEqual('SPAN');
 
-    // todo: check for correct icon
+    expect(buttonIconElement).toBeInTheDocument();
 });
 
 test('text input with hint text', () => {
@@ -289,6 +289,7 @@ test('text input with error message', () => {
 
     expect(textInput).toHaveClass('ds_input--error')
     expect(textInput).toHaveAttribute('aria-describedby', errorMessageElement.id);
+    expect(textInput).toHaveAttribute('aria-invalid', 'true');
     expect(errorMessageElement).toBeInTheDocument();
     expect(errorMessageElement).toHaveClass('ds_question__error-message');
 });

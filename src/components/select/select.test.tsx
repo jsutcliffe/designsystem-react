@@ -188,6 +188,7 @@ test('select with error message', () => {
 
     expect(selectWrapper).toHaveClass('ds_input--error')
     expect(select).toHaveAttribute('aria-describedby', errorMessageElement.id);
+    expect(select).toHaveAttribute('aria-invalid', 'true');
     expect(errorMessageElement).toBeInTheDocument();
     expect(errorMessageElement).toHaveClass('ds_question__error-message');
 });

@@ -194,6 +194,7 @@ test('textarea with error message', () => {
 
     expect(textarea).toHaveClass('ds_input--error')
     expect(textarea).toHaveAttribute('aria-describedby', errorMessageElement.id);
+    expect(textarea).toHaveAttribute('aria-invalid', 'true');
     expect(errorMessageElement).toBeInTheDocument();
     expect(errorMessageElement).toHaveClass('ds_question__error-message');
 });

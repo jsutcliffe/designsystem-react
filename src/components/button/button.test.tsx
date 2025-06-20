@@ -61,7 +61,7 @@ test('small button', () => {
 
 test('button with icon', () => {
     render(
-        <Button icon="chevron_right">Button text</Button>
+        <Button icon="ChevronRight">Button text</Button>
     );
 
     const button = screen.getByRole('button');
@@ -73,7 +73,7 @@ test('button with icon', () => {
 
 test('button with icon (left)', () => {
     render(
-        <Button icon="chevron_left" iconLeft>Button text</Button>
+        <Button icon="ChevronLeft" iconLeft>Button text</Button>
     );
 
     const button = screen.getByRole('button');
@@ -83,7 +83,7 @@ test('button with icon (left)', () => {
 
 test('button only icon', () => {
     render(
-        <Button icon="search" iconOnly>Button text</Button>
+        <Button icon="Search" iconOnly>Button text</Button>
     );
 
     const button = screen.getByRole('button');
