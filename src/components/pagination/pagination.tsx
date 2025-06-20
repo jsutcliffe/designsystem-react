@@ -40,6 +40,7 @@ export const Ellipsis = () => {
 
 const Pagination: React.FC<SGDS.Component.Pagination> = ({
     ariaLabel = 'Pages',
+    className,
     onClick,
     padding = 1,
     page = 1,
@@ -47,11 +48,12 @@ const Pagination: React.FC<SGDS.Component.Pagination> = ({
     totalPages,
     ...props
 }) => {
+    padding = Number(padding);
+    page = Number(page);
+
     const minToShow = padding + 2;
     let includeFirst, includeLast;
     let pages = [];
-
-    page = Number(page);
 
     if (page <= minToShow) {
         for (let i = 1; i <= minToShow + 1; i++) {
@@ -82,7 +84,10 @@ const Pagination: React.FC<SGDS.Component.Pagination> = ({
     }
 
     return (
-        <nav className="ds_pagination"
+        <nav className={[
+                'ds_pagination',
+                className
+            ].join(' ')}
             aria-label={ariaLabel}
             {...props}
         >

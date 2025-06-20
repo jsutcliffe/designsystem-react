@@ -351,3 +351,16 @@ test('passing additional props', () => {
     const paginationNav = screen.getByRole('navigation');
     expect(paginationNav?.dataset.test).toEqual('foo');
 });
+
+test('passing additional CSS classes', () => {
+    render(
+        <Pagination
+            page={currentPage}
+            totalPages={totalPages}
+            className="foo"
+        />
+    )
+
+    const paginationNav = screen.getByRole('navigation');
+    expect(paginationNav).toHaveClass('foo');
+});
