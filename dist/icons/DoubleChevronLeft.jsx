@@ -32,26 +32,10 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const Icons = __importStar(require("../icons"));
-const Icon = ({ ariaLabel, className, fill, icon, iconSize }) => {
-    const Component = react_1.default.createElement(Icons[icon], {
-        'aria-hidden': ariaLabel ? undefined : true,
-        'aria-label': ariaLabel,
-        className: [
-            'ds_icon',
-            className,
-            fill && 'ds_icon--fill',
-            iconSize && `ds_icon--${iconSize}`
-        ].join(' ')
-    });
-    return (<>
-            {Component}
-        </>);
-};
-Icon.displayName = 'Icon';
-exports.default = Icon;
+const React = __importStar(require("react"));
+const SvgDoubleChevronLeft = (props) => (<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" xmlSpace="preserve" role="img" {...props}>
+        <path d="M18.4,16.6L13.8,12l4.6-4.6L17,6l-6,6l6,6L18.4,16.6z"/>
+        <path d="M12.4,16.6L7.8,12l4.6-4.6L11,6l-6,6l6,6L12.4,16.6z"/>
+    </svg>);
+exports.default = SvgDoubleChevronLeft;

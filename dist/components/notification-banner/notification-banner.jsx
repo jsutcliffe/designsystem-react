@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
 // @ts-ignore
 const notification_banner_1 = __importDefault(require("@scottish-government/design-system/src/components/notification-banner/notification-banner"));
-const button_1 = __importDefault(require("../button/button"));
 const icon_1 = __importDefault(require("../../common/icon"));
 const screen_reader_text_1 = __importDefault(require("../../common/screen-reader-text"));
 const NotificationBanner = ({ children, className, close, icon, iconColour, iconInverse, title = 'Information', ...props }) => {
@@ -34,7 +33,7 @@ const NotificationBanner = ({ children, className, close, icon, iconColour, icon
                     iconInverse && 'ds_notification__icon--inverse',
                     iconColour && 'ds_notification__icon--colour'
                 ].join(' ')} aria-hidden="true">
-                            <icon_1.default icon="priority_high"/>
+                            <icon_1.default icon="PriorityHigh"/>
                         </span>}
 
                     <div className="ds_notification__text">
@@ -42,10 +41,10 @@ const NotificationBanner = ({ children, className, close, icon, iconColour, icon
                     </div>
 
                     {close &&
-            <button_1.default className="ds_notification__close js-close-notification">
+            <button type="button" className="ds_notification__close js-close-notification">
                             <screen_reader_text_1.default>Close this notification</screen_reader_text_1.default>
-                            <icon_1.default fill icon="close" aria-hidden="true"/>
-                        </button_1.default>}
+                            <icon_1.default fill icon="Close" aria-hidden="true"/>
+                        </button>}
                 </div>
             </div>
         </div>);

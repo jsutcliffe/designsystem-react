@@ -44,7 +44,7 @@ const TextInput = ({ buttonIcon, buttonText, children, className, countThreshold
             {hintText && <hint_text_1.default id={hintTextId} text={hintText}/>}
             {errorMessage && <error_message_1.default id={errorMessageId} text={errorMessage}/>}
             <conditional_wrapper_1.default condition={hasButton || typeof currency !== 'undefined' && currency} wrapper={(children) => <div className={inputWrapperClasses} data-symbol={currencySymbol}>{children}</div>}>
-                <input aria-describedby={describedbys.join(' ')} className={[
+                <input aria-describedby={describedbys.join(' ')} aria-invalid={error} className={[
             'ds_input',
             className,
             error ? 'ds_input--error' : '',

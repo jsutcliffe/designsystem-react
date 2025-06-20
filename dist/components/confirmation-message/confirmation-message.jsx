@@ -10,7 +10,7 @@ const ConfirmationMessage = ({ ariaLive = 'polite', children, className, headerL
             'ds_confirmation-message',
             className
         ].join(' ')} {...props}>
-            <icon_1.default className="ds_confirmation-message__icon" icon="check_circle" iconSize="24"/>
+            <icon_1.default className="ds_confirmation-message__icon" icon="CheckCircle" iconSize="24"/>
 
             <wrapper_tag_1.default className="ds_confirmation-message__title" tagName={headerLevel}>
                 {title}

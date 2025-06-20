@@ -32,26 +32,9 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const Icons = __importStar(require("../icons"));
-const Icon = ({ ariaLabel, className, fill, icon, iconSize }) => {
-    const Component = react_1.default.createElement(Icons[icon], {
-        'aria-hidden': ariaLabel ? undefined : true,
-        'aria-label': ariaLabel,
-        className: [
-            'ds_icon',
-            className,
-            fill && 'ds_icon--fill',
-            iconSize && `ds_icon--${iconSize}`
-        ].join(' ')
-    });
-    return (<>
-            {Component}
-        </>);
-};
-Icon.displayName = 'Icon';
-exports.default = Icon;
+const React = __importStar(require("react"));
+const SvgCancel = (props) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" role="img" {...props}>
+        <path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/>
+    </svg>);
+exports.default = SvgCancel;

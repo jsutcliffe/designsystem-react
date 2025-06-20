@@ -32,26 +32,10 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const Icons = __importStar(require("../icons"));
-const Icon = ({ ariaLabel, className, fill, icon, iconSize }) => {
-    const Component = react_1.default.createElement(Icons[icon], {
-        'aria-hidden': ariaLabel ? undefined : true,
-        'aria-label': ariaLabel,
-        className: [
-            'ds_icon',
-            className,
-            fill && 'ds_icon--fill',
-            iconSize && `ds_icon--${iconSize}`
-        ].join(' ')
-    });
-    return (<>
-            {Component}
-        </>);
-};
-Icon.displayName = 'Icon';
-exports.default = Icon;
+const React = __importStar(require("react"));
+const SvgClose = (props) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" role="img" {...props}>
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+    </svg>);
+exports.default = SvgClose;

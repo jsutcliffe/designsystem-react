@@ -42,7 +42,7 @@ const SiteSearch = function ({ action = '/search', autocompleteEndpoint, autocom
             hasAutocomplete ? 'js-autocomplete-input' : undefined
         ].join(' ')} id={id} name={name} placeholder={placeholder} required spellCheck="false" type="search"/>
 
-                    <button_1.default type="submit" icon="search" iconOnly>Search</button_1.default>
+                    <button_1.default type="submit" icon="Search" iconOnly>Search</button_1.default>
 
                     {hasAutocomplete && (<div id="autocomplete-suggestions" className="ds_autocomplete__suggestions">
                             <ol className="ds_autocomplete__suggestions-list" role="listbox" aria-labelledby="site-search-label"></ol>

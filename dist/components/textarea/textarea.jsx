@@ -42,7 +42,7 @@ const Textarea = ({ className, countThreshold, error, errorMessage, hintText, id
             {hintText && <hint_text_1.default id={hintTextId} text={hintText}/>}
             {errorMessage && <error_message_1.default id={errorMessageId} text={errorMessage}/>}
 
-            <textarea aria-describedby={describedbys.join(' ')} className={[
+            <textarea aria-describedby={describedbys.join(' ')} aria-invalid={error} className={[
             'ds_input',
             error && 'ds_input--error',
             className

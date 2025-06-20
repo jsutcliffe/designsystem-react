@@ -32,26 +32,10 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const Icons = __importStar(require("../icons"));
-const Icon = ({ ariaLabel, className, fill, icon, iconSize }) => {
-    const Component = react_1.default.createElement(Icons[icon], {
-        'aria-hidden': ariaLabel ? undefined : true,
-        'aria-label': ariaLabel,
-        className: [
-            'ds_icon',
-            className,
-            fill && 'ds_icon--fill',
-            iconSize && `ds_icon--${iconSize}`
-        ].join(' ')
-    });
-    return (<>
-            {Component}
-        </>);
-};
-Icon.displayName = 'Icon';
-exports.default = Icon;
+const React = __importStar(require("react"));
+const SvgCalendarToday = (props) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" role="img" {...props}>
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/>
+    </svg>);
+exports.default = SvgCalendarToday;

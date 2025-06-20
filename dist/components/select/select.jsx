@@ -40,7 +40,7 @@ const Select = function ({ className, defaultValue, error, errorMessage, hintTex
             width && `ds_input--${width}`,
             className
         ].join(' ')} {...props}>
-                <select aria-describedby={describedbys.join(' ')} className="ds_select" defaultValue={defaultValue} id={id} name={name || id} onBlur={handleBlur} onChange={handleChange}>
+                <select aria-describedby={describedbys.join(' ')} aria-invalid={error} className="ds_select" defaultValue={defaultValue} id={id} name={name || id} onBlur={handleBlur} onChange={handleChange}>
                     <option value="">{placeholder}</option>
                     {options && options.map((option, index) => (<Option value={option.value} text={option.text} key={`option-${index}`}/>))}
                 </select>

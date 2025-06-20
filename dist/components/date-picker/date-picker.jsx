@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
 // @ts-ignore
 const date_picker_1 = __importDefault(require("@scottish-government/design-system/src/components/date-picker/date-picker"));
+const error_message_1 = __importDefault(require("../error-message/error-message"));
 const text_input_1 = __importDefault(require("../text-input/text-input"));
 const DatePicker = ({ className, disabledDates, error, errorMessage, hintText, id, iconPath = './', label, maxDate, minDate, multiple, name, onBlur, onChange, value, width = 'fixed-10', ...props }) => {
     // todo: dateSelectCallback function
@@ -32,6 +33,7 @@ const DatePicker = ({ className, disabledDates, error, errorMessage, hintText, i
         ].join(' ')} data-disableddates={disabledDates} data-maxdate={maxDate} data-mindate={minDate} data-module="ds-datepicker" ref={ref} {...props}>
             {(multiple ? (<fieldset className="ds_datepicker__input-wrapper">
                     <legend>{label}</legend>
+                    {errorMessage && <error_message_1.default text={errorMessage}/>}
                     <div>
                         <text_input_1.default className="js-datepicker-date" error={!!error} id={id + "-day"} hintText={hintText} label="Day" name={name + "-day"} onBlur={handleBlur} onChange={handleChange} value={value?.split('/')[0]} width="fixed-2"/>
                     </div>
