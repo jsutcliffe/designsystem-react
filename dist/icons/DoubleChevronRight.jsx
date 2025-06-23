@@ -34,8 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __importStar(require("react"));
-const SvgDoubleChevronRight = (props) => (<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" xmlSpace="preserve" role="img" {...props}>
-        <path d="M5.6,7.4l4.6,4.6l-4.6,4.6L7,18l6-6L7,6L5.6,7.4z"/>
-        <path d="M11.6,7.4l4.6,4.6l-4.6,4.6L13,18l6-6l-6-6L11.6,7.4z"/>
+const SvgDoubleChevronRight = (props) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" {...props}>
+        <path d="M9.6 12 5 7.4 6.4 6l6 6-6 6L5 16.6 9.6 12Zm6.6 0-4.6-4.6L13 6l6 6-6 6-1.4-1.4 4.6-4.6Z"/>
     </svg>);
 exports.default = SvgDoubleChevronRight;
