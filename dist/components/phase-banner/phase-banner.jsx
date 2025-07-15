@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const tag_1 = __importDefault(require("../tag/tag"));
-const PhaseBanner = ({ children, className, phaseName, ...props }) => {
+const PhaseBanner = ({ children, className, content, phaseName, ...props }) => {
     return (<div className={[
             'ds_phase-banner',
             className
@@ -13,7 +13,7 @@ const PhaseBanner = ({ children, className, phaseName, ...props }) => {
                 <p className="ds_phase-banner__content">
                     {phaseName && <tag_1.default title={phaseName} className="ds_phase-banner__tag"/>}
                     <span className="ds_phase-banner__text">
-                        {children || "This is a new service"}
+                        {content ? content : children || "This is a new service"}
                     </span>
                 </p>
             </div>

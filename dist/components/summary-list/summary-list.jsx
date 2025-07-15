@@ -20,10 +20,7 @@ function convertToSlug(string) {
         .replace(/ +/g, "-");
 }
 const Answer = ({ value }) => {
-    let processedValue;
-    if (typeof value === 'string') {
-        processedValue = escapedNewLineToLineBreakTag(value);
-    }
+    const processedValue = escapedNewLineToLineBreakTag(value.toString());
     return (<q className="ds_summary-list__answer">{processedValue}</q>);
 };
 exports.Answer = Answer;
@@ -39,11 +36,11 @@ const Action = ({ describedby, href, onclick, title, }) => {
 exports.Action = Action;
 const Item = ({ actions, index = 1, title, value }) => {
     let values = [];
-    if (typeof value === 'string') {
-        values = [value];
+    if (Array.isArray(value)) {
+        values = value;
     }
     else {
-        values = value;
+        values = [value || ''];
     }
     const describedById = `q${index + 1}-${convertToSlug(title)}`;
     return (<li className="ds_summary-list__item">
