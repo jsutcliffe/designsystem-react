@@ -19,10 +19,7 @@ function convertToSlug(string: string) {
 export const Answer: React.FC<SGDS.Component.SummaryList.Answer> = ({
     value
 }) => {
-    let processedValue;
-    if (typeof value === 'string') {
-        processedValue = escapedNewLineToLineBreakTag(value);
-    }
+    const processedValue = escapedNewLineToLineBreakTag(value.toString());
 
     return (
         <q className="ds_summary-list__answer">{processedValue}</q>
@@ -62,10 +59,10 @@ export const Item: React.FC<SGDS.Component.SummaryList.Item> = ({
 }) => {
     let values: string[] = [];
 
-    if (typeof value === 'string') {
-        values = [value];
-    } else {
+    if (Array.isArray(value)) {
         values = value;
+    } else {
+        values = [value || ''];
     }
 
     const describedById = `q${index+1}-${convertToSlug(title)}`;

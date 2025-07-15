@@ -76,7 +76,7 @@ export const CheckboxGroup: React.FC<SGDS.Component.Checkbox.Group> = ({
         if (ref.current) {
             new DSCheckboxes(ref.current).init();
         }
-    }, [ref])
+    }, [ref]);
 
     return (
         <div

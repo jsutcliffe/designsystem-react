@@ -123,8 +123,23 @@ test('summary list item with multiple values', () => {
 
     expect(valueListItems?.length).toEqual(items[3].value.length);
 
-    expect(valueListItems[0]?.tagName).toEqual('LI');
+    expect(valueListItems[0].tagName).toEqual('LI');
     expect(valueListItems[0].innerHTML).toEqual(`<q class="ds_summary-list__answer">${items[3].value[0]}</q>`);
+});
+
+test('summary list item with no value', () => {
+    render(
+        <Item
+            actions={items[3].actions}
+            title={items[3].title}
+        />
+    );
+
+    const item = screen.getAllByRole('listitem')[0];
+    const value = item.querySelector('.ds_summary-list__value');
+    const answer = value?.children[0];
+
+    expect(answer?.textContent).toEqual('');
 });
 
 test('summary list item with multiple actions', () => {

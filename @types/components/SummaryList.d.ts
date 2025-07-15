@@ -8,14 +8,14 @@ declare namespace SGDS.Component {
         }
 
         interface Answer extends React.AllHTMLAttributes<HTMLElement> {
-            value: string
+            value: number | string
         }
 
         interface Item extends React.LiHTMLAttributes<HTMLLIElement> {
             actions?: SummaryList.Action[],
             index: number,
             title: string
-            value: string | string[]
+            value?: string | string[]
         }
 
     }

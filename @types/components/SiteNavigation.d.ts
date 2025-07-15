@@ -8,6 +8,7 @@ declare namespace SGDS.Component {
     }
 
     interface SiteNavigation extends React.AllHTMLAttributes<HTMLElement> {
-        items: SiteNavigation.Link[]
+        items: SiteNavigation.Link[],
+        ref?: React.RefObject<null>
     }
 }

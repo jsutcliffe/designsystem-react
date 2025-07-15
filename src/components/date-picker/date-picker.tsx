@@ -6,6 +6,7 @@ import TextInput from '../text-input/text-input';
 
 const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
     className,
+    dateSelectCallback,
     disabledDates,
     error,
     errorMessage,
@@ -23,15 +24,16 @@ const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
     width = 'fixed-10',
     ...props
 }) => {
-    // todo: dateSelectCallback function
-
     const ref = useRef(null);
 
     useEffect(() => {
         if (ref.current) {
-            new DSDatePicker(ref.current, {imagePath: iconPath}).init();
+            new DSDatePicker(ref.current, {
+                dateSelectCallback,
+                imagePath: iconPath
+            }).init();
         }
-    }, [ref, iconPath]);
+    }, [ref, dateSelectCallback, iconPath]);
 
     function handleBlur(event: React.FocusEvent) {
         if (typeof onBlur === 'function') {

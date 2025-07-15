@@ -30,8 +30,6 @@ test('accordion renders correctly', () => {
         </Accordion>
     );
 
-    // console.log(items.map(item => { console.log(item.id); return item.title; }));
-
     const accordion = screen.getByTestId(id);
     const openAllButton = document.querySelector('.ds_accordion__open-all');
     const accordionItems = document.querySelectorAll('.ds_accordion-item');
