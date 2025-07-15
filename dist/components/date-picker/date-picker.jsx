@@ -8,14 +8,16 @@ const react_1 = require("react");
 const date_picker_1 = __importDefault(require("@scottish-government/design-system/src/components/date-picker/date-picker"));
 const error_message_1 = __importDefault(require("../error-message/error-message"));
 const text_input_1 = __importDefault(require("../text-input/text-input"));
-const DatePicker = ({ className, disabledDates, error, errorMessage, hintText, id, iconPath = './', label, maxDate, minDate, multiple, name, onBlur, onChange, value, width = 'fixed-10', ...props }) => {
-    // todo: dateSelectCallback function
+const DatePicker = ({ className, dateSelectCallback, disabledDates, error, errorMessage, hintText, id, iconPath = './', label, maxDate, minDate, multiple, name, onBlur, onChange, value, width = 'fixed-10', ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         if (ref.current) {
-            new date_picker_1.default(ref.current, { imagePath: iconPath }).init();
+            new date_picker_1.default(ref.current, {
+                dateSelectCallback,
+                imagePath: iconPath
+            }).init();
         }
-    }, [ref, iconPath]);
+    }, [ref, dateSelectCallback, iconPath]);
     function handleBlur(event) {
         if (typeof onBlur === 'function') {
             onBlur(event);
