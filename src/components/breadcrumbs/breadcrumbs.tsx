@@ -25,7 +25,6 @@ const Breadcrumb: React.FC<SGDS.Component.Breadcrumbs.Item> = ({
  * @returns {JSX.Element} - The element
  */
 const Breadcrumbs: React.FC<SGDS.Component.Breadcrumbs> = ({
-    className,
     hideLastItem,
     items,
     ...props
@@ -33,7 +32,6 @@ const Breadcrumbs: React.FC<SGDS.Component.Breadcrumbs> = ({
     return (
         <nav
             aria-label="Breadcrumb"
-            className={className}
             {...props}
         >
             <ol className="ds_breadcrumbs">

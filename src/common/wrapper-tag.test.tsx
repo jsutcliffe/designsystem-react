@@ -13,7 +13,7 @@ test('wrapper tag renders correctly', () => {
 
     const wrapper = document.querySelector('#foo');
 
-    expect(wrapper.tagName).toEqual('DIV');
+    expect(wrapper?.tagName).toEqual('DIV');
 });
 
 test('wrapper tag widh tag name', () => {
@@ -27,7 +27,7 @@ test('wrapper tag widh tag name', () => {
 
     const wrapper = document.querySelector('#foo');
 
-    expect(wrapper.tagName).toEqual('SECTION');
+    expect(wrapper?.tagName).toEqual('SECTION');
 });
 
 test('passing additional props', () => {
@@ -37,6 +37,6 @@ test('passing additional props', () => {
         </WrapperTag>
     );
 
-    const wrapper = document.querySelector('#foo');
+    const wrapper = document.querySelector('#foo') as HTMLElement;
     expect(wrapper?.dataset.test).toEqual('foo');
 });

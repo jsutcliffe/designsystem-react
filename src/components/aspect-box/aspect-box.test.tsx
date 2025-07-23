@@ -10,7 +10,7 @@ test('aspect box renders correctly', () => {
     );
 
     const image = document.querySelector('img');
-    const imageContainer = image?.parentNode;
+    const imageContainer = image?.parentElement;
 
     expect(image).toHaveClass('ds_aspect-box__inner');
     expect(imageContainer).toHaveClass('ds_aspect-box');
@@ -24,7 +24,7 @@ test('1:1 ratio', () => {
     );
 
     const image = document.querySelector('img');
-    const imageContainer = image?.parentNode;
+    const imageContainer = image?.parentElement;
 
     expect(imageContainer).toHaveClass('ds_aspect-box--square');
 });
@@ -37,7 +37,7 @@ test('square ratio', () => {
     );
 
     const image = document.querySelector('img');
-    const imageContainer = image?.parentNode;
+    const imageContainer = image?.parentElement;
 
     expect(imageContainer).toHaveClass('ds_aspect-box--square');
 });
@@ -50,7 +50,7 @@ test('4:3 ratio', () => {
     );
 
     const image = document.querySelector('img');
-    const imageContainer = image?.parentNode;
+    const imageContainer = image?.parentElement;
 
     expect(imageContainer).toHaveClass('ds_aspect-box--43');
 });
@@ -63,7 +63,7 @@ test('21:9 ratio', () => {
     );
 
     const image = document.querySelector('img');
-    const imageContainer = image?.parentNode;
+    const imageContainer = image?.parentElement;
 
     expect(imageContainer).toHaveClass('ds_aspect-box--219');
 });
@@ -76,7 +76,7 @@ test('passing additional props', () => {
     );
 
     const image = document.querySelector('img');
-    const imageContainer = image?.parentNode;
+    const imageContainer = image?.parentElement;
     expect(imageContainer?.dataset.test).toEqual('foo');
 });
 
@@ -88,6 +88,6 @@ test('passing additional CSS classes', () => {
     );
 
     const image = document.querySelector('img');
-    const imageContainer = image?.parentNode;
+    const imageContainer = image?.parentElement;
     expect(imageContainer).toHaveClass('foo', 'ds_aspect-box');
 });

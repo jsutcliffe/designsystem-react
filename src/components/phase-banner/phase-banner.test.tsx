@@ -14,16 +14,16 @@ test('phase banner renders correctly', () => {
 
     const phaseBanner = document.querySelector('.ds_phase-banner');
     const phaseBannerContent = phaseBanner?.querySelector('.ds_phase-banner__content');
-    const phaseBannerWrapper = phaseBannerContent?.parentNode;
+    const phaseBannerWrapper = phaseBannerContent?.parentElement;
     const phaseBannerText = phaseBannerContent?.querySelector('.ds_phase-banner__text');
 
     expect(phaseBanner).toBeInTheDocument();
     expect(phaseBanner?.tagName).toEqual('DIV');
     expect(phaseBannerWrapper).toHaveClass('ds_wrapper');
-    expect(phaseBannerWrapper.tagName).toEqual('DIV');
-    expect(phaseBannerContent.tagName).toEqual('P');
-    expect(phaseBannerText.tagName).toEqual('SPAN');
-    expect(phaseBannerText.textContent).toEqual(text);
+    expect(phaseBannerWrapper?.tagName).toEqual('DIV');
+    expect(phaseBannerContent?.tagName).toEqual('P');
+    expect(phaseBannerText?.tagName).toEqual('SPAN');
+    expect(phaseBannerText?.textContent).toEqual(text);
 });
 
 test('phase banner with default text', () => {
@@ -50,9 +50,9 @@ test('phase banner with phase tag', () => {
     const phaseBannerTag = phaseBanner?.querySelector('.ds_phase-banner__tag');
 
     expect(phaseBannerTag).toBeInTheDocument();
-    expect(phaseBannerTag.tagName).toEqual('SPAN');
+    expect(phaseBannerTag?.tagName).toEqual('SPAN');
     expect(phaseBannerTag).toHaveClass('ds_tag', 'ds_phase-banner__tag');
-    expect(phaseBannerTag.textContent).toEqual(phase);
+    expect(phaseBannerTag?.textContent).toEqual(phase);
 });
 
 test('passing additional props', () => {
@@ -62,7 +62,7 @@ test('passing additional props', () => {
         </PhaseBanner>
     )
 
-    const phaseBanner = document.querySelector('.ds_phase-banner');
+    const phaseBanner = document.querySelector('.ds_phase-banner') as HTMLElement;
     expect(phaseBanner?.dataset.test).toEqual('foo');
 });
 

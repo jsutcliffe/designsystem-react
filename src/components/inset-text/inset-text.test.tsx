@@ -28,7 +28,7 @@ test('passing additional props', () => {
         </InsetText>
     )
 
-    const insetTextOuter = document.querySelector('.ds_inset-text');
+    const insetTextOuter = document.querySelector('.ds_inset-text') as HTMLElement;
     expect(insetTextOuter?.dataset.test).toEqual('foo');
 });
 

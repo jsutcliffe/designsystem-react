@@ -29,7 +29,7 @@ test('radio group renders correct children', () => {
     );
 
     const radios = screen.getAllByRole('radio');
-    const groupContainer = radios[0].parentNode.parentNode;
+    const groupContainer = radios[0].parentElement?.parentElement;
     expect(radios.length).toEqual(items.length);
     expect(groupContainer).toHaveClass('ds_radios', 'ds_field-group');
 });
@@ -53,7 +53,7 @@ test('inline radio group', () => {
 
 
     const radio = screen.getAllByRole('radio')[0];
-    const groupContainer = radio.parentNode.parentNode;
+    const groupContainer = radio.parentElement?.parentElement;
     expect(groupContainer).toHaveClass('ds_field-group--inline');
 });
 
@@ -78,7 +78,7 @@ test('radio group passes all expected item params', () => {
     );
 
     const radio = screen.getByRole('radio');
-    const radioContainer = radio.parentNode;
+    const radioContainer = radio.parentElement;
     const hintText = screen.getByText('hint text');
 
     expect(radio).toHaveAttribute('checked');
@@ -101,7 +101,7 @@ test('individual radio renders correctly', () => {
     );
 
     const radio = screen.getByRole('radio');
-    const radioContainer = radio.parentNode;
+    const radioContainer = radio.parentElement;
     const label = screen.getByText('Pension Credit');
 
     expect(radioContainer).toHaveClass('ds_radio');
@@ -171,7 +171,7 @@ test('small radio', () => {
     );
 
     const radio = screen.getByRole('radio');
-    const radioContainer = radio.parentNode;
+    const radioContainer = radio.parentElement;
 
     expect(radioContainer).toHaveClass('ds_radio--small');
 });
@@ -185,7 +185,7 @@ test('passing additional props', () => {
     );
 
     const radios = screen.getAllByRole('radio');
-    const groupContainer = radios[0]?.parentNode?.parentNode;
+    const groupContainer = radios[0]?.parentElement?.parentElement;
     expect(groupContainer?.dataset.test).toEqual('foo');
 });
 
@@ -198,6 +198,6 @@ test('passing additional CSS classes', () => {
     );
 
     const radios = screen.getAllByRole('radio');
-    const groupContainer = radios[0]?.parentNode?.parentNode;
+    const groupContainer = radios[0]?.parentElement?.parentElement;
     expect(groupContainer).toHaveClass('foo', 'ds_radios');
 });

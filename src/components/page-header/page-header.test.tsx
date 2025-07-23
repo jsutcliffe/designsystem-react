@@ -12,7 +12,7 @@ test('notification banner renders correctly', () => {
 
     const header = screen.getByRole('banner');
     const title = within(header).getByRole('heading');
-    const label = title.previousSibling;;
+    const label = title.previousElementSibling;
 
     expect(header).toHaveClass('ds_page-header');
     expect(header.tagName).toEqual('HEADER');
@@ -33,7 +33,7 @@ test('header with no label', () => {
 
     const header = screen.getByRole('banner');
     const title = within(header).getByRole('heading');
-    const label = title.previousSibling;
+    const label = title.previousElementSibling;
 
     expect(label).not.toBeInTheDocument();
 });

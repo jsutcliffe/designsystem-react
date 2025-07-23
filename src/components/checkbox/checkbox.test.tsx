@@ -29,7 +29,7 @@ test('checkbox group renders correct children', () => {
     );
 
     const checkboxes = screen.getAllByRole('checkbox');
-    const groupContainer = checkboxes[0].parentNode.parentNode;
+    const groupContainer = checkboxes[0].parentElement?.parentElement;
     expect(checkboxes.length).toEqual(items.length);
     expect(groupContainer).toHaveClass('ds_checkboxes', 'ds_field-group');
 });
@@ -54,7 +54,7 @@ test('checkbox group passes all expected item params', () => {
     );
 
     const checkbox = screen.getByRole('checkbox');
-    const checkboxContainer = checkbox.parentNode;
+    const checkboxContainer = checkbox.parentElement;
     const hintText = screen.getByText('hint text');
 
     expect(checkbox).toHaveAttribute('data-behaviour', 'exclusive');
@@ -77,7 +77,7 @@ test('individual checkbox renders correctly', () => {
     );
 
     const checkbox = screen.getByRole('checkbox');
-    const checkboxContainer = checkbox.parentNode;
+    const checkboxContainer = checkbox.parentElement;
     const label = screen.getByText('Pension Credit');
 
     expect(checkboxContainer).toHaveClass('ds_checkbox');
@@ -107,12 +107,12 @@ test('exclusive checkbox', () => {
     );
 
     const checkbox = screen.getByRole('checkbox');
-    const separator = checkbox.parentNode?.previousSibling;
+    const separator = checkbox.parentElement?.previousSibling;
 
     expect(checkbox).toHaveAttribute('data-behaviour', 'exclusive');
     expect(separator).toBeInTheDocument();
     expect(separator).toHaveClass('ds_checkbox-separator');
-    expect(separator.textContent).toEqual('or');
+    expect(separator?.textContent).toEqual('or');
 });
 
 test('checkbox with blur fn', () => {
@@ -161,7 +161,7 @@ test('small checkbox', () => {
     );
 
     const checkbox = screen.getByRole('checkbox');
-    const checkboxContainer = checkbox.parentNode;
+    const checkboxContainer = checkbox.parentElement;
 
     expect(checkboxContainer).toHaveClass('ds_checkbox--small');
 });
@@ -175,7 +175,7 @@ test('passing additional props', () => {
     );
 
     const checkboxes = screen.getAllByRole('checkbox');
-    const groupContainer = checkboxes[0]?.parentNode?.parentNode;
+    const groupContainer = checkboxes[0]?.parentElement?.parentElement;
     expect(groupContainer?.dataset.test).toEqual('foo');
 });
 
@@ -188,6 +188,6 @@ test('passing additional CSS classes', () => {
     );
 
     const checkboxes = screen.getAllByRole('checkbox');
-    const groupContainer = checkboxes[0]?.parentNode?.parentNode;
+    const groupContainer = checkboxes[0]?.parentElement?.parentElement;
     expect(groupContainer).toHaveClass('foo', 'ds_checkboxes');
 });

@@ -60,7 +60,7 @@ test('side navigation renders correctly', () => {
 
     expect(label).toHaveClass('ds_link');
     expect(label).toHaveAttribute('for', toggle.id);
-    expect(label.textContent).toEqual('Show all Pages in this section');
+    expect(label?.textContent).toEqual('Show all Pages in this section');
 
     expect(rootList).toHaveAttribute('id', 'side-navigation-root');
 

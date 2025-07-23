@@ -37,33 +37,33 @@ test('site header renders correctly (maximal, testing markup structure)', () => 
     const siteHeaderNavigationMobile = within(siteHeader).getAllByRole('navigation')[0];
     const siteHeaderNavigationDesktop = within(siteHeader).getAllByRole('navigation')[1];
     const siteHeaderPhaseBanner = siteHeader.querySelector('.ds_phase-banner');
-    const siteHeaderSearch = within(siteHeader).getByRole('search').parentNode;
+    const siteHeaderSearch = within(siteHeader).getByRole('search').parentElement;
 
     expect(siteHeader).toHaveClass('ds_site-header');
     expect(siteHeaderContentWrapper).toHaveClass('ds_wrapper');
 
-    expect(siteHeaderBranding?.parentNode).toEqual(siteHeaderContent);
-    expect(siteHeaderControls?.parentNode).toEqual(siteHeaderContent);
-    expect(siteHeaderNavToggle?.parentNode).toEqual(siteHeaderContent);
-    expect(siteHeaderNavigationMobile.parentNode).toEqual(siteHeaderContent);
-    expect(siteHeaderSearch?.parentNode).toEqual(siteHeaderContent);
+    expect(siteHeaderBranding?.parentElement).toEqual(siteHeaderContent);
+    expect(siteHeaderControls?.parentElement).toEqual(siteHeaderContent);
+    expect(siteHeaderNavToggle?.parentElement).toEqual(siteHeaderContent);
+    expect(siteHeaderNavigationMobile.parentElement).toEqual(siteHeaderContent);
+    expect(siteHeaderSearch?.parentElement).toEqual(siteHeaderContent);
 
-    expect(siteHeaderBranding?.previousSibling).toBeNull();
-    expect(siteHeaderControls?.previousSibling).toEqual(siteHeaderBranding);
-    expect(siteHeaderNavToggle?.previousSibling).toEqual(siteHeaderControls);
-    expect(siteHeaderNavigationMobile.previousSibling).toEqual(siteHeaderNavToggle);
-    expect(siteHeaderSearch?.previousSibling).toEqual(siteHeaderNavigationMobile);
+    expect(siteHeaderBranding?.previousElementSibling).toBeNull();
+    expect(siteHeaderControls?.previousElementSibling).toEqual(siteHeaderBranding);
+    expect(siteHeaderNavToggle?.previousElementSibling).toEqual(siteHeaderControls);
+    expect(siteHeaderNavigationMobile.previousElementSibling).toEqual(siteHeaderNavToggle);
+    expect(siteHeaderSearch?.previousElementSibling).toEqual(siteHeaderNavigationMobile);
 
-    expect(siteHeaderNavigationDesktop.parentNode).toHaveClass('ds_wrapper');
-    expect(siteHeaderNavigationDesktop?.parentNode?.parentNode).toHaveClass('ds_site-header__navigation');
+    expect(siteHeaderNavigationDesktop.parentElement).toHaveClass('ds_wrapper');
+    expect(siteHeaderNavigationDesktop?.parentElement?.parentElement).toHaveClass('ds_site-header__navigation');
 
-    expect(siteHeaderNavigationDesktop?.parentNode?.parentNode?.previousSibling).toEqual(siteHeaderPhaseBanner);
+    expect(siteHeaderNavigationDesktop?.parentElement?.parentElement?.previousElementSibling).toEqual(siteHeaderPhaseBanner);
 
-    expect(siteHeaderPhaseBanner?.previousSibling).toEqual(siteHeaderContentWrapper);
+    expect(siteHeaderPhaseBanner?.previousElementSibling).toEqual(siteHeaderContentWrapper);
 
-    expect(siteHeaderPhaseBanner?.parentNode).toEqual(siteHeader);
-    expect(siteHeaderNavigationDesktop?.parentNode?.parentNode?.parentNode).toEqual(siteHeader);
-    expect(siteHeaderContentWrapper?.parentNode).toEqual(siteHeader);
+    expect(siteHeaderPhaseBanner?.parentElement).toEqual(siteHeader);
+    expect(siteHeaderNavigationDesktop?.parentElement?.parentElement?.parentElement).toEqual(siteHeader);
+    expect(siteHeaderContentWrapper?.parentElement).toEqual(siteHeader);
 });
 
 test('site header branding: logo only, default URL', () => {
@@ -90,8 +90,8 @@ test('site header branding: logo only, default URL', () => {
     expect(siteHeaderLogoImg).toHaveAttribute('src', logo.src);
     expect(siteHeaderLogoImg).toHaveAttribute('alt', logo.alt);
 
-    expect(siteHeaderLogoImg.parentNode).toEqual(siteHeaderLogoLink);
-    expect(siteHeaderLogoLink.parentNode).toEqual(siteHeaderBranding);
+    expect(siteHeaderLogoImg.parentElement).toEqual(siteHeaderLogoLink);
+    expect(siteHeaderLogoLink.parentElement).toEqual(siteHeaderBranding);
 });
 
 test('site header branding: logo and site title', () => {
@@ -115,8 +115,8 @@ test('site header branding: logo and site title', () => {
 
     expect(siteTitle?.tagName).toEqual('DIV');
     expect(siteTitle?.textContent).toEqual(siteTitleContent);
-    expect(siteTitle?.parentNode).toEqual(siteHeaderBranding);
-    expect(siteTitle?.previousSibling).toEqual(siteHeaderLogoLink);
+    expect(siteTitle?.parentElement).toEqual(siteHeaderBranding);
+    expect(siteTitle?.previousElementSibling).toEqual(siteHeaderLogoLink);
 });
 
 test('site header branding: custom link URL', () => {

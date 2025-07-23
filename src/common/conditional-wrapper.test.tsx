@@ -16,7 +16,7 @@ test('conditional wrapper true', () => {
     const elementParent = screen.getByTestId('wrapper');
     expect(element).toBeInTheDocument();
     expect(elementParent).toBeInTheDocument();
-    expect(element.parentNode).toEqual(elementParent)
+    expect(element.parentElement).toEqual(elementParent)
 });
 
 test('conditional wrapper false', () => {

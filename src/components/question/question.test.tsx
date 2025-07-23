@@ -51,11 +51,11 @@ test('question with error', () => {
     );
 
     const questionElement = document.querySelector('.ds_question');
-    const errorMessageElement = questionElement.querySelector('.ds_question__error-message');
+    const errorMessageElement = questionElement?.querySelector('.ds_question__error-message');
 
     expect(questionElement).toHaveClass('ds_question--error');
     expect(errorMessageElement).toBeInTheDocument();
-    expect(errorMessageElement.textContent).toEqual(errorMessage);
+    expect(errorMessageElement?.textContent).toEqual(errorMessage);
 });
 
 test('passing additional props', () => {
@@ -64,7 +64,7 @@ test('passing additional props', () => {
         </Question>
     )
 
-    const questionElement = document.querySelector('.ds_question');
+    const questionElement = document.querySelector('.ds_question') as HTMLElement;
     expect(questionElement?.dataset.test).toEqual('foo');
 });
 

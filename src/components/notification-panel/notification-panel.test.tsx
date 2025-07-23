@@ -13,15 +13,15 @@ test('notification banner renders correctly', () => {
     );
 
     const notificationPanelHeading = screen.getByRole('heading');
-    const notificationPanelContent = notificationPanelHeading.nextSibling;
-    const notificationPanel = notificationPanelHeading.parentNode;
+    const notificationPanelContent = notificationPanelHeading.nextElementSibling;
+    const notificationPanel = notificationPanelHeading.parentElement;
 
     expect(notificationPanel).toHaveClass('ds_notification-panel');
     expect(notificationPanelHeading).toHaveClass('ds_notification-panel__title');
     expect(notificationPanelHeading.textContent).toEqual(headingText);
     expect(notificationPanelHeading.tagName).toEqual('H1');
     expect(notificationPanelContent).toHaveClass('ds_notification-panel__content');
-    expect(notificationPanelContent.textContent).toEqual(text);
+    expect(notificationPanelContent?.textContent).toEqual(text);
 });
 
 test('notification banner with custom heading level', () => {
@@ -47,7 +47,7 @@ test('notification banner with aria-live', () => {
     );
 
     const notificationPanelHeading = screen.getByRole('heading');
-    const notificationPanel = notificationPanelHeading.parentNode;
+    const notificationPanel = notificationPanelHeading.parentElement;
 
     expect(notificationPanel).toHaveAttribute('aria-live', ariaLive);
 });
@@ -72,7 +72,7 @@ test('passing additional props', () => {
     )
 
     const notificationPanelHeading = screen.getByRole('heading');
-    const notificationPanel = notificationPanelHeading.parentNode;
+    const notificationPanel = notificationPanelHeading.parentElement;
     expect(notificationPanel?.dataset.test).toEqual('foo');
 });
 
@@ -84,6 +84,6 @@ test('passing additional CSS classes', () => {
     )
 
     const notificationPanelHeading = screen.getByRole('heading');
-    const notificationPanel = notificationPanelHeading.parentNode;
+    const notificationPanel = notificationPanelHeading.parentElement;
     expect(notificationPanel).toHaveClass('foo', 'ds_notification-panel');
 });

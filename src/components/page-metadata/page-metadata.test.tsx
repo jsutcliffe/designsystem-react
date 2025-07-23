@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
-import { render, screen, within } from '@testing-library/react';
-import Metadata, {MetadataItem} from './page-metadata';
+import { render, screen } from '@testing-library/react';
+import Metadata from './page-metadata';
 
 const name = 'Directorate';
 const value = 'Equality, Inclusion and Human Rights Directorate';
@@ -8,9 +8,9 @@ const value = 'Equality, Inclusion and Human Rights Directorate';
 test('metadata renders correctly', () => {
     render(
         <Metadata>
-            <MetadataItem name={name}>
+            <Metadata.Item name={name}>
                 {value}
-            </MetadataItem>
+            </Metadata.Item>
         </Metadata>
     );
 
@@ -30,9 +30,9 @@ test('metadata renders correctly', () => {
 test('inline metadata', () => {
     render(
         <Metadata inline>
-            <MetadataItem name={name}>
+            <Metadata.Item name={name}>
                 {value}
-            </MetadataItem>
+            </Metadata.Item>
         </Metadata>
     );
 
@@ -43,14 +43,14 @@ test('inline metadata', () => {
 test('passing additional props', () => {
     render(
         <Metadata data-test="foo">
-            <MetadataItem data-test="bar" name="Last updated">
+            <Metadata.Item data-test="bar" name="Last updated">
                 21/04/2020
-            </MetadataItem>
+            </Metadata.Item>
         </Metadata>
     )
 
-    const metadata = document.querySelector('.ds_metadata');
-    const metadataItem = document.querySelector('.ds_metadata__item');
+    const metadata = document.querySelector('.ds_metadata') as HTMLElement;
+    const metadataItem = document.querySelector('.ds_metadata__item') as HTMLElement;
     expect(metadata?.dataset.test).toEqual('foo');
     expect(metadataItem?.dataset.test).toEqual('bar');
 });
@@ -58,9 +58,9 @@ test('passing additional props', () => {
 test('passing additional CSS classes', () => {
     render(
         <Metadata className="foo">
-            <MetadataItem className="bar" name="Last updated">
+            <Metadata.Item className="bar" name="Last updated">
                 21/04/2020
-            </MetadataItem>
+            </Metadata.Item>
         </Metadata>
     )
 

@@ -5,7 +5,7 @@ import DSAccordion from '@scottish-government/design-system/src/components/accor
 
 let accordionItemCounter = 0;
 
-export const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
+const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
     children,
     className,
     headerLevel = 'h3',
@@ -58,7 +58,8 @@ export const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
     );
 };
 
-const Accordion: React.FC<SGDS.Component.Accordion> = ({
+const Accordion: React.FC<SGDS.Component.Accordion>
+    & { Item: React.FC<SGDS.Component.Accordion.Item> } = ({
     children,
     className,
     headerLevel = 'h3',
@@ -112,5 +113,6 @@ const Accordion: React.FC<SGDS.Component.Accordion> = ({
 
 Accordion.displayName = 'Accordion';
 AccordionItem.displayName = 'AccordionItem';
+Accordion.Item = AccordionItem;
 
 export default Accordion;

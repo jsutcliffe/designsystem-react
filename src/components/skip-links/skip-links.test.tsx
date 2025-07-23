@@ -11,12 +11,12 @@ test('skip links renders correctly', () => {
     );
 
     const skipLinksList = screen.getByRole('list');
-    const skipLinksContainer = skipLinksList.parentNode;
+    const skipLinksContainer = skipLinksList.parentElement;
     const skipLinksListItem = within(skipLinksList).getByRole('listitem');
     const skipLinksLink = within(skipLinksList).getByRole('link');
 
     expect(skipLinksContainer).toHaveClass('ds_skip-links');
-    expect(skipLinksContainer.tagName).toEqual('DIV');
+    expect(skipLinksContainer?.tagName).toEqual('DIV');
 
     expect(skipLinksList).toHaveClass('ds_skip-links__list');
     expect(skipLinksList.tagName).toEqual('UL');
@@ -78,7 +78,7 @@ test('passing additional props', () => {
     );
 
     const skipLinksList = screen.getByRole('list');
-    const skipLinksContainer = skipLinksList.parentNode;
+    const skipLinksContainer = skipLinksList.parentElement;
 
     expect(skipLinksContainer?.dataset.test).toEqual('foo');
 });

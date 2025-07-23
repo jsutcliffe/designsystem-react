@@ -29,23 +29,23 @@ test('select renders correctly', () => {
     );
 
     const select = screen.getByRole('combobox');
-    const selectWrapper = select.parentNode;
-    const label = selectWrapper?.previousSibling;
-    const selectArrow = select.nextSibling;
+    const selectWrapper = select.parentElement;
+    const label = selectWrapper?.previousElementSibling;
+    const selectArrow = select.nextElementSibling;
 
     expect(select).toHaveClass('ds_select');
     expect(select.id).toEqual(id);
     expect(select).toHaveAttribute('name', id);
 
     expect(selectWrapper).toHaveClass('ds_select-wrapper');
-    expect(selectWrapper.tagName).toEqual('DIV');
+    expect(selectWrapper?.tagName).toEqual('DIV');
 
     expect(label).toHaveClass('ds_label');
     expect(label).toHaveAttribute('for', id);
 
     expect(selectArrow).toHaveClass('ds_select-arrow');
     expect(selectArrow).toHaveAttribute('aria-hidden');
-    expect(selectArrow.textContent).toEqual('');
+    expect(selectArrow?.textContent).toEqual('');
 });
 
 test('select with width', () => {
@@ -60,7 +60,7 @@ test('select with width', () => {
         />
     );
 
-    const selectWrapper = screen.getByRole('combobox').parentNode;
+    const selectWrapper = screen.getByRole('combobox').parentElement;
     expect(selectWrapper).toHaveClass(`ds_input--${width}`);
 });
 
@@ -183,7 +183,7 @@ test('select with error message', () => {
     );
 
     const select = screen.getByRole('combobox');
-    const selectWrapper = select.parentNode;
+    const selectWrapper = select.parentElement;
     const errorMessageElement = screen.getByText(errorMessage);
 
     expect(selectWrapper).toHaveClass('ds_input--error')
@@ -204,7 +204,7 @@ test('passing additional props', () => {
     );
 
     const select = screen.getByRole('combobox');
-    const selectWrapper = select.parentNode;
+    const selectWrapper = select.parentElement;
     expect(selectWrapper?.dataset.test).toEqual('foo');
 });
 
@@ -219,6 +219,6 @@ test('passing additional CSS classes', () => {
     );
 
     const select = screen.getByRole('combobox');
-    const selectWrapper = select.parentNode;
+    const selectWrapper = select.parentElement;
     expect(selectWrapper).toHaveClass('foo', 'ds_select-wrapper');
 });

@@ -4,7 +4,7 @@ import HintText from '../../common/hint-text';
 import ScreenReaderText from '../../common/screen-reader-text';
 import Tag from '../tag/tag';
 
-export const Task: React.FC<SGDS.Component.TaskList.Task> = ({
+const TaskItem: React.FC<SGDS.Component.TaskList.Item> = ({
     children,
     className,
     href,
@@ -58,7 +58,7 @@ export const Task: React.FC<SGDS.Component.TaskList.Task> = ({
  * @param {string} props.title - The title of the task group
  * @returns {JSX.Element} - The element
  */
-export const TaskGroup: React.FC<SGDS.Component.TaskList.Group> = ({
+const TaskGroup: React.FC<SGDS.Component.TaskList.Group> = ({
     children,
     className,
     intro,
@@ -82,7 +82,9 @@ export const TaskGroup: React.FC<SGDS.Component.TaskList.Group> = ({
     );
 };
 
-const TaskList: React.FC<SGDS.Component.TaskList> = ({
+const TaskList: React.FC<SGDS.Component.TaskList>
+    & { Group: React.FC<SGDS.Component.TaskList.Group> }
+    & { Item: React.FC<SGDS.Component.TaskList.Item> } = ({
     children,
     className,
     headingId = 'task-list',
@@ -94,7 +96,7 @@ const TaskList: React.FC<SGDS.Component.TaskList> = ({
     let completedTasksCount = 0;
 
     function processChild(item: any) {
-        if (item.type.displayName === 'Task') {
+        if (item.type.displayName === 'TaskItem') {
             taskCount = taskCount + 1;
 
             if (item.props.isComplete) {
@@ -139,7 +141,9 @@ const TaskList: React.FC<SGDS.Component.TaskList> = ({
 };
 
 TaskList.displayName = 'TaskList';
-Task.displayName = 'Task';
+TaskItem.displayName = 'TaskItem';
 TaskGroup.displayName = 'TaskGroup';
+TaskList.Item = TaskItem;
+TaskList.Group = TaskGroup;
 
 export default TaskList;

@@ -12,27 +12,27 @@ test('site search renders correctly', () => {
     );
 
     const searchForm = screen.getByRole('search');
-    const searchFormContainer = searchForm.parentNode;
+    const searchFormContainer = searchForm.parentElement;
     const searchLabel = document.querySelector('label');
     const searchInput = within(searchForm).getByRole('searchbox');
-    const inputWrapper = searchInput.parentNode;
+    const inputWrapper = searchInput.parentElement;
     const searchButton = within(searchForm).getByRole('button');
 
     expect(searchFormContainer).toHaveClass('ds_site-search');
-    expect(searchFormContainer.tagName).toEqual('DIV');
+    expect(searchFormContainer?.tagName).toEqual('DIV');
     expect(searchFormContainer).not.toHaveAttribute('id', 'site-search-autocomplete');
 
     expect(searchForm).toHaveClass('ds_site-search__form');
     expect(searchForm).toHaveAttribute('method', 'GET');
     expect(searchForm).toHaveAttribute('action', '/search');
 
-    expect(searchLabel.textContent).toEqual(labelText);
+    expect(searchLabel?.textContent).toEqual(labelText);
     expect(searchLabel).toHaveAttribute('for', id);
     expect(searchLabel).toHaveAttribute('id', `${id}-label`);
     expect(searchLabel).toHaveClass('ds_label', 'visually-hidden');
 
     expect(inputWrapper).toHaveClass('ds_input__wrapper  ds_input__wrapper--has-icon');
-    expect(inputWrapper.tagName).toEqual('DIV');
+    expect(inputWrapper?.tagName).toEqual('DIV');
 
     expect(searchInput).toHaveClass('ds_input', 'ds_site-search__input');
     expect(searchInput).toHaveAttribute('id', id);
@@ -113,7 +113,7 @@ test('autocomplete', () => {
     )
 
     const searchForm = screen.getByRole('search');
-    const searchFormContainer = searchForm.parentNode;
+    const searchFormContainer = searchForm.parentElement;
     const searchInput = within(searchForm).getByRole('searchbox');
     const autocompleteStatus = within(searchForm).getByRole('status');
     const suggestionsContainer = document.querySelector('.ds_autocomplete__suggestions');
@@ -134,7 +134,7 @@ test('autocomplete', () => {
     expect(searchInput).toHaveClass('js-autocomplete-input');
 
     expect(suggestionsContainer).toHaveAttribute('id', suggestionsId);
-    expect(suggestionsContainer.tagName).toEqual('DIV');
+    expect(suggestionsContainer?.tagName).toEqual('DIV');
 
     expect(suggestionsList).toHaveClass('ds_autocomplete__suggestions-list');
     expect(suggestionsList).toHaveAttribute('aria-labelledby', `${id}-label`);
@@ -148,7 +148,7 @@ test('passing additional props', () => {
     );
 
     const searchForm = screen.getByRole('search');
-    const searchFormContainer = searchForm.parentNode;
+    const searchFormContainer = searchForm.parentElement;
     expect(searchFormContainer?.dataset.test).toEqual('foo');
 });
 
@@ -158,6 +158,6 @@ test('passing additional CSS classes', () => {
     );
 
     const searchForm = screen.getByRole('search');
-    const searchFormContainer = searchForm.parentNode;
+    const searchFormContainer = searchForm.parentElement;
     expect(searchFormContainer).toHaveClass('foo', 'ds_site-search');
 });

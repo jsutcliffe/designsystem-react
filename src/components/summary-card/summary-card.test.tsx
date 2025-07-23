@@ -45,8 +45,8 @@ test('summary card renders correctly', () => {
 
     const summaryCard = screen.getByTestId('foo');
     const title = within(summaryCard).getByRole('heading');
-    const header = title.parentElement;
-    const content = header?.nextSibling;
+    const header = title.parentElement as HTMLElement;
+    const content = header?.nextElementSibling as HTMLElement;
     const actionsList = within(header).getByRole('list')
 
     const thisList = within(content).getByRole('list');

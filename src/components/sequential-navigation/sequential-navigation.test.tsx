@@ -15,9 +15,9 @@ test('sequential navigation renders correctly', () => {
 
     const sequentialNavigation = screen.getByRole('navigation');
     const prevLink = screen.getAllByRole('link')[0];
-    const prevLinkWrapper = prevLink.parentNode;
+    const prevLinkWrapper = prevLink.parentElement;
     const nextLink = screen.getAllByRole('link')[1];
-    const nextLinkWrapper = nextLink.parentNode;
+    const nextLinkWrapper = nextLink.parentElement;
 
     expect(sequentialNavigation).toHaveClass('ds_sequential-nav');
     expect(sequentialNavigation).toHaveAttribute('aria-label', 'Article navigation');
@@ -26,14 +26,14 @@ test('sequential navigation renders correctly', () => {
     expect(prevLink).toHaveAttribute('href', prevLinkObj.href);
     expect(prevLink.textContent).toEqual(prevLinkObj.title);
     expect(prevLinkWrapper).toHaveClass('ds_sequential-nav__item', 'ds_sequential-nav__item--prev');
-    expect(prevLinkWrapper.tagName).toEqual('DIV');
+    expect(prevLinkWrapper?.tagName).toEqual('DIV');
     expect(prevLink.childNodes[0]).toHaveAttribute('data-label', 'Previous')
 
     expect(nextLink).toHaveClass('ds_sequential-nav__button', 'ds_sequential-nav__button--right');
     expect(nextLink).toHaveAttribute('href', nextLinkObj.href);
     expect(nextLink.textContent).toEqual(nextLinkObj.title);
     expect(nextLinkWrapper).toHaveClass('ds_sequential-nav__item', 'ds_sequential-nav__item--next');
-    expect(nextLinkWrapper.tagName).toEqual('DIV');
+    expect(nextLinkWrapper?.tagName).toEqual('DIV');
     expect(nextLink.childNodes[0]).toHaveAttribute('data-label', 'Next')
 });
 

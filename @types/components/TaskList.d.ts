@@ -5,7 +5,7 @@ declare namespace SGDS.Component {
             title: string
         }
 
-        interface Task extends React.AllHTMLAttributes<HTMLElement> {
+        interface Item extends React.AllHTMLAttributes<HTMLElement> {
             href?: string,
             id?: string,
             isComplete?: boolean,

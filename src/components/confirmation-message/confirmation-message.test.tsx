@@ -52,7 +52,7 @@ test('passing additional props', () => {
         </ConfirmationMessage>
     );
 
-    const container = document.querySelector('.ds_confirmation-message');
+    const container = document.querySelector('.ds_confirmation-message') as HTMLElement;
     expect(container?.dataset.test).toEqual('foo');
 });
 

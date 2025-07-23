@@ -89,28 +89,28 @@ test('pagination renders correctly', () => {
     const paginationNav = screen.getByRole('navigation');
     const paginationList = within(paginationNav).getByRole('list');
     const prevLabel = within(paginationList).getByText('Previous');
-    const prevLink = prevLabel.parentNode;
-    const prevIcon = prevLabel.previousSibling;
-    const prevItem = prevLink?.parentNode;
+    const prevLink = prevLabel.parentElement;
+    const prevIcon = prevLabel.previousElementSibling;
+    const prevItem = prevLink?.parentElement;
     const nextLabel = within(paginationList).getByText('Next');
-    const nextLink = nextLabel.parentNode;
-    const nextIcon = nextLabel.nextSibling;
-    const nextItem = nextLink?.parentNode;
+    const nextLink = nextLabel.parentElement;
+    const nextIcon = nextLabel.nextElementSibling;
+    const nextItem = nextLink?.parentElement;
 
     const firstPageLabel = within(paginationList).getByText('1');
-    const firstPageLink = firstPageLabel.parentNode;
-    const firstPageItem = firstPageLink?.parentNode;
+    const firstPageLink = firstPageLabel.parentElement;
+    const firstPageItem = firstPageLink?.parentElement;
     const lastPageLabel = within(paginationList).getByText(totalPages);
-    const lastPageLink = lastPageLabel.parentNode;
-    const lastPageItem = lastPageLink?.parentNode;
+    const lastPageLink = lastPageLabel.parentElement;
+    const lastPageItem = lastPageLink?.parentElement;
 
-    const firstPageEllipsisItem = firstPageItem?.nextSibling;
+    const firstPageEllipsisItem = firstPageItem?.nextElementSibling;
     const firstPageEllipsis = firstPageEllipsisItem?.children[0];
-    const lastPageEllipsisItem = lastPageItem?.previousSibling;
+    const lastPageEllipsisItem = lastPageItem?.previousElementSibling;
     const lastPageEllipsis = lastPageEllipsisItem?.children[0];
 
     const currentPageLink = document.querySelector('.ds_current');
-    const currentPageItem = currentPageLink?.parentNode;
+    const currentPageItem = currentPageLink?.parentElement;
 
     const paginationItems = within(paginationList).getAllByRole('listitem', { hidden: true });
 
@@ -122,7 +122,7 @@ test('pagination renders correctly', () => {
 
     expect(prevItem).toHaveClass('ds_pagination__item');
     expect(prevItem?.tagName).toEqual('LI');
-    expect(prevItem?.parentNode).toEqual(paginationList);
+    expect(prevItem?.parentElement).toEqual(paginationList);
     expect(prevLink).toHaveClass('ds_pagination__link', 'ds_pagination__link--text', 'ds_pagination__link--icon')
     expect(prevLink).toHaveAttribute('aria-label', 'Previous page');
     expect(prevLink).toHaveAttribute('href', `/search?page=${currentPage - 1}`);
@@ -135,7 +135,7 @@ test('pagination renders correctly', () => {
 
     expect(nextItem).toHaveClass('ds_pagination__item');
     expect(nextItem?.tagName).toEqual('LI');
-    expect(nextItem?.parentNode).toEqual(paginationList);
+    expect(nextItem?.parentElement).toEqual(paginationList);
     expect(nextLink).toHaveClass('ds_pagination__link', 'ds_pagination__link--text', 'ds_pagination__link--icon')
     expect(nextLink).toHaveAttribute('aria-label', 'Next page');
     expect(nextLink).toHaveAttribute('href', `/search?page=${currentPage + 1}`);
@@ -148,7 +148,7 @@ test('pagination renders correctly', () => {
 
     expect(firstPageItem).toHaveClass('ds_pagination__item');
     expect(firstPageItem?.tagName).toEqual('LI');
-    expect(firstPageItem?.parentNode).toEqual(paginationList);
+    expect(firstPageItem?.parentElement).toEqual(paginationList);
     expect(firstPageLink).toHaveClass('ds_pagination__link')
     expect(firstPageLink).toHaveAttribute('aria-label', 'Page 1');
     expect(firstPageLink).toHaveAttribute('href', `/search?page=1`);
@@ -158,7 +158,7 @@ test('pagination renders correctly', () => {
 
     expect(lastPageItem).toHaveClass('ds_pagination__item');
     expect(lastPageItem?.tagName).toEqual('LI');
-    expect(lastPageItem?.parentNode).toEqual(paginationList);
+    expect(lastPageItem?.parentElement).toEqual(paginationList);
     expect(lastPageLink).toHaveClass('ds_pagination__link')
     expect(lastPageLink).toHaveAttribute('aria-label', `Page ${totalPages}`);
     expect(lastPageLink).toHaveAttribute('href', `/search?page=${totalPages}`);
@@ -170,28 +170,28 @@ test('pagination renders correctly', () => {
 
     expect(firstPageEllipsisItem).toHaveClass('ds_pagination__item');
     expect(firstPageEllipsisItem).toHaveAttribute('aria-hidden', 'true');
-    expect(firstPageEllipsisItem.tagName).toEqual('LI');
+    expect(firstPageEllipsisItem?.tagName).toEqual('LI');
     expect(firstPageEllipsis).toHaveClass('ds_pagination__link', 'ds_pagination__link--ellipsis');
-    expect(firstPageEllipsis.tagName).toEqual('SPAN');
-    expect(firstPageEllipsis.textContent).toEqual('…');
+    expect(firstPageEllipsis?.tagName).toEqual('SPAN');
+    expect(firstPageEllipsis?.textContent).toEqual('…');
 
     expect(lastPageEllipsisItem).toHaveClass('ds_pagination__item');
     expect(lastPageEllipsisItem).toHaveAttribute('aria-hidden', 'true');
-    expect(lastPageEllipsisItem.tagName).toEqual('LI');
+    expect(lastPageEllipsisItem?.tagName).toEqual('LI');
     expect(lastPageEllipsis).toHaveClass('ds_pagination__link', 'ds_pagination__link--ellipsis');
-    expect(lastPageEllipsis.tagName).toEqual('SPAN');
-    expect(lastPageEllipsis.textContent).toEqual('…');
+    expect(lastPageEllipsis?.tagName).toEqual('SPAN');
+    expect(lastPageEllipsis?.textContent).toEqual('…');
 
     expect(currentPageItem).toHaveClass('ds_pagination__item');
     expect(currentPageLink).toHaveClass('ds_pagination__link', 'ds_current');
-    expect(currentPageLink.textContent).toEqual(currentPage.toString());
+    expect(currentPageLink?.textContent).toEqual(currentPage.toString());
 
     // expect one link either side of the current (default padding)
-    expect(currentPageItem.previousSibling.querySelector('a')).toHaveAttribute('aria-label', 'Page 9');
-    expect(currentPageItem.previousSibling.previousSibling.querySelector('a')).toBeNull();
+    expect(currentPageItem?.previousElementSibling?.querySelector('a')).toHaveAttribute('aria-label', 'Page 9');
+    expect(currentPageItem?.previousElementSibling?.previousElementSibling?.querySelector('a')).toBeNull();
 
-    expect(currentPageItem.nextSibling.querySelector('a')).toHaveAttribute('aria-label', 'Page 11');
-    expect(currentPageItem.nextSibling.nextSibling.querySelector('a')).toBeNull();
+    expect(currentPageItem?.nextElementSibling?.querySelector('a')).toHaveAttribute('aria-label', 'Page 11');
+    expect(currentPageItem?.nextElementSibling?.nextElementSibling?.querySelector('a')).toBeNull();
 
     // 9 is: previous, first, ellipsis, current page and 1 padding either side, ellipsis, last, next
     expect(paginationItems.length).toEqual(9);
@@ -242,8 +242,6 @@ test('pagination passes onclick event to child links', () => {
             onClick={onClickFn}
         />
     );
-
-    const paginationNav = screen.getByRole('navigation');
 
     // pick an arbitrary link
     const link = [].slice.call(document.querySelectorAll('.ds_pagination__link'))[4];

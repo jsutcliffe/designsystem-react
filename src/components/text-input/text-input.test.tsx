@@ -56,7 +56,7 @@ test('text input with character count', () => {
     );
 
     const textInput = screen.getByRole('textbox');
-    const textInputWrapper = textInput.parentNode;
+    const textInputWrapper = textInput.parentElement;
 
     expect(textInputWrapper).toHaveAttribute('data-maxlength', maxLength.toString());
     expect(textInputWrapper).toHaveAttribute('data-module', 'ds-character-count');
@@ -76,7 +76,7 @@ test('text input with character count and threshold', () => {
     );
 
     const textInput = screen.getByRole('textbox');
-    const textInputWrapper = textInput.parentNode;
+    const textInputWrapper = textInput.parentElement;
 
     expect(textInputWrapper).toHaveAttribute('data-threshold', countThreshold.toString());
 });
@@ -106,9 +106,9 @@ test('text input with currency', () => {
     );
 
     const textInput = screen.getByRole('textbox');
-    const textInputWrapper = textInput.parentNode;
+    const textInputWrapper = textInput.parentElement;
 
-    expect(textInputWrapper.tagName).toEqual('DIV')
+    expect(textInputWrapper?.tagName).toEqual('DIV')
     expect(textInputWrapper).toHaveClass('ds_currency-wrapper');
     expect(textInputWrapper).not.toHaveAttribute('data-symbol');
 });
@@ -126,7 +126,7 @@ test('text input with custom currency symbol', () => {
     );
 
     const textInput = screen.getByRole('textbox');
-    const textInputWrapper = textInput.parentNode;
+    const textInputWrapper = textInput.parentElement;
 
     expect(textInputWrapper).toHaveAttribute('data-symbol', symbol);
 });
@@ -145,7 +145,7 @@ test('text input with button', () => {
     );
 
     const textInput = screen.getByRole('textbox');
-    const textInputWrapper = textInput.parentNode;
+    const textInputWrapper = textInput.parentElement;
     const button = screen.getByRole('button');
     const buttonTextElement = within(button).getByText(buttonText);
     const buttonIconElement = within(button).getByRole('img', { hidden: true });

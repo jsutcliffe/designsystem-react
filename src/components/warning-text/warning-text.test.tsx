@@ -35,7 +35,7 @@ test('passing additional props', () => {
         </WarningText>
     )
 
-    const warningTextOuter = document.querySelector('.ds_warning-text');
+    const warningTextOuter = document.querySelector('.ds_warning-text') as HTMLElement;
     expect(warningTextOuter?.dataset.test).toEqual('foo');
 });
 

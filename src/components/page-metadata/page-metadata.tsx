@@ -1,4 +1,4 @@
-export const MetadataItem: React.FC<SGDS.Component.Metadata.Item> = ({
+const MetadataItem: React.FC<SGDS.Component.Metadata.Item> = ({
     children,
     className,
     name,
@@ -19,7 +19,8 @@ export const MetadataItem: React.FC<SGDS.Component.Metadata.Item> = ({
     );
 };
 
-const Metadata: React.FC<SGDS.Component.Metadata> = ({
+const Metadata: React.FC<SGDS.Component.Metadata>
+    & { Item: React.FC<SGDS.Component.Metadata.Item> }    = ({
     children,
     className,
     inline,
@@ -41,5 +42,6 @@ const Metadata: React.FC<SGDS.Component.Metadata> = ({
 
 Metadata.displayName = 'Metadata';
 MetadataItem.displayName = 'MetadataItem';
+Metadata.Item = MetadataItem;
 
 export default Metadata;

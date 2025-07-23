@@ -14,15 +14,15 @@ test('details renders correctly', () => {
     );
 
     const summaryElement = screen.getByText(summaryText);
-    const detailsElement = summaryElement.parentNode;
-    const textElement = summaryElement.nextSibling;
+    const detailsElement = summaryElement.parentElement;
+    const textElement = summaryElement.nextElementSibling;
 
     expect(detailsElement).toHaveClass('ds_details');
-    expect(detailsElement.tagName).toEqual('DETAILS');
+    expect(detailsElement?.tagName).toEqual('DETAILS');
     expect(summaryElement).toHaveClass('ds_details__summary');
-    expect(summaryElement.tagName).toEqual('SUMMARY');
+    expect(summaryElement?.tagName).toEqual('SUMMARY');
     expect(textElement).toHaveClass('ds_details__text');
-    expect(textElement.innerHTML).toEqual(content);
+    expect(textElement?.innerHTML).toEqual(content);
 });
 
 test('passing additional props', () => {
@@ -33,7 +33,7 @@ test('passing additional props', () => {
     )
 
     const summaryElement = screen.getByText(summaryText);
-    const detailsElement = summaryElement.parentNode;
+    const detailsElement = summaryElement.parentElement;
     expect(detailsElement?.dataset.test).toEqual('foo');
 });
 
@@ -45,6 +45,6 @@ test('passing additional CSS classes', () => {
     )
 
     const summaryElement = screen.getByText(summaryText);
-    const detailsElement = summaryElement.parentNode;
+    const detailsElement = summaryElement.parentElement;
     expect(detailsElement).toHaveClass('foo', 'ds_details');
 });

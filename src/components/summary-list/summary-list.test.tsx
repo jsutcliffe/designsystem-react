@@ -116,7 +116,7 @@ test('summary list item with multiple values', () => {
     const item = screen.getAllByRole('listitem')[0];
     const value = item.querySelector('.ds_summary-list__value');
     const valueList = value?.children[0];
-    const valueListItems = valueList?.children;
+    const valueListItems = valueList?.children as HTMLCollection;
 
     expect(valueList).toHaveClass('ds_no-bullets');
     expect(valueList?.tagName).toEqual('UL');
@@ -143,31 +143,47 @@ test('summary list item with no value', () => {
 });
 
 test('summary list item with multiple actions', () => {
+    const title = 'Name';
+    const value = 'Jane Smith';
+    const actions = [
+        {
+            title: 'Change',
+            href: '#foo'
+        },
+        {
+            title: 'Delete',
+            onclick: onClickFn
+        }
+    ];
+
     render(
         <Item
             actions={items[0].actions}
-            title={items[0].title}
-            value={items[0].value}
+            title={title}
+            value={value}
         />
     );
 
     const item = screen.getAllByRole('listitem')[0];
-    const actions = item.querySelector('.ds_summary-list__actions');
+    const actionsElement = item.querySelector('.ds_summary-list__actions');
 
-    expect(actions.children.length).toEqual(items[0].actions.length);
-    expect(actions.children[0].textContent).toEqual(items[0].actions[0].title);
-    expect(actions.children[1].textContent).toEqual(items[0].actions[1].title);
+    expect(actionsElement?.children.length).toEqual(actions.length);
+    expect(actionsElement?.children[0].textContent).toEqual(actions[0].title);
+    expect(actionsElement?.children[1].textContent).toEqual(actions[1].title);
 });
 
 test('button action', () => {
     const describedById = 'q1-name';
+    const title = 'Name';
+    const href = "#foo"
+    const onClick = onClickFn;
 
     render(
         <Action
             describedby={describedById}
-            href={items[0].actions[1].href}
-            onclick={items[0].actions[1].onclick}
-            title={items[0].actions[1].title}
+            href={href}
+            onclick={onClick}
+            title={title}
         />
     );
 
@@ -187,13 +203,16 @@ test('button action', () => {
 
 test('link action', () => {
     const describedById = 'q1-name';
+    const title = 'Name';
+    const href = "#foo"
+    const onClick = onClickFn;
 
     render(
         <Action
             describedby={describedById}
-            href={items[0].actions[0].href}
-            onclick={items[0].actions[0].onclick}
-            title={items[0].actions[0].title}
+            href={href}
+            onclick={onClick}
+            title={title}
         />
     );
 
@@ -201,7 +220,7 @@ test('link action', () => {
 
     expect(action).toHaveClass('ds_link');
     expect(action).toHaveAttribute('aria-describedby', describedById);
-    expect(action).toHaveAttribute('href', items[0].actions[0].href);
+    expect(action).toHaveAttribute('href', href);
     expect(action).not.toHaveAttribute('type');
     expect(action.tagName).toEqual('A');
     expect(action.textContent).toEqual('Change');

@@ -41,7 +41,7 @@ test('textarea with character count', () => {
     );
 
     const textarea = screen.getByRole('textbox');
-    const textareaWrapper = textarea.parentNode;
+    const textareaWrapper = textarea.parentElement;
 
     expect(textareaWrapper).toHaveAttribute('data-maxlength', maxLength.toString());
     expect(textareaWrapper).toHaveAttribute('data-module', 'ds-character-count');
@@ -61,7 +61,7 @@ test('text input with character count and threshold', () => {
     );
 
     const textarea = screen.getByRole('textbox');
-    const textareaWrapper = textarea.parentNode;
+    const textareaWrapper = textarea.parentElement;
 
     expect(textareaWrapper).toHaveAttribute('data-threshold', countThreshold.toString());
 });

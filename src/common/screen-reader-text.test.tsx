@@ -14,7 +14,7 @@ test('screen reader text renders correctly', () => {
     const srtext = document.querySelector('span');
 
     expect(srtext).toHaveClass('visually-hidden');
-    expect(srtext.textContent).toEqual(content)
+    expect(srtext?.textContent).toEqual(content)
 });
 
 test('passing additional props', () => {
