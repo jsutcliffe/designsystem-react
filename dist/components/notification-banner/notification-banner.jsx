@@ -4,50 +4,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
+const abstract_notification_banner_1 = __importDefault(require("../../common/abstract-notification-banner"));
 // @ts-ignore
 const notification_banner_1 = __importDefault(require("@scottish-government/design-system/src/components/notification-banner/notification-banner"));
-const icon_1 = __importDefault(require("../../common/icon"));
-const screen_reader_text_1 = __importDefault(require("../../common/screen-reader-text"));
-const NotificationBanner = ({ children, className, close, icon, iconColour, iconInverse, title = 'Information', ...props }) => {
+const NotificationBanner = ({ children, className, close, icon, iconColour, iconInverse, title, ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         if (ref.current) {
             new notification_banner_1.default(ref.current).init();
         }
     }, [ref]);
-    return (<div className={[
-            'ds_notification',
+    return (<abstract_notification_banner_1.default className={[
             'ds_reversed',
             className
-        ].join(' ')} data-module="ds-notification" ref={ref} {...props}>
-            <div className="ds_wrapper">
-                <div className={[
-            'ds_notification__content',
-            close && 'ds_notification__content--has-close'
-        ].join(' ')}>
-                    <h2 className="visually-hidden">{title}</h2>
-
-                    {icon &&
-            <span className={[
-                    'ds_notification__icon',
-                    iconInverse && 'ds_notification__icon--inverse',
-                    iconColour && 'ds_notification__icon--colour'
-                ].join(' ')} aria-hidden="true">
-                            <icon_1.default icon="PriorityHigh"/>
-                        </span>}
-
-                    <div className="ds_notification__text">
-                        {children}
-                    </div>
-
-                    {close &&
-            <button type="button" className="ds_notification__close js-close-notification">
-                            <screen_reader_text_1.default>Close this notification</screen_reader_text_1.default>
-                            <icon_1.default fill icon="Close" aria-hidden="true"/>
-                        </button>}
-                </div>
-            </div>
-        </div>);
+        ].join(' ')} close={close} icon={icon ? "PriorityHigh" : undefined} iconColour={iconColour} iconInverse={iconInverse} ref={ref} title="Information" {...props}>
+            {children}
+        </abstract_notification_banner_1.default>);
 };
 NotificationBanner.displayName = 'NotificationBanner';
+NotificationBanner.Buttons = abstract_notification_banner_1.default.Buttons;
 exports.default = NotificationBanner;

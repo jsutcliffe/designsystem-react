@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MetadataItem = void 0;
 const MetadataItem = ({ children, className, name, ...props }) => {
     return (<div className={[
             'ds_metadata__item',
@@ -12,7 +11,6 @@ const MetadataItem = ({ children, className, name, ...props }) => {
             </dd>
         </div>);
 };
-exports.MetadataItem = MetadataItem;
 const Metadata = ({ children, className, inline, ...props }) => {
     return (<dl className={[
             'ds_metadata',
@@ -23,5 +21,6 @@ const Metadata = ({ children, className, inline, ...props }) => {
         </dl>);
 };
 Metadata.displayName = 'Metadata';
-exports.MetadataItem.displayName = 'MetadataItem';
+MetadataItem.displayName = 'MetadataItem';
+Metadata.Item = MetadataItem;
 exports.default = Metadata;

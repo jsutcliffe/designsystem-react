@@ -3,13 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TaskGroup = exports.Task = void 0;
 const react_1 = require("react");
 const conditional_wrapper_1 = __importDefault(require("../../common/conditional-wrapper"));
 const hint_text_1 = __importDefault(require("../../common/hint-text"));
 const screen_reader_text_1 = __importDefault(require("../../common/screen-reader-text"));
 const tag_1 = __importDefault(require("../tag/tag"));
-const Task = ({ children, className, href, id, isComplete = false, statusText, tagColour = 'grey', title, ...props }) => {
+const TaskItem = ({ children, className, href, id, isComplete = false, statusText, tagColour = 'grey', title, ...props }) => {
     if (isComplete) {
         tagColour = 'green';
     }
@@ -31,7 +30,6 @@ const Task = ({ children, className, href, id, isComplete = false, statusText, t
             <tag_1.default aria-hidden="true" colour={tagColour} title={statusText}/>}
         </li>);
 };
-exports.Task = Task;
 /**
  * @param {Object} props
  * @param {string} props.intro - Intro text
@@ -50,13 +48,12 @@ const TaskGroup = ({ children, className, intro, title, ...props }) => {
             </ul>
         </li>);
 };
-exports.TaskGroup = TaskGroup;
 const TaskList = ({ children, className, headingId = 'task-list', title, ...props }) => {
     let taskCount = 0;
     let incompleteTaskIds = [];
     let completedTasksCount = 0;
     function processChild(item) {
-        if (item.type.displayName === 'Task') {
+        if (item.type.displayName === 'TaskItem') {
             taskCount = taskCount + 1;
             if (item.props.isComplete) {
                 completedTasksCount = completedTasksCount + 1;
@@ -91,6 +88,8 @@ const TaskList = ({ children, className, headingId = 'task-list', title, ...prop
         </div>);
 };
 TaskList.displayName = 'TaskList';
-exports.Task.displayName = 'Task';
-exports.TaskGroup.displayName = 'TaskGroup';
+TaskItem.displayName = 'TaskItem';
+TaskGroup.displayName = 'TaskGroup';
+TaskList.Item = TaskItem;
+TaskList.Group = TaskGroup;
 exports.default = TaskList;

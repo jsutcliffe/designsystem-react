@@ -36,7 +36,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AccordionItem = void 0;
 const react_1 = __importStar(require("react"));
 const wrapper_tag_1 = __importDefault(require("../../common/wrapper-tag"));
 // @ts-ignore
@@ -67,7 +66,6 @@ const AccordionItem = ({ children, className, headerLevel = 'h3', id: rawId, ope
             </div>
         </div>);
 };
-exports.AccordionItem = AccordionItem;
 const Accordion = ({ children, className, headerLevel = 'h3', hideOpenAll, ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
@@ -99,5 +97,6 @@ const Accordion = ({ children, className, headerLevel = 'h3', hideOpenAll, ...pr
         </div>);
 };
 Accordion.displayName = 'Accordion';
-exports.AccordionItem.displayName = 'AccordionItem';
+AccordionItem.displayName = 'AccordionItem';
+Accordion.Item = AccordionItem;
 exports.default = Accordion;

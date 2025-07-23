@@ -17,8 +17,8 @@ const Breadcrumb = ({ hidden, href, title }) => {
  * @param {Object} props - Properties for the element
  * @returns {JSX.Element} - The element
  */
-const Breadcrumbs = ({ className, hideLastItem, items, ...props }) => {
-    return (<nav aria-label="Breadcrumb" className={className} {...props}>
+const Breadcrumbs = ({ hideLastItem, items, ...props }) => {
+    return (<nav aria-label="Breadcrumb" {...props}>
             <ol className="ds_breadcrumbs">
                 {items && items.map((item, index) => (<Breadcrumb title={item.title} href={item.href} hidden={(hideLastItem) && index + 1 === items.length} key={'breadcrumb' + index}/>))}
             </ol>
