@@ -175,7 +175,7 @@ test('summary list item with multiple actions', () => {
 test('button action', () => {
     const describedById = 'q1-name';
     const title = 'Name';
-    const href = "#foo"
+    const href = undefined;
     const onClick = onClickFn;
 
     render(
@@ -194,7 +194,7 @@ test('button action', () => {
     expect(action).toHaveAttribute('type', 'button');
     expect(action).not.toHaveAttribute('href');
     expect(action.tagName).toEqual('BUTTON');
-    expect(action.textContent).toEqual('Delete');
+    expect(action.textContent).toEqual(title);
 
     fireEvent.click(action);
 
@@ -223,7 +223,7 @@ test('link action', () => {
     expect(action).toHaveAttribute('href', href);
     expect(action).not.toHaveAttribute('type');
     expect(action.tagName).toEqual('A');
-    expect(action.textContent).toEqual('Change');
+    expect(action.textContent).toEqual(title);
 });
 
 test('multiline answer', () => {
