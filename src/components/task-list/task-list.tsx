@@ -96,7 +96,7 @@ const TaskList: React.FC<SGDS.Component.TaskList>
     let completedTasksCount = 0;
 
     function processChild(item: any) {
-        if (item.type.displayName === 'TaskItem') {
+        if (item.type.displayName === 'TaskList.Item') {
             taskCount = taskCount + 1;
 
             if (item.props.isComplete) {
@@ -104,7 +104,7 @@ const TaskList: React.FC<SGDS.Component.TaskList>
             } else {
                 incompleteTaskIds.push(item.props.id);
             }
-        } else if (item.type.displayName === 'TaskGroup') {
+        } else if (item.type.displayName === 'TaskList.Group') {
             Children.forEach(item.props.children, child => {
                 processChild(child);
             });
@@ -141,8 +141,8 @@ const TaskList: React.FC<SGDS.Component.TaskList>
 };
 
 TaskList.displayName = 'TaskList';
-TaskItem.displayName = 'TaskItem';
-TaskGroup.displayName = 'TaskGroup';
+TaskItem.displayName = 'TaskList.Item';
+TaskGroup.displayName = 'TaskList.Group';
 TaskList.Item = TaskItem;
 TaskList.Group = TaskGroup;
 

@@ -104,7 +104,7 @@ const Tabs: React.FC<SGDS.Component.Tabs>
 };
 
 Tabs.displayName = 'Tabs';
-TabItem.displayName = 'TabItem';
+TabItem.displayName = 'Tabs.Item';
 Tabs.Item = TabItem;
 
 export default Tabs;

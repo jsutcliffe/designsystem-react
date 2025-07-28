@@ -41,7 +41,7 @@ const Metadata: React.FC<SGDS.Component.Metadata>
 };
 
 Metadata.displayName = 'Metadata';
-MetadataItem.displayName = 'MetadataItem';
+MetadataItem.displayName = 'Metadata.Item';
 Metadata.Item = MetadataItem;
 
 export default Metadata;
