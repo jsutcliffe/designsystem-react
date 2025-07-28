@@ -94,6 +94,6 @@ const Tabs = ({ baseId = 'tabs', bordered = true, children, className, headerLev
         </div>);
 };
 Tabs.displayName = 'Tabs';
-TabItem.displayName = 'TabItem';
+TabItem.displayName = 'Tabs.Item';
 Tabs.Item = TabItem;
 exports.default = Tabs;

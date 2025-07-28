@@ -53,7 +53,7 @@ const TaskList = ({ children, className, headingId = 'task-list', title, ...prop
     let incompleteTaskIds = [];
     let completedTasksCount = 0;
     function processChild(item) {
-        if (item.type.displayName === 'TaskItem') {
+        if (item.type.displayName === 'TaskList.Item') {
             taskCount = taskCount + 1;
             if (item.props.isComplete) {
                 completedTasksCount = completedTasksCount + 1;
@@ -62,7 +62,7 @@ const TaskList = ({ children, className, headingId = 'task-list', title, ...prop
                 incompleteTaskIds.push(item.props.id);
             }
         }
-        else if (item.type.displayName === 'TaskGroup') {
+        else if (item.type.displayName === 'TaskList.Group') {
             react_1.Children.forEach(item.props.children, child => {
                 processChild(child);
             });
@@ -88,8 +88,8 @@ const TaskList = ({ children, className, headingId = 'task-list', title, ...prop
         </div>);
 };
 TaskList.displayName = 'TaskList';
-TaskItem.displayName = 'TaskItem';
-TaskGroup.displayName = 'TaskGroup';
+TaskItem.displayName = 'TaskList.Item';
+TaskGroup.displayName = 'TaskList.Group';
 TaskList.Item = TaskItem;
 TaskList.Group = TaskGroup;
 exports.default = TaskList;

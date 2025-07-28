@@ -21,6 +21,6 @@ const Metadata = ({ children, className, inline, ...props }) => {
         </dl>);
 };
 Metadata.displayName = 'Metadata';
-MetadataItem.displayName = 'MetadataItem';
+MetadataItem.displayName = 'Metadata.Item';
 Metadata.Item = MetadataItem;
 exports.default = Metadata;
