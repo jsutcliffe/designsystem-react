@@ -37,21 +37,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
-const Icons = __importStar(require("../images/icons"));
-const Icon = ({ ariaLabel, className, fill, icon, iconSize }) => {
-    const Component = react_1.default.createElement(Icons[icon], {
-        'aria-hidden': ariaLabel ? undefined : true,
-        'aria-label': ariaLabel,
-        className: [
-            'ds_icon',
-            className,
-            fill && 'ds_icon--fill',
-            iconSize && `ds_icon--${iconSize}`
-        ].join(' ')
+const FileIcons = __importStar(require("../images/documents"));
+const FileIcon = ({ ariaLabel = '', className, icon }) => {
+    const Component = react_1.default.createElement(FileIcons[icon], {
+        className: className,
+        'aria-label': ariaLabel
     });
     return (<>
             {Component}
         </>);
 };
-Icon.displayName = 'Icon';
-exports.default = Icon;
+FileIcon.displayName = 'FileIcon';
+exports.default = FileIcon;

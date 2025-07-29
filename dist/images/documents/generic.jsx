@@ -32,26 +32,16 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const Icons = __importStar(require("../images/icons"));
-const Icon = ({ ariaLabel, className, fill, icon, iconSize }) => {
-    const Component = react_1.default.createElement(Icons[icon], {
-        'aria-hidden': ariaLabel ? undefined : true,
-        'aria-label': ariaLabel,
-        className: [
-            'ds_icon',
-            className,
-            fill && 'ds_icon--fill',
-            iconSize && `ds_icon--${iconSize}`
-        ].join(' ')
-    });
-    return (<>
-            {Component}
-        </>);
-};
-Icon.displayName = 'Icon';
-exports.default = Icon;
+const React = __importStar(require("react"));
+const SvgGeneric = (props) => (<svg fill="none" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg" role="img" {...props}>
+    <path d="m1 119v-118.000244h58.5858l19.4142 19.414244v98.586z" fill="#fff" stroke="#5e5e5e" strokeWidth={2}/>
+    <g fill="#5e5e5e">
+      <path d="m80 19.9998-20-20.00004414v20.00004414z"/>
+      <path d="m10 27.9998h59.9997v5h-59.9997z"/>
+      <path d="m10 37.9998h59.9997v5h-59.9997z"/>
+      <path d="m10 47.9998h59.9997v5h-59.9997z"/>
+      <path d="m10 57.9998h30v5h-30z"/>
+    </g>
+  </svg>);
+exports.default = SvgGeneric;
