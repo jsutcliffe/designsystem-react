@@ -1,8 +1,7 @@
 {
     "dimensions": false,
     "filenameCase": "snake",
-    "icon": true,
-    "outDir": "src/images/icons",
+    "outDir": "src/images/documents",
     "svgo": true,
     "svgoConfig": {
         "plugins": [

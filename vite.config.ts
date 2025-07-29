@@ -9,7 +9,7 @@ export default defineConfig({
         environment: 'jsdom',
         setupFiles: ["./vitest-setup.ts"],
         coverage: {
-            exclude: ["src/icons"],
+            exclude: ["src/images"],
             include: ["src/**"],
             reporter: ["text", "lcov"],
         }
