@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Icons from '../icons';
+import * as Icons from '../images/icons';
 
 const Icon: React.FC<SGDS.Common.Icon> = ({
     ariaLabel,

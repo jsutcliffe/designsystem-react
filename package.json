@@ -12,6 +12,7 @@
     "build": "npm run svgr && npm run tsc",
     "coverage": "vitest run --coverage",
     "svgr": "npx @svgr/cli node_modules/@scottish-government/design-system/src/images/icons/svg --config-file .svgrrc",
+    "svgr_documents": "npx @svgr/cli node_modules/@scottish-government/design-system/src/images/documents/svg --config-file .svgrrc_documents",
     "test": "vitest",
     "tsc": "node ./node_modules/typescript/bin/tsc"
   },
