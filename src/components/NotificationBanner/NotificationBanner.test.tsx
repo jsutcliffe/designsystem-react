@@ -7,7 +7,7 @@ import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import NotificationBanner from './NotificationBanner';
 
-const text = 'We need to tell you about something';
+const BANNER_TEXT = 'We need to tell you about something';
 
 /**
  * NotificationBanner has the ds_reversed class
@@ -15,7 +15,7 @@ const text = 'We need to tell you about something';
 test('notification banner renders correctly', () => {
     render(
         <NotificationBanner>
-            {text}
+            {BANNER_TEXT}
         </NotificationBanner>
     );
 
@@ -30,7 +30,7 @@ test('notification banner renders correctly', () => {
 test('notification banner with icon', () => {
     render(
         <NotificationBanner icon>
-            {text}
+            {BANNER_TEXT}
         </NotificationBanner>
     );
 

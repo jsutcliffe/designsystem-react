@@ -2,45 +2,45 @@ import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import TaskList from './TaskList';
 
-const taskListHeadingText = 'Application incomplete';
+const TASK_LIST_HEADING_TEXT = 'Application incomplete';
 
-const tasks = [
+const TASKS = [
     { id: 'task-conditions', statusText: 'Cannot start yet', title: 'Conditions' },
     { id: 'task-medications', statusText: 'Cannot start yet', title: 'Medications' },
     { id: 'task-contacts', statusText: 'Cannot start yet', title: 'Contacts and supporting information' },
 ];
-const taskItem = {
+const TASK_ITEM = {
         id: 'task-conditions',
         statusText: 'Cannot start yet',
         title: 'Conditions',
         href: '#foo'
     };
-const taskSummaryContent = 'Tell us about your conditions, symptoms and any sensory issues you have.';
+const TASK_SUMMARY_CONTENT = 'Tell us about your conditions, symptoms and any sensory issues you have.';
 
 
 test('task list renders correctly', () => {
     render(
         <TaskList
-            title={taskListHeadingText}
+            title={TASK_LIST_HEADING_TEXT}
         >
             <TaskList.Item
-                id={tasks[0].id}
-                statusText={tasks[0].statusText}
-                title={tasks[0].title}
+                id={TASKS[0].id}
+                statusText={TASKS[0].statusText}
+                title={TASKS[0].title}
             >
                 Tell us about your conditions, symptoms and any sensory issues you have.
             </TaskList.Item>
             <TaskList.Item
-                id={tasks[1].id}
-                statusText={tasks[1].statusText}
-                title={tasks[1].title}
+                id={TASKS[1].id}
+                statusText={TASKS[1].statusText}
+                title={TASKS[1].title}
             >
                 Tell us about any medication you need.
             </TaskList.Item>
             <TaskList.Item
-                id={tasks[2].id}
-                statusText={tasks[2].statusText}
-                title={tasks[2].title}
+                id={TASKS[2].id}
+                statusText={TASKS[2].statusText}
+                title={TASKS[2].title}
             >
                 Share any supporting documents and provide details of people we can talk to about you.
             </TaskList.Item>
@@ -57,7 +57,7 @@ test('task list renders correctly', () => {
 
     expect(taskListHeading).toHaveClass('ds_task-list-status-heading');
     expect(taskListHeading).toHaveAttribute('id', 'task-list-status');
-    expect(taskListHeading.textContent).toEqual(taskListHeadingText);
+    expect(taskListHeading.textContent).toEqual(TASK_LIST_HEADING_TEXT);
 
     expect(taskListStatus).toHaveClass('ds_task-list-status');
     expect(taskListStatus).toHaveAttribute('aria-labelledby', taskListHeading.id);
@@ -67,19 +67,20 @@ test('task list renders correctly', () => {
     expect(taskListStatus2.tagName).toEqual('P');
     expect(taskListStatusLink.tagName).toEqual('A');
     expect(taskListStatusLink.textContent).toEqual('Skip to first incomplete section');
-    expect(taskListStatusLink).toHaveAttribute('href', `#${tasks[0].id}`);
+    expect(taskListStatusLink).toHaveAttribute('href', `#${TASKS[0].id}`);
 
     expect(taskList).toHaveClass('ds_task-list');
     expect(taskList.tagName).toEqual('UL');
-    expect(taskList.children.length).toEqual(tasks.length);
+    expect(taskList.children.length).toEqual(TASKS.length);
 });
 
 test('task list with custom ID', () => {
-    const headingId = 'my-id';
+    const TASKLIST_HEADING_ID = 'my-id';
+
     render(
         <TaskList
-            title={taskListHeadingText}
-            headingId={headingId}
+            title={TASK_LIST_HEADING_TEXT}
+            headingId={TASKLIST_HEADING_ID}
         >
         </TaskList>
     );
@@ -87,35 +88,35 @@ test('task list with custom ID', () => {
     const taskListStatus = screen.getByRole('navigation');
     const taskListHeading = screen.getAllByRole('heading')[0];
 
-    expect(taskListHeading).toHaveAttribute('id', `${headingId}-status`);
+    expect(taskListHeading).toHaveAttribute('id', `${TASKLIST_HEADING_ID}-status`);
     expect(taskListStatus).toHaveAttribute('aria-labelledby', taskListHeading.id);
 });
 
 test('task list with completed tasks', () => {
     render(
         <TaskList
-            title={taskListHeadingText}
+            title={TASK_LIST_HEADING_TEXT}
         >
             <TaskList.Item
-                id={tasks[0].id}
-                statusText={tasks[0].statusText}
-                title={tasks[0].title}
+                id={TASKS[0].id}
+                statusText={TASKS[0].statusText}
+                title={TASKS[0].title}
                 isComplete
             >
                 Tell us about your conditions, symptoms and any sensory issues you have.
             </TaskList.Item>
             <TaskList.Item
-                id={tasks[1].id}
-                statusText={tasks[1].statusText}
-                title={tasks[1].title}
+                id={TASKS[1].id}
+                statusText={TASKS[1].statusText}
+                title={TASKS[1].title}
                 isComplete
             >
                 Tell us about any medication you need.
             </TaskList.Item>
             <TaskList.Item
-                id={tasks[2].id}
-                statusText={tasks[2].statusText}
-                title={tasks[2].title}
+                id={TASKS[2].id}
+                statusText={TASKS[2].statusText}
+                title={TASKS[2].title}
             >
                 Share any supporting documents and provide details of people we can talk to about you.
             </TaskList.Item>
@@ -127,17 +128,17 @@ test('task list with completed tasks', () => {
     const taskListStatusLink = within(taskListStatus).getByRole('link');
 
     expect(taskListStatus1.textContent).toEqual('You have completed 2 of 3 sections.');
-    expect(taskListStatusLink).toHaveAttribute('href', `#${tasks[2].id}`);
+    expect(taskListStatusLink).toHaveAttribute('href', `#${TASKS[2].id}`);
 });
 
 test('task renders correctly', () => {
     render(
         <TaskList.Item
-            id={taskItem.id}
-            statusText={taskItem.statusText}
-            title={taskItem.title}
+            id={TASK_ITEM.id}
+            statusText={TASK_ITEM.statusText}
+            title={TASK_ITEM.title}
         >
-            {taskSummaryContent}
+            {TASK_SUMMARY_CONTENT}
         </TaskList.Item>
     );
 
@@ -148,7 +149,7 @@ test('task renders correctly', () => {
     const taskSummary = taskHeading.nextElementSibling;
 
     expect(task).toHaveClass('ds_task-list__task');
-    expect(task).toHaveAttribute('id', taskItem.id);
+    expect(task).toHaveAttribute('id', TASK_ITEM.id);
 
     expect(taskDetails).toHaveClass('ds_task-list__task-details');
     expect(taskDetails?.parentElement).toEqual(task);
@@ -156,27 +157,27 @@ test('task renders correctly', () => {
 
     expect(taskHeading).toHaveClass('ds_task-list__task-heading');
     expect(taskHeading.tagName).toEqual('H3');
-    expect(taskHeading.textContent).toEqual(`${taskItem.title}(${taskItem.statusText})`);
+    expect(taskHeading.textContent).toEqual(`${TASK_ITEM.title}(${TASK_ITEM.statusText})`);
 
     expect(taskSummary).toHaveClass('ds_task-list__task-summary');
     expect(taskSummary?.tagName).toEqual('P');
-    expect(taskSummary?.textContent).toEqual(taskSummaryContent);
+    expect(taskSummary?.textContent).toEqual(TASK_SUMMARY_CONTENT);
 
     expect(tag).toHaveAttribute('aria-hidden', 'true');
-    expect(tag?.textContent).toEqual(taskItem.statusText);
+    expect(tag?.textContent).toEqual(TASK_ITEM.statusText);
 });
 
 test('task with link', () => {
-    const href = '#foo';
+    const TASK_HREF = '#foo';
 
     render(
         <TaskList.Item
-            id={taskItem.id}
-            statusText={taskItem.statusText}
-            title={taskItem.title}
-            href={href}
+            id={TASK_ITEM.id}
+            statusText={TASK_ITEM.statusText}
+            title={TASK_ITEM.title}
+            href={TASK_HREF}
         >
-            {taskSummaryContent}
+            {TASK_SUMMARY_CONTENT}
         </TaskList.Item>
     );
 
@@ -185,8 +186,8 @@ test('task with link', () => {
     const link = within(task).getByRole('link');
 
     expect(link).toHaveClass('ds_task-list__task-link');
-    expect(link).toHaveAttribute('href', href);
-    expect(link.textContent).toEqual(`${taskItem.title}(${taskItem.statusText})`);
+    expect(link).toHaveAttribute('href', TASK_HREF);
+    expect(link.textContent).toEqual(`${TASK_ITEM.title}(${TASK_ITEM.statusText})`);
     expect(link.parentElement).toEqual(taskHeading);
     expect(link.textContent).toEqual(taskHeading.textContent);
 });
@@ -194,12 +195,12 @@ test('task with link', () => {
 test('completed task has green tag', () => {
     render(
         <TaskList.Item
-            id={taskItem.id}
-            statusText={taskItem.statusText}
-            title={taskItem.title}
+            id={TASK_ITEM.id}
+            statusText={TASK_ITEM.statusText}
+            title={TASK_ITEM.title}
             isComplete
         >
-            {taskSummaryContent}
+            {TASK_SUMMARY_CONTENT}
         </TaskList.Item>
     );
 
@@ -209,31 +210,31 @@ test('completed task has green tag', () => {
 });
 
 test('specific tag colour', () => {
-    const tagColour = 'red';
+    const TAG_COLOUR = 'red';
 
     render(
         <TaskList.Item
-            id={taskItem.id}
-            statusText={taskItem.statusText}
-            title={taskItem.title}
-            tagColour={tagColour}
+            id={TASK_ITEM.id}
+            statusText={TASK_ITEM.statusText}
+            title={TASK_ITEM.title}
+            tagColour={TAG_COLOUR}
         >
-            {taskSummaryContent}
+            {TASK_SUMMARY_CONTENT}
         </TaskList.Item>
     );
 
     const tag = document.querySelector('.ds_tag');
 
-    expect(tag).toHaveClass(`ds_tag--${tagColour}`);
+    expect(tag).toHaveClass(`ds_tag--${TAG_COLOUR}`);
 });
 
 test('no status tag when no status text provided', () => {
     render(
         <TaskList.Item
-            id={taskItem.id}
-            title={taskItem.title}
+            id={TASK_ITEM.id}
+            title={TASK_ITEM.title}
         >
-            {taskSummaryContent}
+            {TASK_SUMMARY_CONTENT}
         </TaskList.Item>
     );
 
@@ -243,28 +244,28 @@ test('no status tag when no status text provided', () => {
 });
 
 test('task group renders correctly', () => {
-    const taskGroupHeadingText = 'Provide your health details';
+    const TASK_GROUP_HEADING_TEXT = 'Provide your health details';
 
     render(
-        <TaskList.Group title={taskGroupHeadingText}>
+        <TaskList.Group title={TASK_GROUP_HEADING_TEXT}>
             <TaskList.Item
-                id={tasks[0].id}
-                statusText={tasks[0].statusText}
-                title={tasks[0].title}
+                id={TASKS[0].id}
+                statusText={TASKS[0].statusText}
+                title={TASKS[0].title}
             >
                 Tell us about your conditions, symptoms and any sensory issues you have.
             </TaskList.Item>
             <TaskList.Item
-                id={tasks[1].id}
-                statusText={tasks[1].statusText}
-                title={tasks[1].title}
+                id={TASKS[1].id}
+                statusText={TASKS[1].statusText}
+                title={TASKS[1].title}
             >
                 Tell us about any medication you need.
             </TaskList.Item>
             <TaskList.Item
-                id={tasks[2].id}
-                statusText={tasks[2].statusText}
-                title={tasks[2].title}
+                id={TASKS[2].id}
+                statusText={TASKS[2].statusText}
+                title={TASKS[2].title}
             >
                 Share any supporting documents and provide details of people we can talk to about you.
             </TaskList.Item>
@@ -279,35 +280,35 @@ test('task group renders correctly', () => {
     expect(taskGroup?.tagName).toEqual('LI');
 
     expect(taskGroupHeading?.tagName).toEqual('H2');
-    expect(taskGroupHeading?.textContent).toEqual(taskGroupHeadingText);
+    expect(taskGroupHeading?.textContent).toEqual(TASK_GROUP_HEADING_TEXT);
 
     // a bit hacky, but list should be last child
     expect(taskGroup?.children[taskGroup.children.length - 1]).toEqual(innerTaskList);
 });
 
 test('task group with intro text', () => {
-    const taskGroupIntroText = 'This information will be used to check what additional benefits you may be able to apply for.';
+    const TASK_GROUP_INTRO_TEXT = 'This information will be used to check what additional benefits you may be able to apply for.';
 
     render(
-        <TaskList.Group title="Provide your health details" intro={taskGroupIntroText}>
+        <TaskList.Group title="Provide your health details" intro={TASK_GROUP_INTRO_TEXT}>
             <TaskList.Item
-                id={tasks[0].id}
-                statusText={tasks[0].statusText}
-                title={tasks[0].title}
+                id={TASKS[0].id}
+                statusText={TASKS[0].statusText}
+                title={TASKS[0].title}
             >
                 Tell us about your conditions, symptoms and any sensory issues you have.
             </TaskList.Item>
             <TaskList.Item
-                id={tasks[1].id}
-                statusText={tasks[1].statusText}
-                title={tasks[1].title}
+                id={TASKS[1].id}
+                statusText={TASKS[1].statusText}
+                title={TASKS[1].title}
             >
                 Tell us about any medication you need.
             </TaskList.Item>
             <TaskList.Item
-                id={tasks[2].id}
-                statusText={tasks[2].statusText}
-                title={tasks[2].title}
+                id={TASKS[2].id}
+                statusText={TASKS[2].statusText}
+                title={TASKS[2].title}
             >
                 Share any supporting documents and provide details of people we can talk to about you.
             </TaskList.Item>
@@ -318,7 +319,7 @@ test('task group with intro text', () => {
     const taskGroupHeading = taskGroup?.querySelector('.ds_task-list-heading');
     const taskGroupIntro = taskGroup?.querySelector('.ds_task-list-intro');
 
-    expect(taskGroupIntro?.textContent).toEqual(taskGroupIntroText);
+    expect(taskGroupIntro?.textContent).toEqual(TASK_GROUP_INTRO_TEXT);
     expect(taskGroupIntro?.previousSibling).toEqual(taskGroupHeading);
 });
 
@@ -327,25 +328,25 @@ test('task list counts completed items from all groups for its status text and t
         <TaskList>
             <TaskList.Group title="Provide your health details">
                 <TaskList.Item
-                    id={tasks[0].id}
-                    statusText={tasks[0].statusText}
-                    title={tasks[0].title}
+                    id={TASKS[0].id}
+                    statusText={TASKS[0].statusText}
+                    title={TASKS[0].title}
                     isComplete
                 >
                     Tell us about your conditions, symptoms and any sensory issues you have.
                 </TaskList.Item>
                 <TaskList.Item
-                    id={tasks[1].id}
-                    statusText={tasks[1].statusText}
-                    title={tasks[1].title}
+                    id={TASKS[1].id}
+                    statusText={TASKS[1].statusText}
+                    title={TASKS[1].title}
                     isComplete
                 >
                     Tell us about any medication you need.
                 </TaskList.Item>
                 <TaskList.Item
-                    id={tasks[2].id}
-                    statusText={tasks[2].statusText}
-                    title={tasks[2].title}
+                    id={TASKS[2].id}
+                    statusText={TASKS[2].statusText}
+                    title={TASKS[2].title}
                     isComplete
                 >
                     Share any supporting documents and provide details of people we can talk to about you.
@@ -353,23 +354,23 @@ test('task list counts completed items from all groups for its status text and t
             </TaskList.Group>
             <TaskList.Group title="Provide your health details">
                 <TaskList.Item
-                    id={tasks[0].id + '2'}
-                    statusText={tasks[0].statusText}
-                    title={tasks[0].title}
+                    id={TASKS[0].id + '2'}
+                    statusText={TASKS[0].statusText}
+                    title={TASKS[0].title}
                 >
                     Tell us about your conditions, symptoms and any sensory issues you have.
                 </TaskList.Item>
                 <TaskList.Item
-                    id={tasks[1].id + '2'}
-                    statusText={tasks[1].statusText}
-                    title={tasks[1].title}
+                    id={TASKS[1].id + '2'}
+                    statusText={TASKS[1].statusText}
+                    title={TASKS[1].title}
                 >
                     Tell us about any medication you need.
                 </TaskList.Item>
                 <TaskList.Item
-                    id={tasks[2].id + '2'}
-                    statusText={tasks[2].statusText}
-                    title={tasks[2].title}
+                    id={TASKS[2].id + '2'}
+                    statusText={TASKS[2].statusText}
+                    title={TASKS[2].title}
                     isComplete
                 >
                     Share any supporting documents and provide details of people we can talk to about you.
@@ -383,13 +384,13 @@ test('task list counts completed items from all groups for its status text and t
     const taskListStatusLink = within(taskListStatus).getByRole('link');
 
     expect(taskListStatus1.textContent).toEqual('You have completed 4 of 6 sections.');
-    expect(taskListStatusLink).toHaveAttribute('href', `#${tasks[0].id + '2'}`);
+    expect(taskListStatusLink).toHaveAttribute('href', `#${TASKS[0].id + '2'}`);
 });
 
 test('passing additional props to task list', () => {
     render(
         <TaskList
-            title={taskListHeadingText}
+            title={TASK_LIST_HEADING_TEXT}
             data-test="foo"
         />
     );
@@ -422,7 +423,7 @@ test('passing additional props to task', () => {
 test('passing additional CSS classes to task list', () => {
     render(
         <TaskList
-            title={taskListHeadingText}
+            title={TASK_LIST_HEADING_TEXT}
             className="foo"
         />
     );

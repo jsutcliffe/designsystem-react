@@ -10,7 +10,7 @@ function convertToSlug(string: string) {
 const SummaryCard: React.FC<SGDS.Component.SummaryCard> = ({
     actions,
     className,
-    headerLevel = 'h3',
+    headingLevel = 'h3',
     items,
     title,
     ...props
@@ -29,7 +29,7 @@ const SummaryCard: React.FC<SGDS.Component.SummaryCard> = ({
                 <WrapperTag
                     className="ds_summary-card__header-title"
                     id={describedById}
-                    tagName={headerLevel}
+                    tagName={headingLevel}
                 >{title}</WrapperTag>
 
                 <ul className="ds_summary-card__actions-list">

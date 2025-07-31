@@ -2,38 +2,38 @@ import { test, expect, vi } from 'vitest';
 import { render, screen, within, fireEvent } from '@testing-library/react';
 import Pagination, { Page, Ellipsis } from './Pagination';
 
-const pageAriaLabel = 'Page 1';
-const pageHref = '#foo';
-const pageText = '1';
-const currentPage = 10;
-const totalPages = 21;
+const PAGE_ARIA_LABEL = 'Page 1';
+const PAGE_HREF = '#foo';
+const PAGE_TEXT = '1';
+const CURRENT_PAGE = 10;
+const TOTAL_PAGES = 21;
 
 test('pagination page renders correctly', () => {
     render(
         <Page
-            ariaLabel={pageAriaLabel}
-            href={pageHref}
-            text={pageText}
+            ariaLabel={PAGE_ARIA_LABEL}
+            href={PAGE_HREF}
+            text={PAGE_TEXT}
         />
     );
 
     const item = screen.getByRole('listitem');
     const link = within(item).getByRole('link');
-    const span = within(link).getByText(pageText);
+    const span = within(link).getByText(PAGE_TEXT);
 
     expect(item).toHaveClass('ds_pagination__item');
     expect(link).toHaveClass('ds_pagination__link');
-    expect(link).toHaveAttribute('aria-label', pageAriaLabel);
-    expect(link).toHaveAttribute('href', pageHref);
+    expect(link).toHaveAttribute('aria-label', PAGE_ARIA_LABEL);
+    expect(link).toHaveAttribute('href', PAGE_HREF);
     expect(span).toHaveClass('ds_pagination__link-label');
 });
 
 test('current pagination page', () => {
     render(
         <Page
-            ariaLabel={pageAriaLabel}
-            href={pageHref}
-            text={pageText}
+            ariaLabel={PAGE_ARIA_LABEL}
+            href={PAGE_HREF}
+            text={PAGE_TEXT}
             current
         />
     );
@@ -46,14 +46,14 @@ test('current pagination page', () => {
 });
 
 test('pagination page with click event', () => {
-    const onClickFn = vi.fn();
+    const ONCLICK_FUNCTION = vi.fn();
 
     render(
         <Page
-            ariaLabel={pageAriaLabel}
-            href={pageHref}
-            text={pageText}
-            onClick={onClickFn}
+            ariaLabel={PAGE_ARIA_LABEL}
+            href={PAGE_HREF}
+            text={PAGE_TEXT}
+            onClick={ONCLICK_FUNCTION}
         />
     );
 
@@ -62,7 +62,7 @@ test('pagination page with click event', () => {
 
     fireEvent.click(link);
 
-    expect(onClickFn).toHaveBeenCalled();
+    expect(ONCLICK_FUNCTION).toHaveBeenCalled();
 });
 
 test('Ellipsis item renders correctly', () => {
@@ -79,11 +79,11 @@ test('Ellipsis item renders correctly', () => {
 });
 
 test('pagination renders correctly', () => {
-    const currentPage = 10;
-    const totalPages = 21;
+    const CURRENT_PAGE = 10;
+    const TOTAL_PAGES = 21;
 
     render(
-        <Pagination page={currentPage} totalPages={totalPages} />
+        <Pagination page={CURRENT_PAGE} totalPages={TOTAL_PAGES} />
     );
 
     const paginationNav = screen.getByRole('navigation');
@@ -100,7 +100,7 @@ test('pagination renders correctly', () => {
     const firstPageLabel = within(paginationList).getByText('1');
     const firstPageLink = firstPageLabel.parentElement;
     const firstPageItem = firstPageLink?.parentElement;
-    const lastPageLabel = within(paginationList).getByText(totalPages);
+    const lastPageLabel = within(paginationList).getByText(TOTAL_PAGES);
     const lastPageLink = lastPageLabel.parentElement;
     const lastPageItem = lastPageLink?.parentElement;
 
@@ -125,7 +125,7 @@ test('pagination renders correctly', () => {
     expect(prevItem?.parentElement).toEqual(paginationList);
     expect(prevLink).toHaveClass('ds_pagination__link', 'ds_pagination__link--text', 'ds_pagination__link--icon')
     expect(prevLink).toHaveAttribute('aria-label', 'Previous page');
-    expect(prevLink).toHaveAttribute('href', `/search?page=${currentPage - 1}`);
+    expect(prevLink).toHaveAttribute('href', `/search?page=${CURRENT_PAGE - 1}`);
     expect(prevLink?.tagName).toEqual('A');
     expect(prevIcon).toHaveClass('ds_icon');
     expect(prevIcon).toHaveAttribute('aria-hidden', 'true')
@@ -138,7 +138,7 @@ test('pagination renders correctly', () => {
     expect(nextItem?.parentElement).toEqual(paginationList);
     expect(nextLink).toHaveClass('ds_pagination__link', 'ds_pagination__link--text', 'ds_pagination__link--icon')
     expect(nextLink).toHaveAttribute('aria-label', 'Next page');
-    expect(nextLink).toHaveAttribute('href', `/search?page=${currentPage + 1}`);
+    expect(nextLink).toHaveAttribute('href', `/search?page=${CURRENT_PAGE + 1}`);
     expect(nextLink?.tagName).toEqual('A');
     expect(nextIcon).toHaveClass('ds_icon');
     expect(nextIcon).toHaveAttribute('aria-hidden', 'true')
@@ -160,8 +160,8 @@ test('pagination renders correctly', () => {
     expect(lastPageItem?.tagName).toEqual('LI');
     expect(lastPageItem?.parentElement).toEqual(paginationList);
     expect(lastPageLink).toHaveClass('ds_pagination__link')
-    expect(lastPageLink).toHaveAttribute('aria-label', `Page ${totalPages}`);
-    expect(lastPageLink).toHaveAttribute('href', `/search?page=${totalPages}`);
+    expect(lastPageLink).toHaveAttribute('aria-label', `Page ${TOTAL_PAGES}`);
+    expect(lastPageLink).toHaveAttribute('href', `/search?page=${TOTAL_PAGES}`);
     expect(lastPageLink?.tagName).toEqual('A');
     expect(lastPageLabel).toHaveClass('ds_pagination__link-label');
     expect(lastPageLabel?.tagName).toEqual('SPAN');
@@ -184,7 +184,7 @@ test('pagination renders correctly', () => {
 
     expect(currentPageItem).toHaveClass('ds_pagination__item');
     expect(currentPageLink).toHaveClass('ds_pagination__link', 'ds_current');
-    expect(currentPageLink?.textContent).toEqual(currentPage.toString());
+    expect(currentPageLink?.textContent).toEqual(CURRENT_PAGE.toString());
 
     // expect one link either side of the current (default padding)
     expect(currentPageItem?.previousElementSibling?.querySelector('a')).toHaveAttribute('aria-label', 'Page 9');
@@ -198,13 +198,13 @@ test('pagination renders correctly', () => {
 });
 
 test('pagination with 2 padding', () => {
-    const padding = 2;
+    const PADDING = 2;
 
     render(
         <Pagination
-            page={currentPage}
-            totalPages={totalPages}
-            padding={padding}
+            page={CURRENT_PAGE}
+            totalPages={TOTAL_PAGES}
+            padding={PADDING}
         />
     );
 
@@ -217,29 +217,29 @@ test('pagination with 2 padding', () => {
 });
 
 test('pagination with custom aria label', () => {
-    const ariaLabel = 'My label';
+    const ARIA_LABEL = 'My label';
 
     render(
         <Pagination
-            page={currentPage}
-            totalPages={totalPages}
-            ariaLabel={ariaLabel}
+            page={CURRENT_PAGE}
+            totalPages={TOTAL_PAGES}
+            ariaLabel={ARIA_LABEL}
         />
     );
 
     const paginationNav = screen.getByRole('navigation');
 
-    expect(paginationNav).toHaveAttribute('aria-label', ariaLabel);
+    expect(paginationNav).toHaveAttribute('aria-label', ARIA_LABEL);
 });
 
 test('pagination passes onclick event to child links', () => {
-    const onClickFn = vi.fn();
+    const ONCLICK_FUNCTION = vi.fn();
 
     render(
         <Pagination
-            page={currentPage}
-            totalPages={totalPages}
-            onClick={onClickFn}
+            page={CURRENT_PAGE}
+            totalPages={TOTAL_PAGES}
+            onClick={ONCLICK_FUNCTION}
         />
     );
 
@@ -249,14 +249,14 @@ test('pagination passes onclick event to child links', () => {
 
     fireEvent.click(link);
 
-    expect(onClickFn).toHaveBeenCalled();
+    expect(ONCLICK_FUNCTION).toHaveBeenCalled();
 });
 
 test('pagination modifies an input pattern for its link format', () => {
     render(
         <Pagination
-            page={currentPage}
-            totalPages={totalPages}
+            page={CURRENT_PAGE}
+            totalPages={TOTAL_PAGES}
             pattern='My/Link/Format?Page=$1#foo'
         />
     );
@@ -271,7 +271,7 @@ test('pagination at an early link in the list', () => {
     render(
         <Pagination
             page="1"
-            totalPages={totalPages}
+            totalPages={TOTAL_PAGES}
         />
     );
 
@@ -289,7 +289,7 @@ test('pagination at an early link in the list, increased padding', () => {
         <Pagination
             padding={2}
             page="1"
-            totalPages={totalPages}
+            totalPages={TOTAL_PAGES}
         />
     );
 
@@ -305,8 +305,8 @@ test('pagination at an early link in the list, increased padding', () => {
 test('pagination at late link in the list', () => {
     render(
         <Pagination
-            page={totalPages}
-            totalPages={totalPages}
+            page={TOTAL_PAGES}
+            totalPages={TOTAL_PAGES}
         />
     );
 
@@ -323,8 +323,8 @@ test('pagination at late link in the list, increased padding', () => {
     render(
         <Pagination
             padding={2}
-            page={totalPages}
-            totalPages={totalPages}
+            page={TOTAL_PAGES}
+            totalPages={TOTAL_PAGES}
         />
     );
 
@@ -340,8 +340,8 @@ test('pagination at late link in the list, increased padding', () => {
 test('passing additional props', () => {
     render(
         <Pagination
-            page={currentPage}
-            totalPages={totalPages}
+            page={CURRENT_PAGE}
+            totalPages={TOTAL_PAGES}
             data-test="foo"
         />
     );
@@ -353,8 +353,8 @@ test('passing additional props', () => {
 test('passing additional CSS classes', () => {
     render(
         <Pagination
-            page={currentPage}
-            totalPages={totalPages}
+            page={CURRENT_PAGE}
+            totalPages={TOTAL_PAGES}
             className="foo"
         />
     )

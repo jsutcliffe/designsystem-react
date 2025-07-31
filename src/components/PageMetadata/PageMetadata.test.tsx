@@ -2,14 +2,14 @@ import { test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Metadata from './PageMetadata';
 
-const name = 'Directorate';
-const value = 'Equality, Inclusion and Human Rights Directorate';
+const NAME = 'Directorate';
+const VALUE = 'Equality, Inclusion and Human Rights Directorate';
 
 test('metadata renders correctly', () => {
     render(
         <Metadata>
-            <Metadata.Item name={name}>
-                {value}
+            <Metadata.Item name={NAME}>
+                {VALUE}
             </Metadata.Item>
         </Metadata>
     );
@@ -22,16 +22,16 @@ test('metadata renders correctly', () => {
     expect(metadata).toBeInTheDocument();
     expect(metadataItem).toBeInTheDocument();
     expect(metadataItemKey).toHaveClass('ds_metadata__key');
-    expect(metadataItemKey.textContent).toEqual(name);
+    expect(metadataItemKey.textContent).toEqual(NAME);
     expect(metadataItemValue).toHaveClass('ds_metadata__value');
-    expect(metadataItemValue.textContent).toEqual(value);
+    expect(metadataItemValue.textContent).toEqual(VALUE);
 });
 
 test('inline metadata', () => {
     render(
         <Metadata inline>
-            <Metadata.Item name={name}>
-                {value}
+            <Metadata.Item name={NAME}>
+                {VALUE}
             </Metadata.Item>
         </Metadata>
     );

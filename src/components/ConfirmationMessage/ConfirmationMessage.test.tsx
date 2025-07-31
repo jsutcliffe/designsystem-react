@@ -2,26 +2,26 @@ import { test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import ConfirmationMessage from './ConfirmationMessage';
 
-const titleString = 'Landlord added successfully';
+const TITLE_TEXT = 'Landlord added successfully';
 
 test('renders correctly with icon, title and message', () => {
     render(
-        <ConfirmationMessage title={titleString}>
+        <ConfirmationMessage title={TITLE_TEXT}>
             <p>You have added the landlord <strong>John Smith</strong> to the application.</p>
         </ConfirmationMessage>
     );
 
     const container = document.querySelector('.ds_confirmation-message');
-    const header = screen.getByRole('heading');
+    const heading = screen.getByRole('heading');
 
     expect(container?.ariaLive).toEqual('polite');
 
-    expect(header.tagName).toEqual('H3');
-    expect(header.textContent).toEqual(titleString)
+    expect(heading.tagName).toEqual('H3');
+    expect(heading.textContent).toEqual(TITLE_TEXT)
 });
 
 test("does not render body when no children specified", () => {
-  const { container } = render(<ConfirmationMessage title={titleString} />);
+  const { container } = render(<ConfirmationMessage title={TITLE_TEXT} />);
 
   expect(
     container.querySelector(".ds_confirmation-message__body"),
@@ -29,25 +29,23 @@ test("does not render body when no children specified", () => {
 });
 
 test('renders confirmation message with custom aria live and custom heaer level', () => {
-    const titleString = 'Landlord added successfully';
-
     render(
-        <ConfirmationMessage headerLevel="h2" ariaLive="alert" title={titleString}>
+        <ConfirmationMessage headingLevel="h2" ariaLive="alert" title={TITLE_TEXT}>
             <p>You have added the landlord <strong>John Smith</strong> to the application.</p>
         </ConfirmationMessage>
     );
 
     const container = document.querySelector('.ds_confirmation-message');
-    const header = screen.getByRole('heading');
+    const heading = screen.getByRole('heading');
 
     expect(container?.ariaLive).toEqual('alert');
 
-    expect(header.tagName).toEqual('H2');
+    expect(heading.tagName).toEqual('H2');
 });
 
 test('passing additional props', () => {
     render(
-        <ConfirmationMessage data-test="foo" title={titleString}>
+        <ConfirmationMessage data-test="foo" title={TITLE_TEXT}>
             <p>You have added the landlord <strong>John Smith</strong> to the application.</p>
         </ConfirmationMessage>
     );
@@ -58,7 +56,7 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <ConfirmationMessage className="foo" title={titleString}>
+        <ConfirmationMessage className="foo" title={TITLE_TEXT}>
             <p>You have added the landlord <strong>John Smith</strong> to the application.</p>
         </ConfirmationMessage>
     );

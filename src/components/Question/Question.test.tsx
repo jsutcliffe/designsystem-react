@@ -14,39 +14,39 @@ test('question renders correctly (basic q, just a wrapper, invalid example)', ()
 });
 
 test('fieldset question with legend', () => {
-    const legendText = 'My legend';
+    const LEGEND_TEXT = 'My legend';
 
     render(
-        <Question tagName="fieldset" legend={legendText}>
+        <Question tagName="fieldset" legend={LEGEND_TEXT}>
         </Question>
     );
 
     const questionElement = screen.getByRole('group');
-    const legendElement = within(questionElement).getByText(legendText);
+    const legendElement = within(questionElement).getByText(LEGEND_TEXT);
     expect(questionElement?.tagName).toEqual('FIELDSET');
     expect(legendElement.tagName).toEqual('LEGEND');
 });
 
 test('question with hint text', () => {
-    const hintText = 'My hint text';
+    const HINT_TEXT = 'My hint text';
 
     render(
-        <Question hintText={hintText}>
+        <Question hintText={HINT_TEXT}>
         </Question>
     );
 
     const hintTextElement = screen.getByRole('paragraph');
     const firstQuestionChild = document.querySelector('.ds_question')?.childNodes[0]
     expect(hintTextElement).toHaveClass('ds_hint-text');
-    expect(hintTextElement.textContent).toEqual(hintText);
+    expect(hintTextElement.textContent).toEqual(HINT_TEXT);
     expect(hintTextElement).toBe(firstQuestionChild);
 });
 
 test('question with error', () => {
-    const errorMessage = 'My error message';
+    const ERROR_MESSAGE_TEXT = 'My error message';
 
     render(
-        <Question error errorMessage={errorMessage}>
+        <Question error errorMessage={ERROR_MESSAGE_TEXT}>
         </Question>
     );
 
@@ -55,7 +55,7 @@ test('question with error', () => {
 
     expect(questionElement).toHaveClass('ds_question--error');
     expect(errorMessageElement).toBeInTheDocument();
-    expect(errorMessageElement?.textContent).toEqual(errorMessage);
+    expect(errorMessageElement?.textContent).toEqual(ERROR_MESSAGE_TEXT);
 });
 
 test('passing additional props', () => {

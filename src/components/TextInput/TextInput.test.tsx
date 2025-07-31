@@ -2,30 +2,30 @@ import { test, expect, vi } from 'vitest';
 import { render, screen, within, fireEvent } from '@testing-library/react';
 import TextInput from './TextInput';
 
-const id = 'text-input';
-const labelText = 'First name';
+const INPUT_ID = 'text-input';
+const LABEL_TEXT = 'First name';
 
 test('text input renders correctly', () => {
     render(
         <TextInput
-            id={id}
-            label={labelText}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
         />
     );
 
     const textInput = screen.getByRole('textbox');
-    const label = screen.getByText(labelText);
+    const label = screen.getByText(LABEL_TEXT);
 
     expect(textInput).toHaveClass('ds_input');
-    expect(textInput).toHaveAttribute('id', id);
-    expect(textInput).toHaveAttribute('name', id);
+    expect(textInput).toHaveAttribute('id', INPUT_ID);
+    expect(textInput).toHaveAttribute('name', INPUT_ID);
     expect(textInput).toHaveAttribute('type', 'text');
     expect(textInput.tagName).toEqual('INPUT');
 
     expect(label).toHaveClass('ds_label');
-    expect(label).toHaveAttribute('for', id);
+    expect(label).toHaveAttribute('for', INPUT_ID);
     expect(label.tagName).toEqual('LABEL');
-    expect(label.textContent).toEqual(labelText);
+    expect(label.textContent).toEqual(LABEL_TEXT);
 
     expect(textInput.previousSibling).toEqual(label);
 });
@@ -33,8 +33,8 @@ test('text input renders correctly', () => {
 test('text input with custom class(es)', () => {
     render(
         <TextInput
-            id={id}
-            label={labelText}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
             className="foo bar"
         />
     );
@@ -45,62 +45,62 @@ test('text input with custom class(es)', () => {
 });
 
 test('text input with character count', () => {
-    const maxLength = 100;
+    const MAX_LENGTH = 100;
 
     render(
         <TextInput
-            id={id}
-            label={labelText}
-            maxlength={maxLength}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            maxlength={MAX_LENGTH}
         />
     );
 
     const textInput = screen.getByRole('textbox');
     const textInputWrapper = textInput.parentElement;
 
-    expect(textInputWrapper).toHaveAttribute('data-maxlength', maxLength.toString());
+    expect(textInputWrapper).toHaveAttribute('data-maxlength', MAX_LENGTH.toString());
     expect(textInputWrapper).toHaveAttribute('data-module', 'ds-character-count');
 });
 
 test('text input with character count and threshold', () => {
-    const maxLength = 100;
-    const countThreshold = 80;
+    const MAX_LENGTH = 100;
+    const COUNT_THRESHOLD = 80;
 
     render(
         <TextInput
-            id={id}
-            label={labelText}
-            maxlength={maxLength}
-            countThreshold={countThreshold}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            maxlength={MAX_LENGTH}
+            countThreshold={COUNT_THRESHOLD}
         />
     );
 
     const textInput = screen.getByRole('textbox');
     const textInputWrapper = textInput.parentElement;
 
-    expect(textInputWrapper).toHaveAttribute('data-threshold', countThreshold.toString());
+    expect(textInputWrapper).toHaveAttribute('data-threshold', COUNT_THRESHOLD.toString());
 });
 
 test('text input with width', () => {
-    const width = 'fixed-10';
+    const INPUT_WIDTH = 'fixed-10';
 
     render(
         <TextInput
-            id={id}
-            label={labelText}
-            width={width}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            width={INPUT_WIDTH}
         />
     );
 
     const textInput = screen.getByRole('textbox');
-    expect(textInput).toHaveClass(`ds_input--${width}`);
+    expect(textInput).toHaveClass(`ds_input--${INPUT_WIDTH}`);
 });
 
 test('text input with currency', () => {
     render(
         <TextInput
-            id={id}
-            label={labelText}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
             currency
         />
     );
@@ -114,32 +114,33 @@ test('text input with currency', () => {
 });
 
 test('text input with custom currency symbol', () => {
-    const symbol = '@';
+    const CURRENCY_SYMBOL = '@';
 
     render(
         <TextInput
-            id={id}
-            label={labelText}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
             currency
-            currencySymbol={symbol}
+            currencySymbol={CURRENCY_SYMBOL}
         />
     );
 
     const textInput = screen.getByRole('textbox');
     const textInputWrapper = textInput.parentElement;
 
-    expect(textInputWrapper).toHaveAttribute('data-symbol', symbol);
+    expect(textInputWrapper).toHaveAttribute('data-symbol', CURRENCY_SYMBOL);
 });
 
 test('text input with button', () => {
-    const buttonText = 'Search';
-    const buttonIcon = 'Search';
+    const BUTTON_TEXT = 'Search';
+    const BUTTON_ICON = 'Search';
+
     render(
         <TextInput
-            id={id}
-            label={labelText}
-            buttonIcon={buttonIcon}
-            buttonText={buttonText}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            buttonIcon={BUTTON_ICON}
+            buttonText={BUTTON_TEXT}
             hasButton
         />
     );
@@ -147,7 +148,7 @@ test('text input with button', () => {
     const textInput = screen.getByRole('textbox');
     const textInputWrapper = textInput.parentElement;
     const button = screen.getByRole('button');
-    const buttonTextElement = within(button).getByText(buttonText);
+    const buttonTextElement = within(button).getByText(BUTTON_TEXT);
     const buttonIconElement = within(button).getByRole('img', { hidden: true });
 
     expect(textInputWrapper).toHaveClass('ds_input__wrapper', 'ds_input__wrapper--has-icon ');
@@ -163,16 +164,17 @@ test('text input with button', () => {
 });
 
 test('text input with hint text', () => {
-    const hintText = 'hint text';
+    const HINT_TEXT = 'hint text';
+
     render(
         <TextInput
-            id={id}
-            label={labelText}
-            hintText={hintText}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            hintText={HINT_TEXT}
         />
     );
 
-    const hintTextEl = screen.getByText(hintText);
+    const hintTextEl = screen.getByText(HINT_TEXT);
     const textInput = screen.getByRole('textbox');
 
     expect(hintTextEl).toBeInTheDocument();
@@ -180,27 +182,28 @@ test('text input with hint text', () => {
 });
 
 test('text input with custom name', () => {
-    const name = 'foo';
+    const INPUT_NAME = 'foo';
 
     render(
         <TextInput
-            id={id}
-            label={labelText}
-            name={name}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            name={INPUT_NAME}
         />
     );
 
     const textInput = screen.getByRole('textbox');
-    expect(textInput).toHaveAttribute('name', name);
+    expect(textInput).toHaveAttribute('name', INPUT_NAME);
 });
 
 test('text input with blur function', () => {
-    const onBlurFn = vi.fn();
+    const ONBLUR_FUNCTION = vi.fn();
+
     render(
         <TextInput
-            id={id}
-            label={labelText}
-            onBlur={onBlurFn}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            onBlur={ONBLUR_FUNCTION}
         />
     );
 
@@ -208,16 +211,17 @@ test('text input with blur function', () => {
 
     fireEvent.blur(textInput);
 
-    expect(onBlurFn).toHaveBeenCalled();
+    expect(ONBLUR_FUNCTION).toHaveBeenCalled();
 });
 
 test('text input with change function', () => {
-    const onChangeFn = vi.fn();
+    const ONCHANGE_FUNCTION = vi.fn();
+
     render(
         <TextInput
-            id={id}
-            label={labelText}
-            onChange={onChangeFn}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            onChange={ONCHANGE_FUNCTION}
         />
     );
 
@@ -225,67 +229,68 @@ test('text input with change function', () => {
 
     fireEvent.change(textInput, {target: {value: 'foo'}});
 
-    expect(onChangeFn).toHaveBeenCalled();
+    expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
 test('text input with placeholder text', () => {
-    const placeholder = 'foo';
+    const PLACEHOLDER_TEXT = 'foo';
 
     render(
         <TextInput
-            id={id}
-            label={labelText}
-            placeholder={placeholder}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            placeholder={PLACEHOLDER_TEXT}
         />
     );
 
     const textInput = screen.getByRole('textbox');
-    expect(textInput).toHaveAttribute('placeholder', placeholder);
+    expect(textInput).toHaveAttribute('placeholder', PLACEHOLDER_TEXT);
 });
 
 test('text input with different type', () => {
-    const type = 'foo';
+    const INPUT_TYPE = 'foo';
 
     render(
         <TextInput
-            id={id}
-            label={labelText}
-            type={type}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            type={INPUT_TYPE}
         />
     );
 
     const textInput = screen.getByRole('textbox');
-    expect(textInput).toHaveAttribute('type', type);
+    expect(textInput).toHaveAttribute('type', INPUT_TYPE);
 });
 
 test('text input with initial value', () => {
-    const initialValue = 'initial value';
+    const INITIAL_VALUE = 'initial value';
 
     render(
         <TextInput
-            id={id}
-            label={labelText}
-            value={initialValue}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            value={INITIAL_VALUE}
         />
     );
 
     const textInput = screen.getByRole('textbox');
-    expect(textInput).toHaveAttribute('value', initialValue);
+    expect(textInput).toHaveAttribute('value', INITIAL_VALUE);
 });
 
 test('text input with error message', () => {
-    const errorMessage = 'This is a required field';
+    const ERROR_MESSAGE_TEXT = 'This is a required field';
+
     render(
         <TextInput
-            id={id}
-            label={labelText}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
             error
-            errorMessage={errorMessage}
+            errorMessage={ERROR_MESSAGE_TEXT}
         />
     );
 
     const textInput = screen.getByRole('textbox');
-    const errorMessageElement = screen.getByText(errorMessage);
+    const errorMessageElement = screen.getByText(ERROR_MESSAGE_TEXT);
 
     expect(textInput).toHaveClass('ds_input--error')
     expect(textInput).toHaveAttribute('aria-describedby', errorMessageElement.id);
@@ -297,8 +302,8 @@ test('text input with error message', () => {
 test('passing additional props', () => {
     render(
         <TextInput
-            id={id}
-            label={labelText}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
             data-test="foo"
         />
     );
@@ -310,8 +315,8 @@ test('passing additional props', () => {
 test('passing additional CSS classes', () => {
     render(
         <TextInput
-            id={id}
-            label={labelText}
+            id={INPUT_ID}
+            label={LABEL_TEXT}
             className="foo"
         />
     );

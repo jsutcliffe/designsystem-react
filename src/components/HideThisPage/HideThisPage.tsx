@@ -13,10 +13,10 @@ const HideThisPage: React.FC<SGDS.Component.HideThisPage> = ({
         if (ref.current) {
             new DSHideThisPage().init();
 
-            const htpDivId = 'hide-this-page-instruction';
-            if (!document.getElementById(htpDivId)) {
+            const HIDE_THIS_PAGE_DIV_ID = 'hide-this-page-instruction';
+            if (!document.getElementById(HIDE_THIS_PAGE_DIV_ID)) {
                 const htpDiv = document.createElement('div');
-                htpDiv.id = htpDivId;
+                htpDiv.id = HIDE_THIS_PAGE_DIV_ID;
                 htpDiv.classList.add('visually-hidden');
                 htpDiv.classList.add('ds_hide-page');
                 htpDiv.innerHTML = '<p>To leave the page quickly, press the escape key.</p>';

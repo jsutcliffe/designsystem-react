@@ -2,7 +2,7 @@ import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import SiteNavigation from './SiteNavigation';
 
-const items = [
+const ITEMS = [
     {title: 'About', href: '#about'},
     {title: 'Get started', href: '#get-started'},
     {title: 'Styles', href: '#styles'},
@@ -13,7 +13,7 @@ const items = [
 
 test('renders correctly', () => {
     render(
-        <SiteNavigation items={items}/>
+        <SiteNavigation items={ITEMS}/>
     );
 
     const nav = screen.getByRole('navigation');
@@ -29,7 +29,7 @@ test('renders correctly', () => {
     expect(list).toHaveClass('ds_site-navigation__list');
 
     // check items
-    expect(listItems.length).toEqual(items.length);
+    expect(listItems.length).toEqual(ITEMS.length);
 
     listItems.forEach((item, index) => {
         expect(item).toHaveClass('ds_site-navigation__item');
@@ -38,8 +38,8 @@ test('renders correctly', () => {
 
         expect(link).toHaveClass('ds_site-navigation__link');
         expect(link).not.toHaveClass('ds_current');
-        expect(link.textContent).toEqual(items[index].title);
-        expect(link).toHaveAttribute('href', items[index].href)
+        expect(link.textContent).toEqual(ITEMS[index].title);
+        expect(link).toHaveAttribute('href', ITEMS[index].href)
     });
 });
 
@@ -55,7 +55,7 @@ test('highlights current item', () => {
 
 test('passing additional props', () => {
     render(
-        <SiteNavigation data-test="foo" items={items}/>
+        <SiteNavigation data-test="foo" items={ITEMS}/>
     );
 
     const nav = screen.getByRole('navigation');
@@ -64,7 +64,7 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <SiteNavigation className="foo" items={items}/>
+        <SiteNavigation className="foo" items={ITEMS}/>
     );
 
     const nav = screen.getByRole('navigation');

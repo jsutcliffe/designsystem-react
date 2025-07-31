@@ -8,7 +8,7 @@ let accordionItemCounter = 0;
 const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
     children,
     className,
-    headerLevel = 'h3',
+    headingLevel = 'h3',
     id: rawId,
     open = false,
     title,
@@ -39,7 +39,7 @@ const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
                 <WrapperTag
                     id={`panel-${processedId}-heading`}
                     className="ds_accordion-item__title"
-                    tagName={headerLevel}
+                    tagName={headingLevel}
                 >
                     {title}
                 </WrapperTag>
@@ -62,7 +62,7 @@ const Accordion: React.FC<SGDS.Component.Accordion>
     & { Item: React.FC<SGDS.Component.Accordion.Item> } = ({
     children,
     className,
-    headerLevel = 'h3',
+    headingLevel = 'h3',
     hideOpenAll,
     ...props
 }) => {
@@ -79,7 +79,7 @@ const Accordion: React.FC<SGDS.Component.Accordion>
     }
 
     function processChild(child: any) {
-        return React.cloneElement(child, { headerLevel: headerLevel });
+        return React.cloneElement(child, { headingLevel: headingLevel });
     }
 
     return (

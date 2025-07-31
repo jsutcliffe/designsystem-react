@@ -4,7 +4,7 @@ const NotificationPanel: React.FC<SGDS.Component.NotificationPanel> = function (
     ariaLive,
     children,
     className,
-    headerLevel = 'h1',
+    headingLevel = 'h1',
     title,
     ...props
 }) {
@@ -19,7 +19,7 @@ const NotificationPanel: React.FC<SGDS.Component.NotificationPanel> = function (
         >
             <WrapperTag
                 className="ds_notification-panel__title"
-                tagName={headerLevel}
+                tagName={headingLevel}
             >
                 {title}
             </WrapperTag>

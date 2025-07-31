@@ -67,14 +67,14 @@ test('site header renders correctly (maximal, testing markup structure)', () => 
 });
 
 test('site header branding: logo only, default URL', () => {
-    const logo = {
+    const LOGO = {
         alt: 'The Scottish Government',
         src: './scottish-government.svg'
     };
 
     render(
         <SiteHeader
-            logo={logo}
+            logo={LOGO}
         />
     );
 
@@ -87,24 +87,24 @@ test('site header branding: logo only, default URL', () => {
     expect(siteHeaderLogoLink).toHaveAttribute('href', '/');
 
     expect(siteHeaderLogoImg).toHaveClass('ds_site-branding__logo-image');
-    expect(siteHeaderLogoImg).toHaveAttribute('src', logo.src);
-    expect(siteHeaderLogoImg).toHaveAttribute('alt', logo.alt);
+    expect(siteHeaderLogoImg).toHaveAttribute('src', LOGO.src);
+    expect(siteHeaderLogoImg).toHaveAttribute('alt', LOGO.alt);
 
     expect(siteHeaderLogoImg.parentElement).toEqual(siteHeaderLogoLink);
     expect(siteHeaderLogoLink.parentElement).toEqual(siteHeaderBranding);
 });
 
 test('site header branding: logo and site title', () => {
-    const logo = {
+    const LOGO = {
         alt: 'The Scottish Government',
         src: './scottish-government.svg'
     };
-    const siteTitleContent = 'Design System React';
+    const SITE_TITLE_CONTENT = 'Design System React';
 
     render(
         <SiteHeader
-            logo={logo}
-            siteTitle={siteTitleContent}
+            logo={LOGO}
+            siteTitle={SITE_TITLE_CONTENT}
         />
     );
 
@@ -114,13 +114,13 @@ test('site header branding: logo and site title', () => {
     const siteTitle = siteHeader.querySelector('.ds_site-branding__title');
 
     expect(siteTitle?.tagName).toEqual('DIV');
-    expect(siteTitle?.textContent).toEqual(siteTitleContent);
+    expect(siteTitle?.textContent).toEqual(SITE_TITLE_CONTENT);
     expect(siteTitle?.parentElement).toEqual(siteHeaderBranding);
     expect(siteTitle?.previousElementSibling).toEqual(siteHeaderLogoLink);
 });
 
 test('site header branding: custom link URL', () => {
-    const logo = {
+    const LOGO = {
         alt: 'The Scottish Government',
         href: '/home.aspx',
         src: './scottish-government.svg'
@@ -128,18 +128,18 @@ test('site header branding: custom link URL', () => {
 
     render(
         <SiteHeader
-            logo={logo}
+            logo={LOGO}
         />
     );
 
     const siteHeader = screen.getByRole('banner');
     const siteHeaderLogoLink = within(siteHeader).getByRole('link');
 
-    expect(siteHeaderLogoLink).toHaveAttribute('href', logo.href);
+    expect(siteHeaderLogoLink).toHaveAttribute('href', LOGO.href);
 });
 
 test('site header with site search', () => {
-    const searchProps = {
+    const SEARCH_PROPS = {
         action: 'apple',
         autocompleteEndpoint: 'banana',
         autocompleteSuggestionMappingFunction: 'cucumber',
@@ -152,8 +152,8 @@ test('site header with site search', () => {
 
     render(
         <>
-            <SiteHeader siteSearch={searchProps} />
-            <SiteSearch data-testid="sitesearch" {...searchProps} />
+            <SiteHeader siteSearch={SEARCH_PROPS} />
+            <SiteSearch data-testid="sitesearch" {...SEARCH_PROPS} />
         </>
     );
 
@@ -165,7 +165,7 @@ test('site header with site search', () => {
 });
 
 test('site header with site navigation', () => {
-    const navigationItems = [
+    const NAVIGATION_ITEMS = [
         { title: 'About', href: '#about' },
         { title: 'Get started', href: '#get-started' },
         { title: 'Styles', href: '#styles' },
@@ -176,8 +176,8 @@ test('site header with site navigation', () => {
 
     render(
         <>
-            <SiteHeader navigationItems={navigationItems} />
-            <SiteNavigation data-testid="sitenavigation" items={navigationItems} />
+            <SiteHeader navigationItems={NAVIGATION_ITEMS} />
+            <SiteNavigation data-testid="sitenavigation" items={NAVIGATION_ITEMS} />
         </>
     );
 
@@ -212,15 +212,15 @@ test('site header with site navigation', () => {
 });
 
 test('site header with phase banner', () => {
-    const phaseBannerProps = {
+    const PHASE_BANNER_PROPS = {
         content: 'My content',
         phaseName: 'Beta'
     };
 
     render(
         <>
-            <SiteHeader phaseBanner={phaseBannerProps} />
-            <PhaseBanner data-testid="phasebanner" {...phaseBannerProps} />
+            <SiteHeader phaseBanner={PHASE_BANNER_PROPS} />
+            <PhaseBanner data-testid="phasebanner" {...PHASE_BANNER_PROPS} />
         </>
     );
 

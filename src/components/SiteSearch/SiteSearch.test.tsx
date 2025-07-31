@@ -2,9 +2,9 @@ import { test, expect, vi } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import SiteSearch from './SiteSearch';
 
-const id = 'site-search';
-const labelText = 'Search';
-const placeholderText = 'Search';
+const SITE_SEARCH_ID = 'site-search';
+const LABEL_TEXT = 'Search';
+const PLACEHOLDER_TEXT = 'Search';
 
 test('site search renders correctly', () => {
     render(
@@ -26,17 +26,17 @@ test('site search renders correctly', () => {
     expect(searchForm).toHaveAttribute('method', 'GET');
     expect(searchForm).toHaveAttribute('action', '/search');
 
-    expect(searchLabel?.textContent).toEqual(labelText);
-    expect(searchLabel).toHaveAttribute('for', id);
-    expect(searchLabel).toHaveAttribute('id', `${id}-label`);
+    expect(searchLabel?.textContent).toEqual(LABEL_TEXT);
+    expect(searchLabel).toHaveAttribute('for', SITE_SEARCH_ID);
+    expect(searchLabel).toHaveAttribute('id', `${SITE_SEARCH_ID}-label`);
     expect(searchLabel).toHaveClass('ds_label', 'visually-hidden');
 
     expect(inputWrapper).toHaveClass('ds_input__wrapper  ds_input__wrapper--has-icon');
     expect(inputWrapper?.tagName).toEqual('DIV');
 
     expect(searchInput).toHaveClass('ds_input', 'ds_site-search__input');
-    expect(searchInput).toHaveAttribute('id', id);
-    expect(searchInput).toHaveAttribute('placeholder', placeholderText);
+    expect(searchInput).toHaveAttribute('id', SITE_SEARCH_ID);
+    expect(searchInput).toHaveAttribute('placeholder', PLACEHOLDER_TEXT);
     expect(searchInput).toHaveAttribute('required');
     expect(searchInput).toHaveAttribute('spellcheck', 'false');
     expect(searchInput).toHaveAttribute('type', 'search');
@@ -102,13 +102,13 @@ test('custom placeholder', () => {
 });
 
 test('autocomplete', () => {
-    const autocompleteSuggestionMappingFunction = vi.fn();
-    const suggestionsId = 'autocomplete-suggestions';
+    const AUTOCOMPLETE_SUGGESTION_MAPPING_FUNCTION = vi.fn();
+    const SUGGESTIONS_ID = 'autocomplete-suggestions';
 
     render(
         <SiteSearch
             autocompleteEndpoint="/endpoint"
-            autocompleteSuggestionMappingFunction={autocompleteSuggestionMappingFunction}
+            autocompleteSuggestionMappingFunction={AUTOCOMPLETE_SUGGESTION_MAPPING_FUNCTION}
         />
     )
 
@@ -120,7 +120,7 @@ test('autocomplete', () => {
     const suggestionsList = within(searchForm).getByRole('listbox');
 
     expect(searchFormContainer).toHaveClass('ds_autocomplete');
-    expect(searchFormContainer).toHaveAttribute('id', `${id}-autocomplete`);
+    expect(searchFormContainer).toHaveAttribute('id', `${SITE_SEARCH_ID}-autocomplete`);
 
     expect(autocompleteStatus).toBeInTheDocument();
     expect(autocompleteStatus).toHaveClass('visually-hidden');
@@ -129,15 +129,15 @@ test('autocomplete', () => {
     expect(autocompleteStatus.tagName).toEqual('DIV');
 
     expect(searchInput).toHaveAttribute('aria-autocomplete', 'list');
-    expect(searchInput).toHaveAttribute('aria-owns', suggestionsId);
+    expect(searchInput).toHaveAttribute('aria-owns', SUGGESTIONS_ID);
     expect(searchInput).toHaveAttribute('autocomplete', 'off');
     expect(searchInput).toHaveClass('js-autocomplete-input');
 
-    expect(suggestionsContainer).toHaveAttribute('id', suggestionsId);
+    expect(suggestionsContainer).toHaveAttribute('id', SUGGESTIONS_ID);
     expect(suggestionsContainer?.tagName).toEqual('DIV');
 
     expect(suggestionsList).toHaveClass('ds_autocomplete__suggestions-list');
-    expect(suggestionsList).toHaveAttribute('aria-labelledby', `${id}-label`);
+    expect(suggestionsList).toHaveAttribute('aria-labelledby', `${SITE_SEARCH_ID}-label`);
     expect(suggestionsList.tagName).toEqual('OL');
 
 });

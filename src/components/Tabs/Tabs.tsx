@@ -44,7 +44,7 @@ const Tabs: React.FC<SGDS.Component.Tabs>
     bordered = true,
     children,
     className,
-    headerLevel = 'h2',
+    headingLevel = 'h2',
     manual = false,
     title = 'Contents',
     ...props
@@ -89,7 +89,7 @@ const Tabs: React.FC<SGDS.Component.Tabs>
             <WrapperTag
                 id={headingId}
                 className="ds_tabs__title"
-                tagName={headerLevel}
+                tagName={headingLevel}
             >
                 {title}
             </WrapperTag>

@@ -39,16 +39,16 @@ test('hide this page renders correctly', () => {
 });
 
 test('custom escape URL', () => {
-    const escapeUrl = 'https://www.mygov.scot';
+    const ESCAPE_URL = 'https://www.mygov.scot';
 
     render(
-        <HideThisPage data-testid="htp" escapeUrl={escapeUrl} />
+        <HideThisPage data-testid="htp" escapeUrl={ESCAPE_URL} />
     );
 
     const hideThisPageElement = screen.getByTestId('htp');
     const link = within(hideThisPageElement).getByRole('link');
 
-    expect(link).toHaveAttribute('href', escapeUrl);
+    expect(link).toHaveAttribute('href', ESCAPE_URL);
 })
 
 test('passing additional props', () => {

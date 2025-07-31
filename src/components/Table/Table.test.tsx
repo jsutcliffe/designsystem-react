@@ -30,10 +30,10 @@ test('table renders correctly', () => {
 });
 
 test('table with smallscreen behaviour', () => {
-    const behaviour = 'scrolling';
+    const SMALL_SCREEN_BEHAVIOUR = 'scrolling';
 
     render(
-        <Table smallscreen={behaviour}>
+        <Table smallscreen={SMALL_SCREEN_BEHAVIOUR}>
             <caption>Public holidays in 2020</caption>
             <thead>
                 <tr>
@@ -54,7 +54,7 @@ test('table with smallscreen behaviour', () => {
 
     const table = screen.getByRole('table');
 
-    expect(table).toHaveAttribute('data-smallscreen', behaviour);
+    expect(table).toHaveAttribute('data-smallscreen', SMALL_SCREEN_BEHAVIOUR);
     expect(table.nodeName).toEqual('TABLE');
 });
 

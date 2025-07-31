@@ -2,13 +2,13 @@ import { test, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import PhaseBanner from './PhaseBanner';
 
-const text = 'This is a new service. Your feedback will help us to improve it.';
-const defaultText = 'This is a new service';
+const BANNER_TEXT = 'This is a new service. Your feedback will help us to improve it.';
+const DEFAULT_TEXT = 'This is a new service';
 
 test('phase banner renders correctly', () => {
     render(
         <PhaseBanner>
-            {text}
+            {BANNER_TEXT}
         </PhaseBanner>
     );
 
@@ -23,7 +23,7 @@ test('phase banner renders correctly', () => {
     expect(phaseBannerWrapper?.tagName).toEqual('DIV');
     expect(phaseBannerContent?.tagName).toEqual('P');
     expect(phaseBannerText?.tagName).toEqual('SPAN');
-    expect(phaseBannerText?.textContent).toEqual(text);
+    expect(phaseBannerText?.textContent).toEqual(BANNER_TEXT);
 });
 
 test('phase banner with default text', () => {
@@ -36,14 +36,14 @@ test('phase banner with default text', () => {
     const phaseBannerContent = phaseBanner?.querySelector('.ds_phase-banner__content');
     const phaseBannerText = phaseBannerContent?.querySelector('.ds_phase-banner__text');
 
-    expect(phaseBannerText?.textContent).toEqual(defaultText);
+    expect(phaseBannerText?.textContent).toEqual(DEFAULT_TEXT);
 });
 
 test('phase banner with phase tag', () => {
-    const phase = 'Beta';
+    const PHASE_TEXT = 'Beta';
 
     render(
-        <PhaseBanner phaseName={phase}></PhaseBanner>
+        <PhaseBanner phaseName={PHASE_TEXT}></PhaseBanner>
     );
 
     const phaseBanner = document.querySelector('.ds_phase-banner');
@@ -52,7 +52,7 @@ test('phase banner with phase tag', () => {
     expect(phaseBannerTag).toBeInTheDocument();
     expect(phaseBannerTag?.tagName).toEqual('SPAN');
     expect(phaseBannerTag).toHaveClass('ds_tag', 'ds_phase-banner__tag');
-    expect(phaseBannerTag?.textContent).toEqual(phase);
+    expect(phaseBannerTag?.textContent).toEqual(PHASE_TEXT);
 });
 
 test('passing additional props', () => {

@@ -2,8 +2,8 @@ import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import SkipLinks from './SkipLinks';
 
-const mainContentId = 'main-content';
-const linkText = 'Skip to main content';
+const MAIN_CONTENT_ID = 'main-content';
+const LINK_TEXT = 'Skip to main content';
 
 test('skip links renders correctly', () => {
     render(
@@ -24,43 +24,43 @@ test('skip links renders correctly', () => {
     expect(skipLinksListItem).toHaveClass('ds_skip-links__item');
 
     expect(skipLinksLink).toHaveClass('ds_skip-links__link');
-    expect(skipLinksLink).toHaveAttribute('href', `#${mainContentId}`);
-    expect(skipLinksLink.textContent).toEqual(linkText);
+    expect(skipLinksLink).toHaveAttribute('href', `#${MAIN_CONTENT_ID}`);
+    expect(skipLinksLink.textContent).toEqual(LINK_TEXT);
 });
 
 test('custom link text', () => {
-    const mainLinkText = 'foo';
+    const MAIN_LINK_TEXT = 'foo';
 
     render(
-        <SkipLinks mainLinkText={mainLinkText} />
+        <SkipLinks mainLinkText={MAIN_LINK_TEXT} />
     );
 
     const skipLinksList = screen.getByRole('list');
     const skipLinksLink = within(skipLinksList).getByRole('link');
 
-    expect(skipLinksLink.textContent).toEqual(mainLinkText);
+    expect(skipLinksLink.textContent).toEqual(MAIN_LINK_TEXT);
 });
 
 test('custom link target', () => {
-    const customId = 'bar'
+    const CUSTOM_ID = 'bar'
 
     render(
-        <SkipLinks mainContentId={customId} />
+        <SkipLinks mainContentId={CUSTOM_ID} />
     );
 
     const skipLinksList = screen.getByRole('list');
     const skipLinksLink = within(skipLinksList).getByRole('link');
 
-    expect(skipLinksLink).toHaveAttribute('href', `#${customId}`)
+    expect(skipLinksLink).toHaveAttribute('href', `#${CUSTOM_ID}`)
 });
 
 test('additional links', () => {
-    const items = [
+    const ITEMS = [
         { title: 'foo', targetId: 'bar' }
     ];
 
     render(
-        <SkipLinks items={items} />
+        <SkipLinks items={ITEMS} />
     );
 
     const skipLinksList = screen.getByRole('list');
@@ -68,8 +68,8 @@ test('additional links', () => {
     const skipLinksSecondLink = within(skipLinksList).getAllByRole('link')[1];
 
     expect(skipLinksListItems.length).toEqual(2);
-    expect(skipLinksSecondLink).toHaveAttribute('href', `#${items[0].targetId}`);
-    expect(skipLinksSecondLink.textContent).toEqual(items[0].title);
+    expect(skipLinksSecondLink).toHaveAttribute('href', `#${ITEMS[0].targetId}`);
+    expect(skipLinksSecondLink.textContent).toEqual(ITEMS[0].title);
 })
 
 test('passing additional props', () => {

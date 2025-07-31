@@ -3,20 +3,20 @@ import { render, screen, within, fireEvent } from '@testing-library/react';
 import SummaryCard from './SummaryCard';
 import SummaryList from '../SummaryList/SummaryList';
 
-const onClickFn = vi.fn();
+const ONCLICK_FUNCTION = vi.fn();
 
-const actions = [
+const ACTIONS = [
     {
         title: 'Change',
         href: '#foo'
     },
     {
         title: 'Delete',
-        onclick: onClickFn
+        onclick: ONCLICK_FUNCTION
     }
 ];
 
-const items = [
+const ITEMS = [
     {
         title: 'Phone number',
         value: '0123 456 7890'
@@ -27,19 +27,21 @@ const items = [
     }
 ];
 
-const titleText = 'Joe Bloggs';
+const TITLE_TEXT = 'Joe Bloggs';
 
 test('summary card renders correctly', () => {
+    const DESCRIBEDBY_ID = 'summary-card-joe-bloggs';
+
     render(
         <>
             <SummaryCard
                 data-testid="foo"
-                actions={actions}
-                items={items}
-                title={titleText}
+                actions={ACTIONS}
+                items={ITEMS}
+                title={TITLE_TEXT}
             />
 
-            <SummaryList data-testid="bar" items={items}/>
+            <SummaryList data-testid="bar" items={ITEMS}/>
         </>
     );
 
@@ -52,20 +54,18 @@ test('summary card renders correctly', () => {
     const thisList = within(content).getByRole('list');
     const comparisonList = screen.getByTestId('bar');
 
-    const describedById = 'summary-card-joe-bloggs';
-
     expect(summaryCard).toHaveClass('ds_summary-card');
 
     expect(header).toHaveClass('ds_summary-card__header');
     expect(header?.tagName).toEqual('DIV');
 
     expect(title).toHaveClass('ds_summary-card__header-title');
-    expect(title).toHaveAttribute('id', describedById);
+    expect(title).toHaveAttribute('id', DESCRIBEDBY_ID);
     expect(title?.tagName).toEqual('H3');
-    expect(title.textContent).toEqual(titleText);
+    expect(title.textContent).toEqual(TITLE_TEXT);
 
     expect(actionsList?.tagName).toEqual('UL');
-    expect(actionsList.children.length).toEqual(actions.length);
+    expect(actionsList.children.length).toEqual(ACTIONS.length);
     expect(actionsList.children[0]).toHaveClass('ds_summary-card__actions-list-item');
     expect(actionsList.children[0].tagName).toEqual('LI');
     expect(actionsList.children[0].innerHTML).toEqual('<a aria-describedby="summary-card-joe-bloggs" class="ds_link" href="#foo">Change</a>');
@@ -73,7 +73,7 @@ test('summary card renders correctly', () => {
 
     fireEvent.click(actionsList.children[1].children[0]);
 
-    expect(onClickFn).toHaveBeenCalled();
+    expect(ONCLICK_FUNCTION).toHaveBeenCalled();
 
     expect(content).toHaveClass('ds_summary-card__content');
     expect(content?.tagName).toEqual('DIV');
@@ -81,14 +81,14 @@ test('summary card renders correctly', () => {
     expect(thisList?.innerHTML).toEqual(comparisonList?.innerHTML);
 });
 
-test('custom header level', () => {
+test('custom heading level', () => {
     render(
         <SummaryCard
             data-testid="foo"
-            actions={actions}
-            headerLevel="h2"
-            items={items}
-            title={titleText}
+            actions={ACTIONS}
+            headingLevel="h2"
+            items={ITEMS}
+            title={TITLE_TEXT}
         />
     );
 
@@ -102,9 +102,9 @@ test('passing additional props', () => {
     render(
         <SummaryCard
             data-testid="foo"
-            actions={actions}
-            items={items}
-            title={titleText}
+            actions={ACTIONS}
+            items={ITEMS}
+            title={TITLE_TEXT}
             data-test="foo"
         />
     );
@@ -117,9 +117,9 @@ test('passing additional CSS classes', () => {
     render(
         <SummaryCard
             data-testid="foo"
-            actions={actions}
-            items={items}
-            title={titleText}
+            actions={ACTIONS}
+            items={ITEMS}
+            title={TITLE_TEXT}
             className="foo"
         />
     );

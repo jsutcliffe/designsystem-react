@@ -2,17 +2,17 @@ import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import ErrorSummary from './ErrorSummary';
 
-const errors = [
+const ERRORS = [
     { fragmentId: 'did-resolve', title: 'Did this resolve your issue?' },
     { fragmentId: 'what-topics', title: 'What topics are you interested in?' },
     { fragmentId: 'more-detail', title: 'Please provide more detail' }
 ];
 
 test('error summary renders correctly', () => {
-    const titleId = 'error-summary-title';
+    const TITLE_ID = 'error-summary-title';
 
     render(
-        <ErrorSummary data-testid="errorsummary" errors={errors} />
+        <ErrorSummary data-testid="errorsummary" errors={ERRORS} />
     );
 
     const errorSummaryElement = screen.getByTestId('errorsummary');
@@ -27,30 +27,30 @@ test('error summary renders correctly', () => {
     expect(errorSummaryElement.tagName).toEqual('DIV');
 
     expect(errorSummaryTitle).toHaveClass('ds_error-summary__title');
-    expect(errorSummaryTitle).toHaveAttribute('id', titleId);
+    expect(errorSummaryTitle).toHaveAttribute('id', TITLE_ID);
     expect(errorSummaryTitle.tagName).toEqual('H2');
     expect(errorSummaryTitle.textContent).toEqual('There is a problem');
 
     expect(errorSummaryList).toHaveClass('ds_error-summary__list');
     expect(errorSummaryList.tagName).toEqual('UL');
 
-    expect(errorSummaryItems.length).toEqual(errors.length);
+    expect(errorSummaryItems.length).toEqual(ERRORS.length);
 
-    expect(errorSummaryLink1).toHaveAttribute('href', `#${errors[0].fragmentId}`);
-    expect(errorSummaryLink1.textContent).toEqual(errors[0].title);
+    expect(errorSummaryLink1).toHaveAttribute('href', `#${ERRORS[0].fragmentId}`);
+    expect(errorSummaryLink1.textContent).toEqual(ERRORS[0].title);
 });
 
 test('error summary with custom title', () => {
-    const title = 'Foo';
+    const TITLE_TEXT = 'Foo';
 
     render(
-        <ErrorSummary data-testid="errorsummary" errors={errors} title={title} />
+        <ErrorSummary data-testid="errorsummary" errors={ERRORS} title={TITLE_TEXT} />
     );
 
     const errorSummaryElement = screen.getByTestId('errorsummary');
     const errorSummaryTitle = within(errorSummaryElement).getByRole('heading');
 
-    expect(errorSummaryTitle.textContent).toEqual(title);
+    expect(errorSummaryTitle.textContent).toEqual(TITLE_TEXT);
 });
 
 test('error summary with no errors (empty array) should not display', () => {
@@ -88,7 +88,7 @@ test('error sumary item with no link', () => {
 
 test('passing additional props', () => {
     render(
-        <ErrorSummary data-testid="errorsummary" errors={errors} data-test="foo" />
+        <ErrorSummary data-testid="errorsummary" errors={ERRORS} data-test="foo" />
     )
 
     const errorSummaryElement = screen.getByTestId('errorsummary');
@@ -97,7 +97,7 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <ErrorSummary data-testid="errorsummary" errors={errors} className="foo" />
+        <ErrorSummary data-testid="errorsummary" errors={ERRORS} className="foo" />
     )
 
     const errorSummaryElement = screen.getByTestId('errorsummary');

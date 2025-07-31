@@ -5,7 +5,7 @@ const ConfirmationMessage: React.FC<SGDS.Component.ConfirmationMessage> = ({
     ariaLive = 'polite',
     children,
     className,
-    headerLevel = 'h3',
+    headingLevel = 'h3',
     title,
     ...props
 }) => {
@@ -22,7 +22,7 @@ const ConfirmationMessage: React.FC<SGDS.Component.ConfirmationMessage> = ({
 
             <WrapperTag
                 className="ds_confirmation-message__title"
-                tagName={headerLevel}
+                tagName={headingLevel}
             >
                 {title}
             </WrapperTag>

@@ -2,9 +2,9 @@ import { test, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import SummaryList, { Item, Action, Answer } from './SummaryList';
 
-const onClickFn = vi.fn();
+const ONCLICK_FUNCTION = vi.fn();
 
-const items = [
+const SUMMARY_ITEMS = [
     {
         title: 'Name',
         value: 'Jane Smith',
@@ -15,7 +15,7 @@ const items = [
             },
             {
                 title: 'Delete',
-                onclick: onClickFn
+                onclick: ONCLICK_FUNCTION
             }
         ]
     },
@@ -50,7 +50,7 @@ const items = [
 
 test('summary list renders correctly', () => {
     render(
-        <SummaryList items={items} />
+        <SummaryList items={SUMMARY_ITEMS} />
     );
 
     const summaryList = screen.getAllByRole('list')[0];
@@ -58,12 +58,12 @@ test('summary list renders correctly', () => {
 
     expect(summaryList).toHaveClass('ds_summary-list');
     expect(summaryList.tagName).toEqual('OL');
-    expect(summaryListItems.length).toEqual(items.length);
+    expect(summaryListItems.length).toEqual(SUMMARY_ITEMS.length);
 });
 
 test('summary list without border', () => {
     render(
-        <SummaryList noBorder items={items} />
+        <SummaryList noBorder items={SUMMARY_ITEMS} />
     );
 
     const summaryList = screen.getAllByRole('list')[0];
@@ -72,11 +72,13 @@ test('summary list without border', () => {
 });
 
 test('summary list item renders correctly', () => {
+    const DESCRIBEDBY_ID = 'q2-date-of-birth';
+
     render(
         <Item
-            actions={items[1].actions}
-            title={items[1].title}
-            value={items[1].value}
+            actions={SUMMARY_ITEMS[1].actions}
+            title={SUMMARY_ITEMS[1].title}
+            value={SUMMARY_ITEMS[1].value}
         />
     );
 
@@ -86,13 +88,11 @@ test('summary list item renders correctly', () => {
     const answer = value?.children[0];
     const actions = item.querySelector('.ds_summary-list__actions');
 
-    const describedById = 'q2-date-of-birth';
-
     expect(item).toHaveClass('ds_summary-list__item');
 
     expect(key?.tagName).toEqual('SPAN');
     expect(key?.textContent).toEqual('Date of birth');
-    expect(key).toHaveAttribute('id', describedById);
+    expect(key).toHaveAttribute('id', DESCRIBEDBY_ID);
 
     expect(value?.tagName).toEqual('SPAN');
 
@@ -101,15 +101,15 @@ test('summary list item renders correctly', () => {
 
     expect(actions?.tagName).toEqual('DIV');
 
-    expect(actions?.querySelector('.ds_link')).toHaveAttribute('aria-describedby', describedById);
+    expect(actions?.querySelector('.ds_link')).toHaveAttribute('aria-describedby', DESCRIBEDBY_ID);
 });
 
 test('summary list item with multiple values', () => {
     render(
         <Item
-            actions={items[3].actions}
-            title={items[3].title}
-            value={items[3].value}
+            actions={SUMMARY_ITEMS[3].actions}
+            title={SUMMARY_ITEMS[3].title}
+            value={SUMMARY_ITEMS[3].value}
         />
     );
 
@@ -121,17 +121,17 @@ test('summary list item with multiple values', () => {
     expect(valueList).toHaveClass('ds_no-bullets');
     expect(valueList?.tagName).toEqual('UL');
 
-    expect(valueListItems?.length).toEqual(items[3].value.length);
+    expect(valueListItems?.length).toEqual(SUMMARY_ITEMS[3].value.length);
 
     expect(valueListItems[0].tagName).toEqual('LI');
-    expect(valueListItems[0].innerHTML).toEqual(`<q class="ds_summary-list__answer">${items[3].value[0]}</q>`);
+    expect(valueListItems[0].innerHTML).toEqual(`<q class="ds_summary-list__answer">${SUMMARY_ITEMS[3].value[0]}</q>`);
 });
 
 test('summary list item with no value', () => {
     render(
         <Item
-            actions={items[3].actions}
-            title={items[3].title}
+            actions={SUMMARY_ITEMS[3].actions}
+            title={SUMMARY_ITEMS[3].title}
         />
     );
 
@@ -143,92 +143,91 @@ test('summary list item with no value', () => {
 });
 
 test('summary list item with multiple actions', () => {
-    const title = 'Name';
-    const value = 'Jane Smith';
-    const actions = [
+    const ITEM_TITLE = 'Name';
+    const ITEM_VALUE = 'Jane Smith';
+    const ITEM_ACTIONS = [
         {
             title: 'Change',
             href: '#foo'
         },
         {
             title: 'Delete',
-            onclick: onClickFn
+            onclick: ONCLICK_FUNCTION
         }
     ];
 
     render(
         <Item
-            actions={items[0].actions}
-            title={title}
-            value={value}
+            actions={SUMMARY_ITEMS[0].actions}
+            title={ITEM_TITLE}
+            value={ITEM_VALUE}
         />
     );
 
     const item = screen.getAllByRole('listitem')[0];
     const actionsElement = item.querySelector('.ds_summary-list__actions');
 
-    expect(actionsElement?.children.length).toEqual(actions.length);
-    expect(actionsElement?.children[0].textContent).toEqual(actions[0].title);
-    expect(actionsElement?.children[1].textContent).toEqual(actions[1].title);
+    expect(actionsElement?.children.length).toEqual(ITEM_ACTIONS.length);
+    expect(actionsElement?.children[0].textContent).toEqual(ITEM_ACTIONS[0].title);
+    expect(actionsElement?.children[1].textContent).toEqual(ITEM_ACTIONS[1].title);
 });
 
 test('button action', () => {
-    const describedById = 'q1-name';
-    const title = 'Name';
-    const href = undefined;
-    const onClick = onClickFn;
+    const DESCRIBEDBY_ID = 'q1-name';
+    const ACTION_TITLE = 'Name';
+    const ACTION_ONCLICK = ONCLICK_FUNCTION;
 
     render(
         <Action
-            describedby={describedById}
-            href={href}
-            onclick={onClick}
-            title={title}
+            describedby={DESCRIBEDBY_ID}
+            href={undefined}
+            onclick={ACTION_ONCLICK}
+            title={ACTION_TITLE}
         />
     );
 
     const action = screen.getByRole('button');
 
     expect(action).toHaveClass('ds_link');
-    expect(action).toHaveAttribute('aria-describedby', describedById);
+    expect(action).toHaveAttribute('aria-describedby', DESCRIBEDBY_ID);
     expect(action).toHaveAttribute('type', 'button');
     expect(action).not.toHaveAttribute('href');
     expect(action.tagName).toEqual('BUTTON');
-    expect(action.textContent).toEqual(title);
+    expect(action.textContent).toEqual(ACTION_TITLE);
 
     fireEvent.click(action);
 
-    expect(onClickFn).toHaveBeenCalled();
+    expect(ONCLICK_FUNCTION).toHaveBeenCalled();
 });
 
 test('link action', () => {
-    const describedById = 'q1-name';
-    const title = 'Name';
-    const href = "#foo"
-    const onClick = onClickFn;
+    const DESCRIBEDBY_ID = 'q1-name';
+    const ACTION_TITLE = 'Name';
+    const ACTION_HREF = "#foo"
+    const ACTION_ONCLICK = ONCLICK_FUNCTION;
 
     render(
         <Action
-            describedby={describedById}
-            href={href}
-            onclick={onClick}
-            title={title}
+            describedby={DESCRIBEDBY_ID}
+            href={ACTION_HREF}
+            onclick={ACTION_ONCLICK}
+            title={ACTION_TITLE}
         />
     );
 
     const action = screen.getByRole('link');
 
     expect(action).toHaveClass('ds_link');
-    expect(action).toHaveAttribute('aria-describedby', describedById);
-    expect(action).toHaveAttribute('href', href);
+    expect(action).toHaveAttribute('aria-describedby', DESCRIBEDBY_ID);
+    expect(action).toHaveAttribute('href', ACTION_HREF);
     expect(action).not.toHaveAttribute('type');
     expect(action.tagName).toEqual('A');
-    expect(action.textContent).toEqual(title);
+    expect(action.textContent).toEqual(ACTION_TITLE);
 });
 
 test('multiline answer', () => {
     render(
-        <Answer value={items[2].value} />
+        <Answer value={SUMMARY_ITEMS[2].value} />
     );
 
     const answer = document.querySelector('.ds_summary-list__answer');
@@ -238,7 +237,7 @@ test('multiline answer', () => {
 
 test('passing additional props', () => {
     render(
-        <SummaryList data-test="foo" items={items} />
+        <SummaryList data-test="foo" items={SUMMARY_ITEMS} />
     );
 
     const summaryList = screen.getAllByRole('list')[0];
@@ -247,7 +246,7 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <SummaryList className="foo" items={items} />
+        <SummaryList className="foo" items={SUMMARY_ITEMS} />
     );
 
     const summaryList = screen.getAllByRole('list')[0];

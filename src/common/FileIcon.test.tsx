@@ -2,12 +2,12 @@ import { test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import FileIcon from './FileIcon';
 
-const iconName = 'Generic';
+const ICON_NAME = 'Generic';
 
 test('file icon renders correctly', () => {
     render(
         <FileIcon data-testid="icon"
-            icon={iconName}
+            icon={ICON_NAME}
         />
     );
 
@@ -19,12 +19,12 @@ test('file icon renders correctly', () => {
 });
 
 test('file icon with class name', () => {
-    const className = 'foo';
+    const CLASSNAME = 'foo';
 
     render(
         <FileIcon data-testid="icon"
-            icon={iconName}
-            className={className}
+            icon={ICON_NAME}
+            className={CLASSNAME}
         />
     );
 
@@ -34,17 +34,17 @@ test('file icon with class name', () => {
 });
 
 test('file icon with aria label', () => {
-    const label = 'My icon';
+    const LABEL = 'My icon';
 
     render(
         <FileIcon data-testid="icon"
-            icon={iconName}
-            ariaLabel={label}
+            icon={ICON_NAME}
+            ariaLabel={LABEL}
         />
     );
 
     const icon = screen.getByRole('img', {hidden: true});
 
-    expect(icon).toHaveAttribute('aria-label', label);
+    expect(icon).toHaveAttribute('aria-label', LABEL);
     expect(icon).not.toHaveAttribute('aria-hidden');
 });

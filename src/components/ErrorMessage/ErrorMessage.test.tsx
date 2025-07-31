@@ -2,27 +2,27 @@ import { test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import ErrorMessage from './ErrorMessage';
 
-const errorText = 'Error message';
-const errorId = 'errormessage';
+const ERROR_TEXT = 'Error message';
+const ERROR_ID = 'errormessage';
 
 test('error message renders correctly', () => {
 
     render(
-        <ErrorMessage text={errorText} id={errorId}/>
+        <ErrorMessage text={ERROR_TEXT} id={ERROR_ID}/>
     );
 
     const errorMessageElement = screen.getByRole('paragraph');
 
-    expect(errorMessageElement).toHaveAttribute('id', errorId);
+    expect(errorMessageElement).toHaveAttribute('id', ERROR_ID);
     expect(errorMessageElement).toHaveClass('ds_question__error-message');
-    expect(errorMessageElement.textContent).toEqual(errorText);
+    expect(errorMessageElement.textContent).toEqual(ERROR_TEXT);
 });
 
 test('error message with HTML content', () => {
-    const errorId = 'errormessage';
+    const ERROR_ID = 'errormessage';
 
     render(
-        <ErrorMessage id={errorId}>hello <a href="#foo">world</a></ErrorMessage>
+        <ErrorMessage id={ERROR_ID}>hello <a href="#foo">world</a></ErrorMessage>
     );
 
     const errorMessageElement = screen.getByRole('paragraph');
@@ -32,7 +32,7 @@ test('error message with HTML content', () => {
 
 test('passing additional props', () => {
     render(
-        <ErrorMessage data-test="foo" text={errorText} id={errorId}/>
+        <ErrorMessage data-test="foo" text={ERROR_TEXT} id={ERROR_ID}/>
     )
 
     const errorMessageElement = screen.getByRole('paragraph');
@@ -41,7 +41,7 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <ErrorMessage className="foo" text={errorText} id={errorId}/>
+        <ErrorMessage className="foo" text={ERROR_TEXT} id={ERROR_ID}/>
     )
 
     const errorMessageElement = screen.getByRole('paragraph');

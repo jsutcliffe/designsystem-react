@@ -2,42 +2,42 @@ import { test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import HintText from './HintText';
 
-const id = 'hint-text';
-const content = 'Hint text';
+const HINT_TEXT_ID = 'hint-text';
+const HINT_TEXT_CONTENT = 'Hint text';
 
 test('hint test renders correctly', () => {
     render(
         <HintText data-testid="hint-text"
-            id={id}
-            text={content}
+            id={HINT_TEXT_ID}
+            text={HINT_TEXT_CONTENT}
         />
     );
 
     const hintText = screen.getByTestId('hint-text');
     expect(hintText).toHaveClass('ds_hint-text');
-    expect(hintText).toHaveAttribute('id', id);
+    expect(hintText).toHaveAttribute('id', HINT_TEXT_ID);
     expect(hintText.tagName).toEqual('P');
-    expect(hintText.textContent).toEqual(content);
+    expect(hintText.textContent).toEqual(HINT_TEXT_CONTENT);
 });
 
 test('hint test with children instead of text', () => {
     render(
         <HintText data-testid="hint-text"
-            id={id}
+            id={HINT_TEXT_ID}
         >
-            <span>{content}</span>
+            <span>{HINT_TEXT_CONTENT}</span>
         </HintText>
     );
 
     const hintText = screen.getByTestId('hint-text');
-    expect(hintText.innerHTML).toEqual(`<span>${content}</span>`);
+    expect(hintText.innerHTML).toEqual(`<span>${HINT_TEXT_CONTENT}</span>`);
 });
 
 test('passing additional props', () => {
     render(
         <HintText data-testid="hint-text"
-            id={id}
-            text={content}
+            id={HINT_TEXT_ID}
+            text={HINT_TEXT_CONTENT}
             data-test="foo"
         />
     );

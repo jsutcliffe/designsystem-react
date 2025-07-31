@@ -2,13 +2,13 @@ import { test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import NotificationPanel from './NotificationPanel';
 
-const headingText = 'Thank you';
-const text = 'Your Saltire Scholarship Application form has been successfully submitted.';
+const HEADING_TEXT = 'Thank you';
+const TEXT = 'Your Saltire Scholarship Application form has been successfully submitted.';
 
 test('notification banner renders correctly', () => {
     render(
-        <NotificationPanel title={headingText}>
-            {text}
+        <NotificationPanel title={HEADING_TEXT}>
+            {TEXT}
         </NotificationPanel>
     );
 
@@ -18,56 +18,57 @@ test('notification banner renders correctly', () => {
 
     expect(notificationPanel).toHaveClass('ds_notification-panel');
     expect(notificationPanelHeading).toHaveClass('ds_notification-panel__title');
-    expect(notificationPanelHeading.textContent).toEqual(headingText);
+    expect(notificationPanelHeading.textContent).toEqual(HEADING_TEXT);
     expect(notificationPanelHeading.tagName).toEqual('H1');
     expect(notificationPanelContent).toHaveClass('ds_notification-panel__content');
-    expect(notificationPanelContent?.textContent).toEqual(text);
+    expect(notificationPanelContent?.textContent).toEqual(TEXT);
 });
 
 test('notification banner with custom heading level', () => {
-    const headerLevel = 'h2';
+    const HEADING_LEVEL = 'h2';
 
     render(
-        <NotificationPanel headerLevel={headerLevel} title={headingText}>
-            {text}
+        <NotificationPanel headingLevel={HEADING_LEVEL} title={HEADING_TEXT}>
+            {TEXT}
         </NotificationPanel>
     );
 
     const notificationPanelHeading = screen.getByRole('heading');
-    expect(notificationPanelHeading.tagName).toEqual(headerLevel.toUpperCase());
+    expect(notificationPanelHeading.tagName).toEqual(HEADING_LEVEL.toUpperCase());
 });
 
 test('notification banner with aria-live', () => {
-    const ariaLive = 'polite';
+    const ARIA_LIVE = 'polite';
 
     render(
-        <NotificationPanel ariaLive={ariaLive} title={headingText}>
-            {text}
+        <NotificationPanel ariaLive={ARIA_LIVE} title={HEADING_TEXT}>
+            {TEXT}
         </NotificationPanel>
     );
 
     const notificationPanelHeading = screen.getByRole('heading');
     const notificationPanel = notificationPanelHeading.parentElement;
 
-    expect(notificationPanel).toHaveAttribute('aria-live', ariaLive);
+    expect(notificationPanel).toHaveAttribute('aria-live', ARIA_LIVE);
 });
 
 test('notification banner with nonsense heading level reverts to H1', () => {
-    const headerLevel = 'h2';
+    const HEADING_LEVEL = 'h2';
+
     render(
-        <NotificationPanel headerLevel={headerLevel} title={headingText}>
-            {text}
+        <NotificationPanel headingLevel={HEADING_LEVEL} title={HEADING_TEXT}>
+            {TEXT}
         </NotificationPanel>
     );
 
     const notificationPanelHeading = screen.getByRole('heading');
-    expect(notificationPanelHeading.tagName).toEqual(headerLevel.toUpperCase());
+    expect(notificationPanelHeading.tagName).toEqual(HEADING_LEVEL.toUpperCase());
 });
 
 test('passing additional props', () => {
     render(
-        <NotificationPanel title={headingText} data-test="foo">
-            {text}
+        <NotificationPanel title={HEADING_TEXT} data-test="foo">
+            {TEXT}
         </NotificationPanel>
     )
 
@@ -78,8 +79,8 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <NotificationPanel title={headingText} className="foo">
-            {text}
+        <NotificationPanel title={HEADING_TEXT} className="foo">
+            {TEXT}
         </NotificationPanel>
     )
 

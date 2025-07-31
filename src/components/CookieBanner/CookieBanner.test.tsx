@@ -7,7 +7,7 @@ import { test, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import CookieBanner from './CookieBanner';
 
-const text = 'We need to tell you about something';
+const BANNER_TEXT = 'We need to tell you about something';
 
 /**
  * CookieBanner has additional classNames
@@ -15,7 +15,7 @@ const text = 'We need to tell you about something';
 test('cookie banner renders correctly', () => {
     render(
         <CookieBanner>
-            {text}
+            {BANNER_TEXT}
         </CookieBanner>
     );
 

@@ -3,12 +3,12 @@ import { render, screen, within } from '@testing-library/react';
 import AbstractNotificationBanner from './AbstractNotificationBanner';
 import Button from '../components/Button/Button';
 
-const text = 'We need to tell you about something';
+const NOTIFICATION_TEXT = 'We need to tell you about something';
 
 test('abstract notification banner renders correctly', () => {
     render(
         <AbstractNotificationBanner>
-            {text}
+            {NOTIFICATION_TEXT}
         </AbstractNotificationBanner>
     );
 
@@ -24,7 +24,7 @@ test('abstract notification banner renders correctly', () => {
     expect(bannerTitle).toHaveClass('visually-hidden');
 
     expect(bannerText).toHaveClass('ds_notification__text');
-    expect(bannerText?.textContent).toEqual(text);
+    expect(bannerText?.textContent).toEqual(NOTIFICATION_TEXT);
 
     expect(bannerContent).toHaveClass('ds_notification__content');
     expect(bannerWrapper).toHaveClass('ds_wrapper');
@@ -34,7 +34,7 @@ test('abstract notification banner renders correctly', () => {
 test('abstract notification banner with close button', () => {
     render(
         <AbstractNotificationBanner close>
-            {text}
+            {NOTIFICATION_TEXT}
         </AbstractNotificationBanner>
     );
 
@@ -57,7 +57,7 @@ test('abstract notification banner with close button', () => {
 test('abstract notification banner with icon', () => {
     render(
         <AbstractNotificationBanner icon="Search">
-            {text}
+            {NOTIFICATION_TEXT}
         </AbstractNotificationBanner>
     );
 
@@ -73,7 +73,7 @@ test('abstract notification banner with icon', () => {
 test('abstract notification banner with icon modifier classes', () => {
     render(
         <AbstractNotificationBanner icon="Search" iconColour iconInverse>
-            {text}
+            {NOTIFICATION_TEXT}
         </AbstractNotificationBanner>
     );
 
@@ -86,7 +86,7 @@ test('abstract notification banner with icon modifier classes', () => {
 test('abstract notification banner with buttons', () => {
     render(
         <AbstractNotificationBanner>
-            {text}
+            {NOTIFICATION_TEXT}
             <AbstractNotificationBanner.Buttons>
                 <Button data-testid="button">Foo</Button>
             </AbstractNotificationBanner.Buttons>
@@ -106,7 +106,7 @@ test('abstract notification banner with buttons', () => {
 test('passing additional props', () => {
     render(
         <AbstractNotificationBanner data-test="foo">
-            {text}
+            {NOTIFICATION_TEXT}
         </AbstractNotificationBanner>
     )
 
@@ -117,7 +117,7 @@ test('passing additional props', () => {
 test('passing additional CSS classes', () => {
     render(
         <AbstractNotificationBanner className="foo">
-            {text}
+            {NOTIFICATION_TEXT}
         </AbstractNotificationBanner>
     )
 

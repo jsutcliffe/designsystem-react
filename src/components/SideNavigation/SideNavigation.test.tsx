@@ -2,7 +2,7 @@ import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import SideNavigation, { List, Link } from './SideNavigation';
 
-const items = [
+const ITEMS = [
     {
         title: 'Apples',
         href: '#apples',
@@ -43,7 +43,7 @@ const items = [
 
 test('side navigation renders correctly', () => {
     render(
-        <SideNavigation items={items} />
+        <SideNavigation items={ITEMS} />
     );
 
     const sideNavigation = screen.getByRole('navigation');
@@ -124,7 +124,7 @@ test('side nav link with children', () => {
 });
 
 test('side nav list renders correctly', () => {
-    const items = [
+    const ITEMS = [
         {
             title: 'Bramley',
             href: '#bramley'
@@ -136,7 +136,7 @@ test('side nav list renders correctly', () => {
     ];
 
     render(
-        <List items={items}/>
+        <List items={ITEMS}/>
     );
 
     const list = screen.getByRole('list');
@@ -146,7 +146,7 @@ test('side nav list renders correctly', () => {
     expect(list).toHaveClass('ds_side-navigation__list');
     expect(list.tagName).toEqual('UL');
 
-    expect(list.children.length).toEqual(items.length);
+    expect(list.children.length).toEqual(ITEMS.length);
 
     // check properties of first link
     expect(item).toHaveClass('ds_side-navigation__item');
@@ -157,7 +157,7 @@ test('side nav list renders correctly', () => {
 
 test('passing additional props', () => {
     render(
-        <SideNavigation data-test="foo" items={items} />
+        <SideNavigation data-test="foo" items={ITEMS} />
     );
 
     const sideNavigation = screen.getByRole('navigation');
@@ -166,7 +166,7 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <SideNavigation className="foo" items={items} />
+        <SideNavigation className="foo" items={ITEMS} />
     );
 
     const sideNavigation = screen.getByRole('navigation');

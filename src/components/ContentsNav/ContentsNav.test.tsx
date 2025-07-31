@@ -2,8 +2,11 @@ import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import ContentsNav, {Link} from './ContentsNav';
 
+const ITEM_HREF = '#foo';
+const ITEM_TITLE = 'My content';
+
 test('contents nav renders correctly', () => {
-    const items = [
+    const ITEMS = [
         {
             title: 'Apply for Blue Badge',
             current: true
@@ -26,10 +29,10 @@ test('contents nav renders correctly', () => {
         }
     ];
 
-    const label = 'Pages in this guide';
+    const LABEL_TEXT = 'Pages in this guide';
 
     render(
-        <ContentsNav label={label} items={items} />
+        <ContentsNav label={LABEL_TEXT} items={ITEMS} />
     )
 
     const contentsNav = screen.getByRole('navigation');
@@ -37,33 +40,30 @@ test('contents nav renders correctly', () => {
     const contentsNavList = within(contentsNav).getByRole('list');
 
     expect(contentsNav).toHaveClass('ds_contents-nav');
-    expect(contentsNav.ariaLabel).toEqual(label);
+    expect(contentsNav.ariaLabel).toEqual(LABEL_TEXT);
     expect(contentsNav.tagName).toEqual('NAV');
     expect(contentsNavTitle).toHaveClass('ds_contents-nav__title');
     expect(contentsNavTitle.textContent).toEqual('Contents');
     expect(contentsNavList).toHaveClass('ds_contents-nav__list');
     expect(contentsNavList.tagName).toEqual('UL');
-    expect(contentsNavList.children.length).toEqual(items.length);
+    expect(contentsNavList.children.length).toEqual(ITEMS.length);
 });
 
 test('contents nav with custom title', () => {
-    const title = 'My title';
+    const TITLE_TEXT = 'My title';
 
     render(
-        <ContentsNav title={title} items={[]} />
+        <ContentsNav title={TITLE_TEXT} items={[]} />
     );
 
     const contentsNav = screen.getByRole('navigation');
     const contentsNavTitle = within(contentsNav).getByRole('heading');
-    expect(contentsNavTitle.textContent).toEqual(title);
+    expect(contentsNavTitle.textContent).toEqual(TITLE_TEXT);
 });
 
 test('contents nav item', () => {
-    const href = '#foo';
-    const content = 'My content';
-
     render(
-        <Link href={href} title={content} />
+        <Link href={ITEM_HREF} title={ITEM_TITLE} />
     );
 
     const listItem = screen.getByRole('listitem');
@@ -73,20 +73,17 @@ test('contents nav item', () => {
     expect(listItem.tagName).toEqual('LI');
     expect(link).toHaveClass('ds_contents-nav__link');
     expect(link.tagName).toEqual('A');
-    expect(link.textContent).toEqual(content);
-    expect(link).toHaveAttribute('href', href);
+    expect(link.textContent).toEqual(ITEM_TITLE);
+    expect(link).toHaveAttribute('href', ITEM_HREF);
 });
 
 test('contents nav current item with href', () => {
-    const href = '#foo';
-    const content = 'My content';
-
     render(
-        <Link current href={href} title={content} />
+        <Link current href={ITEM_HREF} title={ITEM_TITLE} />
     );
 
     const listItem = screen.getByRole('listitem');
-    const link = within(listItem).getByText(content);
+    const link = within(listItem).getByText(ITEM_TITLE);
 
     expect(listItem.ariaCurrent).toEqual('page');
     expect(link.tagName).toEqual('SPAN');
@@ -94,14 +91,12 @@ test('contents nav current item with href', () => {
 });
 
 test('contents nav current item without href', () => {
-    const content = 'My content';
-
     render(
-        <Link current title={content} />
+        <Link current title={ITEM_TITLE} />
     );
 
     const listItem = screen.getByRole('listitem');
-    const link = within(listItem).getByText(content);
+    const link = within(listItem).getByText(ITEM_TITLE);
 
     expect(listItem.ariaCurrent).toEqual('page');
     expect(link.tagName).toEqual('SPAN');
@@ -109,14 +104,12 @@ test('contents nav current item without href', () => {
 });
 
 test('contents nav item without href', () => {
-    const content = 'My content';
-
     render(
-        <Link title={content} />
+        <Link title={ITEM_TITLE} />
     );
 
     const listItem = screen.getByRole('listitem');
-    const link = within(listItem).getByText(content);
+    const link = within(listItem).getByText(ITEM_TITLE);
 
     expect(link.tagName).toEqual('SPAN');
     expect(link).not.toHaveClass('ds_current');

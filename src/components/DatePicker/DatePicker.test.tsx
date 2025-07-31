@@ -2,20 +2,20 @@ import { test, expect, vi } from 'vitest';
 import { render, screen, within, fireEvent } from '@testing-library/react';
 import DatePicker from './DatePicker';
 
-const labelText = 'Date of birth';
-const id = 'date-picker';
+const LABEL_TEXT = 'Date of birth';
+const DATE_PICKER_ID = 'date-picker';
 
 test('date picker renders correctly', () => {
     render(
         <DatePicker
-            id={id}
-            label={labelText}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
         />
     );
 
     // a little hacky. maybe testid would be better?
     const datePicker = screen.getAllByRole('generic')[1];
-    const label = within(datePicker).getByText(labelText);
+    const label = within(datePicker).getByText(LABEL_TEXT);
     const textInput = within(datePicker).getByRole('textbox');
 
     expect(datePicker).toHaveClass('ds_datepicker');
@@ -23,36 +23,38 @@ test('date picker renders correctly', () => {
     expect(label).toHaveAttribute('for', textInput.id);
     expect(label.tagName).toEqual('LABEL');
     expect(textInput).toHaveClass('ds_input', 'ds_input--fixed-10');
-    expect(textInput.id).toEqual(id);
+    expect(textInput.id).toEqual(DATE_PICKER_ID);
 
     // todo: check for DS script being fired
 });
 
 test('date picker with disabled dates', () => {
-    const disabledDates = '18/05/2023 19/05/2023'
+    const DISABLED_DATES = '18/05/2023 19/05/2023'
+
     render(
         <DatePicker
-            id={id}
-            label={labelText}
-            disabledDates={disabledDates}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
+            disabledDates={DISABLED_DATES}
         />
     );
     const datePicker = screen.getAllByRole('generic')[1];
 
-    expect(datePicker).toHaveAttribute('data-disableddates', disabledDates);
+    expect(datePicker).toHaveAttribute('data-disableddates', DISABLED_DATES);
 });
 
 test('date picker with hint text', () => {
-    const hintText = 'My hint text'
+    const HINT_TEXT = 'My hint text'
+
     render(
         <DatePicker
-            id={id}
-            label={labelText}
-            hintText={hintText}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
+            hintText={HINT_TEXT}
         />
     );
     const datePicker = screen.getAllByRole('generic')[1];
-    const hintTextEl = screen.getByText(hintText);
+    const hintTextEl = screen.getByText(HINT_TEXT);
     const textInput = within(datePicker).getByRole('textbox');
 
     expect(hintTextEl).toBeInTheDocument();
@@ -60,56 +62,60 @@ test('date picker with hint text', () => {
 });
 
 test('date picker with custom icon path', () => {
-    const iconPath = '/my/icon/path'
+    const ICON_PATH = '/my/icon/path'
+
     render(
         <DatePicker
-            id={id}
-            label={labelText}
-            iconPath={iconPath}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
+            iconPath={ICON_PATH}
         />
     );
     const datePicker = screen.getAllByRole('generic')[1];
-    const label = within(datePicker).getByText(labelText);
+    const label = within(datePicker).getByText(LABEL_TEXT);
     const textInput = within(datePicker).getByRole('textbox');
 
     // todo
 });
 
 test('date picker with max date', () => {
-    const maxDate = '28/05/2023'
+    const MAX_DATE = '28/05/2023'
+
     render(
         <DatePicker
-            id={id}
-            label={labelText}
-            maxDate={maxDate}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
+            maxDate={MAX_DATE}
         />
     );
     const datePicker = screen.getAllByRole('generic')[1];
 
-    expect(datePicker).toHaveAttribute('data-maxDate', maxDate);
+    expect(datePicker).toHaveAttribute('data-maxDate', MAX_DATE);
 });
 
 test('date picker with min date', () => {
-    const minDate = '28/05/2023'
+    const MIN_DATE = '28/05/2023'
+
     render(
         <DatePicker
-            id={id}
-            label={labelText}
-            minDate={minDate}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
+            minDate={MIN_DATE}
         />
     );
     const datePicker = screen.getAllByRole('generic')[1];
 
-    expect(datePicker).toHaveAttribute('data-mindate', minDate);
+    expect(datePicker).toHaveAttribute('data-mindate', MIN_DATE);
 });
 
 test('date picker with blur fn', () => {
-    const onBlurFn = vi.fn();
+    const ONBLUR_FUNCTION = vi.fn();
+
     render(
         <DatePicker
-            id={id}
-            label={labelText}
-            onBlur={onBlurFn}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
+            onBlur={ONBLUR_FUNCTION}
         />
     );
     const datePicker = screen.getAllByRole('generic')[1];
@@ -117,16 +123,17 @@ test('date picker with blur fn', () => {
 
     fireEvent.blur(textInput);
 
-    expect(onBlurFn).toHaveBeenCalled();
+    expect(ONBLUR_FUNCTION).toHaveBeenCalled();
 });
 
 test('date picker with change fn', () => {
-    const onChangeFn = vi.fn();
+    const ONCHANGE_FUNCTION = vi.fn();
+
     render(
         <DatePicker
-            id={id}
-            label={labelText}
-            onChange={onChangeFn}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
+            onChange={ONCHANGE_FUNCTION}
         />
     );
     const datePicker = screen.getAllByRole('generic')[1];
@@ -134,32 +141,34 @@ test('date picker with change fn', () => {
 
     fireEvent.change(textInput, {target: {value: 'foo'}});
 
-    expect(onChangeFn).toHaveBeenCalled();
+    expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
 test('date picker with initial value', () => {
-    const initialValue = '28/05/2023';
+    const INITIAL_VALUE = '28/05/2023';
+
     render(
         <DatePicker
-            id={id}
-            label={labelText}
-            value={initialValue}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
+            value={INITIAL_VALUE}
         />
     );
     const datePicker = screen.getAllByRole('generic')[1];
     const textInput = within(datePicker).getByRole('textbox');
 
-    expect(textInput).toHaveValue(initialValue);
+    expect(textInput).toHaveValue(INITIAL_VALUE);
 });
 
 test('date picker with multiple inputs', () => {
-    const initialValue = '28/05/2023';
+    const INITIAL_VALUE = '28/05/2023';
+
     render(
         <DatePicker
-            id={id}
-            label={labelText}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
             multiple
-            value={initialValue}
+            value={INITIAL_VALUE}
         />
     );
 
@@ -174,13 +183,13 @@ test('date picker with multiple inputs', () => {
 
     expect(textInputs.length).toEqual(3);
 
-    expect(dateInput).toHaveValue(initialValue.split('/')[0]);
-    expect(monthInput).toHaveValue(initialValue.split('/')[1]);
-    expect(yearInput).toHaveValue(initialValue.split('/')[2]);
+    expect(dateInput).toHaveValue(INITIAL_VALUE.split('/')[0]);
+    expect(monthInput).toHaveValue(INITIAL_VALUE.split('/')[1]);
+    expect(yearInput).toHaveValue(INITIAL_VALUE.split('/')[2]);
 
-    expect(dateInput).toHaveAttribute('id', `${id}-day`);
-    expect(monthInput).toHaveAttribute('id', `${id}-month`);
-    expect(yearInput).toHaveAttribute('id', `${id}-year`);
+    expect(dateInput).toHaveAttribute('id', `${DATE_PICKER_ID}-day`);
+    expect(monthInput).toHaveAttribute('id', `${DATE_PICKER_ID}-month`);
+    expect(yearInput).toHaveAttribute('id', `${DATE_PICKER_ID}-year`);
 
     expect(dateInput).toHaveClass('ds_input', 'ds_input--fixed-2', 'js-datepicker-date');
     expect(monthInput).toHaveClass('ds_input', 'ds_input--fixed-2', 'js-datepicker-month');
@@ -196,18 +205,19 @@ test('date picker with multiple inputs', () => {
 });
 
 test('date picker with error message', () => {
-    const errorMessage = 'This is a required field';
+    const ERROR_MESSAGE_TEXT = 'This is a required field';
+
     render(
         <DatePicker
-            id={id}
-            label={labelText}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
             error
-            errorMessage={errorMessage}
+            errorMessage={ERROR_MESSAGE_TEXT}
         />
     );
 
     const textInput = screen.getByRole('textbox');
-    const errorMessageElement = screen.getByText(errorMessage);
+    const errorMessageElement = screen.getByText(ERROR_MESSAGE_TEXT);
 
     expect(textInput).toHaveClass('ds_input--error')
     expect(textInput).toHaveAttribute('aria-describedby', errorMessageElement.id);
@@ -219,8 +229,8 @@ test('date picker with error message', () => {
 test('passing additional props', () => {
     render(
         <DatePicker
-            id={id}
-            label={labelText}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
             data-test="foo"
         />
     )
@@ -232,8 +242,8 @@ test('passing additional props', () => {
 test('passing additional CSS classes', () => {
     render(
         <DatePicker
-            id={id}
-            label={labelText}
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
             className="foo"
         />
     )

@@ -2,12 +2,12 @@ import { test, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import WrapperTag from './WrapperTag';
 
-const content = 'My content';
+const CONTENT = 'My content';
 
 test('wrapper tag renders correctly', () => {
     render(
         <WrapperTag id="foo">
-            {content}
+            {CONTENT}
         </WrapperTag>
     );
 
@@ -21,7 +21,7 @@ test('wrapper tag widh tag name', () => {
         <WrapperTag id="foo"
             tagName="section"
         >
-            {content}
+            {CONTENT}
         </WrapperTag>
     );
 
@@ -33,7 +33,7 @@ test('wrapper tag widh tag name', () => {
 test('passing additional props', () => {
     render(
         <WrapperTag id="foo" data-test="foo">
-            {content}
+            {CONTENT}
         </WrapperTag>
     );
 

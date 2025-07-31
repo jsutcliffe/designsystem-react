@@ -2,7 +2,7 @@ import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import Breadcrumbs from './Breadcrumbs';
 
-const items = [
+const ITEMS = [
     { href: 'home', title: 'Home' },
     { href: 'category', title: 'Category' },
     { title: 'Page' }
@@ -10,7 +10,7 @@ const items = [
 
 test('renders correctly', () => {
     render(
-        <Breadcrumbs items={items} />
+        <Breadcrumbs items={ITEMS} />
     );
 
     const nav = screen.getByRole('navigation');
@@ -25,7 +25,7 @@ test('renders correctly', () => {
     expect(list).toHaveClass('ds_breadcrumbs');
 
     // check items
-    expect(listItems.length).toEqual(items.length);
+    expect(listItems.length).toEqual(ITEMS.length);
 
     listItems.forEach((item, index) => {
         expect(item).toHaveClass('ds_breadcrumbs__item');
@@ -49,7 +49,7 @@ test('renders with last item hidden', () => {
     render(
         <Breadcrumbs
             hideLastItem
-            items={items}
+            items={ITEMS}
         />
     );
 
@@ -67,7 +67,7 @@ test('renders with last item hidden', () => {
 test('passing additional props', () => {
     render(
         <Breadcrumbs
-            items={items}
+            items={ITEMS}
             data-test="foo"
         />
     );
@@ -79,7 +79,7 @@ test('passing additional props', () => {
 test('passing additional CSS classes', () => {
     render(
         <Breadcrumbs
-            items={items}
+            items={ITEMS}
             className="foo"
         />
     );

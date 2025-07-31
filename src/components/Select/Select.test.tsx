@@ -2,9 +2,9 @@ import { test, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Select from './Select';
 
-const id = 'select-component';
-const labelText = 'choose a component';
-const options = [
+const SELECT_ID = 'select-component';
+const LABEL_TEXT = 'choose a component';
+const OPTIONS = [
     {
         text: 'Accordion',
         value: 'accordion'
@@ -22,9 +22,9 @@ const options = [
 test('select renders correctly', () => {
     render(
         <Select
-            id={id}
-            label={labelText}
-            options={options}
+            id={SELECT_ID}
+            label={LABEL_TEXT}
+            options={OPTIONS}
         />
     );
 
@@ -34,14 +34,14 @@ test('select renders correctly', () => {
     const selectArrow = select.nextElementSibling;
 
     expect(select).toHaveClass('ds_select');
-    expect(select.id).toEqual(id);
-    expect(select).toHaveAttribute('name', id);
+    expect(select.id).toEqual(SELECT_ID);
+    expect(select).toHaveAttribute('name', SELECT_ID);
 
     expect(selectWrapper).toHaveClass('ds_select-wrapper');
     expect(selectWrapper?.tagName).toEqual('DIV');
 
     expect(label).toHaveClass('ds_label');
-    expect(label).toHaveAttribute('for', id);
+    expect(label).toHaveAttribute('for', SELECT_ID);
 
     expect(selectArrow).toHaveClass('ds_select-arrow');
     expect(selectArrow).toHaveAttribute('aria-hidden');
@@ -49,34 +49,34 @@ test('select renders correctly', () => {
 });
 
 test('select with width', () => {
-    const width = 'fixed-10';
+    const SELECTWIDTH = 'fixed-10';
 
     render(
         <Select
-            id={id}
-            label={labelText}
-            options={options}
-            width={width}
+            id={SELECT_ID}
+            label={LABEL_TEXT}
+            options={OPTIONS}
+            width={SELECTWIDTH}
         />
     );
 
     const selectWrapper = screen.getByRole('combobox').parentElement;
-    expect(selectWrapper).toHaveClass(`ds_input--${width}`);
+    expect(selectWrapper).toHaveClass(`ds_input--${SELECTWIDTH}`);
 });
 
 test('select with hint text', () => {
-    const hintText = 'hint text';
+    const HINT_TEXT = 'hint text';
 
     render(
         <Select
-            id={id}
-            label={labelText}
-            options={options}
-            hintText={hintText}
+            id={SELECT_ID}
+            label={LABEL_TEXT}
+            options={OPTIONS}
+            hintText={HINT_TEXT}
         />
     );
 
-    const hintTextEl = screen.getByText(hintText);
+    const hintTextEl = screen.getByText(HINT_TEXT);
     const select = screen.getByRole('combobox');
 
     expect(hintTextEl).toBeInTheDocument();
@@ -84,29 +84,30 @@ test('select with hint text', () => {
 });
 
 test('select with custom name', () => {
-    const name = 'foo';
+    const SELECT_NAME = 'foo';
 
     render(
         <Select
-            id={id}
-            label={labelText}
-            options={options}
-            name={name}
+            id={SELECT_ID}
+            label={LABEL_TEXT}
+            options={OPTIONS}
+            name={SELECT_NAME}
         />
     );
 
     const select = screen.getByRole('combobox');
-    expect(select).toHaveAttribute('name', name);
+    expect(select).toHaveAttribute('name', SELECT_NAME);
 });
 
 test('select with blur function', () => {
-    const onBlurFn = vi.fn();
+    const ONBLUR_FUNCTION = vi.fn();
+
     render(
         <Select
-            id={id}
-            label={labelText}
-            options={options}
-            onBlur={onBlurFn}
+            id={SELECT_ID}
+            label={LABEL_TEXT}
+            options={OPTIONS}
+            onBlur={ONBLUR_FUNCTION}
         />
     );
 
@@ -114,17 +115,18 @@ test('select with blur function', () => {
 
     fireEvent.blur(select);
 
-    expect(onBlurFn).toHaveBeenCalled();
+    expect(ONBLUR_FUNCTION).toHaveBeenCalled();
 });
 
 test('select with change function', () => {
-    const onChangeFn = vi.fn();
+    const ONCHANGE_FUNCTION = vi.fn();
+
     render(
         <Select
-            id={id}
-            label={labelText}
-            options={options}
-            onChange={onChangeFn}
+            id={SELECT_ID}
+            label={LABEL_TEXT}
+            options={OPTIONS}
+            onChange={ONCHANGE_FUNCTION}
         />
     );
 
@@ -132,59 +134,60 @@ test('select with change function', () => {
 
     fireEvent.change(select, {target: {value: 'button'}});
 
-    expect(onChangeFn).toHaveBeenCalled();
+    expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
 test('select with placeholder option', () => {
-    const placeholder = 'foo';
+    const PLACEHOLDER_TEXT = 'foo';
 
     render(
         <Select
-            id={id}
-            label={labelText}
-            options={options}
-            placeholder={placeholder}
+            id={SELECT_ID}
+            label={LABEL_TEXT}
+            options={OPTIONS}
+            placeholder={PLACEHOLDER_TEXT}
         />
     );
 
     const select = screen.getByRole('combobox');
     const firstOption = select.childNodes[0];
-    expect(firstOption.textContent).toEqual(placeholder);
+    expect(firstOption.textContent).toEqual(PLACEHOLDER_TEXT);
     expect(firstOption).toHaveAttribute('value', '');
 });
 
 test('select with initial value', () => {
-    const initialValue = 'button';
+    const INITIAL_VALUE = 'button';
 
     render(
         <Select
-            id={id}
-            label={labelText}
-            options={options}
-            defaultValue={initialValue}
+            id={SELECT_ID}
+            label={LABEL_TEXT}
+            options={OPTIONS}
+            defaultValue={INITIAL_VALUE}
         />
     );
 
     const select = screen.getByRole('combobox');
     const selectedOption = [].slice.call(select.childNodes).filter(childNode => childNode.selected)[0];
-    expect(selectedOption).toHaveAttribute('value', initialValue);
+    expect(selectedOption).toHaveAttribute('value', INITIAL_VALUE);
 });
 
 test('select with error message', () => {
-    const errorMessage = 'This is a required field';
+    const ERROR_MESSAGE_TEXT = 'This is a required field';
+
     render(
         <Select
-            id={id}
-            label={labelText}
-            options={options}
+            id={SELECT_ID}
+            label={LABEL_TEXT}
+            options={OPTIONS}
             error
-            errorMessage={errorMessage}
+            errorMessage={ERROR_MESSAGE_TEXT}
         />
     );
 
     const select = screen.getByRole('combobox');
     const selectWrapper = select.parentElement;
-    const errorMessageElement = screen.getByText(errorMessage);
+    const errorMessageElement = screen.getByText(ERROR_MESSAGE_TEXT);
 
     expect(selectWrapper).toHaveClass('ds_input--error')
     expect(select).toHaveAttribute('aria-describedby', errorMessageElement.id);
@@ -196,9 +199,9 @@ test('select with error message', () => {
 test('passing additional props', () => {
     render(
         <Select
-            id={id}
-            label={labelText}
-            options={options}
+            id={SELECT_ID}
+            label={LABEL_TEXT}
+            options={OPTIONS}
             data-test="foo"
         />
     );
@@ -211,9 +214,9 @@ test('passing additional props', () => {
 test('passing additional CSS classes', () => {
     render(
         <Select
-            id={id}
-            label={labelText}
-            options={options}
+            id={SELECT_ID}
+            label={LABEL_TEXT}
+            options={OPTIONS}
             className="foo"
         />
     );

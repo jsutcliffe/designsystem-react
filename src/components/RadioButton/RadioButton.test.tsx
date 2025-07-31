@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import RadioGroup, { Radio } from './RadioButton';
 
 test('radio group renders correct children', () => {
-    const items = [
+    const ITEMS = [
         {
             id: 'universal-credit',
             label: 'Universal Credit',
@@ -22,20 +22,20 @@ test('radio group renders correct children', () => {
             label: 'I do not receive any of these benefits',
         }
     ];
-    const groupName = "foo"
+    const GROUP_NAME = "foo"
 
     render(
-        <RadioGroup name={groupName} items={items} />
+        <RadioGroup name={GROUP_NAME} items={ITEMS} />
     );
 
     const radios = screen.getAllByRole('radio');
     const groupContainer = radios[0].parentElement?.parentElement;
-    expect(radios.length).toEqual(items.length);
+    expect(radios.length).toEqual(ITEMS.length);
     expect(groupContainer).toHaveClass('ds_radios', 'ds_field-group');
 });
 
 test('inline radio group', () => {
-    const items = [
+    const ITEMS = [
         {
             id: 'radio-yes',
             label: 'Yes'
@@ -45,10 +45,10 @@ test('inline radio group', () => {
             label: 'No'
         }
     ];
-    const groupName = "yesno"
+    const GROUP_NAME = "yesno"
 
     render(
-        <RadioGroup inline name={groupName} items={items} />
+        <RadioGroup inline name={GROUP_NAME} items={ITEMS} />
     );
 
 
@@ -58,20 +58,20 @@ test('inline radio group', () => {
 });
 
 test('radio group passes all expected item params', () => {
-    const onBlurFn = vi.fn();
-    const onChangeFn = vi.fn();
-    const groupName = "foo"
+    const ONBLUR_FUNCTION = vi.fn();
+    const ONCHANGE_FUNCTION = vi.fn();
+    const GROUP_NAME = "foo"
 
     render(
-        <RadioGroup name={groupName} small items={[
+        <RadioGroup name={GROUP_NAME} small items={[
             {
                 checked: true,
                 exclusive: true,
                 hintText: 'hint text',
                 id: 'myid',
                 label: 'label text',
-                onBlur: {onBlurFn},
-                onChange: {onChangeFn},
+                onBlur: {ONBLUR_FUNCTION},
+                onChange: {ONCHANGE_FUNCTION},
                 small: true
             }
         ]}/>
@@ -82,17 +82,17 @@ test('radio group passes all expected item params', () => {
     const hintText = screen.getByText('hint text');
 
     expect(radio).toHaveAttribute('checked');
-    expect(radio).toHaveAttribute('name', groupName);
+    expect(radio).toHaveAttribute('name', GROUP_NAME);
     expect(radio.id).toEqual('myid');
     expect(radioContainer).toHaveClass('ds_radio--small');
     expect(hintText).toBeInTheDocument();
     expect(radio).toHaveAttribute('aria-describedby', hintText.id);
 
     // fireEvent.blur(radio);
-    // expect(onBlurFn).toHaveBeenCalled();
+    // expect(ONBLUR_FUNCTION).toHaveBeenCalled();
 
     // fireEvent.click(radio);
-    // expect(onChangeFn).toHaveBeenCalled();
+    // expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
 test('individual radio renders correctly', () => {
@@ -126,31 +126,31 @@ test('checked radio', () => {
 });
 
 test('radio with blur fn', () => {
-    const onBlurFn = vi.fn();
+    const ONBLUR_FUNCTION = vi.fn();
 
     render(
-        <Radio onBlur={onBlurFn} name="benefitType" label="Pension Credit" id="pensioncredit" />
+        <Radio onBlur={ONBLUR_FUNCTION} name="benefitType" label="Pension Credit" id="pensioncredit" />
     );
 
     const radio = screen.getByRole('radio');
 
     fireEvent.blur(radio);
 
-    expect(onBlurFn).toHaveBeenCalled();
+    expect(ONBLUR_FUNCTION).toHaveBeenCalled();
 });
 
 test('radio with change fn', () => {
-    const onChangeFn = vi.fn();
+    const ONCHANGE_FUNCTION = vi.fn();
 
     render(
-        <Radio onChange={onChangeFn} name="benefitType" label="Pension Credit" id="pensioncredit" />
+        <Radio onChange={ONCHANGE_FUNCTION} name="benefitType" label="Pension Credit" id="pensioncredit" />
     );
 
     const radio = screen.getByRole('radio');
 
     fireEvent.click(radio);
 
-    expect(onChangeFn).toHaveBeenCalled();
+    expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
 test('radio with hint text', () => {

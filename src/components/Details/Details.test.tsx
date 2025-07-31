@@ -2,18 +2,18 @@ import { test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Details from './Details';
 
-const summaryText = 'I can\'t sign in';
-const content = '<p>hello</p>';
+const SUMARY_TEXT = 'I can\'t sign in';
+const CONTENT = '<p>hello</p>';
 
 test('details renders correctly', () => {
 
     render(
-        <Details summary={summaryText}>
+        <Details summary={SUMARY_TEXT}>
             <p>hello</p>
         </Details>
     );
 
-    const summaryElement = screen.getByText(summaryText);
+    const summaryElement = screen.getByText(SUMARY_TEXT);
     const detailsElement = summaryElement.parentElement;
     const textElement = summaryElement.nextElementSibling;
 
@@ -22,29 +22,29 @@ test('details renders correctly', () => {
     expect(summaryElement).toHaveClass('ds_details__summary');
     expect(summaryElement?.tagName).toEqual('SUMMARY');
     expect(textElement).toHaveClass('ds_details__text');
-    expect(textElement?.innerHTML).toEqual(content);
+    expect(textElement?.innerHTML).toEqual(CONTENT);
 });
 
 test('passing additional props', () => {
     render(
-        <Details data-test="foo" summary={summaryText}>
+        <Details data-test="foo" summary={SUMARY_TEXT}>
             <p>hello</p>
         </Details>
     )
 
-    const summaryElement = screen.getByText(summaryText);
+    const summaryElement = screen.getByText(SUMARY_TEXT);
     const detailsElement = summaryElement.parentElement;
     expect(detailsElement?.dataset.test).toEqual('foo');
 });
 
 test('passing additional CSS classes', () => {
     render(
-        <Details className="foo" summary={summaryText}>
+        <Details className="foo" summary={SUMARY_TEXT}>
             <p>hello</p>
         </Details>
     )
 
-    const summaryElement = screen.getByText(summaryText);
+    const summaryElement = screen.getByText(SUMARY_TEXT);
     const detailsElement = summaryElement.parentElement;
     expect(detailsElement).toHaveClass('foo', 'ds_details');
 });

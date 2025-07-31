@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import CheckboxGroup, { Checkbox } from './Checkbox';
 
 test('checkbox group renders correct children', () => {
-    const items = [
+    const ITEMS = [
         {
             id: 'universal-credit',
             label: 'Universal Credit',
@@ -25,18 +25,18 @@ test('checkbox group renders correct children', () => {
     ];
 
     render(
-        <CheckboxGroup items={items} />
+        <CheckboxGroup items={ITEMS} />
     );
 
     const checkboxes = screen.getAllByRole('checkbox');
     const groupContainer = checkboxes[0].parentElement?.parentElement;
-    expect(checkboxes.length).toEqual(items.length);
+    expect(checkboxes.length).toEqual(ITEMS.length);
     expect(groupContainer).toHaveClass('ds_checkboxes', 'ds_field-group');
 });
 
 test('checkbox group passes all expected item params', () => {
-    const onBlurFn = vi.fn();
-    const onChangeFn = vi.fn();
+    const ONBLUR_FUNCTION = vi.fn();
+    const ONCHANGE_FUNCTION = vi.fn();
 
     render(
         <CheckboxGroup small items={[
@@ -46,8 +46,8 @@ test('checkbox group passes all expected item params', () => {
                 hintText: 'hint text',
                 id: 'myid',
                 label: 'label text',
-                onBlur: {onBlurFn},
-                onChange: {onChangeFn},
+                onBlur: {ONBLUR_FUNCTION},
+                onChange: {ONCHANGE_FUNCTION},
                 small: true
             }
         ]}/>
@@ -65,10 +65,10 @@ test('checkbox group passes all expected item params', () => {
     expect(checkbox).toHaveAttribute('aria-describedby', hintText.id);
 
     // fireEvent.blur(checkbox);
-    // expect(onBlurFn).toHaveBeenCalled();
+    // expect(ONBLUR_FUNCTION).toHaveBeenCalled();
 
     // fireEvent.click(checkbox);
-    // expect(onChangeFn).toHaveBeenCalled();
+    // expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
 test('individual checkbox renders correctly', () => {
@@ -116,31 +116,31 @@ test('exclusive checkbox', () => {
 });
 
 test('checkbox with blur fn', () => {
-    const onBlurFn = vi.fn();
+    const ONBLUR_FUNCTION = vi.fn();
 
     render(
-        <Checkbox onBlur={onBlurFn} label="Pension Credit" id="pensioncredit" />
+        <Checkbox onBlur={ONBLUR_FUNCTION} label="Pension Credit" id="pensioncredit" />
     );
 
     const checkbox = screen.getByRole('checkbox');
 
     fireEvent.blur(checkbox);
 
-    expect(onBlurFn).toHaveBeenCalled();
+    expect(ONBLUR_FUNCTION).toHaveBeenCalled();
 });
 
 test('checkbox with change fn', () => {
-    const onChangeFn = vi.fn();
+    const ONCHANGE_FUNCTION = vi.fn();
 
     render(
-        <Checkbox onChange={onChangeFn} label="Pension Credit" id="pensioncredit" />
+        <Checkbox onChange={ONCHANGE_FUNCTION} label="Pension Credit" id="pensioncredit" />
     );
 
     const checkbox = screen.getByRole('checkbox');
 
     fireEvent.click(checkbox);
 
-    expect(onChangeFn).toHaveBeenCalled();
+    expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
 test('checkbox with hint text', () => {

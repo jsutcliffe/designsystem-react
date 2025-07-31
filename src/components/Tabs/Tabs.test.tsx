@@ -29,7 +29,7 @@ test('tab container renders correctly', () => {
     expect(tabContainer.tagName).toEqual('DIV');
 
     expect(tabHeading).toHaveClass('ds_tabs__title');
-    // default header level
+    // default heading level
     expect(tabHeading.tagName).toEqual('H2');
     expect(tabHeading.parentElement).toEqual(tabContainer);
     // default ID-heading
@@ -83,10 +83,10 @@ test('non-bordered tabs', () => {
 });
 
 test('custom title', () => {
-    const title = 'My title';
+    const TABS_TITLE = 'My title';
 
     render(
-        <Tabs data-testid="tabcontainer" title={title}>
+        <Tabs data-testid="tabcontainer" title={TABS_TITLE}>
             <Tabs.Item tabLabel="Tab 1" data-testid="tabpanel1">
                 <div data-testid="tabpanel1content">Content one</div>
             </Tabs.Item>
@@ -101,14 +101,14 @@ test('custom title', () => {
     const tabHeading = within(tabContainer).getByRole('heading');
 
     expect(tabList).toHaveAttribute('aria-labelledby', tabHeading.id);
-    expect(tabHeading.textContent).toEqual(title)
+    expect(tabHeading.textContent).toEqual(TABS_TITLE)
 });
 
-test('custom base ID', () => {
-    const baseId = 'foo';
+test('custom heading level', () => {
+    const HEADING_LEVEL = 'h3';
 
     render(
-        <Tabs data-testid="tabcontainer" baseId={baseId}>
+        <Tabs data-testid="tabcontainer" headingLevel={HEADING_LEVEL}>
             <Tabs.Item tabLabel="Tab 1" data-testid="tabpanel1">
                 <div data-testid="tabpanel1content">Content one</div>
             </Tabs.Item>
@@ -121,34 +121,14 @@ test('custom base ID', () => {
     const tabContainer = screen.getByTestId('tabcontainer');
     const tabHeading = within(tabContainer).getByRole('heading');
 
-    expect(tabHeading).toHaveAttribute('id', `${baseId}-heading`);
-});
-
-test('custom header level', () => {
-    const headerLevel = 'h3';
-
-    render(
-        <Tabs data-testid="tabcontainer" headerLevel={headerLevel}>
-            <Tabs.Item tabLabel="Tab 1" data-testid="tabpanel1">
-                <div data-testid="tabpanel1content">Content one</div>
-            </Tabs.Item>
-            <Tabs.Item tabLabel="Tab 2" data-testid="tabpanel2">
-                Content two
-            </Tabs.Item>
-        </Tabs>
-    );
-
-    const tabContainer = screen.getByTestId('tabcontainer');
-    const tabHeading = within(tabContainer).getByRole('heading');
-
-    expect(tabHeading.tagName).toEqual(headerLevel.toUpperCase());
+    expect(tabHeading.tagName).toEqual(HEADING_LEVEL.toUpperCase());
 });
 
 test('custom baseID', () => {
-    const baseId = 'myId';
+    const BASE_ID = 'myId';
 
     render(
-        <Tabs data-testid="tabcontainer" baseId={baseId}>
+        <Tabs data-testid="tabcontainer" baseId={BASE_ID}>
             <Tabs.Item tabLabel="Tab 1" data-testid="tabpanel1">
                 <div data-testid="tabpanel1content">Content one</div>
             </Tabs.Item>
@@ -164,23 +144,23 @@ test('custom baseID', () => {
     const tabPanelTwo = screen.getByTestId('tabpanel2');
 
     // default title slugified to part of the ID
-    expect(tabHeading).toHaveAttribute('id', `${baseId}-heading`);
+    expect(tabHeading).toHaveAttribute('id', `${BASE_ID}-heading`);
     // generated IDs using the slug of the tab title
-    expect(tabPanelOne).toHaveAttribute('id', `${baseId}-tab-1`);
-    expect(tabPanelTwo).toHaveAttribute('id', `${baseId}-tab-2`);
+    expect(tabPanelOne).toHaveAttribute('id', `${BASE_ID}-tab-1`);
+    expect(tabPanelTwo).toHaveAttribute('id', `${BASE_ID}-tab-2`);
 });
 
 test('tab with and without specific ID attribute', () => {
-    const baseId = 'foo'
-    const tabLabel = 'Tab 1';
-    const id = 'bar';
+    const BASE_ID = 'foo'
+    const TAB_LABEL = 'Tab 1';
+    const TAB_ID = 'bar';
 
     render(
-        <Tabs baseId={baseId}>
-            <Tabs.Item tabLabel={tabLabel} data-testid="tabpanel1">
+        <Tabs baseId={BASE_ID}>
+            <Tabs.Item tabLabel={TAB_LABEL} data-testid="tabpanel1">
                 <div data-testid="tabpanel1content">Content one</div>
             </Tabs.Item>
-            <Tabs.Item tabLabel="Tab 2" id={id} data-testid="tabpanel2">
+            <Tabs.Item tabLabel="Tab 2" id={TAB_ID} data-testid="tabpanel2">
                 <div data-testid="tabpanel1content">Content one</div>
             </Tabs.Item>
         </Tabs>
@@ -189,8 +169,8 @@ test('tab with and without specific ID attribute', () => {
     const tabPanelOne = screen.getByTestId('tabpanel1');
     const tabPanelTwo = screen.getByTestId('tabpanel2');
 
-    expect(tabPanelOne).toHaveAttribute('id', `${baseId}-${slugify(tabLabel)}`);
-    expect(tabPanelTwo).toHaveAttribute('id', id);
+    expect(tabPanelOne).toHaveAttribute('id', `${BASE_ID}-${slugify(TAB_LABEL)}`);
+    expect(tabPanelTwo).toHaveAttribute('id', TAB_ID);
 });
 
 test('with manual activation', () => {

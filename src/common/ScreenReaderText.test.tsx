@@ -2,19 +2,19 @@ import { test, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import ScreenReaderText from './ScreenReaderText';
 
-const content = 'My content';
+const CONTENT = 'My content';
 
 test('screen reader text renders correctly', () => {
     render(
         <ScreenReaderText>
-            {content}
+            {CONTENT}
         </ScreenReaderText>
     );
 
     const srtext = document.querySelector('span');
 
     expect(srtext).toHaveClass('visually-hidden');
-    expect(srtext?.textContent).toEqual(content)
+    expect(srtext?.textContent).toEqual(CONTENT)
 });
 
 test('passing additional props', () => {
@@ -22,7 +22,7 @@ test('passing additional props', () => {
         <ScreenReaderText
             data-test="foo"
         >
-            {content}
+            {CONTENT}
         </ScreenReaderText>
     );
 
