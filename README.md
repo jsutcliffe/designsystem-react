@@ -4,6 +4,10 @@ This repository contains a React implementation of the [Scottish Government Desi
 
 There is a documentation site showing what is in this implementation and how to use it here: https://designsystem-react.vercel.app/
 
+## 🚧 Under construction 🚧
+
+Warning: This project is in an alpha state and could potentially receive large breaking changes with little warning while it is being developed.
+
 ## Feedback, help or support
 
 If you need any help or want to give any feedback you can e-mail the Design System team at: [designsystem@gov.scot](mailto:designsystem@gov.scot).
