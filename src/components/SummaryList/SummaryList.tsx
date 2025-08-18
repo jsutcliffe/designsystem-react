@@ -1,71 +1,25 @@
+import React, { Children, useId } from 'react';
+
+import ActionLink from '../../common/ActionLink';
 import ConditionalWrapper from '../../common/ConditionalWrapper';
-import WrapperTag from '../../common/WrapperTag';
 
-function escapedNewLineToLineBreakTag (string: string) {
-    if (typeof string === 'string') {
-        // @ts-ignore
-        return string.split('\n').map((item, index) => {
-            return (index === 0) ? item : [<br key={index} />, item]
-        });
-    }
-}
+const Item = ({
+    children,
+    title
+}: SGDS.Component.SummaryList.Item) => {
+    let values: any[] = [];
+    let actions: any[] = [];
 
-function convertToSlug(string: string) {
-    return string.toLowerCase()
-        .replace(/[^\w ]+/g, "")
-        .replace(/ +/g, "-");
-}
+    const describedById = useId();
 
-export const Answer: React.FC<SGDS.Component.SummaryList.Answer> = ({
-    value
-}) => {
-    const processedValue = escapedNewLineToLineBreakTag(value.toString());
-
-    return (
-        <q className="ds_summary-list__answer">{processedValue}</q>
-    );
-};
-
-export const Action: React.FC<SGDS.Component.SummaryList.Action> = ({
-    describedby,
-    href,
-    onclick,
-    title,
-}) => {
-    let tagName = 'button';
-    if (href) {
-        tagName = 'a';
-    }
-
-    return (
-        <WrapperTag
-            aria-describedby={describedby}
-            className="ds_link"
-            href={href}
-            onClick={onclick}
-            tagName={tagName}
-            type={tagName === 'button' ? 'button' : undefined}
-        >
-            {title}
-        </WrapperTag>
-    );
-};
-
-export const Item: React.FC<SGDS.Component.SummaryList.Item> = ({
-    actions,
-    index = 1,
-    title,
-    value
-}) => {
-    let values: string[] = [];
-
-    if (Array.isArray(value)) {
-        values = value;
-    } else {
-        values = [value || ''];
-    }
-
-    const describedById = `q${index+1}-${convertToSlug(title)}`;
+    Children.forEach(children, (child: React.ReactNode) => {
+        const thisChild = child as React.ReactElement<SGDS.Common.ActionLink>;
+        if (thisChild && thisChild.type === Value) {
+            values.push(thisChild);
+        } else if (thisChild && thisChild.type === ActionLink) {
+            actions.push(React.cloneElement(thisChild, { describedby: describedById }));
+        }
+    });
 
     return (
         <li className="ds_summary-list__item">
@@ -75,42 +29,53 @@ export const Item: React.FC<SGDS.Component.SummaryList.Item> = ({
                     condition={values.length > 1}
                     wrapper={(children: React.JSX.Element) => <ul className="ds_no-bullets">{children}</ul>}
                 >
-                    {values && values.map((value, index: number) => (
+                     {values && values.map((value, index: number) => (
                         <ConditionalWrapper
                             condition={values.length > 1}
                             wrapper={(children: React.JSX.Element) => <li>{children}</li>}
                             key={'answer' + index}
                         >
-                            <Answer
-                                value={value}
-                            />
+                            {value}
                         </ConditionalWrapper>
                     ))}
                 </ConditionalWrapper>
             </span>
             {actions &&
                 <div className="ds_summary-list__actions">
-                    {actions && actions.map((action, index: number) => (
-                        <Action
-                            describedby={describedById}
-                            href={action.href}
-                            onclick={action.onclick}
-                            title={action.title}
-                            key={'summarylistaction' + index}
-                        />
-                    ))}
+                    <ConditionalWrapper
+                        condition={actions.length > 1}
+                        wrapper={(children: React.JSX.Element) => <ul className="ds_summary-list__actions-list">{children}</ul>}
+                    >
+                        {actions && actions.map((action, index: number) => (
+                            <ConditionalWrapper
+                                condition={actions.length > 1}
+                                wrapper={(children: React.JSX.Element) => <li className="ds_summary-list__actions-list-item">{children}</li>}
+                                key={'action' + index}
+                            >
+                                {action}
+                            </ConditionalWrapper>
+                        ))}
+                    </ConditionalWrapper>
                 </div>
             }
         </li>
     );
 };
 
-const SummaryList: React.FC<SGDS.Component.SummaryList> = ({
+const Value = ({
+    children
+}: SGDS.Component.SummaryList.Answer) => {
+    return (
+        <q className="ds_summary-list__answer">{children}</q>
+    );
+};
+
+const SummaryList = ({
+    children,
     className,
-    items,
     noBorder,
     ...props
-}) => {
+}: SGDS.Component.SummaryList) => {
     return (
         <ol
             className={[
@@ -120,22 +85,19 @@ const SummaryList: React.FC<SGDS.Component.SummaryList> = ({
             ].join(' ')}
             {...props}
         >
-            {items && items.map((item, index: number) => (
-                <Item
-                    actions={item.actions}
-                    title={item.title}
-                    value={item.value}
-                    index={index}
-                    key={'summarylistitem' + index}
-                />
-            ))}
+           {children}
         </ol>
     );
 };
 
+
+SummaryList.Action = ActionLink;
+SummaryList.Item = Item;
+SummaryList.Value = Value;
+
 SummaryList.displayName = 'SummaryList';
-Action.displayName = 'SummaryListAction';
-Answer.displayName = 'SumaryListAnswer';
-Item.displayName = 'SummaryListItem';
+SummaryList.Action.displayName = 'SummaryList.Action';
+Item.displayName = 'SummaryList.Item';
+Value.displayName = 'SumaryList.Value';
 
 export default SummaryList;

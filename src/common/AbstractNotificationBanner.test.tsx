@@ -72,7 +72,7 @@ test('abstract notification banner with icon', () => {
 
 test('abstract notification banner with icon modifier classes', () => {
     render(
-        <AbstractNotificationBanner icon="Search" iconColour iconInverse>
+        <AbstractNotificationBanner icon="Search" hasColourIcon hasInverseIcon>
             {NOTIFICATION_TEXT}
         </AbstractNotificationBanner>
     );

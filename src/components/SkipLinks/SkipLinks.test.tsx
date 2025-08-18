@@ -54,23 +54,35 @@ test('custom link target', () => {
     expect(skipLinksLink).toHaveAttribute('href', `#${CUSTOM_ID}`)
 });
 
-test('additional links', () => {
-    const ITEMS = [
-        { title: 'foo', targetId: 'bar' }
-    ];
+test('explicit links', () => {
+    const LINK_ID = 'foo';
+    const LINK_TEXT = 'bar';
 
     render(
-        <SkipLinks items={ITEMS} />
+        <SkipLinks>
+            <SkipLinks.Link fragmentId={LINK_ID}>{LINK_TEXT}</SkipLinks.Link>
+        </SkipLinks>
     );
 
     const skipLinksList = screen.getByRole('list');
     const skipLinksListItems = within(skipLinksList).getAllByRole('listitem');
-    const skipLinksSecondLink = within(skipLinksList).getAllByRole('link')[1];
+    const skipLinksSecondLink = within(skipLinksList).getByRole('link');
 
-    expect(skipLinksListItems.length).toEqual(2);
-    expect(skipLinksSecondLink).toHaveAttribute('href', `#${ITEMS[0].targetId}`);
-    expect(skipLinksSecondLink.textContent).toEqual(ITEMS[0].title);
-})
+    expect(skipLinksListItems.length).toEqual(1);
+    expect(skipLinksSecondLink).toHaveAttribute('href', `#${LINK_ID}`);
+    expect(skipLinksSecondLink.textContent).toEqual(LINK_TEXT);
+});
+
+test('static skip links', () => {
+    render(
+        <SkipLinks isStatic />
+    );
+
+    const skipLinksList = screen.getByRole('list');
+    const skipLinksContainer = skipLinksList.parentElement;
+
+    expect(skipLinksContainer).toHaveClass('ds_skip-links--static');
+});
 
 test('passing additional props', () => {
     render(

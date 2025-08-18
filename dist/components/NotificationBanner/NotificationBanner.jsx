@@ -7,7 +7,7 @@ const react_1 = require("react");
 const AbstractNotificationBanner_1 = __importDefault(require("../../common/AbstractNotificationBanner"));
 // @ts-ignore
 const notification_banner_1 = __importDefault(require("@scottish-government/design-system/src/components/notification-banner/notification-banner"));
-const NotificationBanner = ({ children, className, close, icon, iconColour, iconInverse, title, ...props }) => {
+const NotificationBanner = ({ children, className, close, hasColourIcon, hasInverseIcon, icon, title, ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         if (ref.current) {
@@ -17,7 +17,7 @@ const NotificationBanner = ({ children, className, close, icon, iconColour, icon
     return (<AbstractNotificationBanner_1.default className={[
             'ds_reversed',
             className
-        ].join(' ')} close={close} icon={icon ? "PriorityHigh" : undefined} iconColour={iconColour} iconInverse={iconInverse} ref={ref} title="Information" {...props}>
+        ].join(' ')} close={close} icon={icon ? "PriorityHigh" : undefined} hasColourIcon={hasColourIcon} hasInverseIcon={hasInverseIcon} ref={ref} title="Information" {...props}>
             {children}
         </AbstractNotificationBanner_1.default>);
 };

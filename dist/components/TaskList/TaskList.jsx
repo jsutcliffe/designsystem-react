@@ -8,9 +8,18 @@ const ConditionalWrapper_1 = __importDefault(require("../../common/ConditionalWr
 const HintText_1 = __importDefault(require("../../common/HintText"));
 const ScreenReaderText_1 = __importDefault(require("../../common/ScreenReaderText"));
 const Tag_1 = __importDefault(require("../Tag/Tag"));
-const TaskItem = ({ children, className, href, id, isComplete = false, statusText, tagColour = 'grey', title, ...props }) => {
+const TaskItem = ({ children, className, href, id, isComplete = false, linkComponent, statusText, tagColour = 'grey', title, ...props }) => {
     if (isComplete) {
         tagColour = 'green';
+    }
+    const LINK_CLASS = 'ds_task-list__task-link';
+    function getLinkElement(children) {
+        if (linkComponent) {
+            return linkComponent({ className: LINK_CLASS, href, children });
+        }
+        else if (href) {
+            return <a href={href} className={LINK_CLASS}>{children}</a>;
+        }
     }
     return (<li className={[
             'ds_task-list__task',
@@ -18,7 +27,7 @@ const TaskItem = ({ children, className, href, id, isComplete = false, statusTex
         ].join(' ')} id={id} {...props}>
             <div className="ds_task-list__task-details">
                 <h3 className="ds_task-list__task-heading">
-                <ConditionalWrapper_1.default condition={typeof href !== 'undefined'} wrapper={(children) => <a className="ds_task-list__task-link" href={href}>{children}</a>}>
+                <ConditionalWrapper_1.default condition={typeof href !== 'undefined'} wrapper={(children) => getLinkElement(children)}>
                     {title}
                     {statusText && <ScreenReaderText_1.default>({statusText})</ScreenReaderText_1.default>}
                 </ConditionalWrapper_1.default>
@@ -27,7 +36,9 @@ const TaskItem = ({ children, className, href, id, isComplete = false, statusTex
             </div>
 
             {typeof statusText !== 'undefined' &&
-            <Tag_1.default aria-hidden="true" colour={tagColour} title={statusText}/>}
+            <Tag_1.default aria-hidden="true" colour={tagColour}>
+                    {statusText}
+                </Tag_1.default>}
         </li>);
 };
 /**

@@ -4,12 +4,12 @@ import DSDatePicker from '@scottish-government/design-system/src/components/date
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import TextInput from '../TextInput/TextInput';
 
-const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
+const DatePicker = ({
     className,
     dateSelectCallback,
     disabledDates,
-    error,
     errorMessage,
+    hasError,
     hintText,
     id,
     iconPath = './',
@@ -23,7 +23,7 @@ const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
     value,
     width = 'fixed-10',
     ...props
-}) => {
+}: SGDS.Component.DatePicker) => {
     const ref = useRef(null);
 
     useEffect(() => {
@@ -68,7 +68,7 @@ const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
                     <div>
                         <TextInput
                             className="js-datepicker-date"
-                            error={!!error}
+                            hasError={!!hasError}
                             id={id + "-day"}
                             hintText={hintText}
                             label="Day"
@@ -83,7 +83,7 @@ const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
                     <div>
                         <TextInput
                             className="js-datepicker-month"
-                            error={!!error}
+                            hasError={!!hasError}
                             id={id + "-month"}
                             hintText={hintText}
                             label="Month"
@@ -98,7 +98,7 @@ const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
                     <div>
                         <TextInput
                             className="js-datepicker-year"
-                            error={!!error}
+                            hasError={!!hasError}
                             id={id + "-year"}
                             hintText={hintText}
                             label="Year"
@@ -112,7 +112,7 @@ const DatePicker: React.FC<SGDS.Component.DatePicker> = ({
                 </fieldset>
             ) : (
                 <TextInput
-                    error={!!error}
+                    hasError={!!hasError}
                     errorMessage={errorMessage}
                     id={id}
                     hasButton

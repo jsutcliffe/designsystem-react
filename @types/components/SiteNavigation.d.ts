@@ -1,14 +1,13 @@
 declare namespace SGDS.Component {
     namespace SiteNavigation {
-        interface Link extends React.AllHTMLAttributes<HTMLLIElement> {
+        interface Item extends React.AllHTMLAttributes<HTMLLIElement> {
             current?: boolean,
             href: string,
-            title: string
+            linkComponent?: SGDS.LinkComponent
         }
     }
 
     interface SiteNavigation extends React.AllHTMLAttributes<HTMLElement> {
-        items: SiteNavigation.Link[],
         ref?: React.RefObject<null>
     }
 }

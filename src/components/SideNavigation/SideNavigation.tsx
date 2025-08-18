@@ -2,60 +2,55 @@ import { useEffect, useRef } from 'react';
 // @ts-ignore
 import DSSideNavigation from '@scottish-government/design-system/src/components/side-navigation/side-navigation';
 
-export const List: React.FC<SGDS.Component.SideNavigation.List> = function ({
-    items,
-    root
-}) {
+const SideNavigationList = function ({
+    children,
+    isRoot
+}: SGDS.Component.SideNavigation.List) {
     return (
         <ul className="ds_side-navigation__list"
-            id={root ? 'side-navigation-root' : undefined }
+            id={isRoot ? 'side-navigation-root' : undefined }
         >
-            {items && items.map((item, index: number) => (
-                <Link
-                    title={item.title}
-                    href={item.href}
-                    items={item.items}
-                    current={item.current}
-                    key={'sidenavitem' + index}
-                />
-            ))}
+            {children}
         </ul>
     );
 };
 
-export const Link: React.FC<SGDS.Component.SideNavigation.Link> = function ({
-    current = false,
+const SideNavigationItem = function ({
+    children,
     href,
-    items,
+    current = false,
+    linkComponent,
     title
-}) {
+}: SGDS.Component.SideNavigation.Item) {
+    const LINK_CLASS = 'ds_side-navigation__link';
+
     return (
         <li
             className={[
                 'ds_side-navigation__item',
-                items && 'ds_side-navigation__item--has-children'
+                children && 'ds_side-navigation__item--has-children'
             ].join(' ')}
         >
             {current ?
-                <span className="ds_side-navigation__link  ds_current">{title}</span> :
-                <a href={href} className="ds_side-navigation__link">{title}</a>
+                <span className={LINK_CLASS + ' ds_current'}>{title}</span> :
+                linkComponent ? linkComponent({ className: LINK_CLASS, href, children: title }) :
+                <a href={href} className={LINK_CLASS}>{title}</a>
             }
 
-            {items && <List items={items} />}
+            {children}
         </li>
     );
 };
 
-const SideNavigation: React.FC<SGDS.Component.SideNavigation> = function ({
+const SideNavigation = function ({
     children,
     className,
-    items,
     ...props
-}) {
+}: SGDS.Component.SideNavigation) {
     const ref = useRef(null);
 
     useEffect(() => {
-        if (ref.current) {
+        if (ref.current && children) {
             new DSSideNavigation(ref.current).init();
         }
     }, [ref]);
@@ -77,13 +72,16 @@ const SideNavigation: React.FC<SGDS.Component.SideNavigation> = function ({
                 <span className="ds_side-navigation__expand-indicator"></span>
             </label>
 
-            {items && <List root items={items} />}
+            {children}
         </nav>
     );
 };
 
 SideNavigation.displayName = 'SideNavigation';
-Link.displayName = 'SideNavLink';
-List.displayName = 'SideNavList';
+SideNavigationItem.displayName = 'SideNavigation.Item';
+SideNavigationList.displayName = 'SideNavigation.List';
+
+SideNavigation.Item = SideNavigationItem;
+SideNavigation.List = SideNavigationList;
 
 export default SideNavigation;

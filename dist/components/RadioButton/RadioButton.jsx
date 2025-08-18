@@ -3,9 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Radio = void 0;
 const HintText_1 = __importDefault(require("../../common/HintText"));
-const Radio = ({ checked, hintText, id, label, name, onBlur, onChange, small }) => {
+const RadioButton = ({ checked, hintText, id, label, name, onBlur, onChange, small }) => {
     const hintTextId = `hint-text-${id}`;
     function handleBlur(event) {
         if (typeof onBlur === 'function') {
@@ -26,18 +25,5 @@ const Radio = ({ checked, hintText, id, label, name, onBlur, onChange, small }) 
             {hintText && <HintText_1.default id={hintTextId} text={hintText}/>}
         </div>);
 };
-exports.Radio = Radio;
-const RadioGroup = ({ className, inline, items, name, small, ...props }) => {
-    return (<div className={[
-            'ds_radios',
-            'ds_field-group',
-            inline && 'ds_field-group--inline',
-            className
-        ].join(' ')} {...props}>
-
-            {items && items.map((item, index) => (<exports.Radio checked={item.checked} hintText={item.hintText} id={item.id} key={'radio' + index} label={item.label} name={name} onBlur={item.onBlur} onChange={item.onChange} small={small || item.small}/>))}
-        </div>);
-};
-exports.Radio.displayName = 'Radio';
-RadioGroup.displayName = 'RadioGroup';
-exports.default = RadioGroup;
+RadioButton.displayName = 'RadioButton';
+exports.default = RadioButton;

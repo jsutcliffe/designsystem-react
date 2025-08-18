@@ -10,7 +10,7 @@ const Button_1 = __importDefault(require("../Button/Button"));
 const ConditionalWrapper_1 = __importDefault(require("../../common/ConditionalWrapper"));
 const ErrorMessage_1 = __importDefault(require("../ErrorMessage/ErrorMessage"));
 const HintText_1 = __importDefault(require("../../common/HintText"));
-const TextInput = ({ buttonIcon, buttonText, children, className, countThreshold, width, currency, currencySymbol, error, errorMessage, hasButton = false, hintText, id, label, maxlength, name, onBlur, onChange, placeholder, type = 'text', value, ...props }) => {
+const TextInput = ({ buttonIcon, buttonText, children, className, countThreshold, width, currency, currencySymbol, errorMessage, hasButton = false, hasError, hintText, id, label, maxlength, name, onBlur, onChange, placeholder, type = 'text', value, ...props }) => {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
     const ref = (0, react_1.useRef)(null);
@@ -44,10 +44,10 @@ const TextInput = ({ buttonIcon, buttonText, children, className, countThreshold
             {hintText && <HintText_1.default id={hintTextId} text={hintText}/>}
             {errorMessage && <ErrorMessage_1.default id={errorMessageId} text={errorMessage}/>}
             <ConditionalWrapper_1.default condition={hasButton || typeof currency !== 'undefined' && currency} wrapper={(children) => <div className={inputWrapperClasses} data-symbol={currencySymbol}>{children}</div>}>
-                <input aria-describedby={describedbys.join(' ')} aria-invalid={error} className={[
+                <input aria-describedby={describedbys.join(' ')} aria-invalid={hasError} className={[
             'ds_input',
             className,
-            error ? 'ds_input--error' : '',
+            hasError ? 'ds_input--error' : '',
             width ? `ds_input--${width}` : '',
         ].join(' ')} defaultValue={value} id={id} maxLength={maxlength} name={name || id} onBlur={handleBlur} onChange={handleChange} placeholder={placeholder} type={type} {...props}/>
                 {hasButton && (buttonText || buttonIcon) && <Button_1.default iconOnly icon={buttonIcon}>{buttonText}</Button_1.default>}

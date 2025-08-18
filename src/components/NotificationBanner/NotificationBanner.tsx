@@ -3,17 +3,16 @@ import AbstractNotificationBanner from '../../common/AbstractNotificationBanner'
 // @ts-ignore
 import DSNotificationBanner from '@scottish-government/design-system/src/components/notification-banner/notification-banner';
 
-const NotificationBanner: React.FC<SGDS.Common.AbstractNotificationBanner>
-    & { Buttons?: React.FC<SGDS.Common.AbstractNotificationBanner.Buttons> } = ({
+const NotificationBanner = ({
     children,
     className,
     close,
+    hasColourIcon,
+    hasInverseIcon,
     icon,
-    iconColour,
-    iconInverse,
     title,
     ...props
-}) => {
+}: SGDS.Common.AbstractNotificationBanner) => {
     const ref = useRef(null);
 
     useEffect(() => {
@@ -30,8 +29,8 @@ const NotificationBanner: React.FC<SGDS.Common.AbstractNotificationBanner>
             ].join(' ')}
             close={close}
             icon={icon ? "PriorityHigh" : undefined}
-            iconColour={iconColour}
-            iconInverse={iconInverse}
+            hasColourIcon={hasColourIcon}
+            hasInverseIcon={hasInverseIcon}
             ref={ref}
             title="Information"
             {...props}

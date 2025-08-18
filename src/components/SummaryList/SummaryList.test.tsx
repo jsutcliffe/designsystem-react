@@ -1,69 +1,39 @@
 import { test, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
-import SummaryList, { Item, Action, Answer } from './SummaryList';
+import { within, render, screen, fireEvent } from '@testing-library/react';
+import SummaryList from './SummaryList';
 
 const ONCLICK_FUNCTION = vi.fn();
+const TITLE = 'Name';
+const VALUE_1 = 'Jane Smith';
+const VALUE_2 = 'Tony Brown';
 
-const SUMMARY_ITEMS = [
-    {
-        title: 'Name',
-        value: 'Jane Smith',
-        actions: [
-            {
-                title: 'Change',
-                href: '#foo'
-            },
-            {
-                title: 'Delete',
-                onclick: ONCLICK_FUNCTION
-            }
-        ]
-    },
-    {
-        title: 'Date of birth',
-        value: '13 April 2001',
-        actions: [
-            {
-                title: 'Change',
-                href: '#bar'
-            }
-        ]
-    },
-    {
-        title: 'Address',
-        value: `Scottish Government\nSt Andrew's House\nRegent Road\nEdinburgh\nEH1 3DG`,
-        actions: [
-            {
-                title: 'Change',
-                href: '#baz'
-            }
-        ]
-    },
-    {
-        title: 'Contact details',
-        value: [
-            'email@gov.scot',
-            '0123 456 7890',
-        ]
-    }
-];
+const ACTION_HREF = "#foo"
+const ACTION_ONCLICK = ONCLICK_FUNCTION;
+const ACTION_TEXT = 'Name';
+const DESCRIBEDBY_ID = 'q1-name';
 
 test('summary list renders correctly', () => {
     render(
-        <SummaryList items={SUMMARY_ITEMS} />
+        <SummaryList data-testid="summarylist">
+            <SummaryList.Item title="key">
+                <SummaryList.Value>value</SummaryList.Value>
+                <SummaryList.Value>value2</SummaryList.Value>
+                <SummaryList.Value>value3</SummaryList.Value>
+                <SummaryList.Action href="foo">foo</SummaryList.Action>
+                <SummaryList.Action onclick={() => true}>bar</SummaryList.Action>
+            </SummaryList.Item>
+        </SummaryList>
     );
 
-    const summaryList = screen.getAllByRole('list')[0];
-    const summaryListItems = summaryList.children;
+    const summaryList = screen.getByTestId('summarylist');
 
     expect(summaryList).toHaveClass('ds_summary-list');
     expect(summaryList.tagName).toEqual('OL');
-    expect(summaryListItems.length).toEqual(SUMMARY_ITEMS.length);
 });
 
 test('summary list without border', () => {
     render(
-        <SummaryList noBorder items={SUMMARY_ITEMS} />
+        <SummaryList noBorder/>
     );
 
     const summaryList = screen.getAllByRole('list')[0];
@@ -72,14 +42,11 @@ test('summary list without border', () => {
 });
 
 test('summary list item renders correctly', () => {
-    const DESCRIBEDBY_ID = 'q2-date-of-birth';
-
     render(
-        <Item
-            actions={SUMMARY_ITEMS[1].actions}
-            title={SUMMARY_ITEMS[1].title}
-            value={SUMMARY_ITEMS[1].value}
-        />
+        <SummaryList.Item title={TITLE}>
+            <SummaryList.Value>{VALUE_1}</SummaryList.Value>
+            <SummaryList.Action></SummaryList.Action>
+        </SummaryList.Item>
     );
 
     const item = screen.getAllByRole('listitem')[0];
@@ -91,8 +58,7 @@ test('summary list item renders correctly', () => {
     expect(item).toHaveClass('ds_summary-list__item');
 
     expect(key?.tagName).toEqual('SPAN');
-    expect(key?.textContent).toEqual('Date of birth');
-    expect(key).toHaveAttribute('id', DESCRIBEDBY_ID);
+    expect(key?.textContent).toEqual(TITLE);
 
     expect(value?.tagName).toEqual('SPAN');
 
@@ -101,16 +67,15 @@ test('summary list item renders correctly', () => {
 
     expect(actions?.tagName).toEqual('DIV');
 
-    expect(actions?.querySelector('.ds_link')).toHaveAttribute('aria-describedby', DESCRIBEDBY_ID);
+    expect(actions?.querySelector('.ds_link')).toHaveAttribute('aria-describedby', key?.id);
 });
 
 test('summary list item with multiple values', () => {
     render(
-        <Item
-            actions={SUMMARY_ITEMS[3].actions}
-            title={SUMMARY_ITEMS[3].title}
-            value={SUMMARY_ITEMS[3].value}
-        />
+        <SummaryList.Item title={TITLE}>
+            <SummaryList.Value>{VALUE_1}</SummaryList.Value>
+            <SummaryList.Value>{VALUE_2}</SummaryList.Value>
+        </SummaryList.Item>
     );
 
     const item = screen.getAllByRole('listitem')[0];
@@ -121,30 +86,23 @@ test('summary list item with multiple values', () => {
     expect(valueList).toHaveClass('ds_no-bullets');
     expect(valueList?.tagName).toEqual('UL');
 
-    expect(valueListItems?.length).toEqual(SUMMARY_ITEMS[3].value.length);
-
     expect(valueListItems[0].tagName).toEqual('LI');
-    expect(valueListItems[0].innerHTML).toEqual(`<q class="ds_summary-list__answer">${SUMMARY_ITEMS[3].value[0]}</q>`);
+    expect(valueListItems[0].innerHTML).toEqual(`<q class="ds_summary-list__answer">${VALUE_1}</q>`);
 });
 
 test('summary list item with no value', () => {
     render(
-        <Item
-            actions={SUMMARY_ITEMS[3].actions}
-            title={SUMMARY_ITEMS[3].title}
-        />
+        <SummaryList.Item title={TITLE}>
+        </SummaryList.Item>
     );
 
     const item = screen.getAllByRole('listitem')[0];
     const value = item.querySelector('.ds_summary-list__value');
-    const answer = value?.children[0];
 
-    expect(answer?.textContent).toEqual('');
+    expect(value?.textContent).toEqual('');
 });
 
 test('summary list item with multiple actions', () => {
-    const ITEM_TITLE = 'Name';
-    const ITEM_VALUE = 'Jane Smith';
     const ITEM_ACTIONS = [
         {
             title: 'Change',
@@ -157,87 +115,30 @@ test('summary list item with multiple actions', () => {
     ];
 
     render(
-        <Item
-            actions={SUMMARY_ITEMS[0].actions}
-            title={ITEM_TITLE}
-            value={ITEM_VALUE}
-        />
+        <SummaryList.Item title={TITLE}>
+            <SummaryList.Value>{VALUE_1}</SummaryList.Value>
+            <SummaryList.Action href={ITEM_ACTIONS[0].href}>{ITEM_ACTIONS[0].title}</SummaryList.Action>
+            <SummaryList.Action onclick={ITEM_ACTIONS[0].onclick}>{ITEM_ACTIONS[1].title}</SummaryList.Action>
+        </SummaryList.Item>
     );
 
     const item = screen.getAllByRole('listitem')[0];
     const actionsElement = item.querySelector('.ds_summary-list__actions');
+    const actionsList = within(actionsElement as HTMLElement).getByRole('list')
 
-    expect(actionsElement?.children.length).toEqual(ITEM_ACTIONS.length);
-    expect(actionsElement?.children[0].textContent).toEqual(ITEM_ACTIONS[0].title);
-    expect(actionsElement?.children[1].textContent).toEqual(ITEM_ACTIONS[1].title);
-});
+    expect(actionsList).toHaveClass('ds_summary-list__actions-list');
+    expect(actionsList.tagName).toEqual('UL');
 
-test('button action', () => {
-    const DESCRIBEDBY_ID = 'q1-name';
-    const ACTION_TITLE = 'Name';
-    const ACTION_ONCLICK = ONCLICK_FUNCTION;
-
-    render(
-        <Action
-            describedby={DESCRIBEDBY_ID}
-            href={undefined}
-            onclick={ACTION_ONCLICK}
-            title={ACTION_TITLE}
-        />
-    );
-
-    const action = screen.getByRole('button');
-
-    expect(action).toHaveClass('ds_link');
-    expect(action).toHaveAttribute('aria-describedby', DESCRIBEDBY_ID);
-    expect(action).toHaveAttribute('type', 'button');
-    expect(action).not.toHaveAttribute('href');
-    expect(action.tagName).toEqual('BUTTON');
-    expect(action.textContent).toEqual(ACTION_TITLE);
-
-    fireEvent.click(action);
-
-    expect(ONCLICK_FUNCTION).toHaveBeenCalled();
-});
-
-test('link action', () => {
-    const DESCRIBEDBY_ID = 'q1-name';
-    const ACTION_TITLE = 'Name';
-    const ACTION_HREF = "#foo"
-    const ACTION_ONCLICK = ONCLICK_FUNCTION;
-
-    render(
-        <Action
-            describedby={DESCRIBEDBY_ID}
-            href={ACTION_HREF}
-            onclick={ACTION_ONCLICK}
-            title={ACTION_TITLE}
-        />
-    );
-
-    const action = screen.getByRole('link');
-
-    expect(action).toHaveClass('ds_link');
-    expect(action).toHaveAttribute('aria-describedby', DESCRIBEDBY_ID);
-    expect(action).toHaveAttribute('href', ACTION_HREF);
-    expect(action).not.toHaveAttribute('type');
-    expect(action.tagName).toEqual('A');
-    expect(action.textContent).toEqual(ACTION_TITLE);
-});
-
-test('multiline answer', () => {
-    render(
-        <Answer value={SUMMARY_ITEMS[2].value} />
-    );
-
-    const answer = document.querySelector('.ds_summary-list__answer');
-
-    expect(answer?.outerHTML).toEqual('<q class="ds_summary-list__answer">Scottish Government<br>St Andrew\'s House<br>Regent Road<br>Edinburgh<br>EH1 3DG</q>');
+    expect(actionsList?.children.length).toEqual(2);
+    expect(actionsList?.children[0]).toHaveClass('ds_summary-list__actions-list-item');
+    expect(actionsList?.children[0].tagName).toEqual('LI');
+    expect(actionsList?.children[0].textContent).toEqual(ITEM_ACTIONS[0].title);
+    expect(actionsList?.children[1].textContent).toEqual(ITEM_ACTIONS[1].title);
 });
 
 test('passing additional props', () => {
     render(
-        <SummaryList data-test="foo" items={SUMMARY_ITEMS} />
+        <SummaryList data-test="foo" />
     );
 
     const summaryList = screen.getAllByRole('list')[0];
@@ -246,7 +147,7 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <SummaryList className="foo" items={SUMMARY_ITEMS} />
+        <SummaryList className="foo" />
     );
 
     const summaryList = screen.getAllByRole('list')[0];

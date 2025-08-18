@@ -4,19 +4,30 @@ import HintText from '../../common/HintText';
 import ScreenReaderText from '../../common/ScreenReaderText';
 import Tag from '../Tag/Tag';
 
-const TaskItem: React.FC<SGDS.Component.TaskList.Item> = ({
+const TaskItem = ({
     children,
     className,
     href,
     id,
     isComplete = false,
+    linkComponent,
     statusText,
     tagColour = 'grey',
     title,
     ...props
-}) => {
+}: SGDS.Component.TaskList.Item) => {
     if (isComplete) {
         tagColour = 'green';
+    }
+
+    const LINK_CLASS = 'ds_task-list__task-link';
+
+    function getLinkElement(children: React.ReactNode) {
+        if (linkComponent) {
+            return linkComponent({ className: LINK_CLASS, href, children });
+        } else if (href) {
+            return <a href={href} className={LINK_CLASS}>{children}</a>;
+        }
     }
 
     return (
@@ -32,7 +43,7 @@ const TaskItem: React.FC<SGDS.Component.TaskList.Item> = ({
                 <h3 className="ds_task-list__task-heading">
                 <ConditionalWrapper
                     condition={typeof href !== 'undefined'}
-                    wrapper={(children: React.JSX.Element) => <a className="ds_task-list__task-link" href={href}>{children}</a>}
+                    wrapper={(children: React.JSX.Element) => getLinkElement(children)}
                 >
                     {title}
                     {statusText && <ScreenReaderText>({statusText})</ScreenReaderText>}
@@ -45,8 +56,9 @@ const TaskItem: React.FC<SGDS.Component.TaskList.Item> = ({
                 <Tag
                     aria-hidden="true"
                     colour={tagColour}
-                    title={statusText}
-                />
+                >
+                    {statusText}
+                </Tag>
             }
         </li>
     );
@@ -58,13 +70,13 @@ const TaskItem: React.FC<SGDS.Component.TaskList.Item> = ({
  * @param {string} props.title - The title of the task group
  * @returns {JSX.Element} - The element
  */
-const TaskGroup: React.FC<SGDS.Component.TaskList.Group> = ({
+const TaskGroup = ({
     children,
     className,
     intro,
     title,
     ...props
-}) => {
+}: SGDS.Component.TaskList.Group) => {
     return (
         <li
             className={[
@@ -82,15 +94,13 @@ const TaskGroup: React.FC<SGDS.Component.TaskList.Group> = ({
     );
 };
 
-const TaskList: React.FC<SGDS.Component.TaskList>
-    & { Group: React.FC<SGDS.Component.TaskList.Group> }
-    & { Item: React.FC<SGDS.Component.TaskList.Item> } = ({
+const TaskList = ({
     children,
     className,
     headingId = 'task-list',
     title,
     ...props
-}) => {
+}: SGDS.Component.TaskList) => {
     let taskCount = 0;
     let incompleteTaskIds: string[] = [];
     let completedTasksCount = 0;

@@ -56,7 +56,7 @@ const AccordionItem = ({ children, className, headingLevel = 'h3', id: rawId, op
                 <WrapperTag_1.default id={`panel-${processedId}-heading`} className="ds_accordion-item__title" tagName={headingLevel}>
                     {title}
                 </WrapperTag_1.default>
-                <span className='ds_accordion-item__indicator'/>
+                <span className="ds_accordion-item__indicator"/>
                 <label className="ds_accordion-item__label" htmlFor={`${processedId}-control`}>
                     <span className="visually-hidden">Show this section</span>
                 </label>
@@ -97,6 +97,6 @@ const Accordion = ({ children, className, headingLevel = 'h3', hideOpenAll, ...p
         </div>);
 };
 Accordion.displayName = 'Accordion';
-AccordionItem.displayName = 'AccordionItem';
+AccordionItem.displayName = 'Accordion.Item';
 Accordion.Item = AccordionItem;
 exports.default = Accordion;

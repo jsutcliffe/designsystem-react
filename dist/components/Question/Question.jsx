@@ -6,15 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ErrorMessage_1 = __importDefault(require("../ErrorMessage/ErrorMessage"));
 const HintText_1 = __importDefault(require("../../common/HintText"));
 const WrapperTag_1 = __importDefault(require("../../common/WrapperTag"));
-const Question = function ({ children, className, error, errorMessage, hintText, legend, tagName = 'div', ...props }) {
+const Question = function ({ children, className, errorMessage, hasError, hintText, legend, tagName = 'div', ...props }) {
     return (<WrapperTag_1.default tagName={tagName} className={[
             'ds_question',
-            error && 'ds_question--error',
+            hasError && 'ds_question--error',
             className
         ].join(' ')} {...props}>
             {legend && <legend>{legend}</legend>}
             {hintText && <HintText_1.default text={hintText}/>}
-            {error && errorMessage && <ErrorMessage_1.default text={errorMessage}/>}
+            {hasError && errorMessage && <ErrorMessage_1.default text={errorMessage}/>}
             {children}
         </WrapperTag_1.default>);
 };

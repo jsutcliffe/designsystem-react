@@ -1,49 +1,57 @@
-import ConditionalWrapper from '../../common/ConditionalWrapper';
+import { useId } from 'react';
 
-const Error: React.FC<SGDS.Component.ErrorSummary.Error> = ({
+const ErrorSummaryItem = ({
+    children,
     fragmentId,
-    title
-}) => {
+    linkComponent
+}: SGDS.Component.ErrorSummary.Item) => {
+    const HREF = '#' + fragmentId;
+
+    function processChildren(children: React.ReactNode) {
+        if (linkComponent) {
+            return linkComponent({ className: '', href: HREF, children });
+        } else if (fragmentId) {
+            return <a href={HREF}>{children}</a>;
+        } else {
+            return children;
+        }
+    }
+
     return (
         <li>
-            <ConditionalWrapper
-                condition={!!fragmentId}
-                wrapper={() => <a href={`#${fragmentId}`}>{title}</a>}
-            >{title}</ConditionalWrapper>
+            {processChildren(children)}
         </li>
     );
-};
+}
 
-const ErrorSummary: React.FC<SGDS.Component.ErrorSummary> = ({
+const ErrorSummary = ({
+    children,
     className,
-    errors,
     title = 'There is a problem',
     ...props
-}) => {
-    return (
-        <>
-            {errors && errors.length && (
-                <div className={[
-                        'ds_error-summary',
-                        className
-                    ].join(' ')}
-                    aria-labelledby="error-summary-title"
-                    role="alert"
-                    {...props}
-                >
-                    <h2 className="ds_error-summary__title" id="error-summary-title">{title}</h2>
+}: SGDS.Component.ErrorSummary) => {
+    const summaryTitleId = useId();
 
-                    <ul className="ds_error-summary__list">
-                        {errors && errors.map((error, index: number) => (
-                            <Error fragmentId={error.fragmentId} title={error.title} key={'error' + index} />
-                        ))}
-                    </ul>
-                </div>
-            )}
-        </>
+    return (
+        <div className={[
+                'ds_error-summary',
+                className
+            ].join(' ')}
+            aria-labelledby={summaryTitleId}
+            role="alert"
+            {...props}
+        >
+            <h2 className="ds_error-summary__title" id={summaryTitleId}>{title}</h2>
+
+            <ul className="ds_error-summary__list">
+                {children}
+            </ul>
+        </div>
     );
 };
 
 ErrorSummary.displayName = 'ErrorSummary';
+ErrorSummaryItem.displayName = 'ErrorSummary.Item';
+ErrorSummary.Item = ErrorSummaryItem;
 
 export default ErrorSummary;

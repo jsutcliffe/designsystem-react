@@ -3,33 +3,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Link = exports.List = void 0;
 const react_1 = require("react");
 // @ts-ignore
 const side_navigation_1 = __importDefault(require("@scottish-government/design-system/src/components/side-navigation/side-navigation"));
-const List = function ({ items, root }) {
-    return (<ul className="ds_side-navigation__list" id={root ? 'side-navigation-root' : undefined}>
-            {items && items.map((item, index) => (<exports.Link title={item.title} href={item.href} items={item.items} current={item.current} key={'sidenavitem' + index}/>))}
+const SideNavigationList = function ({ children, isRoot }) {
+    return (<ul className="ds_side-navigation__list" id={isRoot ? 'side-navigation-root' : undefined}>
+            {children}
         </ul>);
 };
-exports.List = List;
-const Link = function ({ current = false, href, items, title }) {
+const SideNavigationItem = function ({ children, href, current = false, linkComponent, title }) {
+    const LINK_CLASS = 'ds_side-navigation__link';
     return (<li className={[
             'ds_side-navigation__item',
-            items && 'ds_side-navigation__item--has-children'
+            children && 'ds_side-navigation__item--has-children'
         ].join(' ')}>
             {current ?
-            <span className="ds_side-navigation__link  ds_current">{title}</span> :
-            <a href={href} className="ds_side-navigation__link">{title}</a>}
+            <span className={LINK_CLASS + ' ds_current'}>{title}</span> :
+            linkComponent ? linkComponent({ className: LINK_CLASS, href, children: title }) :
+                <a href={href} className={LINK_CLASS}>{title}</a>}
 
-            {items && <exports.List items={items}/>}
+            {children}
         </li>);
 };
-exports.Link = Link;
-const SideNavigation = function ({ children, className, items, ...props }) {
+const SideNavigation = function ({ children, className, ...props }) {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
-        if (ref.current) {
+        if (ref.current && children) {
             new side_navigation_1.default(ref.current).init();
         }
     }, [ref]);
@@ -43,10 +42,12 @@ const SideNavigation = function ({ children, className, items, ...props }) {
                 <span className="ds_side-navigation__expand-indicator"></span>
             </label>
 
-            {items && <exports.List root items={items}/>}
+            {children}
         </nav>);
 };
 SideNavigation.displayName = 'SideNavigation';
-exports.Link.displayName = 'SideNavLink';
-exports.List.displayName = 'SideNavList';
+SideNavigationItem.displayName = 'SideNavigation.Item';
+SideNavigationList.displayName = 'SideNavigation.List';
+SideNavigation.Item = SideNavigationItem;
+SideNavigation.List = SideNavigationList;
 exports.default = SideNavigation;

@@ -2,29 +2,29 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import HintText from '../../common/HintText';
 import WrapperTag from '../../common/WrapperTag';
 
-const Question: React.FC<SGDS.Component.Question> = function ({
+const Question = function ({
     children,
     className,
-    error,
     errorMessage,
+    hasError,
     hintText,
     legend,
     tagName = 'div',
     ...props
-}) {
+}: SGDS.Component.Question) {
     return (
         <WrapperTag
             tagName={tagName}
             className={[
                 'ds_question',
-                error && 'ds_question--error',
+                hasError && 'ds_question--error',
                 className
             ].join(' ')}
             {...props}
         >
             {legend && <legend>{legend}</legend>}
             {hintText && <HintText text={hintText} />}
-            {error && errorMessage && <ErrorMessage text={errorMessage} />}
+            {hasError && errorMessage && <ErrorMessage text={errorMessage} />}
             {children}
         </WrapperTag>
     );

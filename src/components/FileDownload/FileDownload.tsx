@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import FileIcon from '../../common/FileIcon';
 
-const FileDownload: React.FC<SGDS.Component.FileDownload> = ({
+const FileDownload = ({
     className,
     cover,
     highlighted,
@@ -11,7 +11,7 @@ const FileDownload: React.FC<SGDS.Component.FileDownload> = ({
     fileUrl,
     title,
     ...props
-}) => {
+}: SGDS.Component.FileDownload) => {
     const hasMetadata = !!fileType || !!fileSize;
     const metaContainerId = `file-download-${useId()}`;
 

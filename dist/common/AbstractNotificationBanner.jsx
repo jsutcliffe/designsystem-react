@@ -9,15 +9,16 @@ const ScreenReaderText_1 = __importDefault(require("./ScreenReaderText"));
 const Buttons = ({ children }) => {
     return (<>{children}</>);
 };
-const AbstractNotificationBanner = ({ children, className, close, icon, iconColour, iconInverse, title = 'Information', ...props }) => {
+const AbstractNotificationBanner = ({ children, className, close, hasColourIcon, hasInverseIcon, icon, title = 'Information', ...props }) => {
     let content = [];
     let buttons;
     react_1.Children.forEach(children, (child) => {
-        if ((0, react_1.isValidElement)(child) && child.type === Buttons) {
-            buttons = child;
+        const thisChild = child;
+        if (thisChild && thisChild.type === Buttons) {
+            buttons = thisChild;
         }
         else {
-            content.push(child);
+            content.push(thisChild);
         }
     });
     return (<div className={[
@@ -34,8 +35,8 @@ const AbstractNotificationBanner = ({ children, className, close, icon, iconColo
                     {icon &&
             <span className={[
                     'ds_notification__icon',
-                    iconInverse && 'ds_notification__icon--inverse',
-                    iconColour && 'ds_notification__icon--colour'
+                    hasInverseIcon && 'ds_notification__icon--inverse',
+                    hasColourIcon && 'ds_notification__icon--colour'
                 ].join(' ')} aria-hidden="true">
                             <Icon_1.default icon={icon}/>
                         </span>}
@@ -60,4 +61,5 @@ const AbstractNotificationBanner = ({ children, className, close, icon, iconColo
 };
 AbstractNotificationBanner.displayName = 'AbstractNotificationBanner';
 AbstractNotificationBanner.Buttons = Buttons;
+Buttons.displayName = 'Buttons';
 exports.default = AbstractNotificationBanner;

@@ -2,18 +2,23 @@ import { test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import SequentialNavigation from './SequentialNavigation';
 
-const NEXT_LINK_OBJECT = { title: 'Apply for or renew a Blue Badge?', href: '#prev' }
+const NEXT_LINK_OBJECT = { title: 'Apply for or renew a Blue Badge?', href: '#next' }
 const PREVIOUS_LINK_OBJECT = { title: 'Apply for or renew a Blue Badge?', href: '#prev' }
 
 test('sequential navigation renders correctly', () => {
     render(
-        <SequentialNavigation
-            next={NEXT_LINK_OBJECT}
-            previous={PREVIOUS_LINK_OBJECT}
-        />
+        <SequentialNavigation>
+            <SequentialNavigation.Previous href={PREVIOUS_LINK_OBJECT.href}>
+                {PREVIOUS_LINK_OBJECT.title}
+            </SequentialNavigation.Previous>
+            <SequentialNavigation.Next href={NEXT_LINK_OBJECT.href}>
+                {NEXT_LINK_OBJECT.title}
+            </SequentialNavigation.Next>
+        </SequentialNavigation>
     );
 
     const sequentialNavigation = screen.getByRole('navigation');
+
     const prevLink = screen.getAllByRole('link')[0];
     const prevLinkWrapper = prevLink.parentElement;
     const nextLink = screen.getAllByRole('link')[1];
@@ -34,18 +39,14 @@ test('sequential navigation renders correctly', () => {
     expect(nextLink.textContent).toEqual(NEXT_LINK_OBJECT.title);
     expect(nextLinkWrapper).toHaveClass('ds_sequential-nav__item', 'ds_sequential-nav__item--next');
     expect(nextLinkWrapper?.tagName).toEqual('DIV');
-    expect(nextLink.childNodes[0]).toHaveAttribute('data-label', 'Next')
+    expect(nextLink.childNodes[0]).toHaveAttribute('data-label', 'Next');
 });
 
 test('with custom aria label', () => {
     const ARIA_LABEL = 'My label';
 
     render(
-        <SequentialNavigation
-            ariaLabel={ARIA_LABEL}
-            next={NEXT_LINK_OBJECT}
-            previous={PREVIOUS_LINK_OBJECT}
-        />
+        <SequentialNavigation aria-label={ARIA_LABEL}/>
     );
 
     const sequentialNavigation = screen.getByRole('navigation');
@@ -53,13 +54,27 @@ test('with custom aria label', () => {
     expect(sequentialNavigation).toHaveAttribute('aria-label', ARIA_LABEL);
 });
 
+test('sequential nav links with custom element', () => {
+    render(
+        <SequentialNavigation>
+            <SequentialNavigation.Previous href={PREVIOUS_LINK_OBJECT.href} linkComponent={
+                ({ className, ...props }) => (
+                    <span role="link" className={className} {...props}/>
+                )}>
+                {PREVIOUS_LINK_OBJECT.title}
+            </SequentialNavigation.Previous>
+        </SequentialNavigation>
+    );
+
+    const link = screen.queryByRole('link');
+
+    expect(link?.tagName).toEqual('SPAN');
+    expect(link?.textContent).toEqual(PREVIOUS_LINK_OBJECT.title);
+});
+
 test('passing additional props', () => {
     render(
-        <SequentialNavigation
-            data-test="foo"
-            next={NEXT_LINK_OBJECT}
-            previous={PREVIOUS_LINK_OBJECT}
-        />
+        <SequentialNavigation data-test="foo" />
     );
 
     const sequentialNavigation = screen.getByRole('navigation');
@@ -68,11 +83,7 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <SequentialNavigation
-            className="foo"
-            next={NEXT_LINK_OBJECT}
-            previous={PREVIOUS_LINK_OBJECT}
-        />
+        <SequentialNavigation className="foo" />
     );
 
     const sequentialNavigation = screen.getByRole('navigation');

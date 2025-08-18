@@ -1,17 +1,17 @@
-import React, { isValidElement, Children, useEffect, useRef } from 'react';
+import React, { Children, useEffect, useRef } from 'react';
 import WrapperTag from '../../common/WrapperTag';
 // @ts-ignore
 import DSTabs from '@scottish-government/design-system/src/components/tabs/tabs';
 import slugify from '../../utils/slugify';
 
-const TabItem: React.FC<SGDS.Component.Tabs.Item> = ({
+const TabItem = ({
     bordered,
     children,
     className,
     id,
     tabLabel,
     ...props
-}) => {
+}: SGDS.Component.Tabs.Item) => {
     return (
         <div
             className={[
@@ -27,19 +27,18 @@ const TabItem: React.FC<SGDS.Component.Tabs.Item> = ({
     );
 };
 
-const TabListItem: React.FC<SGDS.Component.Tabs.TabListItem> = ({
-    title,
+const TabListItem = ({
+    children,
     href
-}) => {
+}: SGDS.Component.Tabs.TabListItem) => {
     return (
         <li className="ds_tabs__tab">
-            <a className="ds_tabs__tab-link" href={href}>{title}</a>
+            <a className="ds_tabs__tab-link" href={href}>{children}</a>
         </li>
     );
 }
 
-const Tabs: React.FC<SGDS.Component.Tabs>
-    & { Item: React.FC<SGDS.Component.Tabs.Item> } = ({
+const Tabs = ({
     baseId = 'tabs',
     bordered = true,
     children,
@@ -48,7 +47,7 @@ const Tabs: React.FC<SGDS.Component.Tabs>
     manual = false,
     title = 'Contents',
     ...props
-}) => {
+}: SGDS.Component.Tabs) => {
     const ref = useRef(null);
 
     const headingId = `${baseId}-heading`;
@@ -60,10 +59,10 @@ const Tabs: React.FC<SGDS.Component.Tabs>
     }, [ref]);
 
     const processedItems = Children.map(children, child => {
-        if (isValidElement(child) && child.type === TabItem) {
-            let thisChild = child as React.ReactElement<SGDS.Component.Tabs.Item>;
+        const thisChild = child as React.ReactElement<SGDS.Component.Tabs.Item>;
 
-            return React.cloneElement(thisChild as React.ReactElement<SGDS.Component.Tabs.Item>, {
+        if (thisChild && thisChild.type === TabItem) {
+            return React.cloneElement(thisChild, {
                 bordered: bordered,
                 id: thisChild.props.id || `${baseId}-${slugify(thisChild.props.tabLabel)}`,
             });
@@ -71,8 +70,8 @@ const Tabs: React.FC<SGDS.Component.Tabs>
     });
 
     const tabListItems = Children.map(processedItems, child => {
-        if (isValidElement(child) && child.type === TabItem) {
-            return React.createElement(TabListItem, { title: child.props.tabLabel, href: `#${child.props.id}` });
+        if (child && child.type === TabItem) {
+            return <TabListItem href={`#${child.props.id}`}>{child.props.tabLabel}</TabListItem>
         }
     });
 

@@ -1,42 +1,48 @@
-import WrapperTag from '../../common/WrapperTag';
+import React from 'react';
 
-export const Link: React.FC<SGDS.Component.ContentsNav.Link> = ({
+const ContentsNavItem = ({
+    children,
     current,
     href,
-    title
-}) => {
-    // determine which HTML tag to use
-    const tagName = href && !current ? 'a' : 'span';
+    linkComponent
+}: SGDS.Component.ContentsNav.ContentsNavItem) => {
+    const classNames = ['ds_contents-nav__link'];
+    let ariaCurrent: React.AriaAttributes["aria-current"];
+
+    if (current) {
+        classNames.push('ds_current');
+        ariaCurrent = 'page';
+    }
+
+    function processChildren(children: React.ReactNode) {
+        if (linkComponent) {
+            return linkComponent({ className: classNames.join(' '), href, children });
+        } else if (href) {
+            return <a href={href} aria-current={ariaCurrent ? ariaCurrent : undefined} className={classNames.join(' ')}>{children}</a>;
+        } else {
+            return <span aria-current={ariaCurrent ? ariaCurrent : undefined} className={classNames.join(' ')}>{children}</span>;
+        }
+    }
 
     return (
         <li
-            aria-current={current && 'page' || undefined}
             className="ds_contents-nav__item"
         >
-            <WrapperTag
-                tagName={tagName}
-                className={[
-                    'ds_contents-nav__link',
-                    current && 'ds_current'
-                ].join(' ')}
-                href={!current ? href : undefined}
-            >
-                {title}
-            </WrapperTag>
+            {processChildren(children)}
         </li>
     );
 };
 
-const ContentsNav: React.FC<SGDS.Component.ContentsNav> = function ({
+const ContentsNav = ({
+    ariaLabel = 'Pages in this section',
+    children,
     className,
-    items,
-    label = 'Pages in this section',
     title = 'Contents',
     ...props
-}) {
+}: SGDS.Component.ContentsNav) => {
     return (
         <nav
-            aria-label={label}
+            aria-label={ariaLabel}
             className={[
                 'ds_contents-nav',
                 className
@@ -44,15 +50,16 @@ const ContentsNav: React.FC<SGDS.Component.ContentsNav> = function ({
             {...props}
         >
             <h2 className="ds_contents-nav__title">{title}</h2>
+
             <ul className="ds_contents-nav__list">
-                {items && items.map((item, index: number) => (
-                    <Link current={item.current} href={item.href} title={item.title} key={'link' + index} />
-                ))}
+                {children}
             </ul>
         </nav>
     );
 };
 
 ContentsNav.displayName = 'ContentsNav';
+ContentsNavItem.displayName = 'ContentsNav.Item';
+ContentsNav.Item = ContentsNavItem;
 
 export default ContentsNav;

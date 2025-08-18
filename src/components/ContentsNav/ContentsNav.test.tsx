@@ -1,38 +1,20 @@
 import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
-import ContentsNav, {Link} from './ContentsNav';
+import ContentsNav from './ContentsNav';
 
 const ITEM_HREF = '#foo';
 const ITEM_TITLE = 'My content';
+const LABEL_TEXT = 'Pages in this guide';
 
 test('contents nav renders correctly', () => {
-    const ITEMS = [
-        {
-            title: 'Apply for Blue Badge',
-            current: true
-        },
-        {
-            title: 'Eligibility',
-            href: '#2'
-        },
-        {
-            title: 'Using your Blue Badge',
-            href: '#3'
-        },
-        {
-            title: 'Report a lost, stolen or misuesd Blue Badge',
-            href: '#4'
-        },
-        {
-            title: 'Changing or handing back a Blue Badge',
-            href: '#5'
-        }
-    ];
-
-    const LABEL_TEXT = 'Pages in this guide';
-
     render(
-        <ContentsNav label={LABEL_TEXT} items={ITEMS} />
+        <ContentsNav ariaLabel={LABEL_TEXT}>
+            <ContentsNav.Item>Apply for Blue Badge</ContentsNav.Item>
+            <ContentsNav.Item href="#1">Eligibility</ContentsNav.Item>
+            <ContentsNav.Item href="#2">Using your Blue Badge</ContentsNav.Item>
+            <ContentsNav.Item href="#3">Report a lost, stolen or misuesd Blue Badge</ContentsNav.Item>
+            <ContentsNav.Item href="#4">Changing or handing back a Blue Badge</ContentsNav.Item>
+        </ContentsNav>
     )
 
     const contentsNav = screen.getByRole('navigation');
@@ -46,14 +28,13 @@ test('contents nav renders correctly', () => {
     expect(contentsNavTitle.textContent).toEqual('Contents');
     expect(contentsNavList).toHaveClass('ds_contents-nav__list');
     expect(contentsNavList.tagName).toEqual('UL');
-    expect(contentsNavList.children.length).toEqual(ITEMS.length);
 });
 
 test('contents nav with custom title', () => {
     const TITLE_TEXT = 'My title';
 
     render(
-        <ContentsNav title={TITLE_TEXT} items={[]} />
+        <ContentsNav title={TITLE_TEXT} />
     );
 
     const contentsNav = screen.getByRole('navigation');
@@ -63,7 +44,7 @@ test('contents nav with custom title', () => {
 
 test('contents nav item', () => {
     render(
-        <Link href={ITEM_HREF} title={ITEM_TITLE} />
+        <ContentsNav.Item href={ITEM_HREF}>{ITEM_TITLE}</ContentsNav.Item>
     );
 
     const listItem = screen.getByRole('listitem');
@@ -77,35 +58,9 @@ test('contents nav item', () => {
     expect(link).toHaveAttribute('href', ITEM_HREF);
 });
 
-test('contents nav current item with href', () => {
-    render(
-        <Link current href={ITEM_HREF} title={ITEM_TITLE} />
-    );
-
-    const listItem = screen.getByRole('listitem');
-    const link = within(listItem).getByText(ITEM_TITLE);
-
-    expect(listItem.ariaCurrent).toEqual('page');
-    expect(link.tagName).toEqual('SPAN');
-    expect(link).toHaveClass('ds_current');
-});
-
-test('contents nav current item without href', () => {
-    render(
-        <Link current title={ITEM_TITLE} />
-    );
-
-    const listItem = screen.getByRole('listitem');
-    const link = within(listItem).getByText(ITEM_TITLE);
-
-    expect(listItem.ariaCurrent).toEqual('page');
-    expect(link.tagName).toEqual('SPAN');
-    expect(link).toHaveClass('ds_current');
-});
-
 test('contents nav item without href', () => {
     render(
-        <Link title={ITEM_TITLE} />
+        <ContentsNav.Item>{ITEM_TITLE}</ContentsNav.Item>
     );
 
     const listItem = screen.getByRole('listitem');
@@ -115,13 +70,51 @@ test('contents nav item without href', () => {
     expect(link).not.toHaveClass('ds_current');
 });
 
+test('current contents nav item with href', () => {
+    render(
+        <ContentsNav.Item current href={ITEM_HREF}>{ITEM_TITLE}</ContentsNav.Item>
+    );
+
+    const listItem = screen.getByRole('listitem');
+    const link = within(listItem).getByText(ITEM_TITLE);
+
+    expect(link.tagName).toEqual('A');
+    expect(link).toHaveClass('ds_current');
+});
+
+test('current contents nav item without href', () => {
+    render(
+        <ContentsNav.Item current>{ITEM_TITLE}</ContentsNav.Item>
+    );
+
+    const listItem = screen.getByRole('listitem');
+    const link = within(listItem).getByText(ITEM_TITLE);
+
+    expect(link.tagName).toEqual('SPAN');
+    expect(link).toHaveClass('ds_current');
+});
+
+test('contents nav item with custom element', () => {
+    render(
+        <ContentsNav.Item href="category" linkComponent={
+            ({ className, ...props }) => (
+                <strong role="link" className={className} {...props}/>
+            )}>
+            {ITEM_TITLE}
+        </ContentsNav.Item>
+    );
+
+
+    const item = screen.getByRole('listitem');
+    const link = within(item).queryByRole('link');
+
+    expect(link?.tagName).toEqual('STRONG');
+    expect(link?.textContent).toEqual(ITEM_TITLE);
+});
+
 test('passing additional props', () => {
     render(
-        <ContentsNav data-test="foo" items={[
-            {
-                title: 'Apply for Blue Badge',
-            }
-        ]} />
+        <ContentsNav data-test="foo"/>
     )
 
     const contentsNav = screen.getByRole('navigation');
@@ -130,11 +123,7 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <ContentsNav className="foo" items={[
-            {
-                title: 'Apply for Blue Badge',
-            }
-        ]} />
+        <ContentsNav className="foo"/>
     )
 
     const contentsNav = screen.getByRole('navigation');

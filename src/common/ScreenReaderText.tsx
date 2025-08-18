@@ -1,7 +1,7 @@
-const ScreenReaderText: React.FC<SGDS.Common.ScreenReaderText> = ({
+const ScreenReaderText = ({
     children,
     ...props
-}) => {
+}: SGDS.Common.ScreenReaderText) => {
     return (
         <span
             className="visually-hidden"

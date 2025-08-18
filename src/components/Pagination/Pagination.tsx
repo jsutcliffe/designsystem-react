@@ -1,31 +1,51 @@
 import Icon from "../../common/Icon";
 
-export const Page: React.FC<SGDS.Component.Pagination.Page> = ({
+export const Page = ({
     ariaLabel,
+    children,
+    className,
     current = false,
     href,
-    onClick,
-    text
-}) => {
+    linkComponent,
+    onClick
+}: SGDS.Component.Pagination.Page) => {
     function handleClick(event: React.MouseEvent) {
         if (typeof onClick === 'function') {
             onClick(event);
         }
     }
 
+    function processChildren(children: React.ReactNode) {
+        const classNames = [
+            'ds_pagination__link',
+            className,
+            current ? 'ds_current' : undefined
+        ].join(' ');
+
+        const linkProps: SGDS.LinkComponentProps = {
+            'aria-label': ariaLabel,
+            href: href,
+            onClick: handleClick
+        };
+
+        if (current) {
+            linkProps['aria-current'] = 'page';
+        }
+
+        if (linkComponent) {
+            return linkComponent({ className: classNames, children: children, ...linkProps });
+        } else if (href) {
+            return (
+                <a href={href} className={classNames} {...linkProps}>
+                    {children}
+                </a>
+            );
+        }
+    }
+
     return (
         <li className="ds_pagination__item">
-            <a aria-label={ariaLabel}
-                className={[
-                    'ds_pagination__link',
-                    current ? 'ds_current' : undefined
-                ].join(' ')}
-                href={href}
-                aria-current={current ? "page" : undefined}
-                onClick={handleClick}
-            >
-                <span className="ds_pagination__link-label">{text}</span>
-            </a>
+            {processChildren(children)}
         </li>
     );
 };
@@ -38,7 +58,7 @@ export const Ellipsis = () => {
     );
 };
 
-const Pagination: React.FC<SGDS.Component.Pagination> = ({
+const Pagination = ({
     ariaLabel = 'Pages',
     className,
     onClick,
@@ -46,8 +66,9 @@ const Pagination: React.FC<SGDS.Component.Pagination> = ({
     page = 1,
     pattern = '/search?page=$1',
     totalPages,
+    linkComponent,
     ...props
-}) => {
+}: SGDS.Component.Pagination) => {
     padding = Number(padding);
     page = Number(page);
 
@@ -93,12 +114,16 @@ const Pagination: React.FC<SGDS.Component.Pagination> = ({
         >
             <ul className="ds_pagination__list">
                 {page > 1 && (
-                    <li className="ds_pagination__item">
-                        <a aria-label="Previous page" className="ds_pagination__link  ds_pagination__link--text  ds_pagination__link--icon" href={pattern.replace('$1', String(page - 1))} data-search="pagination-previous" onClick={onClick}>
-                            <Icon icon="ChevronLeft" />
-                            <span className="ds_pagination__link-label">Previous</span>
-                        </a>
-                    </li>
+                    <Page
+                        ariaLabel="Previous page"
+                        className="ds_pagination__link--text  ds_pagination__link--icon"
+                        data-search="pagination-previous"
+                        href={pattern.replace('$1', String(page - 1))}
+                        onClick={onClick}
+                    >
+                        <Icon icon="ChevronLeft" />
+                        <span className="ds_pagination__link-label">Previous</span>
+                    </Page>
                 )}
 
                 {includeFirst && (
@@ -107,8 +132,10 @@ const Pagination: React.FC<SGDS.Component.Pagination> = ({
                             ariaLabel="Page 1"
                             href={pattern.replace('$1', String(1))}
                             onClick={onClick}
-                            text="1"
-                        />
+                            linkComponent={linkComponent}
+                        >
+                            <span className="ds_pagination__link-label">1</span>
+                        </Page>
                         <Ellipsis/>
                     </>
                 )}
@@ -116,13 +143,15 @@ const Pagination: React.FC<SGDS.Component.Pagination> = ({
                 {pages && pages.map((item, index: number) => (
                     <Page
                         ariaLabel={`Page ${item}`}
-                        current={item === page}
                         href={pattern.replace('$1', String(item))}
+                        current={item === page}
                         key={`pagination${index}`}
+                        linkComponent={linkComponent}
                         onClick={onClick}
                         pattern={pattern}
-                        text={item.toString()}
-                    />
+                    >
+                        <span className="ds_pagination__link-label">{item.toString()}</span>
+                    </Page>
                 ))}
 
                 {includeLast && (
@@ -131,20 +160,25 @@ const Pagination: React.FC<SGDS.Component.Pagination> = ({
                         <Page
                             ariaLabel={`Page ${totalPages}`}
                             href={pattern.replace('$1', String(totalPages))}
+                            linkComponent={linkComponent}
                             onClick={onClick}
                             pattern={pattern}
-                            text={totalPages.toString()}
-                        />
+                        >
+                            <span className="ds_pagination__link-label">{totalPages.toString()}</span>
+                        </Page>
                     </>
                 )}
 
                 {page < totalPages && (
-                    <li className="ds_pagination__item">
-                        <a aria-label="Next page" className="ds_pagination__link  ds_pagination__link--text  ds_pagination__link--icon" href={pattern.replace('$1', String(page + 1))} data-search="pagination-next" onClick={onClick}>
-                            <span className="ds_pagination__link-label">Next</span>
-                            <Icon icon="ChevronRight" />
-                        </a>
-                    </li>
+                    <Page
+                        ariaLabel="Next page"
+                        href={pattern.replace('$1', String(page + 1))}
+                        className="ds_pagination__link  ds_pagination__link--text  ds_pagination__link--icon"
+                        onClick={onClick}
+                    >
+                        <span className="ds_pagination__link-label">Next</span>
+                        <Icon icon="ChevronRight" />
+                    </Page>
                 )}
 
             </ul>

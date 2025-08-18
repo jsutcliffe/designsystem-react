@@ -5,10 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const ErrorMessage_1 = __importDefault(require("../ErrorMessage/ErrorMessage"));
 const HintText_1 = __importDefault(require("../../common/HintText"));
-const Option = function ({ text, value }) {
-    return (<option value={value}>{text}</option>);
-};
-const Select = function ({ className, defaultValue, error, errorMessage, hintText, id, label, name, onBlur, onChange, options, placeholder, width, ...props }) {
+const Select = function ({ children, className, defaultValue, errorMessage, hasError, hintText, id, label, name, onBlur, onChange, placeholder, width, ...props }) {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
     const describedbys = [];
@@ -36,13 +33,13 @@ const Select = function ({ className, defaultValue, error, errorMessage, hintTex
             {errorMessage && <ErrorMessage_1.default id={errorMessageId} text={errorMessage}/>}
             <div className={[
             "ds_select-wrapper",
-            error && 'ds_input--error',
+            hasError && 'ds_input--error',
             width && `ds_input--${width}`,
             className
         ].join(' ')} {...props}>
-                <select aria-describedby={describedbys.join(' ')} aria-invalid={error} className="ds_select" defaultValue={defaultValue} id={id} name={name || id} onBlur={handleBlur} onChange={handleChange}>
+                <select aria-describedby={describedbys.join(' ')} aria-invalid={hasError} className="ds_select" defaultValue={defaultValue} id={id} name={name || id} onBlur={handleBlur} onChange={handleChange}>
                     <option value="">{placeholder}</option>
-                    {options && options.map((option, index) => (<Option value={option.value} text={option.text} key={`option-${index}`}/>))}
+                    {children}
                 </select>
                 <span className="ds_select-arrow" aria-hidden="true"></span>
             </div>

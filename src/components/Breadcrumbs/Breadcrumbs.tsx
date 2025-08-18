@@ -1,53 +1,53 @@
-const Breadcrumb: React.FC<SGDS.Component.Breadcrumbs.Item> = ({
-    hidden,
+const BreadcrumbItem = ({
+    children,
+    isHidden,
     href,
-    title
-}) => {
-    return (
-        <li
-            className={[
-                'ds_breadcrumbs__item',
-                hidden && 'visually-hidden'
-            ].join(' ')}
-        >
+    linkComponent,
+    ...props
+}: SGDS.Component.Breadcrumbs.Item) => {
+    const BREADCRUMB_LINK_CLASSNAME = 'ds_breadcrumbs__link';
 
-            {href ? (<a className="ds_breadcrumbs__link" href={href}>
-                {title}
-            </a>) : (title)}
+    function processChildren(children: React.ReactNode) {
+        if (linkComponent) {
+            return linkComponent({ className: BREADCRUMB_LINK_CLASSNAME, href, children });
+        } else if (href) {
+            return <a href={href} className={BREADCRUMB_LINK_CLASSNAME}>{children}</a>;
+        } else {
+            return children;
+        }
+    }
+
+    return (
+        <li className={[
+            'ds_breadcrumbs__item',
+            isHidden && 'visually-hidden'
+        ].join(' ')}
+            {...props}
+        >
+            {processChildren(children)}
         </li>
     );
 };
 
-/**
- * @param {boolean} hideLastItem
- * @param {Array} items
- * @param {Object} props - Properties for the element
- * @returns {JSX.Element} - The element
- */
-const Breadcrumbs: React.FC<SGDS.Component.Breadcrumbs> = ({
-    hideLastItem,
-    items,
+const Breadcrumbs = ({
+    children,
     ...props
-}) => {
+}: SGDS.Component.Breadcrumbs & { Item: SGDS.Component.Breadcrumbs.Item }) => {
     return (
         <nav
             aria-label="Breadcrumb"
             {...props}
         >
             <ol className="ds_breadcrumbs">
-                {items && items.map((item, index: number) => (
-                    <Breadcrumb
-                        title={item.title}
-                        href={item.href}
-                        hidden={(hideLastItem) && index + 1 === items.length}
-                        key={'breadcrumb' + index}
-                    />
-                ))}
+                {children}
             </ol>
         </nav>
     );
 };
 
 Breadcrumbs.displayName = 'Breadcrumbs';
+BreadcrumbItem.displayName = 'Breadcrumbs.Item';
+
+Breadcrumbs.Item = BreadcrumbItem;
 
 export default Breadcrumbs;

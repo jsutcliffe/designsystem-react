@@ -7,7 +7,69 @@ Changes are grouped under the labels: `Added`, `Changed`, `Deprecated`, `Fixed`,
 
 ---
 
-## [0.7.0] 
+## [0.8.0] - 2025-08-18
+## Added
+- ActionLink component, centralising behaviour used in actions in both SummaryCard and SummaryList
+- SiteFooter component
+- Add support for the SkipLinks 'static' variant
+
+## Changed
+
+Two headline changes:
+
+1. Components that used an array of data to populate their children have been changed to use explicit child components.
+  Affected components:
+  - Breadcrumbs
+  - Checkbox/CheckboxGroup
+  - ContentsNav
+  - ErrorSummary
+  - RadioButton/RadioGroup
+  - Select
+  - SequentialNavigation
+  - SideNavigation
+  - SiteHeader
+  - SiteNavigation
+  - SkipLinks
+  - SummaryCard
+  - SummaryList
+
+2. Many components that use links now accept a `linkComponent` param to provide a mechanism for overriding the default `<a>` element, for example to allow the use of the Next.js `<Link>` component.
+  Affected components:
+  - ActionLink
+  - Breadcrumbs
+  - ContentsNav
+  - ErrorSummary
+  - Pagination
+  - SequentialNavigation
+  - SideNavigation
+  - SiteFooter
+  - SiteHeader
+  - TaskList
+
+Other component changes:
+
+- Prop names for many boolean properties made more explicit:
+  - form fields (and Question) use `hasError` (was: `error`)
+  - AbstractNotificationBanner (and components extending it) uses `hasColourIcon` and `hasInverseIcon` (was: `colourIcon`, `inverseIcon`)
+  - Breadcrumb.Item uses `isHidden` (was: `hidden`)
+  - SideNavigation.List uses `isRoot` (was: `root`)
+- PhaseBanner and Tag only use their children instead of allowing content to be passed through a prop
+- SequentialNav allows custom 'previous' and 'next' text labels
+- SkipLinks will add a default link if it has no children; if any children are added the default link will not be included (i.e. include your own 'main' link if you're adding additional skip links)
+
+Maintenance:
+
+- Reduce use of legacy React APIs
+  - remove use of `isValidElement`
+  - Icon and FileIcon use JSX instead of `React.createElement`
+- Components no longer use `React.FC<>` in their definitions
+- ARIA attributes in props now derive their types from the React ARIA types
+
+## [0.7.1] - 2025-08-04
+### Removed
+- Cleaned up unwanted items in the 'dist' folder 
+
+## [0.7.0] - 2025-08-01
 ### Changed
 - Change all component file names to Pascal case
 - Use uppercase text for const variable names

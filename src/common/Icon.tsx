@@ -1,30 +1,26 @@
 import React from 'react';
 import * as Icons from '../images/icons';
 
-const Icon: React.FC<SGDS.Common.Icon> = ({
+const Icon = ({
     ariaLabel,
     className,
     fill,
     icon,
     iconSize
-}) => {
-    const Component = React.createElement(Icons[icon],
-        {
-            'aria-hidden': ariaLabel ? undefined : true,
-            'aria-label': ariaLabel,
-            className: [
-                'ds_icon',
-                className,
-                fill && 'ds_icon--fill',
-                iconSize && `ds_icon--${iconSize}`
-            ].join(' ')
-        }
-    );
+}: SGDS.Common.Icon) => {
+    const IconComponent = Icons[icon];
 
     return (
-        <>
-            {Component}
-        </>
+        <IconComponent
+            aria-hidden={ariaLabel ? undefined : true}
+            aria-label={ariaLabel}
+            className={[
+                    'ds_icon',
+                    className,
+                    fill && 'ds_icon--fill',
+                    iconSize && `ds_icon--${iconSize}`
+            ].join(' ')}
+        />
     );
 };
 

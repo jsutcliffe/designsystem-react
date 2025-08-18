@@ -8,7 +8,7 @@ const react_1 = require("react");
 const date_picker_1 = __importDefault(require("@scottish-government/design-system/src/components/date-picker/date-picker"));
 const ErrorMessage_1 = __importDefault(require("../ErrorMessage/ErrorMessage"));
 const TextInput_1 = __importDefault(require("../TextInput/TextInput"));
-const DatePicker = ({ className, dateSelectCallback, disabledDates, error, errorMessage, hintText, id, iconPath = './', label, maxDate, minDate, multiple, name, onBlur, onChange, value, width = 'fixed-10', ...props }) => {
+const DatePicker = ({ className, dateSelectCallback, disabledDates, errorMessage, hasError, hintText, id, iconPath = './', label, maxDate, minDate, multiple, name, onBlur, onChange, value, width = 'fixed-10', ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         if (ref.current) {
@@ -37,17 +37,17 @@ const DatePicker = ({ className, dateSelectCallback, disabledDates, error, error
                     <legend>{label}</legend>
                     {errorMessage && <ErrorMessage_1.default text={errorMessage}/>}
                     <div>
-                        <TextInput_1.default className="js-datepicker-date" error={!!error} id={id + "-day"} hintText={hintText} label="Day" name={name + "-day"} onBlur={handleBlur} onChange={handleChange} value={value?.split('/')[0]} width="fixed-2"/>
+                        <TextInput_1.default className="js-datepicker-date" hasError={!!hasError} id={id + "-day"} hintText={hintText} label="Day" name={name + "-day"} onBlur={handleBlur} onChange={handleChange} value={value?.split('/')[0]} width="fixed-2"/>
                     </div>
 
                     <div>
-                        <TextInput_1.default className="js-datepicker-month" error={!!error} id={id + "-month"} hintText={hintText} label="Month" name={name + "-month"} onBlur={handleBlur} onChange={handleChange} value={value?.split('/')[1]} width="fixed-2"/>
+                        <TextInput_1.default className="js-datepicker-month" hasError={!!hasError} id={id + "-month"} hintText={hintText} label="Month" name={name + "-month"} onBlur={handleBlur} onChange={handleChange} value={value?.split('/')[1]} width="fixed-2"/>
                     </div>
 
                     <div>
-                        <TextInput_1.default className="js-datepicker-year" error={!!error} id={id + "-year"} hintText={hintText} label="Year" name={name + "-year"} onBlur={handleBlur} onChange={handleChange} value={value?.split('/')[2]} width="fixed-4"/>
+                        <TextInput_1.default className="js-datepicker-year" hasError={!!hasError} id={id + "-year"} hintText={hintText} label="Year" name={name + "-year"} onBlur={handleBlur} onChange={handleChange} value={value?.split('/')[2]} width="fixed-4"/>
                     </div>
-                </fieldset>) : (<TextInput_1.default error={!!error} errorMessage={errorMessage} id={id} hasButton hintText={hintText} label={label} name={name} onBlur={handleBlur} onChange={handleChange} placeholder="dd/mm/yyyy" value={value} width={width}/>))}
+                </fieldset>) : (<TextInput_1.default hasError={!!hasError} errorMessage={errorMessage} id={id} hasButton hintText={hintText} label={label} name={name} onBlur={handleBlur} onChange={handleChange} placeholder="dd/mm/yyyy" value={value} width={width}/>))}
         </div>);
 };
 DatePicker.displayName = 'DatePicker';

@@ -1,21 +1,29 @@
-import SummaryList, { Action } from "../SummaryList/SummaryList";
+import React, { Children, useId } from 'react';
+
+import ActionLink from '../../common/ActionLink';
+import ConditionalWrapper from '../../common/ConditionalWrapper';
 import WrapperTag from "../../common/WrapperTag";
 
-function convertToSlug(string: string) {
-    return string.toLowerCase()
-        .replace(/[^\w ]+/g, "")
-        .replace(/ +/g, "-");
-}
-
-const SummaryCard: React.FC<SGDS.Component.SummaryCard> = ({
-    actions,
+const SummaryCard = ({
+    children,
     className,
     headingLevel = 'h3',
-    items,
     title,
     ...props
-}) => {
-    const describedById = `summary-card-${convertToSlug(title)}`;
+}: SGDS.Component.SummaryCard) => {
+    let actions: any[] = [];
+    let remainingChildren: any[] = [];
+
+    const describedById = useId();
+
+    Children.forEach(children, (child: React.ReactNode) => {
+        const thisChild = child as React.ReactElement<SGDS.Common.ActionLink>;
+        if (thisChild && thisChild.type === ActionLink) {
+            actions.push(React.cloneElement(thisChild, { describedby: describedById }));
+        } else {
+            remainingChildren.push(thisChild);
+        }
+    });
 
     return (
         <div
@@ -32,29 +40,32 @@ const SummaryCard: React.FC<SGDS.Component.SummaryCard> = ({
                     tagName={headingLevel}
                 >{title}</WrapperTag>
 
-                <ul className="ds_summary-card__actions-list">
-                    {actions && actions.map((action, index: number) => (
-                        <li
-                            className="ds_summary-card__actions-list-item"
-                            key={'summarylistaction' + index}
-                        >
-                            <Action
-                                describedby={describedById}
-                                href={action.href}
-                                onclick={action.onclick}
-                                title={action.title}
-                            />
-                        </li>
-                    ))}
-                </ul>
+                {actions &&
+                    <ConditionalWrapper
+                        condition={actions.length > 1}
+                        wrapper={(children: React.JSX.Element) => <ul className="ds_summary-card__actions-list">{children}</ul>}
+                    >
+                        {actions && actions.map((action, index: number) => (
+                            <ConditionalWrapper
+                                condition={actions.length > 1}
+                                wrapper={(children: React.JSX.Element) => <li className="ds_summary-card__actions-list-item">{children}</li>}
+                                key={'action' + index}
+                            >
+                                {action}
+                            </ConditionalWrapper>
+                        ))}
+                    </ConditionalWrapper>
+                }
             </div>
             <div className="ds_summary-card__content">
-                <SummaryList items={items} />
+                {remainingChildren}
             </div>
         </div>
     );
 };
 
 SummaryCard.displayName = 'SummaryCard';
+SummaryCard.Action = ActionLink;
+SummaryCard.Action.displayName = 'SummaryCard.Action';
 
 export default SummaryCard;

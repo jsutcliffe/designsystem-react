@@ -1,10 +1,10 @@
-const ErrorMessage: React.FC<SGDS.Component.ErrorMessage> = ({
+const ErrorMessage = ({
     children,
     className,
     id,
     text,
     ...props
-}) => {
+}: SGDS.Component.ErrorMessage) => {
     return (
         <p
             className={[

@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Tag = ({ className, colour, title, ...props }) => {
+const Tag = ({ children, className, colour, ...props }) => {
     return (<span className={[
             'ds_tag',
             className,
             colour && `ds_tag--${colour}`,
         ].join(' ')} {...props}>
-            {title}
+            {children}
         </span>);
 };
 Tag.displayName = 'Tag';

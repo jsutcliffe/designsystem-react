@@ -1,32 +1,32 @@
-import { Children, isValidElement } from 'react';
+import { Children } from 'react';
 import Icon from './Icon';
 import ScreenReaderText from './ScreenReaderText';
 
-const Buttons: React.FC<SGDS.Common.AbstractNotificationBanner.Buttons> = ({
+const Buttons = ({
     children
-}) => {
+}: SGDS.Common.AbstractNotificationBanner.Buttons) => {
     return (<>{children}</>);
 }
 
-const AbstractNotificationBanner: React.FC<SGDS.Common.AbstractNotificationBanner>
-    & { Buttons: React.FC<SGDS.Common.AbstractNotificationBanner.Buttons> } = ({
+const AbstractNotificationBanner = ({
     children,
     className,
     close,
+    hasColourIcon,
+    hasInverseIcon,
     icon,
-    iconColour,
-    iconInverse,
     title = 'Information',
     ...props
-}) => {
+}: SGDS.Common.AbstractNotificationBanner) => {
     let content: any[] = [];
     let buttons;
 
     Children.forEach(children, (child) => {
-        if (isValidElement(child) && child.type === Buttons) {
-            buttons = child;
+        const thisChild = child as React.ReactElement<HTMLAnchorElement>;
+        if (thisChild && thisChild.type === Buttons) {
+            buttons = thisChild;
         } else {
-            content.push(child);
+            content.push(thisChild);
         }
     });
 
@@ -52,8 +52,8 @@ const AbstractNotificationBanner: React.FC<SGDS.Common.AbstractNotificationBanne
                         <span
                         className={[
                                 'ds_notification__icon',
-                                iconInverse && 'ds_notification__icon--inverse',
-                                iconColour && 'ds_notification__icon--colour'
+                                hasInverseIcon && 'ds_notification__icon--inverse',
+                                hasColourIcon && 'ds_notification__icon--colour'
                             ].join(' ')} aria-hidden="true">
                             <Icon icon={icon} />
                         </span>
@@ -83,5 +83,6 @@ const AbstractNotificationBanner: React.FC<SGDS.Common.AbstractNotificationBanne
 
 AbstractNotificationBanner.displayName = 'AbstractNotificationBanner';
 AbstractNotificationBanner.Buttons = Buttons;
+Buttons.displayName = 'Buttons';
 
 export default AbstractNotificationBanner;

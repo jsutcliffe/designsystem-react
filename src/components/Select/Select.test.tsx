@@ -4,28 +4,20 @@ import Select from './Select';
 
 const SELECT_ID = 'select-component';
 const LABEL_TEXT = 'choose a component';
-const OPTIONS = [
-    {
-        text: 'Accordion',
-        value: 'accordion'
-    },
-    {
-        text: 'Breadcrumbs',
-        value: 'breadcrumbs'
-    },
-    {
-        text: 'Button',
-        value: 'button'
-    }
-];
+const OPTIONS = <>
+    <option value="accordion">Accordion</option>
+    <option value="breadcrumbs">Breadcrumbs</option>
+    <option value="button">Button</option>
+</>;
 
 test('select renders correctly', () => {
     render(
         <Select
             id={SELECT_ID}
             label={LABEL_TEXT}
-            options={OPTIONS}
-        />
+        >
+            {OPTIONS}
+        </Select>
     );
 
     const select = screen.getByRole('combobox');
@@ -55,9 +47,10 @@ test('select with width', () => {
         <Select
             id={SELECT_ID}
             label={LABEL_TEXT}
-            options={OPTIONS}
             width={SELECTWIDTH}
-        />
+        >
+            {OPTIONS}
+        </Select>
     );
 
     const selectWrapper = screen.getByRole('combobox').parentElement;
@@ -71,9 +64,10 @@ test('select with hint text', () => {
         <Select
             id={SELECT_ID}
             label={LABEL_TEXT}
-            options={OPTIONS}
             hintText={HINT_TEXT}
-        />
+        >
+            {OPTIONS}
+        </Select>
     );
 
     const hintTextEl = screen.getByText(HINT_TEXT);
@@ -90,9 +84,10 @@ test('select with custom name', () => {
         <Select
             id={SELECT_ID}
             label={LABEL_TEXT}
-            options={OPTIONS}
             name={SELECT_NAME}
-        />
+        >
+            {OPTIONS}
+        </Select>
     );
 
     const select = screen.getByRole('combobox');
@@ -106,9 +101,10 @@ test('select with blur function', () => {
         <Select
             id={SELECT_ID}
             label={LABEL_TEXT}
-            options={OPTIONS}
             onBlur={ONBLUR_FUNCTION}
-        />
+        >
+            {OPTIONS}
+        </Select>
     );
 
     const select = screen.getByRole('combobox');
@@ -125,9 +121,10 @@ test('select with change function', () => {
         <Select
             id={SELECT_ID}
             label={LABEL_TEXT}
-            options={OPTIONS}
             onChange={ONCHANGE_FUNCTION}
-        />
+        >
+            {OPTIONS}
+        </Select>
     );
 
     const select = screen.getByRole('combobox');
@@ -144,9 +141,10 @@ test('select with placeholder option', () => {
         <Select
             id={SELECT_ID}
             label={LABEL_TEXT}
-            options={OPTIONS}
             placeholder={PLACEHOLDER_TEXT}
-        />
+        >
+            {OPTIONS}
+        </Select>
     );
 
     const select = screen.getByRole('combobox');
@@ -162,9 +160,10 @@ test('select with initial value', () => {
         <Select
             id={SELECT_ID}
             label={LABEL_TEXT}
-            options={OPTIONS}
             defaultValue={INITIAL_VALUE}
-        />
+        >
+            {OPTIONS}
+        </Select>
     );
 
     const select = screen.getByRole('combobox');
@@ -179,10 +178,11 @@ test('select with error message', () => {
         <Select
             id={SELECT_ID}
             label={LABEL_TEXT}
-            options={OPTIONS}
-            error
             errorMessage={ERROR_MESSAGE_TEXT}
-        />
+            hasError
+        >
+            {OPTIONS}
+        </Select>
     );
 
     const select = screen.getByRole('combobox');
@@ -201,9 +201,10 @@ test('passing additional props', () => {
         <Select
             id={SELECT_ID}
             label={LABEL_TEXT}
-            options={OPTIONS}
             data-test="foo"
-        />
+        >
+            {OPTIONS}
+        </Select>
     );
 
     const select = screen.getByRole('combobox');
@@ -216,9 +217,10 @@ test('passing additional CSS classes', () => {
         <Select
             id={SELECT_ID}
             label={LABEL_TEXT}
-            options={OPTIONS}
             className="foo"
-        />
+        >
+            {OPTIONS}
+        </Select>
     );
 
     const select = screen.getByRole('combobox');

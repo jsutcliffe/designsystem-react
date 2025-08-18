@@ -3,11 +3,11 @@ import Icon from '../../common/Icon';
 // @ts-ignore
 import DSBackToTop from '@scottish-government/design-system/src/components/back-to-top/back-to-top';
 
-const BackToTop: React.FC<SGDS.Component.BackToTop> = ({
+const BackToTop = ({
     className,
     href = '#page-top',
     ...props
-}) => {
+}: SGDS.Component.BackToTop) => {
     const ref = useRef(null);
 
     useEffect(() => {

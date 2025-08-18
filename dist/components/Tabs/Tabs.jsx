@@ -50,9 +50,9 @@ const TabItem = ({ bordered, children, className, id, tabLabel, ...props }) => {
             {children}
         </div>);
 };
-const TabListItem = ({ title, href }) => {
+const TabListItem = ({ children, href }) => {
     return (<li className="ds_tabs__tab">
-            <a className="ds_tabs__tab-link" href={href}>{title}</a>
+            <a className="ds_tabs__tab-link" href={href}>{children}</a>
         </li>);
 };
 const Tabs = ({ baseId = 'tabs', bordered = true, children, className, headingLevel = 'h2', manual = false, title = 'Contents', ...props }) => {
@@ -64,8 +64,8 @@ const Tabs = ({ baseId = 'tabs', bordered = true, children, className, headingLe
         }
     }, [ref]);
     const processedItems = react_1.Children.map(children, child => {
-        if ((0, react_1.isValidElement)(child) && child.type === TabItem) {
-            let thisChild = child;
+        const thisChild = child;
+        if (thisChild && thisChild.type === TabItem) {
             return react_1.default.cloneElement(thisChild, {
                 bordered: bordered,
                 id: thisChild.props.id || `${baseId}-${(0, slugify_1.default)(thisChild.props.tabLabel)}`,
@@ -73,8 +73,8 @@ const Tabs = ({ baseId = 'tabs', bordered = true, children, className, headingLe
         }
     });
     const tabListItems = react_1.Children.map(processedItems, child => {
-        if ((0, react_1.isValidElement)(child) && child.type === TabItem) {
-            return react_1.default.createElement(TabListItem, { title: child.props.tabLabel, href: `#${child.props.id}` });
+        if (child && child.type === TabItem) {
+            return <TabListItem href={`#${child.props.id}`}>{child.props.tabLabel}</TabListItem>;
         }
     });
     return (<div className={[

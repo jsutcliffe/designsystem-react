@@ -30,29 +30,21 @@ const ITEMS = [
 const TITLE_TEXT = 'Joe Bloggs';
 
 test('summary card renders correctly', () => {
-    const DESCRIBEDBY_ID = 'summary-card-joe-bloggs';
-
     render(
-        <>
-            <SummaryCard
-                data-testid="foo"
-                actions={ACTIONS}
-                items={ITEMS}
-                title={TITLE_TEXT}
-            />
-
-            <SummaryList data-testid="bar" items={ITEMS}/>
-        </>
+        <SummaryCard
+            data-testid="foo"
+            title={TITLE_TEXT}
+        >
+            <SummaryCard.Action href={ACTIONS[0].href}>{ACTIONS[0].title}</SummaryCard.Action>
+            <SummaryList data-testid="bar" />
+        </SummaryCard>
     );
 
     const summaryCard = screen.getByTestId('foo');
     const title = within(summaryCard).getByRole('heading');
     const header = title.parentElement as HTMLElement;
     const content = header?.nextElementSibling as HTMLElement;
-    const actionsList = within(header).getByRole('list')
-
-    const thisList = within(content).getByRole('list');
-    const comparisonList = screen.getByTestId('bar');
+    const action = within(header).getByRole('link');
 
     expect(summaryCard).toHaveClass('ds_summary-card');
 
@@ -60,34 +52,20 @@ test('summary card renders correctly', () => {
     expect(header?.tagName).toEqual('DIV');
 
     expect(title).toHaveClass('ds_summary-card__header-title');
-    expect(title).toHaveAttribute('id', DESCRIBEDBY_ID);
     expect(title?.tagName).toEqual('H3');
     expect(title.textContent).toEqual(TITLE_TEXT);
 
-    expect(actionsList?.tagName).toEqual('UL');
-    expect(actionsList.children.length).toEqual(ACTIONS.length);
-    expect(actionsList.children[0]).toHaveClass('ds_summary-card__actions-list-item');
-    expect(actionsList.children[0].tagName).toEqual('LI');
-    expect(actionsList.children[0].innerHTML).toEqual('<a aria-describedby="summary-card-joe-bloggs" class="ds_link" href="#foo">Change</a>');
-    expect(actionsList.children[1].innerHTML).toEqual('<button aria-describedby="summary-card-joe-bloggs" class="ds_link" type="button">Delete</button>');
-
-    fireEvent.click(actionsList.children[1].children[0]);
-
-    expect(ONCLICK_FUNCTION).toHaveBeenCalled();
+    expect(action).toHaveAttribute('aria-describedby', title.id);
 
     expect(content).toHaveClass('ds_summary-card__content');
     expect(content?.tagName).toEqual('DIV');
-
-    expect(thisList?.innerHTML).toEqual(comparisonList?.innerHTML);
 });
 
 test('custom heading level', () => {
     render(
         <SummaryCard
             data-testid="foo"
-            actions={ACTIONS}
             headingLevel="h2"
-            items={ITEMS}
             title={TITLE_TEXT}
         />
     );
@@ -98,12 +76,32 @@ test('custom heading level', () => {
     expect(title?.tagName).toEqual('H2');
 });
 
+test('summary card with multiple actions renders actions as a list', () => {
+    render(
+        <SummaryCard
+            data-testid="foo"
+            title={TITLE_TEXT}
+        >
+            <SummaryCard.Action href={ACTIONS[0].href}>{ACTIONS[0].title}</SummaryCard.Action>
+            <SummaryCard.Action onclick={ACTIONS[1].onclick}>{ACTIONS[1].title}</SummaryCard.Action>
+            <SummaryList data-testid="bar" />
+        </SummaryCard>
+    );
+
+    const summaryCard = screen.getByTestId('foo');
+    const title = within(summaryCard).getByRole('heading');
+    const header = title.parentElement as HTMLElement;
+    const actionsList = within(header).getByRole('list')
+
+    expect(actionsList?.tagName).toEqual('UL');
+    expect(actionsList.children[0]).toHaveClass('ds_summary-card__actions-list-item');
+    expect(actionsList.children[0].tagName).toEqual('LI');
+});
+
 test('passing additional props', () => {
     render(
         <SummaryCard
             data-testid="foo"
-            actions={ACTIONS}
-            items={ITEMS}
             title={TITLE_TEXT}
             data-test="foo"
         />
@@ -117,8 +115,6 @@ test('passing additional CSS classes', () => {
     render(
         <SummaryCard
             data-testid="foo"
-            actions={ACTIONS}
-            items={ITEMS}
             title={TITLE_TEXT}
             className="foo"
         />

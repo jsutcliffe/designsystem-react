@@ -6,7 +6,7 @@ const TAG_TEXT = 'Beta';
 
 test('tag renders correctly', () => {
     render(
-        <Tag title={TAG_TEXT}/>
+        <Tag>{TAG_TEXT}</Tag>
     );
 
     const tag = screen.getByText(TAG_TEXT);
@@ -17,7 +17,7 @@ test('tag renders correctly', () => {
 
 test('tag with custom colour', () => {
     render(
-        <Tag colour="red" title={TAG_TEXT}/>
+        <Tag colour="red">{TAG_TEXT}</Tag>
     );
 
     const tag = screen.getByText(TAG_TEXT);
@@ -27,7 +27,7 @@ test('tag with custom colour', () => {
 
 test('passing additional props', () => {
     render(
-        <Tag data-test="foo" title={TAG_TEXT}/>
+        <Tag data-test="foo">{TAG_TEXT}</Tag>
     );
 
     const tag = screen.getByText(TAG_TEXT);
@@ -36,7 +36,7 @@ test('passing additional props', () => {
 
 test('tag with additional CSS class', () => {
     render(
-        <Tag className="foo" title={TAG_TEXT}/>
+        <Tag className="foo">{TAG_TEXT}</Tag>
     );
 
     const tag = screen.getByText(TAG_TEXT);

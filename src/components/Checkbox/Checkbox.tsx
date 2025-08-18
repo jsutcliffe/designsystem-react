@@ -1,9 +1,6 @@
-import { useEffect, useRef } from 'react';
-// @ts-ignore
-import DSCheckboxes from '@scottish-government/design-system/src/forms/checkbox/checkboxes'
 import HintText from '../../common/HintText';
 
-export const Checkbox: React.FC<SGDS.Component.Checkbox> = ({
+const Checkbox = ({
     checked,
     hintText,
     id,
@@ -13,7 +10,7 @@ export const Checkbox: React.FC<SGDS.Component.Checkbox> = ({
     onBlur,
     onChange,
     small
-}) => {
+}: SGDS.Component.Checkbox) => {
     const hintTextId = `hint-text-${id}`;
     const behaviour = exclusive && 'exclusive';
 
@@ -58,55 +55,6 @@ export const Checkbox: React.FC<SGDS.Component.Checkbox> = ({
     );
 };
 
-/**
- * @param {Object} props - Properties for the element
- * @param {Array} items - Checkboxes
- * @param {boolean} small - Use the small display style for all checkboxes
- * @returns {JSX.Element} - The element
- */
-export const CheckboxGroup: React.FC<SGDS.Component.Checkbox.Group> = ({
-    className,
-    items,
-    small,
-    ...props
-}) => {
-    const ref = useRef(null);
-
-    useEffect(() => {
-        if (ref.current) {
-            new DSCheckboxes(ref.current).init();
-        }
-    }, [ref]);
-
-    return (
-        <div
-            className={[
-                'ds_checkboxes',
-                'ds_field-group',
-                className
-            ].join(' ')}
-            data-module="ds-checkboxes"
-            ref={ref}
-            {...props}
-        >
-            {items && items.map((item, index: number) => (
-                <Checkbox
-                    exclusive={item.exclusive}
-                    checked={item.checked}
-                    hintText={item.hintText}
-                    id={item.id}
-                    key={'checkbox' + index}
-                    label={item.label}
-                    onBlur={item.onBlur}
-                    onChange={item.onChange}
-                    small={small || item.small}
-                />
-            ))}
-        </div>
-    )
-};
-
 Checkbox.displayName = 'Checkbox';
-CheckboxGroup.displayName = 'CheckboxGroup';
 
-export default CheckboxGroup;
+export default Checkbox;

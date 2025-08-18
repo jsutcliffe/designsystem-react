@@ -3,10 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckboxGroup = exports.Checkbox = void 0;
-const react_1 = require("react");
-// @ts-ignore
-const checkboxes_1 = __importDefault(require("@scottish-government/design-system/src/forms/checkbox/checkboxes"));
 const HintText_1 = __importDefault(require("../../common/HintText"));
 const Checkbox = ({ checked, hintText, id, exclusive, label, name, onBlur, onChange, small }) => {
     const hintTextId = `hint-text-${id}`;
@@ -34,29 +30,5 @@ const Checkbox = ({ checked, hintText, id, exclusive, label, name, onBlur, onCha
             </div>
         </>);
 };
-exports.Checkbox = Checkbox;
-/**
- * @param {Object} props - Properties for the element
- * @param {Array} items - Checkboxes
- * @param {boolean} small - Use the small display style for all checkboxes
- * @returns {JSX.Element} - The element
- */
-const CheckboxGroup = ({ className, items, small, ...props }) => {
-    const ref = (0, react_1.useRef)(null);
-    (0, react_1.useEffect)(() => {
-        if (ref.current) {
-            new checkboxes_1.default(ref.current).init();
-        }
-    }, [ref]);
-    return (<div className={[
-            'ds_checkboxes',
-            'ds_field-group',
-            className
-        ].join(' ')} data-module="ds-checkboxes" ref={ref} {...props}>
-            {items && items.map((item, index) => (<exports.Checkbox exclusive={item.exclusive} checked={item.checked} hintText={item.hintText} id={item.id} key={'checkbox' + index} label={item.label} onBlur={item.onBlur} onChange={item.onChange} small={small || item.small}/>))}
-        </div>);
-};
-exports.CheckboxGroup = CheckboxGroup;
-exports.Checkbox.displayName = 'Checkbox';
-exports.CheckboxGroup.displayName = 'CheckboxGroup';
-exports.default = exports.CheckboxGroup;
+Checkbox.displayName = 'Checkbox';
+exports.default = Checkbox;

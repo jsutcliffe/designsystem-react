@@ -1,6 +1,6 @@
 declare namespace SGDS.Component {
     interface ConfirmationMessage extends React.AllHTMLAttributes<HTMLElement> {
-        ariaLive: AriaLive,
+        ariaLive: React.AriaAttributes['aria-live'],
         headingLevel: HeadingLevel,
         title: string
     }

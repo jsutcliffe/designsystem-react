@@ -211,8 +211,8 @@ test('date picker with error message', () => {
         <DatePicker
             id={DATE_PICKER_ID}
             label={LABEL_TEXT}
-            error
             errorMessage={ERROR_MESSAGE_TEXT}
+            hasError
         />
     );
 

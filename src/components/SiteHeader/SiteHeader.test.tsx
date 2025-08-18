@@ -7,25 +7,29 @@ import PhaseBanner from '../PhaseBanner/PhaseBanner';
 
 test('site header renders correctly (maximal, testing markup structure)', () => {
     render(
-        <SiteHeader
-            logo={{
-                alt: 'The Scottish Government',
-                src: './scottish-government.svg'
-            }}
-            navigationItems={[
-                { title: 'About', href: '#about' },
-                { title: 'Get started', href: '#get-started' },
-                { title: 'Styles', href: '#styles' },
-                { title: 'Components', href: '#components' },
-                { title: 'Patterns', href: '#patterns' },
-                { title: 'Guidance', href: '#guidance' },
-            ]}
-            phaseBanner={{
-                phaseName: 'Beta'
-            }}
-            siteSearch
-            siteTitle="Design System React"
-        />
+        <SiteHeader>
+            <SiteHeader.Brand homeUrl="/" siteTitle="Design System React">
+                <img src="./scottish-government.svg" alt="gov.scot" loading="lazy" width="300" height="58" />
+            </SiteHeader.Brand>
+            <SiteHeader.Navigation>
+                <SiteNavigation>
+                    <SiteNavigation.Item href="#about">About</SiteNavigation.Item>
+                    <SiteNavigation.Item href="#get-started">Get started</SiteNavigation.Item>
+                    <SiteNavigation.Item href="#styles">Styles</SiteNavigation.Item>
+                    <SiteNavigation.Item href="#components" current>Components</SiteNavigation.Item>
+                    <SiteNavigation.Item href="#patterns">Patterns</SiteNavigation.Item>
+                    <SiteNavigation.Item href="#guidance">Guidance</SiteNavigation.Item>
+                </SiteNavigation>
+            </SiteHeader.Navigation>
+            <SiteHeader.Search>
+                <SiteSearch id="site-header-search"/>
+            </SiteHeader.Search>
+            <SiteHeader.Phase>
+                <PhaseBanner phaseName="Beta">
+                    This is a new service. Your <a href="#feedback">feedback</a> will help us to improve it.
+                </PhaseBanner>
+            </SiteHeader.Phase>
+        </SiteHeader>
     );
 
     const siteHeader = screen.getByRole('banner');
@@ -37,7 +41,7 @@ test('site header renders correctly (maximal, testing markup structure)', () => 
     const siteHeaderNavigationMobile = within(siteHeader).getAllByRole('navigation')[0];
     const siteHeaderNavigationDesktop = within(siteHeader).getAllByRole('navigation')[1];
     const siteHeaderPhaseBanner = siteHeader.querySelector('.ds_phase-banner');
-    const siteHeaderSearch = within(siteHeader).getByRole('search').parentElement;
+    const siteHeaderSearch = within(siteHeader).getByRole('search').parentElement?.parentElement;
 
     expect(siteHeader).toHaveClass('ds_site-header');
     expect(siteHeaderContentWrapper).toHaveClass('ds_wrapper');
@@ -67,15 +71,12 @@ test('site header renders correctly (maximal, testing markup structure)', () => 
 });
 
 test('site header branding: logo only, default URL', () => {
-    const LOGO = {
-        alt: 'The Scottish Government',
-        src: './scottish-government.svg'
-    };
-
     render(
-        <SiteHeader
-            logo={LOGO}
-        />
+        <SiteHeader>
+            <SiteHeader.Brand>
+                <img src="./scottish-government.svg" alt="gov.scot" loading="lazy" width="300" height="58" />
+            </SiteHeader.Brand>
+        </SiteHeader>
     );
 
     const siteHeader = screen.getByRole('banner');
@@ -87,25 +88,22 @@ test('site header branding: logo only, default URL', () => {
     expect(siteHeaderLogoLink).toHaveAttribute('href', '/');
 
     expect(siteHeaderLogoImg).toHaveClass('ds_site-branding__logo-image');
-    expect(siteHeaderLogoImg).toHaveAttribute('src', LOGO.src);
-    expect(siteHeaderLogoImg).toHaveAttribute('alt', LOGO.alt);
 
     expect(siteHeaderLogoImg.parentElement).toEqual(siteHeaderLogoLink);
     expect(siteHeaderLogoLink.parentElement).toEqual(siteHeaderBranding);
+
+    expect(siteHeaderLogoImg).toHaveClass('ds_site-branding__logo-image');
 });
 
 test('site header branding: logo and site title', () => {
-    const LOGO = {
-        alt: 'The Scottish Government',
-        src: './scottish-government.svg'
-    };
     const SITE_TITLE_CONTENT = 'Design System React';
 
     render(
-        <SiteHeader
-            logo={LOGO}
-            siteTitle={SITE_TITLE_CONTENT}
-        />
+        <SiteHeader>
+            <SiteHeader.Brand homeUrl="/" siteTitle={SITE_TITLE_CONTENT}>
+                <img src="./scottish-government.svg" alt="gov.scot" loading="lazy" width="300" height="58" />
+            </SiteHeader.Brand>
+        </SiteHeader>
     );
 
     const siteHeader = screen.getByRole('banner');
@@ -120,64 +118,66 @@ test('site header branding: logo and site title', () => {
 });
 
 test('site header branding: custom link URL', () => {
-    const LOGO = {
-        alt: 'The Scottish Government',
-        href: '/home.aspx',
-        src: './scottish-government.svg'
-    };
+    const HOME_URL = '/home.aspx';
 
     render(
-        <SiteHeader
-            logo={LOGO}
-        />
+        <SiteHeader>
+            <SiteHeader.Brand homeUrl={HOME_URL}>
+                <img src="./scottish-government.svg" alt="gov.scot" loading="lazy" width="300" height="58" />
+            </SiteHeader.Brand>
+        </SiteHeader>
     );
 
     const siteHeader = screen.getByRole('banner');
     const siteHeaderLogoLink = within(siteHeader).getByRole('link');
 
-    expect(siteHeaderLogoLink).toHaveAttribute('href', LOGO.href);
+    expect(siteHeaderLogoLink).toHaveAttribute('href', HOME_URL);
 });
 
-test('site header with site search', () => {
-    const SEARCH_PROPS = {
-        action: 'apple',
-        autocompleteEndpoint: 'banana',
-        autocompleteSuggestionMappingFunction: 'cucumber',
-        className: 'durian',
-        id: 'eggplant',
-        method: 'POST',
-        name: 'guava',
-        placeholder: 'haw'
-    };
+test('site header logo link link with custom element', () => {
+    const LINK_CONTENT = <img src="./scottish-government.svg" alt="gov.scot" loading="lazy" width="300" height="58" />
 
     render(
-        <>
-            <SiteHeader siteSearch={SEARCH_PROPS} />
-            <SiteSearch data-testid="sitesearch" {...SEARCH_PROPS} />
-        </>
+        <SiteHeader>
+            <SiteHeader.Brand linkComponent={
+                ({ className, ...props }) => (
+                    <strong role="link" className={className} {...props}/>
+                )}>
+                {LINK_CONTENT}
+            </SiteHeader.Brand>
+        </SiteHeader>
     );
 
-    const siteHeader = screen.getByRole('banner');
-    const siteHeaderSearch = within(siteHeader).getByRole('search')
-    const siteSearchReference = screen.getByTestId('sitesearch');
+    const item = screen.getByRole('banner');
+    const link = within(item).getByRole('link');
 
-    expect(siteHeaderSearch.outerHTML).toEqual(siteSearchReference.innerHTML);
+    expect(link?.tagName).toEqual('STRONG');
 });
 
 test('site header with site navigation', () => {
-    const NAVIGATION_ITEMS = [
-        { title: 'About', href: '#about' },
-        { title: 'Get started', href: '#get-started' },
-        { title: 'Styles', href: '#styles' },
-        { title: 'Components', href: '#components' },
-        { title: 'Patterns', href: '#patterns' },
-        { title: 'Guidance', href: '#guidance' },
-    ];
+    const NAVIGATION_ITEMS = (
+        <>
+            <SiteNavigation.Item href="#about">About</SiteNavigation.Item>
+            <SiteNavigation.Item href="#get-started">Get started</SiteNavigation.Item>
+            <SiteNavigation.Item href="#styles">Styles</SiteNavigation.Item>
+            <SiteNavigation.Item href="#components" current>Components</SiteNavigation.Item>
+            <SiteNavigation.Item href="#patterns">Patterns</SiteNavigation.Item>
+            <SiteNavigation.Item href="#guidance">Guidance</SiteNavigation.Item>
+        </>
+    );
 
     render(
         <>
-            <SiteHeader navigationItems={NAVIGATION_ITEMS} />
-            <SiteNavigation data-testid="sitenavigation" items={NAVIGATION_ITEMS} />
+            <SiteHeader>
+                <SiteHeader.Navigation>
+                    <SiteNavigation>
+                        {NAVIGATION_ITEMS}
+                    </SiteNavigation>
+                </SiteHeader.Navigation>
+            </SiteHeader>
+            <SiteNavigation data-testid="sitenavigation">
+                {NAVIGATION_ITEMS}
+            </SiteNavigation>
         </>
     );
 
@@ -212,15 +212,23 @@ test('site header with site navigation', () => {
 });
 
 test('site header with phase banner', () => {
-    const PHASE_BANNER_PROPS = {
+    const PHASE_BANNER = {
         content: 'My content',
         phaseName: 'Beta'
     };
 
     render(
         <>
-            <SiteHeader phaseBanner={PHASE_BANNER_PROPS} />
-            <PhaseBanner data-testid="phasebanner" {...PHASE_BANNER_PROPS} />
+            <SiteHeader>
+                <SiteHeader.Phase>
+                    <PhaseBanner phaseName={PHASE_BANNER.phaseName}>
+                        {PHASE_BANNER.content}
+                    </PhaseBanner>
+                </SiteHeader.Phase>
+            </SiteHeader>
+            <PhaseBanner data-testid="phasebanner" phaseName={PHASE_BANNER.phaseName}>
+                {PHASE_BANNER.content}
+            </PhaseBanner>
         </>
     );
 

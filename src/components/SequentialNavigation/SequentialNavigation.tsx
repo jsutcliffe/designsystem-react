@@ -1,44 +1,63 @@
-const NextLink: React.FC<SGDS.Component.SequentialNavigation.Link> = ({
+const SeqNavLink = ({
+    children,
     href,
-    title
-}) => {
+    isPrev,
+    linkComponent,
+    textLabel
+}: SGDS.Component.SequentialNavigation.Link) => {
+    const LINK_CLASSES = [
+        'ds_sequential-nav__button',
+        isPrev ? 'ds_sequential-nav__button--left' : 'ds_sequential-nav__button--right'
+    ].join(' ');
+
+    const ITEM_CLASSES = [
+        'ds_sequential-nav__item',
+        isPrev ? 'ds_sequential-nav__item--prev' : 'ds_sequential-nav__item--next'
+    ].join(' ');
+
+    function processChildren(children: React.ReactNode) {
+        const linkInner = <span className="ds_sequential-nav__text" data-label={textLabel}>{children}</span>
+
+        if (linkComponent) {
+            return linkComponent({ className: LINK_CLASSES, href, children: linkInner });
+        } else {
+            return <a href={href} className={LINK_CLASSES}>{linkInner}</a>;
+        }
+    }
+
     return (
         <div
-            className="ds_sequential-nav__item  ds_sequential-nav__item--next"
+            className={ITEM_CLASSES}
         >
-            <a href={href} className="ds_sequential-nav__button  ds_sequential-nav__button--right">
-                <span className="ds_sequential-nav__text" data-label="Next">
-                    {title}
-                </span>
-            </a>
+            {processChildren(children)}
         </div>
-    );
+    )
 };
 
-const PrevLink: React.FC<SGDS.Component.SequentialNavigation.Link> = ({
+const NextLink = ({
+    children,
     href,
-    title,
-}) => {
-    return (
-        <div
-            className="ds_sequential-nav__item  ds_sequential-nav__item--prev"
-        >
-            <a href={href} className="ds_sequential-nav__button  ds_sequential-nav__button--left">
-                <span className="ds_sequential-nav__text" data-label="Previous">
-                    {title}
-                </span>
-            </a>
-        </div>
-    );
+    linkComponent,
+    textLabel = 'Next'
+}: SGDS.Component.SequentialNavigation.Link) => {
+    return <SeqNavLink href={href} linkComponent={linkComponent} textLabel={textLabel}>{children}</SeqNavLink>
 };
 
-const SequentialNavigation: React.FC<SGDS.Component.SequentialNavigation> = ({
+const PreviousLink = ({
+    children,
+    href,
+    linkComponent,
+    textLabel = 'Previous'
+}: SGDS.Component.SequentialNavigation.Link) => {
+    return <SeqNavLink href={href} linkComponent={linkComponent} textLabel={textLabel} isPrev>{children}</SeqNavLink>
+};
+
+const SequentialNavigation = ({
     ariaLabel = 'Article navigation',
+    children,
     className,
-    next,
-    previous,
     ...props
-}) => {
+}: SGDS.Component.SequentialNavigation) => {
     return (
         <nav
             className={[
@@ -48,12 +67,15 @@ const SequentialNavigation: React.FC<SGDS.Component.SequentialNavigation> = ({
             aria-label={ariaLabel}
             {...props}
         >
-            {previous && <PrevLink href={previous.href} title={previous.title}></PrevLink>}
-            {next && <NextLink href={next.href} title={next.title}></NextLink>}
+            {children}
         </nav>
     );
 };
 
 SequentialNavigation.displayName = 'SequentialNavigation';
+SequentialNavigation.Next = NextLink;
+SequentialNavigation.Previous = PreviousLink;
+NextLink.displayName = 'SequentialNavigation.Next';
+PreviousLink.displayName = 'SequentialNavigation.Previous';
 
 export default SequentialNavigation;

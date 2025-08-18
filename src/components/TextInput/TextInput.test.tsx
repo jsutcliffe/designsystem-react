@@ -284,8 +284,8 @@ test('text input with error message', () => {
         <TextInput
             id={INPUT_ID}
             label={LABEL_TEXT}
-            error
             errorMessage={ERROR_MESSAGE_TEXT}
+            hasError
         />
     );
 

@@ -5,7 +5,7 @@ import DSAccordion from '@scottish-government/design-system/src/components/accor
 
 let accordionItemCounter = 0;
 
-const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
+const AccordionItem = ({
     children,
     className,
     headingLevel = 'h3',
@@ -13,7 +13,7 @@ const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
     open = false,
     title,
     ...props
-}) => {
+}: SGDS.Component.Accordion.Item) => {
     accordionItemCounter = accordionItemCounter + 1;
     const processedId = rawId || `accordion-item-${accordionItemCounter}`;
     return (
@@ -43,7 +43,7 @@ const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
                 >
                     {title}
                 </WrapperTag>
-                <span className='ds_accordion-item__indicator' />
+                <span className="ds_accordion-item__indicator" />
                 <label
                     className="ds_accordion-item__label"
                     htmlFor={`${processedId}-control`}
@@ -58,14 +58,13 @@ const AccordionItem: React.FC<SGDS.Component.Accordion.Item> = ({
     );
 };
 
-const Accordion: React.FC<SGDS.Component.Accordion>
-    & { Item: React.FC<SGDS.Component.Accordion.Item> } = ({
+const Accordion = ({
     children,
     className,
     headingLevel = 'h3',
     hideOpenAll,
     ...props
-}) => {
+}: SGDS.Component.Accordion) => {
     const ref = useRef(null);
 
     useEffect(() => {
@@ -112,7 +111,7 @@ const Accordion: React.FC<SGDS.Component.Accordion>
 };
 
 Accordion.displayName = 'Accordion';
-AccordionItem.displayName = 'AccordionItem';
+AccordionItem.displayName = 'Accordion.Item';
 Accordion.Item = AccordionItem;
 
 export default Accordion;

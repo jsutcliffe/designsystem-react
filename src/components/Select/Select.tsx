@@ -1,31 +1,22 @@
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import HintText from '../../common/HintText';
 
-const Option: React.FC<SGDS.Component.Select.Option> = function ({
-    text,
-    value
-}) {
-    return (
-        <option value={value}>{text}</option>
-    );
-};
-
-const Select: React.FC<SGDS.Component.Select> = function ({
+const Select = function ({
+    children,
     className,
     defaultValue,
-    error,
     errorMessage,
+    hasError,
     hintText,
     id,
     label,
     name,
     onBlur,
     onChange,
-    options,
     placeholder,
     width,
     ...props
-}) {
+}: SGDS.Component.Select) {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
     const describedbys: string[] = [];
@@ -53,7 +44,7 @@ const Select: React.FC<SGDS.Component.Select> = function ({
             <div
                 className={[
                     "ds_select-wrapper",
-                    error && 'ds_input--error',
+                    hasError && 'ds_input--error',
                     width && `ds_input--${width}`,
                     className
                 ].join(' ')}
@@ -61,7 +52,7 @@ const Select: React.FC<SGDS.Component.Select> = function ({
             >
                 <select
                     aria-describedby={describedbys.join(' ')}
-                    aria-invalid={error}
+                    aria-invalid={hasError}
                     className="ds_select"
                     defaultValue={defaultValue}
                     id={id}
@@ -70,13 +61,7 @@ const Select: React.FC<SGDS.Component.Select> = function ({
                     onChange={handleChange}
                 >
                     <option value="">{placeholder}</option>
-                    {options && options.map((option, index: number) => (
-                        <Option
-                            value={option.value}
-                            text={option.text}
-                            key={`option-${index}`}
-                        />
-                    ))}
+                    {children}
                 </select>
                 <span className="ds_select-arrow" aria-hidden="true"></span>
             </div>

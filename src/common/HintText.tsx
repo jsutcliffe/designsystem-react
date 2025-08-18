@@ -1,9 +1,9 @@
-const HintText: React.FC<SGDS.Common.HintText> = ({
+const HintText = ({
     children,
     id,
     text,
     ...props
-}) => {
+}: SGDS.Common.HintText) => {
     return (
         <p
             className="ds_hint-text"

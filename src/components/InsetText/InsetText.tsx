@@ -1,8 +1,8 @@
-const InsetText: React.FC<SGDS.Component.InsetText> = ({
+const InsetText = ({
     children,
     className,
     ...props
-}) => {
+}: SGDS.Component.InsetText) => {
     return (
         <div
             className={[

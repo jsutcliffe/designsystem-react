@@ -216,7 +216,7 @@ test('passing additional props to accordion item', () => {
     );
 
     const accordionItem = screen.getByTestId(ACCORDION_ITEM_ID);
-    expect(accordionItem?.dataset.test).toEqual('foo');
+    expect(accordionItem.dataset.test).toEqual('foo');
 });
 
 test('passing additional CSS classes', () => {

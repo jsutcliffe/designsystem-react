@@ -39,13 +39,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
 const FileIcons = __importStar(require("../images/documents"));
 const FileIcon = ({ ariaLabel = '', className, icon }) => {
-    const Component = react_1.default.createElement(FileIcons[icon], {
-        className: className,
-        'aria-label': ariaLabel
-    });
-    return (<>
-            {Component}
-        </>);
+    const FileIconComponent = FileIcons[icon];
+    return (<FileIconComponent aria-label={ariaLabel} className={className}/>);
 };
 FileIcon.displayName = 'FileIcon';
 exports.default = FileIcon;

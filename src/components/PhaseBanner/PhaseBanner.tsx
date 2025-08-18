@@ -1,12 +1,11 @@
 import Tag from "../Tag/Tag";
 
-const PhaseBanner: React.FC<SGDS.Component.PhaseBanner> = ({
+const PhaseBanner = ({
     children,
     className,
-    content,
     phaseName,
     ...props
-}) => {
+}: SGDS.Component.PhaseBanner) => {
     return (
         <div
             className={[
@@ -17,9 +16,9 @@ const PhaseBanner: React.FC<SGDS.Component.PhaseBanner> = ({
         >
             <div className="ds_wrapper">
                 <p className="ds_phase-banner__content">
-                    {phaseName && <Tag title={phaseName} className="ds_phase-banner__tag" />}
+                    {phaseName && <Tag className="ds_phase-banner__tag">{phaseName}</Tag>}
                     <span className="ds_phase-banner__text">
-                        {content ? content : children || "This is a new service"}
+                        {children || "This is a new service"}
                     </span>
                 </p>
             </div>

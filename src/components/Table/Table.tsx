@@ -2,12 +2,12 @@ import { useEffect, useRef } from 'react';
 // @ts-ignore
 import DSTable from '@scottish-government/design-system/src/components/table/table';
 
-const Table: React.FC<SGDS.Component.Table> = ({
+const Table = ({
     children,
     className,
     smallscreen,
     ...props
-}) => {
+}: SGDS.Component.Table) => {
     const ref = useRef(null);
 
     useEffect(() => {

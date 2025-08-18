@@ -5,19 +5,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ellipsis = exports.Page = void 0;
 const Icon_1 = __importDefault(require("../../common/Icon"));
-const Page = ({ ariaLabel, current = false, href, onClick, text }) => {
+const Page = ({ ariaLabel, children, className, current = false, href, linkComponent, onClick }) => {
     function handleClick(event) {
         if (typeof onClick === 'function') {
             onClick(event);
         }
     }
-    return (<li className="ds_pagination__item">
-            <a aria-label={ariaLabel} className={[
+    function processChildren(children) {
+        const classNames = [
             'ds_pagination__link',
+            className,
             current ? 'ds_current' : undefined
-        ].join(' ')} href={href} aria-current={current ? "page" : undefined} onClick={handleClick}>
-                <span className="ds_pagination__link-label">{text}</span>
-            </a>
+        ].join(' ');
+        const linkProps = {
+            'aria-label': ariaLabel,
+            href: href,
+            onClick: handleClick
+        };
+        if (current) {
+            linkProps['aria-current'] = 'page';
+        }
+        if (linkComponent) {
+            return linkComponent({ className: classNames, children: children, ...linkProps });
+        }
+        else if (href) {
+            return (<a href={href} className={classNames} {...linkProps}>
+                    {children}
+                </a>);
+        }
+    }
+    return (<li className="ds_pagination__item">
+            {processChildren(children)}
         </li>);
 };
 exports.Page = Page;
@@ -27,7 +45,7 @@ const Ellipsis = () => {
         </li>);
 };
 exports.Ellipsis = Ellipsis;
-const Pagination = ({ ariaLabel = 'Pages', className, onClick, padding = 1, page = 1, pattern = '/search?page=$1', totalPages, ...props }) => {
+const Pagination = ({ ariaLabel = 'Pages', className, onClick, padding = 1, page = 1, pattern = '/search?page=$1', totalPages, linkComponent, ...props }) => {
     padding = Number(padding);
     page = Number(page);
     const minToShow = padding + 2;
@@ -64,31 +82,33 @@ const Pagination = ({ ariaLabel = 'Pages', className, onClick, padding = 1, page
             className
         ].join(' ')} aria-label={ariaLabel} {...props}>
             <ul className="ds_pagination__list">
-                {page > 1 && (<li className="ds_pagination__item">
-                        <a aria-label="Previous page" className="ds_pagination__link  ds_pagination__link--text  ds_pagination__link--icon" href={pattern.replace('$1', String(page - 1))} data-search="pagination-previous" onClick={onClick}>
-                            <Icon_1.default icon="ChevronLeft"/>
-                            <span className="ds_pagination__link-label">Previous</span>
-                        </a>
-                    </li>)}
+                {page > 1 && (<exports.Page ariaLabel="Previous page" className="ds_pagination__link--text  ds_pagination__link--icon" data-search="pagination-previous" href={pattern.replace('$1', String(page - 1))} onClick={onClick}>
+                        <Icon_1.default icon="ChevronLeft"/>
+                        <span className="ds_pagination__link-label">Previous</span>
+                    </exports.Page>)}
 
                 {includeFirst && (<>
-                        <exports.Page ariaLabel="Page 1" href={pattern.replace('$1', String(1))} onClick={onClick} text="1"/>
+                        <exports.Page ariaLabel="Page 1" href={pattern.replace('$1', String(1))} onClick={onClick} linkComponent={linkComponent}>
+                            <span className="ds_pagination__link-label">1</span>
+                        </exports.Page>
                         <exports.Ellipsis />
                     </>)}
 
-                {pages && pages.map((item, index) => (<exports.Page ariaLabel={`Page ${item}`} current={item === page} href={pattern.replace('$1', String(item))} key={`pagination${index}`} onClick={onClick} pattern={pattern} text={item.toString()}/>))}
+                {pages && pages.map((item, index) => (<exports.Page ariaLabel={`Page ${item}`} href={pattern.replace('$1', String(item))} current={item === page} key={`pagination${index}`} linkComponent={linkComponent} onClick={onClick} pattern={pattern}>
+                        <span className="ds_pagination__link-label">{item.toString()}</span>
+                    </exports.Page>))}
 
                 {includeLast && (<>
                         <exports.Ellipsis />
-                        <exports.Page ariaLabel={`Page ${totalPages}`} href={pattern.replace('$1', String(totalPages))} onClick={onClick} pattern={pattern} text={totalPages.toString()}/>
+                        <exports.Page ariaLabel={`Page ${totalPages}`} href={pattern.replace('$1', String(totalPages))} linkComponent={linkComponent} onClick={onClick} pattern={pattern}>
+                            <span className="ds_pagination__link-label">{totalPages.toString()}</span>
+                        </exports.Page>
                     </>)}
 
-                {page < totalPages && (<li className="ds_pagination__item">
-                        <a aria-label="Next page" className="ds_pagination__link  ds_pagination__link--text  ds_pagination__link--icon" href={pattern.replace('$1', String(page + 1))} data-search="pagination-next" onClick={onClick}>
-                            <span className="ds_pagination__link-label">Next</span>
-                            <Icon_1.default icon="ChevronRight"/>
-                        </a>
-                    </li>)}
+                {page < totalPages && (<exports.Page ariaLabel="Next page" href={pattern.replace('$1', String(page + 1))} className="ds_pagination__link  ds_pagination__link--text  ds_pagination__link--icon" onClick={onClick}>
+                        <span className="ds_pagination__link-label">Next</span>
+                        <Icon_1.default icon="ChevronRight"/>
+                    </exports.Page>)}
 
             </ul>
         </nav>);

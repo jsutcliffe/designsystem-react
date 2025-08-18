@@ -18,4 +18,5 @@ const CookieBanner = ({ children, className, title, ...props }) => {
 };
 CookieBanner.displayName = 'CookieBanner';
 CookieBanner.Buttons = AbstractNotificationBanner_1.default.Buttons;
+CookieBanner.Buttons.displayName = 'CookieBanner.Buttons';
 exports.default = CookieBanner;

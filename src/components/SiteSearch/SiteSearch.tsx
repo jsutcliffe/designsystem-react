@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import DSAutocomplete from '@scottish-government/design-system/src/components/autocomplete/autocomplete';
 import Button from '../Button/Button';
 
-const SiteSearch: React.FC<SGDS.Component.SiteSearch> = function ({
+const SiteSearch = function ({
     action = '/search',
     autocompleteEndpoint,
     autocompleteSuggestionMappingFunction,
@@ -14,7 +14,7 @@ const SiteSearch: React.FC<SGDS.Component.SiteSearch> = function ({
     name = 'q',
     placeholder = 'Search',
     ...props
-}) {
+}: SGDS.Component.SiteSearch) {
     const ref = useRef(null);
     const hasAutocomplete = !!autocompleteEndpoint;
     let autocompleteId = hasAutocomplete ? id + '-autocomplete' : '';

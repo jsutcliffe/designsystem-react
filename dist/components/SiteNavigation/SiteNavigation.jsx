@@ -1,22 +1,35 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const SiteNavLink = ({ current = false, href, title }) => {
+const Item = ({ children, current = false, href, linkComponent }) => {
+    const classNames = ['ds_site-navigation__link'];
+    let ariaCurrent;
+    if (current) {
+        classNames.push('ds_current');
+        ariaCurrent = 'page';
+    }
+    function processChildren(children) {
+        if (linkComponent) {
+            return linkComponent({ className: classNames.join(' '), href, children });
+        }
+        else if (href) {
+            return <a href={href} aria-current={ariaCurrent ? ariaCurrent : undefined} className={classNames.join(' ')}>{children}</a>;
+        }
+    }
     return (<li className="ds_site-navigation__item">
-            <a href={href} className={[
-            'ds_site-navigation__link',
-            current ? 'ds_current' : undefined
-        ].join(' ')}>{title}</a>
+            {processChildren(children)}
         </li>);
 };
-const SiteNavigation = ({ className, items, ...props }) => {
+const SiteNavigation = ({ children, className, ...props }) => {
     return (<nav className={[
             'ds_site-navigation',
             className
         ].join(' ')} {...props}>
             <ul className="ds_site-navigation__list">
-                {items && items.map((item, index) => (<SiteNavLink current={item.current} href={item.href} title={item.title} key={`link-${index}`}/>))}
+                {children}
             </ul>
         </nav>);
 };
 SiteNavigation.displayName = 'SiteNavigation';
+SiteNavigation.Item = Item;
+Item.displayName = 'SiteNavigation.Item';
 exports.default = SiteNavigation;

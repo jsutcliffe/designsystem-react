@@ -1,9 +1,9 @@
-const Details: React.FC<SGDS.Component.Details> = ({
+const Details = ({
     children,
     className,
     summary,
     ...props
-}) => {
+}: SGDS.Component.Details) => {
     return (
         <details
             className={[

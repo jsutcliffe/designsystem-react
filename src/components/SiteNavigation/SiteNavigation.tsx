@@ -1,27 +1,39 @@
-const SiteNavLink: React.FC<SGDS.Component.SiteNavigation.Link> = ({
-    current=false,
+const Item = ({
+    children,
+    current = false,
     href,
-    title
-}) => {
+    linkComponent
+}: SGDS.Component.SiteNavigation.Item) => {
+    const classNames = ['ds_site-navigation__link'];
+    let ariaCurrent: React.AriaAttributes["aria-current"];
+
+    if (current) {
+        classNames.push('ds_current');
+        ariaCurrent = 'page';
+    }
+
+    function processChildren(children: React.ReactNode) {
+        if (linkComponent) {
+            return linkComponent({ className: classNames.join(' '), href, children });
+        } else if (href) {
+            return <a href={href} aria-current={ariaCurrent ? ariaCurrent : undefined} className={classNames.join(' ')}>{children}</a>;
+        }
+    }
+
     return (
         <li
             className="ds_site-navigation__item"
         >
-            <a
-                href={href}
-                className={[
-                    'ds_site-navigation__link',
-                    current ? 'ds_current' : undefined
-                ].join(' ')}>{title}</a>
+            {processChildren(children)}
         </li>
     );
 };
 
-const SiteNavigation: React.FC<SGDS.Component.SiteNavigation> = ({
+const SiteNavigation = ({
+    children,
     className,
-    items,
     ...props
-}) => {
+}: SGDS.Component.SiteNavigation) => {
     return (
         <nav
             className={[
@@ -31,14 +43,14 @@ const SiteNavigation: React.FC<SGDS.Component.SiteNavigation> = ({
             {...props}
         >
             <ul className="ds_site-navigation__list">
-                {items && items.map((item, index: number) => (
-                    <SiteNavLink current={item.current} href={item.href} title={item.title} key={`link-${index}`} />
-                ))}
+                {children}
             </ul>
         </nav>
     );
 };
 
 SiteNavigation.displayName = 'SiteNavigation';
+SiteNavigation.Item = Item;
+Item.displayName = 'SiteNavigation.Item';
 
 export default SiteNavigation;

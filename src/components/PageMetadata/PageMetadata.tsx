@@ -1,9 +1,9 @@
-const MetadataItem: React.FC<SGDS.Component.Metadata.Item> = ({
+const MetadataItem= ({
     children,
     className,
     name,
     ...props
-}) => {
+}: SGDS.Component.Metadata.Item) => {
     return (
         <div className={[
             'ds_metadata__item',
@@ -19,13 +19,12 @@ const MetadataItem: React.FC<SGDS.Component.Metadata.Item> = ({
     );
 };
 
-const Metadata: React.FC<SGDS.Component.Metadata>
-    & { Item: React.FC<SGDS.Component.Metadata.Item> }    = ({
+const Metadata = ({
     children,
     className,
     inline,
     ...props
-}) => {
+}: SGDS.Component.Metadata) => {
     return (
         <dl
             className={[

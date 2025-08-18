@@ -1,11 +1,11 @@
 /**
  * Wraps all children in a specified HTML tag.
  */
-const WrapperTag: React.FC<SGDS.Common.WrapperTag> = ({
+const WrapperTag = ({
     children,
     tagName = 'div',
     ...props
-}) => {
+}: SGDS.Common.WrapperTag) => {
     const TagName = tagName;
     return <TagName {...props}>{children}</TagName>;
 };

@@ -7,7 +7,6 @@ declare namespace SGDS.Component {
         }
 
         interface TabListItem extends React.AllHTMLAttributes<HTMLLIElement> {
-            title: string,
             href: string
         }
     }

@@ -1,17 +1,18 @@
 declare namespace SGDS.Component {
     namespace Pagination {
         interface Page extends React.AllHTMLAttributes<HTMLElement> {
-            ariaLabel: string,
+            ariaLabel: React.AriaAttributes['aria-label'],
             current?: boolean,
             href: string,
-            onClick?: React.EventHandler<any>,
-            text: string
+            linkComponent?: SGDS.LinkComponent,
+            onClick?: React.EventHandler<any>
         }
     }
 
     interface Pagination extends React.AllHTMLAttributes<HTMLElement> {
-        ariaLabel: string,
+        ariaLabel: React.AriaAttributes['aria-label'],
         className?: string,
+        linkComponent?: SGDS.LinkComponent,
         onClick?: React.EventHandler<any>,
         padding: number,
         page: number,

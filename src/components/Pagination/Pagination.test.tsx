@@ -4,7 +4,8 @@ import Pagination, { Page, Ellipsis } from './Pagination';
 
 const PAGE_ARIA_LABEL = 'Page 1';
 const PAGE_HREF = '#foo';
-const PAGE_TEXT = '1';
+const PAGE_TEXT = 1;
+const PAGE_LABEL = <span className="ds_pagination__link-label">{PAGE_TEXT}</span>;
 const CURRENT_PAGE = 10;
 const TOTAL_PAGES = 21;
 
@@ -13,8 +14,7 @@ test('pagination page renders correctly', () => {
         <Page
             ariaLabel={PAGE_ARIA_LABEL}
             href={PAGE_HREF}
-            text={PAGE_TEXT}
-        />
+        >{PAGE_LABEL}</Page>
     );
 
     const item = screen.getByRole('listitem');
@@ -25,6 +25,27 @@ test('pagination page renders correctly', () => {
     expect(link).toHaveClass('ds_pagination__link');
     expect(link).toHaveAttribute('aria-label', PAGE_ARIA_LABEL);
     expect(link).toHaveAttribute('href', PAGE_HREF);
+    expect(link.tagName).toEqual('A');
+    expect(span).toHaveClass('ds_pagination__link-label');
+});
+
+test('pagination page renders with custom link component', () => {
+    render(
+        <Page
+            ariaLabel={PAGE_ARIA_LABEL}
+            href={PAGE_HREF}
+            linkComponent={
+            ({ className, ...props }) => (
+                <span role="link" className={className} {...props}/>
+            )}
+        >{PAGE_LABEL}</Page>
+    );
+
+    const item = screen.getByRole('listitem');
+    const link = within(item).getByRole('link');
+    const span = within(link).getByText(PAGE_TEXT);
+
+    expect(link.tagName).toEqual('SPAN');
     expect(span).toHaveClass('ds_pagination__link-label');
 });
 
@@ -33,9 +54,8 @@ test('current pagination page', () => {
         <Page
             ariaLabel={PAGE_ARIA_LABEL}
             href={PAGE_HREF}
-            text={PAGE_TEXT}
             current
-        />
+        >{PAGE_LABEL}</Page>
     );
 
     const item = screen.getByRole('listitem');
@@ -52,9 +72,8 @@ test('pagination page with click event', () => {
         <Page
             ariaLabel={PAGE_ARIA_LABEL}
             href={PAGE_HREF}
-            text={PAGE_TEXT}
             onClick={ONCLICK_FUNCTION}
-        />
+        >{PAGE_LABEL}</Page>
     );
 
     const item = screen.getByRole('listitem');

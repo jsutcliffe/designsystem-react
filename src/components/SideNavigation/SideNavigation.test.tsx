@@ -1,49 +1,27 @@
 import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
-import SideNavigation, { List, Link } from './SideNavigation';
-
-const ITEMS = [
-    {
-        title: 'Apples',
-        href: '#apples',
-        items: [
-            {
-                title: 'Green apples',
-                href: '#green-apples',
-                items: [
-                    {
-                        title: 'Bramley',
-                        current: true
-                    },
-                    {
-                        title: 'Granny Smith',
-                        href: '#granny-smith'
-                    }
-                ]
-            },
-            {
-                title: 'Red apples',
-                href: '#red-apples'
-            }
-        ]
-    },
-    {
-        title: 'Bananas',
-        href: '#bananas'
-    },
-    {
-        title: 'Cherries',
-        href: '#cherries'
-    },
-    {
-        title: 'Dates',
-        href: '#dates'
-    }
-];
+import SideNavigation from './SideNavigation';
 
 test('side navigation renders correctly', () => {
     render(
-        <SideNavigation items={ITEMS} />
+        <SideNavigation>
+            <SideNavigation.List isRoot>
+                <SideNavigation.Item href="#apples" title="Apples">
+                    <SideNavigation.List>
+                        <SideNavigation.Item href="#green-apples" title="Green apples">
+                            <SideNavigation.List>
+                                <SideNavigation.Item href="#bramley" title="Bramley" current/>
+                                <SideNavigation.Item href="#granny-smith" title="Granny smith"/>
+                            </SideNavigation.List>
+                        </SideNavigation.Item>
+                        <SideNavigation.Item href="#red-apples" title="Red apples"/>
+                    </SideNavigation.List>
+                </SideNavigation.Item>
+                <SideNavigation.Item href="#bananas" title="Bananas" />
+                <SideNavigation.Item href="#cherries" title="Cherries" />
+                <SideNavigation.Item href="#dates" title="Dates"/>
+            </SideNavigation.List>
+        </SideNavigation>
     );
 
     const sideNavigation = screen.getByRole('navigation');
@@ -63,16 +41,11 @@ test('side navigation renders correctly', () => {
     expect(label?.textContent).toEqual('Show all Pages in this section');
 
     expect(rootList).toHaveAttribute('id', 'side-navigation-root');
-
-    // some specifics of this case
-    expect(rootList.children.length).toEqual(4);
-    expect(document.querySelectorAll('.ds_side-navigation__link').length).toEqual(8);
-    expect(document.querySelectorAll('.ds_side-navigation__list').length).toEqual(3);
 });
 
 test('side nav link renders correctly', () => {
     render(
-        <Link title="Green apples" href="#green-apples" />
+        <SideNavigation.Item href="#green-apples" title="Green apples" />
     );
 
     const item = screen.getByRole('listitem');
@@ -87,7 +60,7 @@ test('side nav link renders correctly', () => {
 
 test('current side nav item without link renders correctly', () => {
     render(
-        <Link title="Green apples" href="#green-apples" current />
+        <SideNavigation.Item href="#green-apples" title="Green apples" current />
     );
 
     const item = screen.getByRole('listitem');
@@ -99,22 +72,18 @@ test('current side nav item without link renders correctly', () => {
 
 test('side nav link with children', () => {
     render(
-        <Link title="Green apples" href="#green-apples" items={[{
-            title: 'Bramley',
-            href: '#bramley'
-        },
-        {
-            title: 'Granny Smith',
-            href: '#granny-smith'
-        }]} />
+        <SideNavigation.Item href="#green-apples" title="Green apples">
+            <SideNavigation.List>
+                <SideNavigation.Item href="#bramley" title="Bramley" />
+            </SideNavigation.List>
+        </SideNavigation.Item>
     );
 
     const childList = screen.getByRole('list');
-    const childItem = screen.getAllByRole('listitem')[1];
+    const childItem = within(childList).getByRole('listitem');
     const childLink = within(childItem).getByRole('link');
 
     expect(childList).toHaveClass('ds_side-navigation__list');
-    expect(childList.children.length).toEqual(2);
 
     // check properties of first child link
     expect(childItem).toHaveClass('ds_side-navigation__item');
@@ -123,41 +92,26 @@ test('side nav link with children', () => {
     expect(childLink.textContent).toEqual('Bramley');
 });
 
-test('side nav list renders correctly', () => {
-    const ITEMS = [
-        {
-            title: 'Bramley',
-            href: '#bramley'
-        },
-        {
-            title: 'Granny Smith',
-            href: '#granny-smith'
-        }
-    ];
+test('side nav link with custom element', () => {
+    const LINK_TEXT = 'Green apples'
 
     render(
-        <List items={ITEMS}/>
+        <SideNavigation.Item href="#green-apples" title={LINK_TEXT} linkComponent={
+            ({ className, ...props }) => (
+                <span role="link" className={className} {...props}/>
+            )}/>
     );
 
-    const list = screen.getByRole('list');
-    const item = screen.getAllByRole('listitem')[0];
-    const link = within(item).getByRole('link');
+    const item = screen.getByRole('listitem');
+    const link = within(item).queryByRole('link');
 
-    expect(list).toHaveClass('ds_side-navigation__list');
-    expect(list.tagName).toEqual('UL');
-
-    expect(list.children.length).toEqual(ITEMS.length);
-
-    // check properties of first link
-    expect(item).toHaveClass('ds_side-navigation__item');
-    expect(link).toHaveClass('ds_side-navigation__link');
-    expect(link).toHaveAttribute('href', '#bramley');
-    expect(link.textContent).toEqual('Bramley');
+    expect(link?.tagName).toEqual('SPAN');
+    expect(link?.textContent).toEqual(LINK_TEXT);
 });
 
 test('passing additional props', () => {
     render(
-        <SideNavigation data-test="foo" items={ITEMS} />
+        <SideNavigation data-test="foo" />
     );
 
     const sideNavigation = screen.getByRole('navigation');
@@ -166,7 +120,7 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <SideNavigation className="foo" items={ITEMS} />
+        <SideNavigation className="foo" />
     );
 
     const sideNavigation = screen.getByRole('navigation');

@@ -1,6 +1,6 @@
 import HintText from '../../common/HintText';
 
-export const Radio: React.FC<SGDS.Component.RadioButton> = ({
+const RadioButton = ({
     checked,
     hintText,
     id,
@@ -9,7 +9,7 @@ export const Radio: React.FC<SGDS.Component.RadioButton> = ({
     onBlur,
     onChange,
     small
-}) => {
+}: SGDS.Component.RadioButton) => {
     const hintTextId = `hint-text-${id}`;
 
     function handleBlur(event: React.FocusEvent) {
@@ -48,43 +48,6 @@ export const Radio: React.FC<SGDS.Component.RadioButton> = ({
     );
 };
 
-const RadioGroup: React.FC<SGDS.Component.RadioButton.Group> = ({
-    className,
-    inline,
-    items,
-    name,
-    small,
-    ...props
-}) => {
-    return (
-        <div
-            className={[
-                'ds_radios',
-                'ds_field-group',
-                inline && 'ds_field-group--inline',
-                className
-            ].join(' ')}
-            {...props}
-        >
+RadioButton.displayName = 'RadioButton';
 
-            {items && items.map((item, index: number) => (
-                <Radio
-                    checked={item.checked}
-                    hintText={item.hintText}
-                    id={item.id}
-                    key={'radio' + index}
-                    label={item.label}
-                    name={name}
-                    onBlur={item.onBlur}
-                    onChange={item.onChange}
-                    small={small || item.small}
-                />
-            ))}
-        </div>
-    )
-};
-
-Radio.displayName = 'Radio';
-RadioGroup.displayName = 'RadioGroup';
-
-export default RadioGroup;
+export default RadioButton;

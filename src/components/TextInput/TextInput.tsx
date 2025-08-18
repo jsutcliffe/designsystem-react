@@ -6,7 +6,7 @@ import ConditionalWrapper from '../../common/ConditionalWrapper';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import HintText from '../../common/HintText';
 
-const TextInput: React.FC<SGDS.Component.TextInput> = ({
+const TextInput = ({
     buttonIcon,
     buttonText,
     children,
@@ -15,9 +15,9 @@ const TextInput: React.FC<SGDS.Component.TextInput> = ({
     width,
     currency,
     currencySymbol,
-    error,
     errorMessage,
     hasButton = false,
+    hasError,
     hintText,
     id,
     label,
@@ -29,7 +29,7 @@ const TextInput: React.FC<SGDS.Component.TextInput> = ({
     type = 'text',
     value,
     ...props
-}) => {
+}: SGDS.Component.TextInput) => {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
     const ref = useRef(null);
@@ -71,11 +71,11 @@ const TextInput: React.FC<SGDS.Component.TextInput> = ({
             >
                 <input
                     aria-describedby={describedbys.join(' ')}
-                    aria-invalid={error}
+                    aria-invalid={hasError}
                     className={[
                         'ds_input',
                         className,
-                        error ? 'ds_input--error' : '',
+                        hasError ? 'ds_input--error' : '',
                         width ? `ds_input--${width}` : '',
                     ].join(' ')}
                     defaultValue={value}

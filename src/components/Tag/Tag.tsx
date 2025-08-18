@@ -1,9 +1,9 @@
-const Tag: React.FC<SGDS.Component.Tag> = ({
+const Tag = ({
+    children,
     className,
     colour,
-    title,
     ...props
-}) => {
+}: SGDS.Component.Tag) => {
     return (
         <span
             className={[
@@ -13,7 +13,7 @@ const Tag: React.FC<SGDS.Component.Tag> = ({
             ].join(' ')}
             {...props}
         >
-            {title}
+            {children}
         </span>
     );
 };

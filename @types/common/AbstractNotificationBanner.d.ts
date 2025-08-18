@@ -9,8 +9,8 @@ declare namespace SGDS.Common {
         close?: boolean,
         hasIcon?: boolean,
         icon?: IconName,
-        iconColour?: boolean,
-        iconInverse?: boolean,
+        hasColourIcon?: boolean,
+        hasInverseIcon?: boolean,
         title: string,
         ref?: any
     }

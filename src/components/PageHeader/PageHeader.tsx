@@ -1,10 +1,10 @@
-const PageHeader: React.FC<SGDS.Component.PageHeader> = ({
+const PageHeader = ({
     children,
     className,
     label,
     title,
     ...props
-}) => {
+}: SGDS.Component.PageHeader) => {
     return (
         <header
             className={[

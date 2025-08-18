@@ -2,23 +2,23 @@ import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import SiteNavigation from './SiteNavigation';
 
-const ITEMS = [
-    {title: 'About', href: '#about'},
-    {title: 'Get started', href: '#get-started'},
-    {title: 'Styles', href: '#styles'},
-    {title: 'Components', href: '#components'},
-    {title: 'Patterns', href: '#patterns'},
-    {title: 'Guidance', href: '#guidance'},
-]
+const LINK_HREF = '#about';
+const LINK_TEXT = 'About';
 
 test('renders correctly', () => {
     render(
-        <SiteNavigation items={ITEMS}/>
+        <SiteNavigation>
+            <SiteNavigation.Item href="#about">About</SiteNavigation.Item>
+            <SiteNavigation.Item href="#get-started">Get started</SiteNavigation.Item>
+            <SiteNavigation.Item href="#styles">Styles</SiteNavigation.Item>
+            <SiteNavigation.Item href="#components">Components</SiteNavigation.Item>
+            <SiteNavigation.Item href="#patterns">Patterns</SiteNavigation.Item>
+            <SiteNavigation.Item href="#guidance">Guidance</SiteNavigation.Item>
+        </SiteNavigation>
     );
 
     const nav = screen.getByRole('navigation');
     const list = within(nav).getByRole('list');
-    const listItems = within(list).getAllByRole('listitem');
 
     // check nav
     expect(nav).toHaveClass('ds_site-navigation');
@@ -27,25 +27,44 @@ test('renders correctly', () => {
     // check list
     expect(list.tagName).toEqual('UL');
     expect(list).toHaveClass('ds_site-navigation__list');
+});
 
-    // check items
-    expect(listItems.length).toEqual(ITEMS.length);
+test('site navigation link renders correctly', () => {
+    render(
+        <SiteNavigation.Item href={LINK_HREF}>{LINK_TEXT}</SiteNavigation.Item>
+    );
 
-    listItems.forEach((item, index) => {
-        expect(item).toHaveClass('ds_site-navigation__item');
+    const listItem =screen.getByRole('listitem');
+    const link = within(listItem).getByRole('link');
 
-        const link = within(item).getByRole('link');
+    expect(listItem).toHaveClass('ds_site-navigation__item');
 
-        expect(link).toHaveClass('ds_site-navigation__link');
-        expect(link).not.toHaveClass('ds_current');
-        expect(link.textContent).toEqual(ITEMS[index].title);
-        expect(link).toHaveAttribute('href', ITEMS[index].href)
-    });
+    expect(link).toHaveClass('ds_site-navigation__link');
+    expect(link).not.toHaveClass('ds_current');
+    expect(link.textContent).toEqual(LINK_TEXT);
+    expect(link).toHaveAttribute('href', LINK_HREF)
+});
+
+test('site navigation link with custom element', () => {
+    render(
+        <SiteNavigation.Item href={LINK_HREF} linkComponent={
+            ({ className, ...props }) => (
+                <strong role="link" className={className} {...props}/>
+            )}>
+            {LINK_TEXT}
+        </SiteNavigation.Item>
+    );
+
+    const item = screen.getByRole('listitem');
+    const link = within(item).queryByRole('link');
+
+    expect(link?.tagName).toEqual('STRONG');
+    expect(link?.textContent).toEqual(LINK_TEXT);
 });
 
 test('highlights current item', () => {
     render(
-        <SiteNavigation data-test="foo" items={[{title: 'About', href: '#about', current: true}]}/>
+        <SiteNavigation.Item href={LINK_HREF} current>{LINK_TEXT}</SiteNavigation.Item>
     );
 
     const link = screen.getByRole('link');
@@ -55,7 +74,7 @@ test('highlights current item', () => {
 
 test('passing additional props', () => {
     render(
-        <SiteNavigation data-test="foo" items={ITEMS}/>
+        <SiteNavigation data-test="foo"/>
     );
 
     const nav = screen.getByRole('navigation');
@@ -64,7 +83,7 @@ test('passing additional props', () => {
 
 test('passing additional CSS classes', () => {
     render(
-        <SiteNavigation className="foo" items={ITEMS}/>
+        <SiteNavigation className="foo"/>
     );
 
     const nav = screen.getByRole('navigation');

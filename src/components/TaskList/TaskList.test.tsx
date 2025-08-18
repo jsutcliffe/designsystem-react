@@ -192,6 +192,32 @@ test('task with link', () => {
     expect(link.textContent).toEqual(taskHeading.textContent);
 });
 
+test('task with custom link element', () => {
+    const TASK_HREF = '#foo';
+
+    render(
+        <TaskList.Item
+            id={TASK_ITEM.id}
+            statusText={TASK_ITEM.statusText}
+            title={TASK_ITEM.title}
+            href={TASK_HREF}
+            linkComponent={
+            ({ className, ...props }) => (
+                <strong role="link" className={className} {...props}/>
+            )}
+        >
+            {TASK_SUMMARY_CONTENT}
+        </TaskList.Item>
+    );
+
+    const task = screen.getByRole('listitem');
+    const taskHeading = within(task).getByRole('heading');
+    const link = within(task).getByRole('link');
+
+    expect(link?.tagName).toEqual('STRONG');
+    expect(link?.textContent).toEqual(taskHeading.textContent);
+});
+
 test('completed task has green tag', () => {
     render(
         <TaskList.Item

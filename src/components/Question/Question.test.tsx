@@ -46,7 +46,7 @@ test('question with error', () => {
     const ERROR_MESSAGE_TEXT = 'My error message';
 
     render(
-        <Question error errorMessage={ERROR_MESSAGE_TEXT}>
+        <Question hasError errorMessage={ERROR_MESSAGE_TEXT}>
         </Question>
     );
 

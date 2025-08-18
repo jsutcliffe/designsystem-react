@@ -1,8 +1,8 @@
-const WarningText: React.FC<SGDS.Component.WarningText> = ({
+const WarningText = ({
     children,
     className,
     ...props
-}) => {
+}: SGDS.Component.WarningText) => {
     return (
         <div
             className={[

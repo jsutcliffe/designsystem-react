@@ -2,15 +2,16 @@ import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import Breadcrumbs from './Breadcrumbs';
 
-const ITEMS = [
-    { href: 'home', title: 'Home' },
-    { href: 'category', title: 'Category' },
-    { title: 'Page' }
-];
+const LINK_HREF = '#home';
+const LINK_TEXT = 'Home';
 
-test('renders correctly', () => {
+test('breadcrumbs render correctly', () => {
     render(
-        <Breadcrumbs items={ITEMS} />
+        <Breadcrumbs>
+            <Breadcrumbs.Item href="home">Home</Breadcrumbs.Item>
+            <Breadcrumbs.Item href="category">Category</Breadcrumbs.Item>
+            <Breadcrumbs.Item>Page</Breadcrumbs.Item>
+        </Breadcrumbs>
     );
 
     const nav = screen.getByRole('navigation');
@@ -23,67 +24,98 @@ test('renders correctly', () => {
     // check list
     expect(list.tagName).toEqual('OL');
     expect(list).toHaveClass('ds_breadcrumbs');
-
-    // check items
-    expect(listItems.length).toEqual(ITEMS.length);
-
-    listItems.forEach((item, index) => {
-        expect(item).toHaveClass('ds_breadcrumbs__item');
-
-        const link = within(item).queryByRole('link');
-
-        if (index + 1 < listItems.length) {
-            expect(link).toBeDefined();
-            expect(link).toHaveClass('ds_breadcrumbs__link');
-        } else {
-            expect(link).toBeNull();
-        }
-    });
-
-    // check href matches correct item
-    const categoryLink = within(list).getByRole('link', { name: 'Category' });
-    expect(categoryLink).toHaveAttribute('href', 'category');
 });
 
-test('renders with last item hidden', () => {
+test('passing additional props to breadcrumbs', () => {
     render(
-        <Breadcrumbs
-            hideLastItem
-            items={ITEMS}
-        />
-    );
-
-    // check still 3 items
-    const list = screen.getByRole('list');
-    const listItems = within(list).getAllByRole('listitem');
-    expect(listItems.length).toEqual(3);
-
-    // check last item is hidden
-    const pageCrumb = within(list).getByText('Page');
-    expect(pageCrumb).toHaveClass('visually-hidden');
-    expect(pageCrumb.tagName).toEqual('LI');
-});
-
-test('passing additional props', () => {
-    render(
-        <Breadcrumbs
-            items={ITEMS}
-            data-test="foo"
-        />
+        <Breadcrumbs data-test="foo"/>
     );
 
     const nav = screen.getByRole('navigation');
     expect(nav.dataset.test).toEqual('foo');
 });
 
-test('passing additional CSS classes', () => {
+test('passing additional CSS classes to breadcrumbs', () => {
     render(
-        <Breadcrumbs
-            items={ITEMS}
-            className="foo"
-        />
+        <Breadcrumbs className="foo"/>
     );
 
     const nav = screen.getByRole('navigation');
+    expect(nav).toHaveClass('foo');
+});
+
+test('breadcrumb item with link', () => {
+    render(
+        <Breadcrumbs.Item href={LINK_HREF}>{LINK_TEXT}</Breadcrumbs.Item>
+    );
+
+    const item = screen.getByRole('listitem');
+    const link = within(item).getByRole('link');
+
+    expect(item).toHaveClass('ds_breadcrumbs__item');
+    expect(item?.tagName).toEqual('LI');
+
+    expect(link).toHaveClass('ds_breadcrumbs__link');
+    expect(link).toHaveAttribute('href', LINK_HREF);
+    expect(link?.tagName).toEqual('A');
+    expect(link?.textContent).toEqual(LINK_TEXT);
+});
+
+test('breadcrumb item without link', () => {
+    render(
+        <Breadcrumbs.Item>{LINK_TEXT}</Breadcrumbs.Item>
+    );
+
+    const item = screen.getByRole('listitem');
+    const link = within(item).queryByRole('link');
+
+    expect(item).toHaveClass('ds_breadcrumbs__item');
+    expect(item?.tagName).toEqual('LI');
+    expect(item?.textContent).toEqual(LINK_TEXT);
+
+    expect(link).not.toBeInTheDocument();
+});
+
+test('hidden breadcrumb item', () => {
+    render(
+        <Breadcrumbs.Item data-testid="Breadcrumbs.Item" isHidden>{LINK_TEXT}</Breadcrumbs.Item>
+    );
+
+    const item = screen.getByRole('listitem');
+    expect(item).toHaveClass('visually-hidden');
+});
+
+test('renders breadcrumb with custom element', () => {
+    render(
+        <Breadcrumbs.Item href="category" linkComponent={
+            ({ className, ...props }) => (
+                <span role="link" className={className} {...props}/>
+            )}>
+            {LINK_TEXT}
+        </Breadcrumbs.Item>
+    );
+
+    const item = screen.getByRole('listitem');
+    const link = within(item).queryByRole('link');
+
+    expect(link?.tagName).toEqual('SPAN');
+    expect(link?.textContent).toEqual(LINK_TEXT);
+});
+
+test('passing additional props to breadcrumb item', () => {
+    render(
+        <Breadcrumbs.Item data-test="foo"/>
+    );
+
+    const nav = screen.getByRole('listitem');
+    expect(nav.dataset.test).toEqual('foo');
+});
+
+test('passing additional CSS classes to breadcrumb item', () => {
+    render(
+        <Breadcrumbs.Item className="foo"/>
+    );
+
+    const nav = screen.getByRole('listitem');
     expect(nav).toHaveClass('foo');
 });

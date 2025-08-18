@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from 'react';
 // @ts-ignore
 import DSHideThisPage from '@scottish-government/design-system/src/components/hide-this-page/hide-this-page';
 
-const HideThisPage: React.FC<SGDS.Component.HideThisPage> = ({
+const HideThisPage = ({
     className,
     escapeUrl = 'https://www.bbc.co.uk/weather',
     ...props
-}) => {
+}: SGDS.Component.HideThisPage) => {
     const ref = useRef(null);
 
     useEffect(() => {

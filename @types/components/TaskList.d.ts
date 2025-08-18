@@ -9,6 +9,7 @@ declare namespace SGDS.Component {
             href?: string,
             id?: string,
             isComplete?: boolean,
+            linkComponent?: SGDS.LinkComponent,
             statusText?: string,
             tagColour?: TagColour,
             title: string

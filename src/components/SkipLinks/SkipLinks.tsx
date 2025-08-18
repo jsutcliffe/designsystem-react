@@ -1,39 +1,40 @@
-export const SkipLink: React.FC<SGDS.Component.SkipLinks.Link> = ({
-    targetId,
-    title
-}) => {
+const Link = ({
+    children,
+    fragmentId
+}: SGDS.Component.SkipLinks.Link) => {
     return (
         <li
             className="ds_skip-links__item"
         >
-            <a href={`#${targetId}`} className="ds_skip-links__link">{ title }</a>
+            <a href={`#${fragmentId}`} className="ds_skip-links__link">{ children }</a>
         </li>
     );
 };
 
-const SkipLinks: React.FC<SGDS.Component.SkipLinks> = ({
-    items,
+const SkipLinks = ({
+    children,
     mainContentId = 'main-content',
     mainLinkText = 'Skip to main content',
+    isStatic,
     ...props
-}) => {
+}: SGDS.Component.SkipLinks) => {
     return (
         <div
-            className="ds_skip-links"
+            className={[
+                'ds_skip-links',
+                isStatic && 'ds_skip-links--static',
+            ].join(' ')}
             {...props}
         >
             <ul className="ds_skip-links__list">
-                <SkipLink title={mainLinkText} targetId={mainContentId}/>
-
-                {items && items.map((item, index: number) => (
-                    <SkipLink title={item.title} targetId={item.targetId} key={`skiplink-${index}`}/>
-                ))}
+                {children ? children : <Link fragmentId={mainContentId}>{mainLinkText}</Link>}
             </ul>
         </div>
     );
 };
 
 SkipLinks.displayName = 'SkipLinks';
-SkipLink.displayName = 'SkipLink';
+Link.displayName = 'SkipLink';
+SkipLinks.Link = Link;
 
 export default SkipLinks;

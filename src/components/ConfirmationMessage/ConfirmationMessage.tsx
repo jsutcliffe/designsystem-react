@@ -1,14 +1,14 @@
 import Icon from '../../common/Icon';
 import WrapperTag from '../../common/WrapperTag';
 
-const ConfirmationMessage: React.FC<SGDS.Component.ConfirmationMessage> = ({
+const ConfirmationMessage = ({
     ariaLive = 'polite',
     children,
     className,
     headingLevel = 'h3',
     title,
     ...props
-}) => {
+}: SGDS.Component.ConfirmationMessage) => {
     return (
         <div
             aria-live={ariaLive}

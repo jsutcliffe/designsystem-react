@@ -2,7 +2,7 @@ import Icon from '../../common/Icon';
 import ScreenReaderText from '../../common/ScreenReaderText';
 import WrapperTag from '../../common/WrapperTag';
 
-const Button: React.FC<SGDS.Component.Button> = ({
+const Button = ({
     buttonStyle,
     children,
     className,
@@ -15,7 +15,7 @@ const Button: React.FC<SGDS.Component.Button> = ({
     type = 'button',
     width,
     ...props
-}) => {
+}: SGDS.Component.Button) => {
     // determine which HTML tag to use
     let tagName = 'button';
     if (href) {

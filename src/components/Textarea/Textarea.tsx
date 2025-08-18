@@ -5,11 +5,11 @@ import ConditionalWrapper from '../../common/ConditionalWrapper';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import HintText from '../../common/HintText';
 
-const Textarea: React.FC<SGDS.Component.Textarea> = ({
+const Textarea = ({
     className,
     countThreshold,
-    error,
     errorMessage,
+    hasError,
     hintText,
     id,
     label,
@@ -21,7 +21,7 @@ const Textarea: React.FC<SGDS.Component.Textarea> = ({
     rows = 4,
     value,
     ...props
-}) => {
+}: SGDS.Component.Textarea) => {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
     const ref = useRef(null);
@@ -59,10 +59,10 @@ const Textarea: React.FC<SGDS.Component.Textarea> = ({
 
             <textarea
                 aria-describedby={describedbys.join(' ')}
-                aria-invalid={error}
+                aria-invalid={hasError}
                 className={[
                     'ds_input',
-                    error && 'ds_input--error',
+                    hasError && 'ds_input--error',
                     className
                 ].join(' ')}
                 defaultValue={value}

@@ -1,15 +1,13 @@
 declare namespace SGDS.Component {
     namespace ContentsNav {
-        interface Link extends React.AllHTMLAttributes<HTMLElement> {
-            title: string,
-            current: boolean,
-            href: string
+        interface ContentsNavItem extends React.AllHTMLAttributes<HTMLElement> {
+            current?: boolean,
+            linkComponent?: SGDS.LinkComponent;
         }
     }
 
     interface ContentsNav extends React.AllHTMLAttributes<HTMLElement> {
-        items: ContentsNav.Link[],
-        label: string,
+        ariaLabel: React.AriaAttributes['aria-label'],
         title: string
     }
 }

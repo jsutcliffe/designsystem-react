@@ -2,12 +2,12 @@ import React, { Children, useEffect, useRef } from 'react';
 // @ts-ignore
 import DSAspectBox from '@scottish-government/design-system/src/components/aspect-box/aspect-box-fallback';
 
-const AspectBox: React.FC<SGDS.Component.AspectBox> = ({
+const AspectBox = ({
     children,
     className,
     ratio,
     ...props
-}) => {
+}: SGDS.Component.AspectBox) => {
     const ref = useRef(null);
 
     useEffect(() => {

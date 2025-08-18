@@ -188,8 +188,8 @@ test('textarea with error message', () => {
         <Textarea
             id={TEXTAREA_ID}
             label={LABEL_TEXT}
-            error
             errorMessage={ERROR_MESSAGE_TEXT}
+            hasError
         />
     );
 

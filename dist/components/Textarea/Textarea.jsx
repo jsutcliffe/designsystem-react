@@ -9,7 +9,7 @@ const character_count_1 = __importDefault(require("@scottish-government/design-s
 const ConditionalWrapper_1 = __importDefault(require("../../common/ConditionalWrapper"));
 const ErrorMessage_1 = __importDefault(require("../ErrorMessage/ErrorMessage"));
 const HintText_1 = __importDefault(require("../../common/HintText"));
-const Textarea = ({ className, countThreshold, error, errorMessage, hintText, id, label, maxlength, name, onBlur, onChange, placeholder, rows = 4, value, ...props }) => {
+const Textarea = ({ className, countThreshold, errorMessage, hasError, hintText, id, label, maxlength, name, onBlur, onChange, placeholder, rows = 4, value, ...props }) => {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
     const ref = (0, react_1.useRef)(null);
@@ -42,9 +42,9 @@ const Textarea = ({ className, countThreshold, error, errorMessage, hintText, id
             {hintText && <HintText_1.default id={hintTextId} text={hintText}/>}
             {errorMessage && <ErrorMessage_1.default id={errorMessageId} text={errorMessage}/>}
 
-            <textarea aria-describedby={describedbys.join(' ')} aria-invalid={error} className={[
+            <textarea aria-describedby={describedbys.join(' ')} aria-invalid={hasError} className={[
             'ds_input',
-            error && 'ds_input--error',
+            hasError && 'ds_input--error',
             className
         ].join(' ')} defaultValue={value} id={id} maxLength={maxlength} name={name || id} onBlur={handleBlur} onChange={handleChange} placeholder={placeholder} rows={rows} {...props}/>
 
