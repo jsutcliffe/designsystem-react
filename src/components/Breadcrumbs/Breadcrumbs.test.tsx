@@ -16,7 +16,6 @@ test('breadcrumbs render correctly', () => {
 
     const nav = screen.getByRole('navigation');
     const list = within(nav).getByRole('list');
-    const listItems = within(list).getAllByRole('listitem');
 
     // check nav
     expect(nav).toHaveAttribute('aria-label', 'Breadcrumb');

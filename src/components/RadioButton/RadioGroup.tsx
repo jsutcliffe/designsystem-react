@@ -1,22 +1,14 @@
-import React, { Children } from 'react';
-import RadioButton from './RadioButton';
+import React from 'react';
+import { CheckboxRadioContext } from '../../utils/context';
 
 const RadioGroup = ({
     children,
     className,
     inline,
     name,
-    small,
+    small = false,
     ...props
 }: SGDS.Component.RadioButton.Group) => {
-    function processChild(child: any) {
-        if (child && child.type === RadioButton) {
-            return React.cloneElement(child as React.ReactElement<SGDS.Component.RadioButton>, { small: small, name: name });
-        } else {
-            return child;
-        }
-    }
-
     return (
         <div
             className={[
@@ -27,8 +19,9 @@ const RadioGroup = ({
             ].join(' ')}
             {...props}
         >
-
-            {Children.map(children, child => processChild(child))}
+            <CheckboxRadioContext value={{ small, name }}>
+                {children}
+            </CheckboxRadioContext>
         </div>
     );
 };

@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { CheckboxRadioContext } from '../../utils/context';
+
 import HintText from '../../common/HintText';
 
 const Checkbox = ({
@@ -25,6 +28,8 @@ const Checkbox = ({
             onChange(event);
         }
     }
+
+    small = small || useContext(CheckboxRadioContext).small;
 
     return (
         <>

@@ -1,22 +1,15 @@
-import React, { Children, useEffect, useRef } from 'react';
-import Checkbox from './Checkbox';
+import React, { useEffect, useRef } from 'react';
+import { CheckboxRadioContext } from '../../utils/context';
+
 // @ts-ignore
 import DSCheckboxes from '@scottish-government/design-system/src/forms/checkbox/checkboxes'
 
 export const CheckboxGroup = ({
     children,
     className,
-    small,
+    small = false,
     ...props
 }: SGDS.Component.Checkbox.Group) => {
-    function processChild(child: any) {
-        if (child && child.type === Checkbox) {
-            return React.cloneElement(child as React.ReactElement<SGDS.Component.Checkbox>, { small: small });
-        } else {
-            return child;
-        }
-    }
-
     const ref = useRef(null);
 
     useEffect(() => {
@@ -36,7 +29,9 @@ export const CheckboxGroup = ({
             ref={ref}
             {...props}
         >
-            {Children.map(children, child => processChild(child))}
+            <CheckboxRadioContext value={{small, name: ''}}>
+                {children}
+            </CheckboxRadioContext>
         </div>
     )
 };

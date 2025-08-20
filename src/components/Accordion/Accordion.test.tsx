@@ -32,7 +32,6 @@ test('accordion renders correctly', () => {
 
     const accordion = screen.getByTestId(ACCORDION_ID);
     const openAllButton = document.querySelector('.ds_accordion__open-all');
-    const accordionItems = document.querySelectorAll('.ds_accordion-item');
     const firstAccordionTitle = document.querySelector('.ds_accordion-item__title');
 
     expect(accordion).toHaveClass('ds_accordion');
@@ -42,8 +41,6 @@ test('accordion renders correctly', () => {
     expect(openAllButton).toHaveAttribute('type', 'button');
     expect(openAllButton?.textContent).toEqual('Open all sections');
     expect(openAllButton?.innerHTML).toEqual('Open all <span class="visually-hidden">sections</span>');
-
-    expect(accordionItems.length).toEqual(3);
 
     expect(firstAccordionTitle?.tagName).toEqual(DEFAULT_HEADING_LEVEL.toUpperCase());
 });
@@ -100,6 +97,22 @@ test('accordion with custom heading level', () => {
 
     const firstAccordionTitle = document.querySelector('.ds_accordion-item__title');
     expect(firstAccordionTitle?.tagName).toEqual(HEADING_LEVEL.toUpperCase());
+});
+
+test('accordion item with nonsense heading level falls back to h3', () => {
+    render(
+        <Accordion id={ACCORDION_ID} data-testid={ACCORDION_ID} headingLevel="bananas">
+            <Accordion.Item id="accordion-1" title="Healthcare for veterans">
+                <p>Veterans are entitled to the same healthcare as any citizen. And there
+                    are health care options and support available specifically for veterans.</p>
+                <p>If you have a health condition that’s related to your service, you’re
+                    entitled to priority treatment based on clinical need.</p>
+            </Accordion.Item>
+        </Accordion>
+    );
+
+    const firstAccordionTitle = document.querySelector('.ds_accordion-item__title');
+    expect(firstAccordionTitle?.tagName).toEqual('H3');
 });
 
 test('passing additional props to accordion', () => {

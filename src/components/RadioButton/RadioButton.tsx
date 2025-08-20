@@ -1,4 +1,7 @@
+import { useContext } from 'react';
+
 import HintText from '../../common/HintText';
+import { CheckboxRadioContext } from '../../utils/context';
 
 const RadioButton = ({
     checked,
@@ -23,6 +26,9 @@ const RadioButton = ({
             onChange(event);
         }
     }
+
+    small = small || useContext(CheckboxRadioContext).small;
+    name = name || useContext(CheckboxRadioContext).name;
 
     return (
         <div

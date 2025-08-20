@@ -1,14 +1,14 @@
-import React, { Children, useEffect, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useRef } from 'react';
 import WrapperTag from '../../common/WrapperTag';
 // @ts-ignore
 import DSAccordion from '@scottish-government/design-system/src/components/accordion/accordion';
 
 let accordionItemCounter = 0;
+const AccordionHeadingLevelContext = createContext('h3');
 
 const AccordionItem = ({
     children,
     className,
-    headingLevel = 'h3',
     id: rawId,
     open = false,
     title,
@@ -16,6 +16,14 @@ const AccordionItem = ({
 }: SGDS.Component.Accordion.Item) => {
     accordionItemCounter = accordionItemCounter + 1;
     const processedId = rawId || `accordion-item-${accordionItemCounter}`;
+    const DEFAULT_HEADING_LEVEL = 'h3';
+
+    let headingLevel = useContext(AccordionHeadingLevelContext);
+
+    if (!['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(headingLevel)) {
+        headingLevel = DEFAULT_HEADING_LEVEL;
+    }
+
     return (
         <div
             className={[
@@ -77,10 +85,6 @@ const Accordion = ({
         hideOpenAll = true;
     }
 
-    function processChild(child: any) {
-        return React.cloneElement(child, { headingLevel: headingLevel });
-    }
-
     return (
         <div
             className={[
@@ -105,7 +109,9 @@ const Accordion = ({
                 </button>
             )}
 
-            {Children.map(children, child => processChild(child))}
+            <AccordionHeadingLevelContext value={headingLevel}>
+                {children}
+            </AccordionHeadingLevelContext>
         </div>
     );
 };
