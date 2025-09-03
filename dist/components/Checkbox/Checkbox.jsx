@@ -3,6 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = require("react");
+const context_1 = require("../../utils/context");
 const HintText_1 = __importDefault(require("../../common/HintText"));
 const Checkbox = ({ checked, hintText, id, exclusive, label, name, onBlur, onChange, small }) => {
     const hintTextId = `hint-text-${id}`;
@@ -17,6 +19,7 @@ const Checkbox = ({ checked, hintText, id, exclusive, label, name, onBlur, onCha
             onChange(event);
         }
     }
+    small = small || (0, react_1.useContext)(context_1.CheckboxRadioContext).small;
     return (<>
             {exclusive && <p className="ds_checkbox-separator">or</p>}
             <div className={[

@@ -3,7 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = require("react");
 const HintText_1 = __importDefault(require("../../common/HintText"));
+const context_1 = require("../../utils/context");
 const RadioButton = ({ checked, hintText, id, label, name, onBlur, onChange, small }) => {
     const hintTextId = `hint-text-${id}`;
     function handleBlur(event) {
@@ -16,6 +18,8 @@ const RadioButton = ({ checked, hintText, id, label, name, onBlur, onChange, sma
             onChange(event);
         }
     }
+    small = small || (0, react_1.useContext)(context_1.CheckboxRadioContext).small;
+    name = name || (0, react_1.useContext)(context_1.CheckboxRadioContext).name;
     return (<div className={[
             'ds_radio',
             small && 'ds_radio--small'
