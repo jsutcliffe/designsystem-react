@@ -17,7 +17,7 @@
     "tsc": "node ./node_modules/typescript/bin/tsc"
   },
   "dependencies": {
-    "@scottish-government/design-system": "^3.0.2"
+    "@scottish-government/design-system": "^3.2.1"
   },
   "devDependencies": {
     "@svgr/cli": "^8.1.0",
