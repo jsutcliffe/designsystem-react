@@ -36,16 +36,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const Icons = __importStar(require("../images/icons"));
-const Icon = ({ ariaLabel, className, isFilled, icon, iconSize }) => {
-    const IconComponent = Icons[icon];
-    return (<IconComponent aria-hidden={ariaLabel ? undefined : true} aria-label={ariaLabel} className={[
-            'ds_icon',
-            className,
-            isFilled && 'ds_icon--fill',
-            iconSize && `ds_icon--${iconSize}`
-        ].join(' ')}/>);
+const react_1 = __importStar(require("react"));
+const WrapperTag_1 = __importDefault(require("../../common/WrapperTag"));
+const CategoryList = ({ children, className, isGrid, isOrdered, ...props }) => {
+    function processChild(child) {
+        const thisChild = child;
+        return react_1.default.cloneElement(thisChild, { tagName: 'li' });
+    }
+    return (<WrapperTag_1.default tagName={isOrdered ? 'ol' : 'ul'} className={[
+            'ds_category-list',
+            isGrid && 'ds_category-list--grid',
+            className
+        ].join(' ')} {...props}>
+            {react_1.Children.map(children, child => processChild(child))}
+        </WrapperTag_1.default>);
 };
-Icon.displayName = 'Icon';
-exports.default = Icon;
+CategoryList.displayName = 'CategoryList';
+exports.default = CategoryList;
