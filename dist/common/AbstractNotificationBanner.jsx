@@ -7,7 +7,7 @@ const react_1 = require("react");
 const Icon_1 = __importDefault(require("./Icon"));
 const ScreenReaderText_1 = __importDefault(require("./ScreenReaderText"));
 const Buttons = ({ children }) => {
-    return (<>{children}</>);
+    return (<div className="ds_button-group">{children}</div>);
 };
 const AbstractNotificationBanner = ({ children, className, hasColourIcon, hasInverseIcon, icon, isDismissable, title = 'Information', ...props }) => {
     let content = [];
@@ -51,10 +51,7 @@ const AbstractNotificationBanner = ({ children, className, hasColourIcon, hasInv
                             <Icon_1.default isFilled icon="Close" aria-hidden="true"/>
                         </button>}
 
-                    {buttons &&
-            <div className="ds_button-group">
-                            {buttons}
-                        </div>}
+                    {buttons}
                 </div>
             </div>
         </div>);

@@ -11,6 +11,7 @@ const Tag_1 = __importDefault(require("../Tag/Tag"));
 const TaskItem = ({ children, className, href, id, isComplete = false, linkComponent, statusText, tagColour = 'grey', title, ...props }) => {
     if (isComplete) {
         tagColour = 'green';
+        statusText = statusText || 'Completed';
     }
     const LINK_CLASS = 'ds_task-list__task-link';
     function getLinkElement(children) {
