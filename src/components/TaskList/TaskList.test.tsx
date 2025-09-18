@@ -219,10 +219,12 @@ test('task with custom link element', () => {
 });
 
 test('completed task has green tag', () => {
+    const STATUS_TEXT = 'MY STATUS TEXT';
+
     render(
         <TaskList.Item
             id={TASK_ITEM.id}
-            statusText={TASK_ITEM.statusText}
+            statusText={STATUS_TEXT}
             title={TASK_ITEM.title}
             isComplete
         >
@@ -233,6 +235,24 @@ test('completed task has green tag', () => {
     const tag = document.querySelector('.ds_tag');
 
     expect(tag).toHaveClass('ds_tag--green');
+    expect(tag?.textContent).toEqual(STATUS_TEXT);
+});
+
+test('completed task has default text if no statusText set', () => {
+    render(
+        <TaskList.Item
+            id={TASK_ITEM.id}
+            title={TASK_ITEM.title}
+            isComplete
+        >
+            {TASK_SUMMARY_CONTENT}
+        </TaskList.Item>
+    );
+
+    const tag = document.querySelector('.ds_tag');
+
+    expect(tag).toHaveClass('ds_tag--green');
+    expect(tag?.textContent).toEqual('Completed');
 });
 
 test('specific tag colour', () => {

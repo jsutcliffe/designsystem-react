@@ -29,5 +29,8 @@ Run unit tests
 `npm run coverage`  
 Run unit tests and output a coverage report, located in `/coverage`
 
+`npm run storybook`  
+Start a local server running the Storybook for the project
+
 `npm run svgr`
 Create icon components for each SVG icon used by the Design System. These icon components are present in the repository. You likely will never need to run this command as an end user.
