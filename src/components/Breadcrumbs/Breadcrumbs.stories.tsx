@@ -7,7 +7,6 @@ const meta = {
     title: 'Components/Breadcrumbs',
     component: Breadcrumbs,
     argTypes: {
-        linkComponent: argTypes.linkComponent(),
         children: argTypes.children()
     },
     args: {

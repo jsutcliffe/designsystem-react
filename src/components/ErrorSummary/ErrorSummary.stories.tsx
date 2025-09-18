@@ -4,10 +4,9 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import ErrorSummary from './ErrorSummary';
 
 const meta = {
-    title: 'Components/Error summary',
+    title: 'Components/ErrorSummary',
     component: ErrorSummary,
     argTypes: {
-        linkComponent: argTypes.linkComponent(),
         title: {
             description: 'The title of the error summary',
             type: 'string'

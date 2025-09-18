@@ -4,10 +4,9 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import SiteNavigation from './SiteNavigation';
 
 const meta = {
-    title: 'Components/Site navigation',
+    title: 'Components/SiteNavigation',
     component: SiteNavigation,
     argTypes: {
-        linkComponent: argTypes.linkComponent(),
         children: argTypes.children()
     },
     args: {

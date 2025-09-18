@@ -5,7 +5,7 @@ import RadioButton from '../RadioButton/RadioButton';
 import RadioGroup from './RadioGroup';
 
 const meta = {
-    title: 'Components/Radio group',
+    title: 'Components/Radio/Radio group',
     component: RadioGroup,
     argTypes: {
         isInline: {

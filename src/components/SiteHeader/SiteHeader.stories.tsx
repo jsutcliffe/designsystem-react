@@ -7,7 +7,7 @@ import SiteNavigation from '../SiteNavigation/SiteNavigation';
 import PhaseBanner from '../PhaseBanner/PhaseBanner';
 
 const meta = {
-    title: 'Components/Site header',
+    title: 'Components/SiteHeader',
     component: SiteHeader,
     argTypes: {
         children: argTypes.children()

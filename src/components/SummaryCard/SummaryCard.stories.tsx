@@ -5,7 +5,7 @@ import SummaryCard from './SummaryCard';
 import SummaryList from '../SummaryList/SummaryList';
 
 const meta = {
-    title: 'Components/Summary card',
+    title: 'Components/SummaryCard',
     component: SummaryCard,
     argTypes: {
         headingLevel: argTypes.headingLevel(),

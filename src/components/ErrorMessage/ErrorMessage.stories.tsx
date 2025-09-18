@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import ErrorMessage from './ErrorMessage';
 
 const meta = {
-    title: 'Components/Error message',
+    title: 'Components/ErrorMessage',
     component: ErrorMessage,
     argTypes: {
         children: argTypes.children()

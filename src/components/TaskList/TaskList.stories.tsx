@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import TaskList from './TaskList';
 
 const meta = {
-    title: 'Components/Task list',
+    title: 'Components/TaskList',
     component: TaskList,
     argTypes: {
         headingId: {

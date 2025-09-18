@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import NotificationBanner from './NotificationBanner';
 
 const meta = {
-    title: 'Components/Notification banner',
+    title: 'Components/NotificationBanner',
     component: NotificationBanner,
     argTypes: {
         children: argTypes.children(),

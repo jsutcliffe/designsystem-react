@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import NotificationPanel from './NotificationPanel';
 
 const meta = {
-    title: 'Components/Notification panel',
+    title: 'Components/NotificationPanel',
     component: NotificationPanel,
     argTypes: {
         ariaLive: argTypes.ariaLive(),

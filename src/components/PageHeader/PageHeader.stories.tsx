@@ -5,7 +5,7 @@ import PageHeader from './PageHeader';
 import Metadata from '../PageMetadata/PageMetadata';
 
 const meta = {
-    title: 'Components/Page header',
+    title: 'Components/PageHeader',
     component: PageHeader,
     argTypes: {
         children: argTypes.children(),

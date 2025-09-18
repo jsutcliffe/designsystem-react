@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import ConfirmationMessage from './ConfirmationMessage';
 
 const meta = {
-    title: 'Components/Confirmation Message',
+    title: 'Components/ConfirmationMessage',
     component: ConfirmationMessage,
     argTypes: {
         headingLevel: argTypes.headingLevel(),

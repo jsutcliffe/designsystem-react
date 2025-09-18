@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import HideThisPage from './HideThisPage';
 
 const meta = {
-    title: 'Components/Hide this page',
+    title: 'Components/HideThisPage',
     component: HideThisPage,
     argTypes: {
         escapeUrl: {

@@ -6,7 +6,7 @@ import coo from '../../../static/images/highland-cow.jpg';
 import AspectBox from './AspectBox';
 
 const meta = {
-    title: 'Components/Aspect Box',
+    title: 'Components/AspectBox',
     component: AspectBox,
     argTypes: {
         ratio: {

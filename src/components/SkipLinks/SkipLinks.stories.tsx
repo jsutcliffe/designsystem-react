@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import SkipLinks from './SkipLinks';
 
 const meta = {
-    title: 'Components/Skip links',
+    title: 'Components/SkipLinks',
     component: SkipLinks,
     argTypes: {
         mainContentId: {

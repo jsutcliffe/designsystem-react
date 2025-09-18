@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import SummaryList from './SummaryList';
 
 const meta = {
-    title: 'Components/Summary list',
+    title: 'Components/SummaryList',
     component: SummaryList,
     argTypes: {
         isBorderless: argTypes.noBorder(),

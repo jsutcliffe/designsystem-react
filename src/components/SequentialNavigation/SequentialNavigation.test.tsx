@@ -72,6 +72,21 @@ test('sequential nav links with custom element', () => {
     expect(link?.textContent).toEqual(PREVIOUS_LINK_OBJECT.title);
 });
 
+test('custom text label on link', () => {
+    const TEXT_LABEL = 'foo';
+
+    render(
+        <SequentialNavigation>
+            <SequentialNavigation.Previous textLabel={TEXT_LABEL} href={PREVIOUS_LINK_OBJECT.href}>
+                {PREVIOUS_LINK_OBJECT.title}
+            </SequentialNavigation.Previous>
+        </SequentialNavigation>
+    );
+
+    const prevLink = screen.getAllByRole('link')[0];
+    expect(prevLink.querySelector('span')?.dataset.label).toEqual(TEXT_LABEL);
+});
+
 test('passing additional props', () => {
     render(
         <SequentialNavigation data-test="foo" />

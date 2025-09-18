@@ -51,6 +51,11 @@ const SGDSArgTypes = {
             type: 'string'
         }, options);
     },
+    href: (options?: any) => {
+        return Object.assign({
+            type: 'string'
+        }, options);
+    },
     id: (options?: any) => {
         return Object.assign({
             type: {
@@ -64,6 +69,12 @@ const SGDSArgTypes = {
             control: { type: 'select' },
             options: [undefined, 'fixed-20', 'fixed-10', 'fixed-5', 'fixed-4', 'fixed-3', 'fixed-2', 'fluid-three-quarters', 'fluid-two-thirds', 'fluid-half', 'fluid-one-third', 'fluid-one-quarter'],
             type: 'string'
+        }, options);
+    },
+    isCurrent: (options?: any) => {
+        return Object.assign({
+            control: 'boolean',
+            description: 'Whether the component is for the current page'
         }, options);
     },
     isSmall: (options?: any) => {
@@ -118,6 +129,14 @@ const SGDSArgTypes = {
             type: 'function'
         }, options);
     },
+    tagColour: (options?: any) => {
+        return Object.assign({
+            control: { type: 'select' },
+            description: 'The tag colour to use',
+            options: ['', 'blue', 'green', 'grey', 'orange', 'pink', 'purple', 'red', 'teal', 'yellow'],
+            type: 'string'
+        }, options);
+    }
 }
 
 export default SGDSArgTypes;

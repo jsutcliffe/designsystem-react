@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import FileDownload from './FileDownload';
 
 const meta = {
-    title: 'Components/File download',
+    title: 'Components/FileDownload',
     component: FileDownload,
     argTypes: {
         cover: {

@@ -6,7 +6,7 @@ import Checkbox from './Checkbox';
 
 const meta = {
     component: CheckboxGroup,
-    title: 'Components/CheckboxGroup',
+    title: 'Components/Checkboxes/CheckboxGroup',
     argTypes: {
         children: argTypes.children(),
         isSmall: argTypes.isSmall()

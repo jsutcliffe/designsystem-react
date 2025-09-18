@@ -4,11 +4,10 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import SequentialNavigation from './SequentialNavigation';
 
 const meta = {
-    title: 'Components/Sequential navigation',
+    title: 'Components/SequentialNavigation',
     component: SequentialNavigation,
     argTypes: {
         ariaLabel: argTypes.ariaLabel({ description: 'Text to use for an aria-label attribute on the nav element' }),
-        linkComponent: argTypes.linkComponent(),
         children: argTypes.children()
     },
     args: {

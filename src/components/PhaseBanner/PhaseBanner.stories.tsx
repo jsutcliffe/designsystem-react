@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import PhaseBanner from './PhaseBanner';
 
 const meta = {
-    title: 'Components/Phase banner',
+    title: 'Components/PhaseBanner',
     component: PhaseBanner,
     argTypes: {
         children: argTypes.children(),

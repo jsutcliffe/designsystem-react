@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import BackToTop from './BackToTop';
 
 const meta = {
-    title: 'Components/Back to top',
+    title: 'Components/BackToTop',
     component: BackToTop,
     argTypes: {
         href: {

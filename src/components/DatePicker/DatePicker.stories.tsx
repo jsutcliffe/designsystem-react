@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import DatePicker from './DatePicker';
 
 const meta = {
-    title: 'Components/Date picker',
+    title: 'Components/DatePicker',
     component: DatePicker,
     argTypes: {
         dateSelectCallback: {},

@@ -18,6 +18,7 @@ const TaskItem = ({
 }: SGDS.Component.TaskList.Item) => {
     if (isComplete) {
         tagColour = 'green';
+        statusText = statusText || 'Completed'
     }
 
     const LINK_CLASS = 'ds_task-list__task-link';

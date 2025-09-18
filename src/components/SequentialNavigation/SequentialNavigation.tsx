@@ -5,6 +5,7 @@ const SeqNavLink = ({
     linkComponent,
     textLabel
 }: SGDS.Component.SequentialNavigation.Link) => {
+    console.log(textLabel)
     const LINK_CLASSES = [
         'ds_sequential-nav__button',
         isPrev ? 'ds_sequential-nav__button--left' : 'ds_sequential-nav__button--right'

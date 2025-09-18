@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import InsetText from './InsetText';
 
 const meta = {
-    title: 'Components/Inset text',
+    title: 'Components/InsetText',
     component: InsetText,
     argTypes: {
         children: argTypes.children()

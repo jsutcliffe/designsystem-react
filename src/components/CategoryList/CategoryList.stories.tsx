@@ -5,7 +5,7 @@ import CategoryList from './CategoryList';
 import CategoryItem from '../CategoryItem/CategoryItem';
 
 const meta = {
-    title: 'Components/Category list',
+    title: 'Components/CategoryList',
     component: CategoryList,
     argTypes: {
         children: argTypes.children(),

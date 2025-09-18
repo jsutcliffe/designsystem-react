@@ -4,12 +4,11 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import ContentsNav from './ContentsNav';
 
 const meta = {
-    title: 'Components/Contents nav',
+    title: 'Components/ContentsNav',
     component: ContentsNav,
     argTypes: {
         ariaLabel: argTypes.ariaLabel({description: 'Text to use for the content nav\'s aria-label property'}),
         children: argTypes.children(),
-        linkComponent: argTypes.linkComponent(),
         title: {
             description: 'Title of the contents nav',
             type: 'string'

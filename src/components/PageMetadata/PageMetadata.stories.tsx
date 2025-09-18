@@ -4,19 +4,24 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import Metadata from './PageMetadata';
 
 const meta = {
-    title: 'Components/Page metadata',
+    title: 'Components/PageMetadata',
     component: Metadata,
     argTypes: {
         children: argTypes.children(),
-         isInline: {
+        isInline: {
             control: 'boolean',
             description: 'Makes the page metadata use the truncated ‘inline’ display'
         },
     },
     args: {
-        children: <Metadata.Item name="Last updated">
-            21/04/2020
-        </Metadata.Item>
+        children: <>
+            <Metadata.Item name="Content type">
+                Publication
+            </Metadata.Item>
+            <Metadata.Item name="Last updated">
+                21/04/2020
+            </Metadata.Item>
+        </>
     }
 } satisfies Meta<typeof Metadata>;
 

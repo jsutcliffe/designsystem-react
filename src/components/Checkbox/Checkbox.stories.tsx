@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import Checkbox from './Checkbox';
 
 const meta = {
-    title: 'Components/Checkbox',
+    title: 'Components/Checkboxes/Checkbox',
     component: Checkbox,
     argTypes: {
         checked: {

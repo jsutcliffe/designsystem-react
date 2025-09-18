@@ -5,7 +5,7 @@ import CookieBanner from './CookieBanner';
 import Button from '../Button/Button';
 
 const meta = {
-    title: 'Components/Cookie banner',
+    title: 'Components/CookieBanner',
     component: CookieBanner,
     argTypes: {
         children: argTypes.children()
@@ -16,7 +16,7 @@ const meta = {
                 experience.</p>,
             <p key="bar">Click 'Accept all cookies' to agree to all cookies that collect anonymous data.
                 To only allow the cookies that make the site work, click 'Use essential cookies only.' Visit 'Set cookie preferences' to control specific cookies.</p>,
-            <CookieBanner.Buttons key="baz">
+            <CookieBanner.Buttons>
                 <Button className="js-accept-all-cookies" small buttonStyle="secondary">Accept all cookies</Button>
                 <Button className="js-accept-essential-cookies" small buttonStyle="secondary">Use essential cookies only</Button>
                 <a href="/cookies/">Set cookie preferences</a>

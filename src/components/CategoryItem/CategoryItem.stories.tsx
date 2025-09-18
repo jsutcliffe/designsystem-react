@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import CategoryItem from './CategoryItem';
 
 const meta = {
-    title: 'Components/Category item',
+    title: 'Components/CategoryItem',
     component: CategoryItem,
     argTypes: {
         children: argTypes.children(),

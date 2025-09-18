@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import SiteFooter from './SiteFooter';
 
 const meta = {
-    title: 'Components/Site footer',
+    title: 'Components/SiteFooter',
     component: SiteFooter,
     argTypes: {
         children: argTypes.children()

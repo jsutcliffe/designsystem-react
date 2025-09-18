@@ -4,10 +4,9 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import SideNavigation from './SideNavigation';
 
 const meta = {
-    title: 'Components/Side navigation',
+    title: 'Components/SideNavigation',
     component: SideNavigation,
     argTypes: {
-        linkComponent: argTypes.linkComponent(),
         children: argTypes.children()
     },
     args: {

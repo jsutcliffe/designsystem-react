@@ -4,7 +4,7 @@ import argTypes from '../../../.storybook/sgdsArgTypes';
 import RadioButton from './RadioButton';
 
 const meta = {
-    title: 'Components/Radio button',
+    title: 'Components/Radio/Radio button',
     component: RadioButton,
     argTypes: {
         checked: {

@@ -5,7 +5,7 @@ import ScreenReaderText from './ScreenReaderText';
 const Buttons = ({
     children
 }: SGDS.Common.AbstractNotificationBanner.Buttons) => {
-    return (<>{children}</>);
+    return (<div className="ds_button-group">{children}</div>);
 }
 
 const AbstractNotificationBanner = ({
@@ -70,11 +70,7 @@ const AbstractNotificationBanner = ({
                         </button>
                     }
 
-                    {buttons &&
-                        <div className="ds_button-group">
-                            {buttons}
-                        </div>
-                    }
+                    {buttons}
                 </div>
             </div>
         </div>
