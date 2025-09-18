@@ -5,7 +5,7 @@ const MetadataItem = ({ children, className, name, ...props }) => {
             'ds_metadata__item',
             className
         ].join(' ')} {...props}>
-            <dt className="ds_metadata__key">{name}</dt>
+            <dt className="ds_metadata__key">{name}</dt>{' '}
             <dd className="ds_metadata__value">
                 {children}{' '}
             </dd>
