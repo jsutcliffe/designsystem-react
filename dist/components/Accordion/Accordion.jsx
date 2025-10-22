@@ -42,10 +42,14 @@ const WrapperTag_1 = __importDefault(require("../../common/WrapperTag"));
 const accordion_1 = __importDefault(require("@scottish-government/design-system/src/components/accordion/accordion"));
 let accordionItemCounter = 0;
 const AccordionHeadingLevelContext = (0, react_1.createContext)('h3');
-const AccordionItem = ({ children, className, id: rawId, isOpen = false, title, ...props }) => {
+const AccordionItem = ({ children, className, id: rawId, isOpen = false, heading, title, ...props }) => {
     accordionItemCounter = accordionItemCounter + 1;
     const processedId = rawId || `accordion-item-${(0, react_1.useId)()}`;
     let headingLevel = (0, react_1.useContext)(AccordionHeadingLevelContext);
+    if (title) {
+        console.warn('Warning: Using the `title` prop for heading text on an Accordion.Item is deprecated and will be removed in a future release. Please use the `heading` prop instead.');
+        heading = heading || title;
+    }
     return (<div className={[
             'ds_accordion-item',
             className
@@ -56,7 +60,7 @@ const AccordionItem = ({ children, className, id: rawId, isOpen = false, title, 
         ].join(' ')} defaultChecked={isOpen} id={`${processedId}-control`} type="checkbox"/>
             <div className="ds_accordion-item__header">
                 <WrapperTag_1.default id={`panel-${processedId}-heading`} className="ds_accordion-item__title" tagName={headingLevel}>
-                    {title}
+                    {heading}
                 </WrapperTag_1.default>
                 <span className="ds_accordion-item__indicator"/>
                 <label className="ds_accordion-item__label" htmlFor={`${processedId}-control`}>
@@ -68,7 +72,7 @@ const AccordionItem = ({ children, className, id: rawId, isOpen = false, title, 
             </div>
         </div>);
 };
-const Accordion = ({ children, className, headingLevel = 'h3', hideOpenAll, ...props }) => {
+const Accordion = ({ children, className, headingLevel = 'h3', hideOpenAll, isSmall, ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         if (ref.current) {
@@ -80,6 +84,7 @@ const Accordion = ({ children, className, headingLevel = 'h3', hideOpenAll, ...p
     }
     return (<div className={[
             'ds_accordion',
+            isSmall ? 'ds_accordion--small' : '',
             className
         ].join(' ')} ref={ref} {...props}>
             {!hideOpenAll && (<button className={[

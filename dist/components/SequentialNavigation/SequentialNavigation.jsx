@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const SeqNavLink = ({ children, href, isPrev, linkComponent, textLabel }) => {
-    console.log(textLabel);
     const LINK_CLASSES = [
         'ds_sequential-nav__button',
         isPrev ? 'ds_sequential-nav__button--left' : 'ds_sequential-nav__button--right'

@@ -25,14 +25,14 @@ const SideNavigationItem = function ({ children, href, isCurrent = false, linkCo
             {children}
         </li>);
 };
-const SideNavigation = function ({ children, className, ...props }) {
+const SideNavigation = function ({ ariaLabel = 'Sections', children, className, ...props }) {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
         if (ref.current && children) {
             new side_navigation_1.default(ref.current).init();
         }
     }, [ref]);
-    return (<nav aria-label="Sections" className={[
+    return (<nav aria-label={ariaLabel} className={[
             'ds_side-navigation',
             className
         ].join(' ')} data-module="ds-side-navigation" ref={ref} {...props}>
