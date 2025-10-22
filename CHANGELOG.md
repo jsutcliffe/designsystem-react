@@ -6,13 +6,37 @@ Changes are grouped under the labels: `Added`, `Changed`, `Deprecated`, `Fixed`,
 `Removed` and `Security`.
 
 ---
+## [0.11.0] - 2025-10-22
 
-## [0.9.0] - 2025-09-17
-## Added
+### Added
+- SearchResult, SearchFilters, SearchFacets, SearchSort components
+- ButtonGroup component
+### Changed
+- Accordion.Item now uses a new `heading` prop for its heading content, which allows both string and ReactNode
+- add "ariaLabel" property to SideNavigation to make the aria label editable
+### Deprecated
+- Accordion.Item `title` prop replaced with `heading`
+### Fixed
+- decorators added to many storybook components for correct rendering
+
+## [0.10.2] - 2025-09-18
+### Fixed
+- correction to handling of subcomponents in Storybook
+
+## [0.10.1] - 2025-09-18
+### Fixed
+- correction to white space on PageMetadata
+
+## [0.10.0] - 2025-09-18
+### Added
 - Storybook now added for all components. `npm run storybook`
 - CategoryList component
 - CategoryItem component
-## Changed
+- useTracking hook, to add DS tracking attributes
+### Changed
+- Accordion uses useContext instead of cloneElement to pass props (headingLevel) to its children
+- CheckboxGroup uses useContext instead of cloneElement to pass props (isSmall) to its children
+- RadioGroup use useContext instead of cloneElement to pass props (isSmall, name) to its children
 - 'text' prop removed from ErrorMessage. Use children instead.
 - Many boolean prop names updated for clarity/consistency
   - AbstractNotificationBanner (used by NotificationBanner and CookieBanner): close -> isDismissable
@@ -36,13 +60,15 @@ Changes are grouped under the labels: `Added`, `Changed`, `Deprecated`, `Fixed`,
   - Tabs: bordered -> isBorderless (logic inverted), manual -> isManual
   - TextInput: currency -> isCurrency
 
+## [0.9.0] - skipped due to user error with the CI script
+
 ## [0.8.0] - 2025-08-18
-## Added
+### Added
 - ActionLink component, centralising behaviour used in actions in both SummaryCard and SummaryList
 - SiteFooter component
 - Add support for the SkipLinks 'static' variant
 
-## Changed
+### Changed
 
 Two headline changes:
 

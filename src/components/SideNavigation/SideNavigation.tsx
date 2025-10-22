@@ -43,6 +43,7 @@ const SideNavigationItem = function ({
 };
 
 const SideNavigation = function ({
+    ariaLabel = 'Sections',
     children,
     className,
     ...props
@@ -57,7 +58,7 @@ const SideNavigation = function ({
 
     return (
         <nav
-            aria-label="Sections"
+            aria-label={ariaLabel}
             className={[
                 'ds_side-navigation',
                 className

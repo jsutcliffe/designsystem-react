@@ -13,6 +13,6 @@ declare namespace SGDS.Component {
     }
 
     interface SideNavigation extends React.AllHTMLAttributes<HTMLElement> {
-
+        ariaLabel?: string
     }
 }
