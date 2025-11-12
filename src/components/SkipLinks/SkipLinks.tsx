@@ -1,3 +1,8 @@
+import React, { useEffect } from 'react';
+
+// @ts-ignore
+import dsSkipLinks from '@scottish-government/design-system/src/components/skip-links/skip-links';
+
 const Link = ({
     children,
     fragmentId
@@ -18,6 +23,11 @@ const SkipLinks = ({
     isStatic,
     ...props
 }: SGDS.Component.SkipLinks) => {
+
+    useEffect(() => {
+        dsSkipLinks.init();
+    });
+
     return (
         <div
             className={[

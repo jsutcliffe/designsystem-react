@@ -3,6 +3,7 @@ const PageHeader = ({
     className,
     label,
     title,
+    titleId,
     ...props
 }: SGDS.Component.PageHeader) => {
     return (
@@ -14,7 +15,7 @@ const PageHeader = ({
             {...props}
         >
             {label && <span className="ds_page-header__label  ds_content-label">{label}</span>}
-            <h1 className="ds_page-header__title">{title}</h1>
+            <h1 id={titleId} className="ds_page-header__title">{title}</h1>
 
             {children}
         </header>

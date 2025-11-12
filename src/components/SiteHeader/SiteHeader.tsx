@@ -1,5 +1,3 @@
-'use client';
-
 import React, { Children, useEffect, useRef } from 'react';
 import Icon from '../../common/Icon';
 import SiteNavigation from '../SiteNavigation/SiteNavigation';
