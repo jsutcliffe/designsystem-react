@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import AbstractNotificationBanner from './AbstractNotificationBanner';
-import Button from '../components/Button/Button';
+import Button from '../../components/Button';
 
 const NOTIFICATION_TEXT = 'We need to tell you about something';
 

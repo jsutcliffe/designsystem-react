@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import argTypes from '../../../.storybook/sgdsArgTypes';
 
 import PageHeader from './PageHeader';
-import Metadata from '../PageMetadata/PageMetadata';
+import Metadata from '../PageMetadata';
 
 const meta = {
     title: 'Components/PageHeader',

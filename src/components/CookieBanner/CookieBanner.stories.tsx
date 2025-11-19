@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import argTypes from '../../../.storybook/sgdsArgTypes';
 
 import CookieBanner from './CookieBanner';
-import Button from '../Button/Button';
+import Button from '../Button';
 
 const meta = {
     title: 'Components/CookieBanner',

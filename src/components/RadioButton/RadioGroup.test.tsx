@@ -1,7 +1,6 @@
 import { test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import RadioButton from './RadioButton';
-import RadioGroup from './RadioGroup';
+import RadioButton, { RadioGroup } from '../RadioButton';
 
 test('radio group renders correctly', () => {
     render(

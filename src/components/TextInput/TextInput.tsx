@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 // @ts-ignore
 import DSCharacterCount from '@scottish-government/design-system/src/forms/character-count/character-count';
-import Button from '../Button/Button';
+import Button from '../Button';
 import ConditionalWrapper from '../../common/ConditionalWrapper';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 import HintText from '../../common/HintText';
 
 const TextInput = ({

@@ -11,7 +11,7 @@ Changes are grouped under the labels: `Added`, `Changed`, `Deprecated`, `Fixed`,
 ### Added
 - type definitions included in /dist
 - optional 'titleId' prop added to PageHeader
-## Fixed
+### Fixed
 - include SGDS 'skip-links' script in SkipLinks
 
 ## [0.11.0] - 2025-10-22

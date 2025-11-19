@@ -1,6 +1,6 @@
 import React, { Children, useEffect, useRef } from 'react';
 import Icon from '../../common/Icon';
-import SiteNavigation from '../SiteNavigation/SiteNavigation';
+import SiteNavigation from '../SiteNavigation';
 
 // @ts-ignore
 import DSMobileMenu from '@scottish-government/design-system/src/components/site-navigation/site-navigation';

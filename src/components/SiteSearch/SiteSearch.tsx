@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 // @ts-ignore
 import DSAutocomplete from '@scottish-government/design-system/src/components/autocomplete/autocomplete';
-import Button from '../Button/Button';
+import Button from '../Button';
 
 const SiteSearch = function ({
     action = '/search',

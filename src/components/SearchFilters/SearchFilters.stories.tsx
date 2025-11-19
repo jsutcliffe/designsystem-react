@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import argTypes from '../../../.storybook/sgdsArgTypes';
 
 import Filters from './SearchFilters';
-import DatePicker from '../DatePicker/DatePicker';
-import Checkbox from '../Checkbox/Checkbox';
+import DatePicker from '../DatePicker';
+import Checkbox from '../Checkbox';
 
 
 const meta = {

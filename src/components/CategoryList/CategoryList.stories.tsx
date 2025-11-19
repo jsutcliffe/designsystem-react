@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import argTypes from '../../../.storybook/sgdsArgTypes';
 
 import CategoryList from './CategoryList';
-import CategoryItem from '../CategoryItem/CategoryItem';
+import CategoryItem from '../CategoryItem';
 
 const meta = {
     title: 'Components/CategoryList',

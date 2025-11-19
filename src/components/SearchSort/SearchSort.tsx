@@ -1,6 +1,6 @@
 import { AllHTMLAttributes } from "react";
-import Button from "../Button/Button";
-import Select from "../Select/Select";
+import Button from "../Button";
+import Select from "../Select";
 
 const Option = ({
     children,

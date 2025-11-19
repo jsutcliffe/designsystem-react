@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import argTypes from '../../../.storybook/sgdsArgTypes';
 
 import SummaryCard from './SummaryCard';
-import SummaryList from '../SummaryList/SummaryList';
+import SummaryList from '../SummaryList';
 
 const meta = {
     title: 'Components/SummaryCard',

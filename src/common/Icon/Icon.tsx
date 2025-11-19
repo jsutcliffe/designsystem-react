@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Icons from '../images/icons';
+import * as Icons from '../../images/icons';
 
 const Icon = ({
     ariaLabel,

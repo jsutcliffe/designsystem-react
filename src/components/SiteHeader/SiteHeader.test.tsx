@@ -1,9 +1,9 @@
 import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import SiteHeader from './SiteHeader';
-import SiteNavigation from '../SiteNavigation/SiteNavigation';
-import SiteSearch from '../SiteSearch/SiteSearch';
-import PhaseBanner from '../PhaseBanner/PhaseBanner';
+import SiteNavigation from '../SiteNavigation';
+import SiteSearch from '../SiteSearch';
+import PhaseBanner from '../PhaseBanner';
 
 test('site header renders correctly (maximal, testing markup structure)', () => {
     render(

@@ -1,7 +1,7 @@
 import { Children, createContext, useContext } from 'react';
 import ConditionalWrapper from '../../common/ConditionalWrapper';
-import AspectBox from '../AspectBox/AspectBox';
-import Metadata from '../PageMetadata/PageMetadata';
+import AspectBox from '../AspectBox';
+import Metadata from '../PageMetadata';
 
 const SearchResultLinkHrefContext = createContext('');
 

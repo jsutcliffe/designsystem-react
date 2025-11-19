@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import argTypes from '../../../.storybook/sgdsArgTypes';
 
 import SiteHeader from './SiteHeader';
-import SiteSearch from '../SiteSearch/SiteSearch';
-import SiteNavigation from '../SiteNavigation/SiteNavigation';
-import PhaseBanner from '../PhaseBanner/PhaseBanner';
+import SiteSearch from '../SiteSearch';
+import SiteNavigation from '../SiteNavigation';
+import PhaseBanner from '../PhaseBanner';
 
 const meta = {
     title: 'Components/SiteHeader',

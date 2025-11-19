@@ -1,6 +1,6 @@
 import { Children } from 'react';
-import Icon from './Icon';
-import ScreenReaderText from './ScreenReaderText';
+import Icon from '../Icon';
+import ScreenReaderText from '../ScreenReaderText';
 
 const Buttons = ({
     children

@@ -1,8 +1,8 @@
-import Accordion from "../Accordion/Accordion";
-import Button from "../Button/Button";
-import SkipLinks from "../SkipLinks/SkipLinks";
+import Accordion from "../Accordion";
+import Button from "../Button";
+import SkipLinks from "../SkipLinks";
 import ConditionalWrapper from "../../common/ConditionalWrapper";
-import CheckboxGroup from "../Checkbox/CheckboxGroup";
+import { CheckboxGroup } from "../Checkbox";
 
 export const FilterPanel = ({
     activeFilterCount = 0,

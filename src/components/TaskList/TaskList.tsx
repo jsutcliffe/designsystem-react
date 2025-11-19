@@ -2,7 +2,7 @@ import { Children } from 'react';
 import ConditionalWrapper from '../../common/ConditionalWrapper';
 import HintText from '../../common/HintText';
 import ScreenReaderText from '../../common/ScreenReaderText';
-import Tag from '../Tag/Tag';
+import Tag from '../Tag';
 
 const TaskItem = ({
     children,

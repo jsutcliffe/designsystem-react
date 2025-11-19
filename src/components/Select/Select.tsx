@@ -1,4 +1,4 @@
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 import HintText from '../../common/HintText';
 
 const Select = function ({

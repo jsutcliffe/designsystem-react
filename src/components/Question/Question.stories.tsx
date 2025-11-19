@@ -2,9 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import argTypes from '../../../.storybook/sgdsArgTypes';
 
 import Question from './Question';
-import TextInput from '../TextInput/TextInput';
-import Checkbox from '../Checkbox/Checkbox';
-import CheckboxGroup from '../Checkbox/CheckboxGroup';
+import TextInput from '../TextInput';
+import Checkbox, { CheckboxGroup } from '../Checkbox';
 
 const meta = {
     title: 'Components/Question',

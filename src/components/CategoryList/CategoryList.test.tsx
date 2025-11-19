@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import CategoryList from './CategoryList';
-import CategoryItem from '../CategoryItem/CategoryItem';
+import CategoryItem from '../CategoryItem';
 
 test('category list renders correctly', () => {
     render(

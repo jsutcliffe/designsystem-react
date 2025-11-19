@@ -1,5 +1,5 @@
 import React from 'react';
-import * as FileIcons from '../images/documents';
+import * as FileIcons from '../../images/documents';
 
 const FileIcon = ({
     ariaLabel = '',

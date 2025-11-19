@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import Filters from './SearchFilters';
-import Checkbox from '../Checkbox/Checkbox';
+import Checkbox from '../Checkbox';
 
 test('search filters boilerplate renders correctly', () => {
     render(

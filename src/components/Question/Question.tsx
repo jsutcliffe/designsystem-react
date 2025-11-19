@@ -1,5 +1,5 @@
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import HintText from '../../common/HintText';
+import ErrorMessage from '../ErrorMessage';
+import HintText from '../../common/HintText'
 import WrapperTag from '../../common/WrapperTag';
 
 const Question = function ({

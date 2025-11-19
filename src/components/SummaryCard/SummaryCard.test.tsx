@@ -1,7 +1,7 @@
 import { test, expect, vi } from 'vitest';
-import { render, screen, within, fireEvent } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import SummaryCard from './SummaryCard';
-import SummaryList from '../SummaryList/SummaryList';
+import SummaryList from '../SummaryList';
 
 const ONCLICK_FUNCTION = vi.fn();
 
