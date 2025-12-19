@@ -1,4 +1,7 @@
 # @scottish-government/designsystem-react
+[![NPM version](https://img.shields.io/npm/v/%40scottish-government%2Fdesignsystem-react)](https://www.npmjs.com/package/@scottish-government/designsystem-react)
+[![Tests](https://github.com/scottish-government-design-system/designsystem-react/actions/workflows/tests.yml/badge.svg)](https://github.com/scottish-government-design-system/designsystem-react/actions/workflows/tests.yml)
+[![Build](https://github.com/scottish-government-design-system/designsystem-react/actions/workflows/build.yml/badge.svg)](https://github.com/scottish-government-design-system/designsystem-react/actions/workflows/build.yml)
 
 This repository contains a React implementation of the [Scottish Government Design System](https://designsystem.gov.scot/).
 
