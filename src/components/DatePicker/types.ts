@@ -4,9 +4,9 @@ export interface DatePickerProps extends React.AllHTMLAttributes<HTMLElement> {
     dateSelectCallback?: (date: Date) => void;
     disabledDates?: string;
     hasError?: boolean;
-    errorMessage?: string;
+    errorMessage?: string | React.ReactNode;
     id: string;
-    hintText?: string;
+    hintText?: string | React.ReactNode;
     iconPath?: string;
     label: string;
     maxDate?: string;

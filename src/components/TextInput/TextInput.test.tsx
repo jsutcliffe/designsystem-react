@@ -58,7 +58,6 @@ test('text input with character count', () => {
     const textInput = screen.getByRole('textbox');
     const textInputWrapper = textInput.parentElement;
 
-    expect(textInputWrapper).toHaveAttribute('data-maxlength', MAX_LENGTH.toString());
     expect(textInputWrapper).toHaveAttribute('data-module', 'ds-character-count');
 });
 

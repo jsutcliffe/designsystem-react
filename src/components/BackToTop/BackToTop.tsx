@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import Icon from '../../common/Icon';
-// @ts-expect-error no types from core SGDS
 import DSBackToTop from '@scottish-government/design-system/src/components/back-to-top/back-to-top';
 import { BackToTopProps } from './types';
 

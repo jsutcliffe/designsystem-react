@@ -21,7 +21,7 @@
     "build-storybook": "storybook build"
   },
   "peerDependencies": {
-    "@scottish-government/design-system": "^3.2.1"
+    "@scottish-government/design-system": "git://github.com/scottish-government-design-system/design-system.git"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",

@@ -10,7 +10,7 @@ const meta = {
         children: argTypes.children()
     },
     args: {
-        title: 'Application incomplete'
+
     }
 } satisfies Meta<typeof Facets>;
 

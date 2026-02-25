@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useRef, useId } from 'react';
 import WrapperTag from '../../common/WrapperTag';
-// @ts-expect-error no types from core SGDS
 import DSAccordion from '@scottish-government/design-system/src/components/accordion/accordion';
 import { AccordionItemProps, AccordionProps } from './types';
 

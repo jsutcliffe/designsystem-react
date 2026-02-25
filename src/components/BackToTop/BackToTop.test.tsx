@@ -1,6 +1,15 @@
-import { test, expect } from 'vitest';
+import { test, expect, vi } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import BackToTop from './BackToTop';
+
+// Mock the ResizeObserver
+class ResizeObserverMock {
+    constructor() {}
+    observe() { return vi.fn() }
+    unobserve() { return vi.fn() }
+    disconnect() { return vi.fn() }
+};
+vi.stubGlobal('ResizeObserver', ResizeObserverMock);
 
 test('back to top renders correctly', () => {
     render(

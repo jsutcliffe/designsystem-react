@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-// @ts-expect-error no types from core SGDS
 import DSSideNavigation from '@scottish-government/design-system/src/components/side-navigation/side-navigation';
 import { SideNavigationItemProps, SideNavigationListProps, SideNavigationProps } from './types';
 

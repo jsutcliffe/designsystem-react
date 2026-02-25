@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-// @ts-expect-error no types from core SGDS
 import DSHideThisPage from '@scottish-government/design-system/src/components/hide-this-page/hide-this-page';
 import { HideThisPageProps } from './types';
 
@@ -12,7 +11,7 @@ const HideThisPage = ({
 
     useEffect(() => {
         if (ref.current) {
-            new DSHideThisPage().init();
+            new DSHideThisPage(ref.current).init();
 
             const HIDE_THIS_PAGE_DIV_ID = 'hide-this-page-instruction';
             if (!document.getElementById(HIDE_THIS_PAGE_DIV_ID)) {

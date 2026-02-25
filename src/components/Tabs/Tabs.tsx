@@ -1,6 +1,5 @@
 import React, { Children, useEffect, useRef, useId } from 'react';
 import WrapperTag from '../../common/WrapperTag';
-// @ts-expect-error no types from core SGDS
 import DSTabs from '@scottish-government/design-system/src/components/tabs/tabs';
 import { TabListItemProps, TabsItemProps, TabsProps } from './types';
 

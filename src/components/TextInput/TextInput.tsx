@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-// @ts-expect-error no types from core SGDS
 import DSCharacterCount from '@scottish-government/design-system/src/forms/character-count/character-count';
 import Button from '../Button';
 import ConditionalWrapper from '../../common/ConditionalWrapper';

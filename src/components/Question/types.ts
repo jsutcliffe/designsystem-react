@@ -1,9 +1,9 @@
 type QuestionTags = 'div' | 'fieldset';
 
 export interface QuestionProps extends React.AllHTMLAttributes<HTMLElement> {
-    errorMessage?: string;
+    errorMessage?: string | React.ReactNode;
     hasError?: boolean;
-    hintText?: string;
+    hintText?: string | React.ReactNode;
     legend?: string;
     tagName: QuestionTags;
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { CheckboxRadioContext } from '../../utils/context';
-// @ts-expect-error no types from core SGDS
 import DSCheckboxes from '@scottish-government/design-system/src/forms/checkbox/checkboxes'
 import { CheckboxGroupProps } from './types';
 

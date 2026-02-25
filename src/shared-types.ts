@@ -18,7 +18,7 @@ export type LinkComponentProps = {
 export type LinkComponent = (linkComponent: LinkComponentProps) => React.ReactNode;
 
 export interface CheckboxRadioBase<T> extends React.InputHTMLAttributes<T> {
-    hintText?: string;
+    hintText?: string | React.ReactNode;
     label: string;
     onBlur?: React.FocusEventHandler<T>;
     onChange?: React.ChangeEventHandler<T>;
@@ -26,9 +26,9 @@ export interface CheckboxRadioBase<T> extends React.InputHTMLAttributes<T> {
 }
 
 export interface FormFieldBase<T> extends React.AllHTMLAttributes <T> {
-    errorMessage?: string;
+    errorMessage?: string | React.ReactNode;
     hasError?: boolean;
-    hintText?: string;
+    hintText?: string | React.ReactNode;
     label: string;
     onBlur?: React.FocusEventHandler<T>;
     onChange?: React.ChangeEventHandler<T>;

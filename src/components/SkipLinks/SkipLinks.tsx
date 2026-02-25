@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// @ts-expect-error no types from core SGDS
 import dsSkipLinks from '@scottish-government/design-system/src/components/skip-links/skip-links';
 import { SkipLinksLinkProps, SkipLinksProps } from './types';
 

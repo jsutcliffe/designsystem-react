@@ -1,6 +1,4 @@
-import React, { Children, useEffect, useRef } from 'react';
-// @ts-expect-error no types from core SGDS
-import DSAspectBox from '@scottish-government/design-system/src/components/aspect-box/aspect-box-fallback';
+import React, { Children, useRef } from 'react';
 import { AspectBoxProps } from './types';
 
 const AspectBox = ({
@@ -10,12 +8,6 @@ const AspectBox = ({
     ...props
 }: AspectBoxProps) => {
     const ref = useRef(null);
-
-    useEffect(() => {
-        if (ref.current) {
-            new DSAspectBox(ref.current).init();
-        }
-    }, [ref]);
 
     function processChild(child: React.JSX.Element) {
         if (['img', 'svg', 'picture'].includes(child.type)) {

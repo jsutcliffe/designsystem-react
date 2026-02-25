@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-// @ts-expect-error no types from core SGDS
 import DSTable from '@scottish-government/design-system/src/components/table/table';
 import { TableProps } from './types';
 

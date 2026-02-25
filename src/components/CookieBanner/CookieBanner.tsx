@@ -1,7 +1,6 @@
 
 import { useEffect, useRef } from 'react';
 import AbstractNotificationBanner from '../../common/AbstractNotificationBanner';
-// @ts-expect-error no types from core SGDS
 import DSCookieBanner from '@scottish-government/design-system/src/components/cookie-notification/cookie-notification.js';
 import { AbstractNotificationBannerProps } from '../../common/AbstractNotificationBanner/types';
 

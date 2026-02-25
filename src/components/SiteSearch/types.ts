@@ -1,5 +1,11 @@
 type FormMethods = 'GET' | 'POST';
-export type SuggestionMappingFunctionProps = (suggestionObj: {response: string}) => [];
+
+export type Suggestion = {
+    displayText: string;
+    isActive: boolean;
+}
+
+export type SuggestionMappingFunctionProps = (suggestions: object[]) => Suggestion[];
 
 export interface SiteSearchProps extends React.AllHTMLAttributes<HTMLInputElement> {
     action?: string;

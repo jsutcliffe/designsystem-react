@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-// @ts-expect-error no types from core SGDS
 import DSDatePicker from '@scottish-government/design-system/src/components/date-picker/date-picker';
 import ErrorMessage from '../ErrorMessage';
 import TextInput from '../TextInput';

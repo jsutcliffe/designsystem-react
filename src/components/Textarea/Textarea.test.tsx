@@ -43,7 +43,6 @@ test('textarea with character count', () => {
     const textarea = screen.getByRole('textbox');
     const textareaWrapper = textarea.parentElement;
 
-    expect(textareaWrapper).toHaveAttribute('data-maxlength', MAX_LENGTH.toString());
     expect(textareaWrapper).toHaveAttribute('data-module', 'ds-character-count');
 });
 

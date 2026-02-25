@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-// @ts-expect-error no types from core SGDS
 import DSAutocomplete from '@scottish-government/design-system/src/components/autocomplete/autocomplete';
 import Button from '../Button';
 import { SiteSearchProps, SuggestionMappingFunctionProps } from './types';
@@ -27,7 +26,8 @@ const SiteSearch = function ({
     }
 
     useEffect(() => {
-        if (hasAutocomplete && ref.current) {
+        const autocompleteElement = document.getElementById(autocompleteId);
+        if (hasAutocomplete && autocompleteElement && ref.current) {
             const options: AutoCompleteOptions = {};
             if (minLength) {
                 options.minLength = minLength;
@@ -37,7 +37,7 @@ const SiteSearch = function ({
             }
 
             const autocomplete = new DSAutocomplete(
-                document.getElementById(autocompleteId),
+                autocompleteElement,
                 autocompleteEndpoint,
                 options
             );
