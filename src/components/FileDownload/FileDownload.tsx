@@ -27,7 +27,7 @@ const FileDownload = ({
             <div className="ds_file-download__thumbnail">
                 <a className="ds_file-download__thumbnail-link" aria-hidden="true" tabIndex={-1} href={fileUrl}>
                     {cover ?
-                        <img alt="" className="ds_file-download__thumbnail-image" src={cover}/>
+                        <img alt="" className="ds_file-download__thumbnail-image  ds_file-download__thumbnail-image--outlined" src={cover}/>
                     :
                         <FileIcon ariaLabel="" className="ds_file-download__thumbnail-image" icon={icon} />
                     }

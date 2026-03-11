@@ -53,10 +53,6 @@ test('highlighted file download', () => {
     expect(fileDownload).toHaveClass('ds_file-download--highlighted');
 });
 
-// test('file download with specific icon', () => {
-
-// });
-
 test('file download with cover image', () => {
     const COVER_URL = 'my-image.png';
 
@@ -66,7 +62,7 @@ test('file download with cover image', () => {
 
     const thumbnailImage = screen.getByRole('presentation', {hidden: true});
 
-    expect(thumbnailImage).toHaveClass('ds_file-download__thumbnail-image');
+    expect(thumbnailImage).toHaveClass('ds_file-download__thumbnail-image', 'ds_file-download__thumbnail-image--outlined');
     expect(thumbnailImage).toHaveAttribute('alt', '');
     expect(thumbnailImage).toHaveAttribute('src', COVER_URL);
     expect(thumbnailImage.tagName).toEqual('IMG');
