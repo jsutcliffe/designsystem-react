@@ -58,6 +58,42 @@ test('table with smallscreen behaviour', () => {
     expect(table.nodeName).toEqual('TABLE');
 });
 
+test('instantiating/initialising DS component script: smallscreen', () => {
+    render(
+        <Table smallscreen="scrolling">
+            <caption>Public holidays in 2020</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Day</th>
+                    <th scope="col">Holiday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>10 April</td>
+                    <td>Friday</td>
+                    <td>Good Friday</td>
+                </tr>
+            </tbody>
+        </Table>
+    );
+
+    const table = screen.getByRole('table');
+    expect(table).toHaveClass('js-initialised');
+    expect(table).toHaveClass('js-instantiated');
+});
+
+test('instantiating/initialising DS component script: not smallscreen', () => {
+    render(
+        <Table />
+    );
+
+    const table = screen.getByRole('table');
+    expect(table).not.toHaveClass('js-initialised');
+    expect(table).not.toHaveClass('js-instantiated');
+});
+
 test('passing additional props', () => {
     render(
         <Table data-test="foo"/>

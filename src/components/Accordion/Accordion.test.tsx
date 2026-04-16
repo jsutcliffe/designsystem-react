@@ -99,6 +99,17 @@ test('accordion with custom heading level', () => {
     expect(firstAccordionTitle?.tagName).toEqual(HEADING_LEVEL.toUpperCase());
 });
 
+test('instantiating/initialising DS component script', () => {
+    render(
+        <Accordion id={ACCORDION_ID} data-testid={ACCORDION_ID} data-test="foo">
+        </Accordion>
+    )
+
+    const accordion = screen.getByTestId(ACCORDION_ID);
+    expect(accordion).toHaveClass('js-initialised');
+    expect(accordion).toHaveClass('js-instantiated');
+});
+
 test('passing additional props to accordion', () => {
     render(
         <Accordion id={ACCORDION_ID} data-testid={ACCORDION_ID} data-test="foo">

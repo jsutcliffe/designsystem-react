@@ -45,7 +45,7 @@ test('site navigation link renders correctly', () => {
     expect(link).toHaveAttribute('href', LINK_HREF)
 });
 
-test('site navigation link with custom element', () => {
+test('site navigation item with custom link element', () => {
     render(
         <SiteNavigation.Item href={LINK_HREF} linkComponent={
             ({ className, ...props }) => (
@@ -60,6 +60,21 @@ test('site navigation link with custom element', () => {
 
     expect(link?.tagName).toEqual('STRONG');
     expect(link?.textContent).toEqual(LINK_TEXT);
+});
+
+test('site navigation item without href', () => {
+    render(
+        // @ts-expect-error required prop missing
+        <SiteNavigation.Item>
+            {LINK_TEXT}
+        </SiteNavigation.Item>
+    );
+
+    const item = screen.getByRole('listitem');
+    const link = within(item).queryByRole('link');
+
+    expect(link).not.toBeInTheDocument();
+    expect(item.textContent).toEqual(LINK_TEXT);
 });
 
 test('highlights current item', () => {

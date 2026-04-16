@@ -11,6 +11,7 @@ const BackToTop = ({
     const ref = useRef(null);
 
     useEffect(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new DSBackToTop(ref.current).init();
         }

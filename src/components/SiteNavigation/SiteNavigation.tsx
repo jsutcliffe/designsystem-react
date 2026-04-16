@@ -19,6 +19,8 @@ const Item = ({
             return linkComponent({ className: classNames.join(' '), href, children });
         } else if (href) {
             return <a href={href} aria-current={ariaCurrent ? ariaCurrent : undefined} className={classNames.join(' ')}>{children}</a>;
+        } else {
+            return <span className={classNames.join(' ')}>{children}</span>;
         }
     }
 

@@ -59,20 +59,6 @@ test('date picker with hint text', () => {
     expect(textInput).toHaveAttribute('aria-describedby', hintTextEl.id);
 });
 
-test('date picker with custom icon path', () => {
-    const ICON_PATH = '/my/icon/path'
-
-    render(
-        <DatePicker
-            id={DATE_PICKER_ID}
-            label={LABEL_TEXT}
-            iconPath={ICON_PATH}
-        />
-    );
-
-    // todo
-});
-
 test('date picker with max date', () => {
     const MAX_DATE = '28/05/2023'
 
@@ -137,6 +123,44 @@ test('date picker with change fn', () => {
     fireEvent.change(textInput, {target: {value: 'foo'}});
 
     expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
+});
+
+test('date picker with onBlur that is not a function', () => {
+    render(
+        <DatePicker
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
+            // @ts-expect-error onBlur is not a function
+            onBlur='foo'
+        />
+    );
+    const datePicker = screen.getAllByRole('generic')[1];
+    const textInput = within(datePicker).getByRole('textbox');
+
+    fireEvent.blur(textInput);
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
+test('date picker with onChange that is not a function', () => {
+    render(
+        <DatePicker
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
+            // @ts-expect-error onChange is not a function
+            onChange='foo'
+        />
+    );
+    const datePicker = screen.getAllByRole('generic')[1];
+    const textInput = within(datePicker).getByRole('textbox');
+
+    fireEvent.change(textInput, { target: { value: 'foo' } });
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
 });
 
 test('date picker with initial value', () => {
@@ -219,6 +243,20 @@ test('date picker with error message', () => {
     expect(textInput).toHaveAttribute('aria-invalid', 'true');
     expect(errorMessageElement).toBeInTheDocument();
     expect(errorMessageElement).toHaveClass('ds_question__error-message');
+});
+
+test('instantiating/initialising DS component script', () => {
+    render(
+        <DatePicker
+            id={DATE_PICKER_ID}
+            label={LABEL_TEXT}
+            data-test="foo"
+        />
+    )
+
+    const datePicker = screen.getAllByRole('generic')[1];
+    expect(datePicker).toHaveClass('js-initialised');
+    expect(datePicker).toHaveClass('js-instantiated');
 });
 
 test('passing additional props', () => {

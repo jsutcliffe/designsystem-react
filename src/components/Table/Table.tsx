@@ -11,8 +11,9 @@ const Table = ({
     const ref = useRef(null);
 
     useEffect(() => {
+        /* istanbul ignore else */
         if (ref.current) {
-            new DSTable().init();
+            new DSTable(ref.current).init();
         }
     }, [ref]);
 

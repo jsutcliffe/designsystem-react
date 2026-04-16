@@ -5,6 +5,17 @@ import SiteNavigation from '../SiteNavigation';
 import SiteSearch from '../SiteSearch';
 import PhaseBanner from '../PhaseBanner';
 
+const NAVIGATION_ITEMS = (
+    <>
+        <SiteNavigation.Item href="#about">About</SiteNavigation.Item>
+        <SiteNavigation.Item href="#get-started">Get started</SiteNavigation.Item>
+        <SiteNavigation.Item href="#styles">Styles</SiteNavigation.Item>
+        <SiteNavigation.Item href="#components" isCurrent>Components</SiteNavigation.Item>
+        <SiteNavigation.Item href="#patterns">Patterns</SiteNavigation.Item>
+        <SiteNavigation.Item href="#guidance">Guidance</SiteNavigation.Item>
+    </>
+);
+
 test('site header renders correctly (maximal, testing markup structure)', () => {
     render(
         <SiteHeader>
@@ -13,12 +24,7 @@ test('site header renders correctly (maximal, testing markup structure)', () => 
             </SiteHeader.Brand>
             <SiteHeader.Navigation>
                 <SiteNavigation>
-                    <SiteNavigation.Item href="#about">About</SiteNavigation.Item>
-                    <SiteNavigation.Item href="#get-started">Get started</SiteNavigation.Item>
-                    <SiteNavigation.Item href="#styles">Styles</SiteNavigation.Item>
-                    <SiteNavigation.Item href="#components" current>Components</SiteNavigation.Item>
-                    <SiteNavigation.Item href="#patterns">Patterns</SiteNavigation.Item>
-                    <SiteNavigation.Item href="#guidance">Guidance</SiteNavigation.Item>
+                    {NAVIGATION_ITEMS}
                 </SiteNavigation>
             </SiteHeader.Navigation>
             <SiteHeader.Search>
@@ -155,16 +161,7 @@ test('site header logo link link with custom element', () => {
 });
 
 test('site header with site navigation', () => {
-    const NAVIGATION_ITEMS = (
-        <>
-            <SiteNavigation.Item href="#about">About</SiteNavigation.Item>
-            <SiteNavigation.Item href="#get-started">Get started</SiteNavigation.Item>
-            <SiteNavigation.Item href="#styles">Styles</SiteNavigation.Item>
-            <SiteNavigation.Item href="#components" current>Components</SiteNavigation.Item>
-            <SiteNavigation.Item href="#patterns">Patterns</SiteNavigation.Item>
-            <SiteNavigation.Item href="#guidance">Guidance</SiteNavigation.Item>
-        </>
-    );
+
 
     render(
         <>
@@ -238,6 +235,22 @@ test('site header with phase banner', () => {
 
     expect(siteHeaderPhaseBanner?.tagName).toEqual('DIV');
     expect(siteHeaderPhaseBanner?.innerHTML).toEqual(phaseBannerReference.innerHTML);
+});
+
+test('instantiating/initialising DS component script', () => {
+    render(
+        <SiteHeader>
+            <SiteHeader.Navigation>
+                <SiteNavigation>
+                    {NAVIGATION_ITEMS}
+                </SiteNavigation>
+            </SiteHeader.Navigation>
+        </SiteHeader>
+    );
+
+    const mobileNav = screen.getAllByRole('navigation')[0];
+    expect(mobileNav).toHaveClass('js-initialised');
+    expect(mobileNav).toHaveClass('js-instantiated');
 });
 
 test('passing additional props', () => {

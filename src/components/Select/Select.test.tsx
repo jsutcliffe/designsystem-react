@@ -134,6 +134,48 @@ test('select with change function', () => {
     expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
+test('select with onBlur that is not a function', () => {
+    render(
+        <Select
+        id={SELECT_ID}
+        label={LABEL_TEXT}
+            // @ts-expect-error onBlur is not a function
+            onBlur='foo'
+        >
+            {OPTIONS}
+        </Select>
+    );
+
+    const select = screen.getByRole('combobox');
+
+    fireEvent.blur(select);
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
+test('select with onChange that is not a function', () => {
+    render(
+        <Select
+        id={SELECT_ID}
+        label={LABEL_TEXT}
+            // @ts-expect-error onChange is not a function
+            onChange='foo'
+        >
+            {OPTIONS}
+        </Select>
+    );
+
+    const select = screen.getByRole('combobox');
+
+    fireEvent.change(select, {target: {value: 'button'}});
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
 test('select with placeholder option', () => {
     const PLACEHOLDER_TEXT = 'foo';
 

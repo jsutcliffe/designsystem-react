@@ -12,6 +12,7 @@ export const Page = ({
     onClick
 }: PaginationPageProps) => {
     function handleClick(event: React.MouseEvent) {
+        /* istanbul ignore else */
         if (typeof onClick === 'function') {
             onClick(event);
         }

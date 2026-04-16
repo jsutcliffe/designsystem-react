@@ -74,6 +74,36 @@ test('checkbox with change fn', () => {
     expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
+test('checkbox with onBlur that is not a function', () => {
+    render(
+        // @ts-expect-error onBlur is not a function
+        <Checkbox onBlur='foo' label="Pension Credit" id="pensioncredit" />
+    );
+
+    const checkbox = screen.getByRole('checkbox');
+
+    fireEvent.blur(checkbox);
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
+test('checkbox with onChange that is not a function', () => {
+    render(
+        // @ts-expect-error onChange is not a function
+        <Checkbox onChange='foo' label="Pension Credit" id="pensioncredit" />
+    );
+
+    const checkbox = screen.getByRole('checkbox');
+
+    fireEvent.click(checkbox);
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
 test('checkbox with hint text', () => {
     render(
         <Checkbox hintText="hint text" label="Pension Credit" id="pensioncredit" />

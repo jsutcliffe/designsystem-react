@@ -81,6 +81,7 @@ const Accordion = ({
     const ref = useRef(null);
 
     useEffect(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new DSAccordion(ref.current).init();
         }

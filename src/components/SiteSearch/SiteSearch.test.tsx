@@ -142,6 +142,28 @@ test('autocomplete', () => {
 
 });
 
+test('instantiating/initialising DS component script: autocomplete', () => {
+    render(
+        <SiteSearch autocompleteEndpoint="/endpoint" />
+    );
+
+    const searchForm = screen.getByRole('search');
+    const searchFormContainer = searchForm.parentElement;
+    expect(searchFormContainer).toHaveClass('js-initialised');
+    expect(searchFormContainer).toHaveClass('js-instantiated');
+});
+
+test('instantiating/initialising DS component script: no autocomplete', () => {
+    render(
+        <SiteSearch />
+    );
+
+    const searchForm = screen.getByRole('search');
+    const searchFormContainer = searchForm.parentElement;
+    expect(searchFormContainer).not.toHaveClass('js-initialised');
+    expect(searchFormContainer).not.toHaveClass('js-instantiated');
+});
+
 test('passing additional props', () => {
     render(
         <SiteSearch data-test="foo" />

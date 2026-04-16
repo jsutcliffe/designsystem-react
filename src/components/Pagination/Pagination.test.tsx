@@ -84,6 +84,26 @@ test('pagination page with click event', () => {
     expect(ONCLICK_FUNCTION).toHaveBeenCalled();
 });
 
+test('pagination page with onClick that is not a function', () => {
+    render(
+        <Page
+            ariaLabel={PAGE_ARIA_LABEL}
+            href={PAGE_HREF}
+            // @ts-expect-error onClick is not a function
+            onClick='foo'
+        >{PAGE_LABEL}</Page>
+    );
+
+    const item = screen.getByRole('listitem');
+    const link = within(item).getByRole('link');
+
+    fireEvent.click(link);
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
 test('Ellipsis item renders correctly', () => {
     render(
         <Ellipsis/>

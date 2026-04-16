@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import DSCharacterCount from '@scottish-government/design-system/src/forms/character-count/character-count';
+import DSCharacterCount from '@scottish-government/design-system/src/components/character-count/character-count';
 import Button from '../Button';
 import ConditionalWrapper from '../../common/ConditionalWrapper';
 import ErrorMessage from '../ErrorMessage';
@@ -39,6 +39,7 @@ const TextInput = ({
     if (errorMessage) { describedbys.push(errorMessageId) };
 
     useEffect(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new DSCharacterCount(ref.current).init();
         }

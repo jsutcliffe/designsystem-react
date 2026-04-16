@@ -18,6 +18,16 @@ test('checkbox group renders correctly', () => {
     expect(checkboxContainer).not.toHaveClass('ds_checkbox--small');
 });
 
+test('instantiating/initialising DS component script', () => {
+    render(
+        <CheckboxGroup data-testid="checkboxgroup" />
+    );
+
+    const checkboxGroup = screen.getByTestId('checkboxgroup');
+    expect(checkboxGroup).toHaveClass('js-initialised');
+    expect(checkboxGroup).toHaveClass('js-instantiated');
+});
+
 test('passing additional props', () => {
     render(
         <CheckboxGroup data-testid="checkboxgroup" data-test="foo" />

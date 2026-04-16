@@ -109,6 +109,30 @@ test('side nav link with custom element', () => {
     expect(link?.textContent).toEqual(LINK_TEXT);
 });
 
+test('instantiating/initialising DS component script', () => {
+    render(
+        <SideNavigation>
+            <SideNavigation.List>
+                <SideNavigation.Item href="#dates" title="Dates"/>
+            </SideNavigation.List>
+        </SideNavigation>
+    );
+
+    const sideNavigation = screen.getByRole('navigation');
+    expect(sideNavigation).toHaveClass('js-initialised');
+    expect(sideNavigation).toHaveClass('js-instantiated');
+});
+
+test('instantiating/initialising DS component script: no children', () => {
+    render(
+        <SideNavigation />
+    );
+
+    const sideNavigation = screen.getByRole('navigation');
+    expect(sideNavigation).not.toHaveClass('js-initialised');
+    expect(sideNavigation).not.toHaveClass('js-instantiated');
+});
+
 test('passing additional props', () => {
     render(
         <SideNavigation data-test="foo" />

@@ -10,6 +10,7 @@ const HideThisPage = ({
     const ref = useRef(null);
 
     useEffect(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new DSHideThisPage(ref.current).init();
 

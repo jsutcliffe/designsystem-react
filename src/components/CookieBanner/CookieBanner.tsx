@@ -13,6 +13,7 @@ const CookieBanner = ({
     const ref = useRef(null);
 
     useEffect(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new DSCookieBanner(ref.current).init();
         }

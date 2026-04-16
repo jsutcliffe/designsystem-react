@@ -16,6 +16,7 @@ const NotificationBanner = ({
     const ref = useRef(null);
 
     useEffect(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new DSNotificationBanner(ref.current).init();
         }

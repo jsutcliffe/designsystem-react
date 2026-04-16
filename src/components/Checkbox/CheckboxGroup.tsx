@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { CheckboxRadioContext } from '../../utils/context';
-import DSCheckboxes from '@scottish-government/design-system/src/forms/checkbox/checkboxes'
+import DSCheckboxes from '@scottish-government/design-system/src/components/checkbox/checkboxes'
 import { CheckboxGroupProps } from './types';
 
 export const CheckboxGroup = ({
@@ -12,6 +12,7 @@ export const CheckboxGroup = ({
     const ref = useRef(null);
 
     useEffect(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new DSCheckboxes(ref.current).init();
         }

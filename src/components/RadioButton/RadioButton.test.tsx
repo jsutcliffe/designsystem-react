@@ -61,6 +61,36 @@ test('radio with change fn', () => {
     expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
+test('radio with onBlur that is not a function', () => {
+    render(
+        // @ts-expect-error onBlur is not a function
+        <RadioButton onBlur='foo' name="benefitType" label="Pension Credit" id="pensioncredit" />
+    );
+
+    const radio = screen.getByRole('radio');
+
+    fireEvent.blur(radio);
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
+test('radio with onChange that is not a function', () => {
+    render(
+        // @ts-expect-error onChange is not a function
+        <RadioButton onChange='foo' name="benefitType" label="Pension Credit" id="pensioncredit" />
+    );
+
+    const radio = screen.getByRole('radio');
+
+    fireEvent.click(radio);
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
 test('radio with hint text', () => {
     render(
         <RadioButton hintText="hint text" name="benefitType" label="Pension Credit" id="pensioncredit" />

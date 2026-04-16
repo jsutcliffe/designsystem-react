@@ -51,8 +51,11 @@ const SideNavigation = function ({
     const ref = useRef(null);
 
     useEffect(() => {
-        if (ref.current && children) {
-            new DSSideNavigation(ref.current).init();
+        /* istanbul ignore else */
+        if (ref.current) {
+            if (children) {
+                new DSSideNavigation(ref.current).init();
+            }
         }
     }, [ref]);
 

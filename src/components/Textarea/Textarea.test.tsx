@@ -134,6 +134,44 @@ test('textarea with change function', () => {
     expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
+test('textarea with onBlur that is not a function', () => {
+    render(
+        <Textarea
+        id={TEXTAREA_ID}
+        label={LABEL_TEXT}
+            // @ts-expect-error onBlur is not a function
+            onBlur='foo'
+        />
+    );
+
+    const textarea = screen.getByRole('textbox');
+
+    fireEvent.blur(textarea);
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
+test('textarea with onChange that is not a function', () => {
+    render(
+        <Textarea
+            id={TEXTAREA_ID}
+            label={LABEL_TEXT}
+            // @ts-expect-error onChange is not a function
+            onChange='foo'
+        />
+    );
+
+    const textarea = screen.getByRole('textbox');
+
+    fireEvent.change(textarea, {target: {value: 'foo'}});
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
 test('textarea with placeholder text', () => {
     const PLACEHOLDER_TEXT = 'foo';
 
@@ -200,6 +238,21 @@ test('textarea with error message', () => {
     expect(textarea).toHaveAttribute('aria-invalid', 'true');
     expect(errorMessageElement).toBeInTheDocument();
     expect(errorMessageElement).toHaveClass('ds_question__error-message');
+});
+
+test('instantiating/initialising DS component script', () => {
+    render(
+        <Textarea
+            id={TEXTAREA_ID}
+            label={LABEL_TEXT}
+            maxlength={200}
+        />
+    );
+
+    const textarea = screen.getByRole('textbox');
+    const textareaContainer = textarea.parentElement;
+    expect(textareaContainer).toHaveClass('js-initialised');
+    expect(textareaContainer).toHaveClass('js-instantiated');
 });
 
 test('passing additional props', () => {

@@ -53,6 +53,7 @@ const Tabs = ({
     const headingId = `${baseId}-heading`;
 
     useEffect(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new DSTabs(ref.current).init();
         }

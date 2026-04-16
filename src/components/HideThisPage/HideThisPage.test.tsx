@@ -49,7 +49,18 @@ test('custom escape URL', () => {
     const link = within(hideThisPageElement).getByRole('link');
 
     expect(link).toHaveAttribute('href', ESCAPE_URL);
-})
+});
+
+test('instantiating/initialising DS component script', () => {
+    render(
+        <HideThisPage data-testid="htp" />
+    );
+
+    const hideThisPageElement = screen.getByTestId('htp');
+    const link = within(hideThisPageElement).getByRole('link');
+    expect(link).toHaveClass('js-initialised');
+    expect(link).toHaveClass('js-instantiated');
+});
 
 test('passing additional props', () => {
     render(

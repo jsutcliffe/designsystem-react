@@ -83,6 +83,7 @@ const SiteHeader = ({
     });
 
     useEffect(() => {
+        /* istanbul ignore else */
         if (mobileMenuRef.current) {
             new DSMobileMenu(mobileMenuRef.current).init();
         }

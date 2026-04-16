@@ -43,6 +43,17 @@ test('renders with custom href', () => {
     expect(button).toHaveAttribute('href', '#foo');
 });
 
+test('instantiating/initialising DS component script', () => {
+    render(
+        <BackToTop />
+    );
+
+    const button = screen.getByRole('link');
+    const container = button.parentElement;
+    expect(container).toHaveClass('js-initialised');
+    expect(container).toHaveClass('js-instantiated');
+});
+
 test('passing additional props', () => {
     render(
         <BackToTop data-test="foo" />

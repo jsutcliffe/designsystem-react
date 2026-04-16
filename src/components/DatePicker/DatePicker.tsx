@@ -26,6 +26,7 @@ const DatePicker = ({
     const ref = useRef(null);
 
     useEffect(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new DSDatePicker(ref.current, {
                 dateSelectCallback

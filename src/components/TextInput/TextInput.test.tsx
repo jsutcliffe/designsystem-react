@@ -231,6 +231,44 @@ test('text input with change function', () => {
     expect(ONCHANGE_FUNCTION).toHaveBeenCalled();
 });
 
+test('text input with onBlur that is not a function', () => {
+    render(
+        <TextInput
+        id={INPUT_ID}
+        label={LABEL_TEXT}
+            // @ts-expect-error onBlur is not a function
+            onBlur='foo'
+        />
+    );
+
+    const textInput = screen.getByRole('textbox');
+
+    fireEvent.blur(textInput);
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
+test('text input with onChange that is not a function', () => {
+    render(
+        <TextInput
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            // @ts-expect-error onChange is not a function
+            onChange='foo'
+        />
+    );
+
+    const textInput = screen.getByRole('textbox');
+
+    fireEvent.change(textInput, {target: {value: 'foo'}});
+
+    // todo: assertion
+    // success indicated by no errors thrown
+    // error would be thrown on an untestable thread
+});
+
 test('text input with placeholder text', () => {
     const PLACEHOLDER_TEXT = 'foo';
 
@@ -296,6 +334,21 @@ test('text input with error message', () => {
     expect(textInput).toHaveAttribute('aria-invalid', 'true');
     expect(errorMessageElement).toBeInTheDocument();
     expect(errorMessageElement).toHaveClass('ds_question__error-message');
+});
+
+test('instantiating/initialising DS component script', () => {
+    render(
+        <TextInput
+            id={INPUT_ID}
+            label={LABEL_TEXT}
+            maxlength={200}
+        />
+    );
+
+    const textInput = screen.getByRole('textbox');
+    const textInputContainer = textInput.parentElement;
+    expect(textInputContainer).toHaveClass('js-initialised');
+    expect(textInputContainer).toHaveClass('js-instantiated');
 });
 
 test('passing additional props', () => {

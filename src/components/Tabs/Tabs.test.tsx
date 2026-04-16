@@ -187,6 +187,20 @@ test('with manual activation', () => {
     expect(tabContainer).toHaveClass('ds_tabs--manual');
 });
 
+test('instantiating/initialising DS component script', () => {
+    render(
+        <Tabs data-testid="tabcontainer" data-test="foo">
+            <Tabs.Item tabLabel="Tab 1" data-testid="tabpanel1">
+                <div data-testid="tabpanel1content">Content one</div>
+            </Tabs.Item>
+        </Tabs>
+    );
+
+    const tabContainer = screen.getByTestId('tabcontainer');
+    expect(tabContainer).toHaveClass('js-initialised');
+    expect(tabContainer).toHaveClass('js-instantiated');
+});
+
 test('passing additional props to tab container', () => {
     render(
         <Tabs data-testid="tabcontainer" data-test="foo">

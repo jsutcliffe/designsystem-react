@@ -42,3 +42,13 @@ test('notification banner with icon', () => {
     expect(bannerIcon).toHaveClass('ds_icon');
     expect(bannerIcon).toHaveAttribute('aria-hidden');
 });
+
+test('instantiating/initialising DS component script', () => {
+    render(
+        <NotificationBanner data-testid="notification-banner" />
+    );
+
+    const notificationBanner = screen.getByTestId('notification-banner');
+    expect(notificationBanner).toHaveClass('js-initialised');
+    expect(notificationBanner).toHaveClass('js-instantiated');
+});
