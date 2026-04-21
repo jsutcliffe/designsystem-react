@@ -40,9 +40,10 @@ const react_1 = __importStar(require("react"));
 const ActionLink_1 = __importDefault(require("../../common/ActionLink"));
 const ConditionalWrapper_1 = __importDefault(require("../../common/ConditionalWrapper"));
 const WrapperTag_1 = __importDefault(require("../../common/WrapperTag"));
+const clsx_1 = __importDefault(require("clsx"));
 const SummaryCard = ({ children, className, headingLevel = 'h3', title, ...props }) => {
-    let actions = [];
-    let remainingChildren = [];
+    const actions = [];
+    const remainingChildren = [];
     const describedById = (0, react_1.useId)();
     react_1.Children.forEach(children, (child) => {
         const thisChild = child;
@@ -53,10 +54,10 @@ const SummaryCard = ({ children, className, headingLevel = 'h3', title, ...props
             remainingChildren.push(thisChild);
         }
     });
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_summary-card',
             className
-        ].join(' ')} {...props}>
+        ])} {...props}>
             <div className="ds_summary-card__header">
                 <WrapperTag_1.default className="ds_summary-card__header-title" id={describedById} tagName={headingLevel}>{title}</WrapperTag_1.default>
 

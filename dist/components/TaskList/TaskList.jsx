@@ -8,6 +8,7 @@ const ConditionalWrapper_1 = __importDefault(require("../../common/ConditionalWr
 const HintText_1 = __importDefault(require("../../common/HintText"));
 const ScreenReaderText_1 = __importDefault(require("../../common/ScreenReaderText"));
 const Tag_1 = __importDefault(require("../Tag"));
+const clsx_1 = __importDefault(require("clsx"));
 const TaskItem = ({ children, className, href, id, isComplete = false, linkComponent, statusText, tagColour = 'grey', title, ...props }) => {
     if (isComplete) {
         tagColour = 'green';
@@ -15,17 +16,19 @@ const TaskItem = ({ children, className, href, id, isComplete = false, linkCompo
     }
     const LINK_CLASS = 'ds_task-list__task-link';
     function getLinkElement(children) {
+        let linkElement;
         if (linkComponent) {
-            return linkComponent({ className: LINK_CLASS, href, children });
+            linkElement = linkComponent({ className: LINK_CLASS, href, children });
         }
-        else if (href) {
-            return <a href={href} className={LINK_CLASS}>{children}</a>;
+        else {
+            linkElement = <a href={href} className={LINK_CLASS}>{children}</a>;
         }
+        return linkElement;
     }
-    return (<li className={[
+    return (<li className={(0, clsx_1.default)([
             'ds_task-list__task',
             className
-        ].join(' ')} id={id} {...props}>
+        ])} id={id} {...props}>
             <div className="ds_task-list__task-details">
                 <h3 className="ds_task-list__task-heading">
                 <ConditionalWrapper_1.default condition={typeof href !== 'undefined'} wrapper={(children) => getLinkElement(children)}>
@@ -49,10 +52,10 @@ const TaskItem = ({ children, className, href, id, isComplete = false, linkCompo
  * @returns {JSX.Element} - The element
  */
 const TaskGroup = ({ children, className, intro, title, ...props }) => {
-    return (<li className={[
+    return (<li className={(0, clsx_1.default)([
             'ds_task-list-group__section',
             className
-        ].join(' ')} {...props}>
+        ])} {...props}>
             <h2 className="ds_task-list-heading">{title}</h2>
             {intro && <p className="ds_task-list-intro">{intro}</p>}
             <ul className="ds_task-list">
@@ -62,7 +65,7 @@ const TaskGroup = ({ children, className, intro, title, ...props }) => {
 };
 const TaskList = ({ children, className, headingId = 'task-list', title, ...props }) => {
     let taskCount = 0;
-    let incompleteTaskIds = [];
+    const incompleteTaskIds = [];
     let completedTasksCount = 0;
     function processChild(item) {
         if (item.type.displayName === 'TaskList.Item') {

@@ -3,15 +3,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = require("react");
 const AbstractNotificationBanner_1 = __importDefault(require("../../common/AbstractNotificationBanner"));
-const CookieBanner = ({ children, className, title, ...props }) => {
+const cookie_notification_js_1 = __importDefault(require("@scottish-government/design-system/src/components/cookie-notification/cookie-notification.js"));
+const clsx_1 = __importDefault(require("clsx"));
+const CookieBanner = ({ children, className, title = 'Information', ...props }) => {
+    const ref = (0, react_1.useRef)(null);
+    (0, react_1.useEffect)(() => {
+        /* istanbul ignore else */
+        if (ref.current) {
+            new cookie_notification_js_1.default(ref.current).init();
+        }
+    }, [ref]);
     return (<>
-            <AbstractNotificationBanner_1.default className={[
+            <AbstractNotificationBanner_1.default className={(0, clsx_1.default)([
             'ds_notification--large',
             'ds_notification--cookie',
             'js-initial-cookie-content',
             className
-        ].join(' ')} data-module="ds-cookie-notification" title={title} {...props}>
+        ])} data-module="ds-cookie-notification" ref={ref} title={title} {...props}>
                 {children}
             </AbstractNotificationBanner_1.default>
         </>);

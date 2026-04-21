@@ -38,16 +38,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const WrapperTag_1 = __importDefault(require("../../common/WrapperTag"));
+const clsx_1 = __importDefault(require("clsx"));
 const CategoryList = ({ children, className, isGrid, isOrdered, ...props }) => {
     function processChild(child) {
         const thisChild = child;
         return react_1.default.cloneElement(thisChild, { tagName: 'li' });
     }
-    return (<WrapperTag_1.default tagName={isOrdered ? 'ol' : 'ul'} className={[
+    return (<WrapperTag_1.default tagName={isOrdered ? 'ol' : 'ul'} className={(0, clsx_1.default)([
             'ds_category-list',
             isGrid && 'ds_category-list--grid',
             className
-        ].join(' ')} {...props}>
+        ])} {...props}>
             {react_1.Children.map(children, child => processChild(child))}
         </WrapperTag_1.default>);
 };

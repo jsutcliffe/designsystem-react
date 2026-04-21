@@ -38,26 +38,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const WrapperTag_1 = __importDefault(require("../../common/WrapperTag"));
-// @ts-ignore
 const accordion_1 = __importDefault(require("@scottish-government/design-system/src/components/accordion/accordion"));
+const clsx_1 = __importDefault(require("clsx"));
 let accordionItemCounter = 0;
 const AccordionHeadingLevelContext = (0, react_1.createContext)('h3');
 const AccordionItem = ({ children, className, id: rawId, isOpen = false, heading, title, ...props }) => {
     accordionItemCounter = accordionItemCounter + 1;
     const processedId = rawId || `accordion-item-${(0, react_1.useId)()}`;
-    let headingLevel = (0, react_1.useContext)(AccordionHeadingLevelContext);
+    const headingLevel = (0, react_1.useContext)(AccordionHeadingLevelContext);
     if (title) {
         console.warn('Warning: Using the `title` prop for heading text on an Accordion.Item is deprecated and will be removed in a future release. Please use the `heading` prop instead.');
         heading = heading || title;
     }
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_accordion-item',
             className
-        ].join(' ')} id={processedId} {...props}>
-            <input aria-labelledby={`panel-${processedId}-heading`} className={[
+        ])} id={processedId} {...props}>
+            <input aria-labelledby={`panel-${processedId}-heading`} className={(0, clsx_1.default)([
             'ds_accordion-item__control',
             'visually-hidden'
-        ].join(' ')} defaultChecked={isOpen} id={`${processedId}-control`} type="checkbox"/>
+        ])} defaultChecked={isOpen} id={`${processedId}-control`} type="checkbox"/>
             <div className="ds_accordion-item__header">
                 <WrapperTag_1.default id={`panel-${processedId}-heading`} className="ds_accordion-item__title" tagName={headingLevel}>
                     {heading}
@@ -75,6 +75,7 @@ const AccordionItem = ({ children, className, id: rawId, isOpen = false, heading
 const Accordion = ({ children, className, headingLevel = 'h3', hideOpenAll, isSmall, ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new accordion_1.default(ref.current).init();
         }
@@ -82,16 +83,16 @@ const Accordion = ({ children, className, headingLevel = 'h3', hideOpenAll, isSm
     if (!children) {
         hideOpenAll = true;
     }
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_accordion',
-            isSmall ? 'ds_accordion--small' : '',
+            isSmall && 'ds_accordion--small',
             className
-        ].join(' ')} ref={ref} {...props}>
-            {!hideOpenAll && (<button className={[
+        ])} ref={ref} {...props}>
+            {!hideOpenAll && (<button className={(0, clsx_1.default)([
                 'ds_accordion__open-all',
                 'ds_link',
                 'js-open-all'
-            ].join(' ')} type='button'>
+            ])} type='button'>
                     Open all
                     {' '}
                     <span className="visually-hidden">sections</span>

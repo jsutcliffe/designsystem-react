@@ -5,16 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Button_1 = __importDefault(require("../Button"));
 const Select_1 = __importDefault(require("../Select"));
+const clsx_1 = __importDefault(require("clsx"));
 const Option = ({ children, value }) => {
     return (<option value={value}>
             {children}
         </option>);
 };
 const SearchSort = ({ children, className, id = 'sort-by', label = 'Sort by', onApply, ...props }) => {
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_sort-options',
             className
-        ].join(' ')} {...props}>
+        ])} {...props}>
             <Select_1.default id={id} label={label}>
                 {children}
             </Select_1.default>

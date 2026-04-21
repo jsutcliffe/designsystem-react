@@ -37,13 +37,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
-// @ts-ignore
 const hide_this_page_1 = __importDefault(require("@scottish-government/design-system/src/components/hide-this-page/hide-this-page"));
+const clsx_1 = __importDefault(require("clsx"));
 const HideThisPage = ({ className, escapeUrl = 'https://www.bbc.co.uk/weather', ...props }) => {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
+        /* istanbul ignore else */
         if (ref.current) {
-            new hide_this_page_1.default().init();
+            new hide_this_page_1.default(ref.current).init();
             const HIDE_THIS_PAGE_DIV_ID = 'hide-this-page-instruction';
             if (!document.getElementById(HIDE_THIS_PAGE_DIV_ID)) {
                 const htpDiv = document.createElement('div');
@@ -56,10 +57,10 @@ const HideThisPage = ({ className, escapeUrl = 'https://www.bbc.co.uk/weather', 
             document.body.classList.add('ds_has-hide-page');
         }
     }, [ref]);
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_hide-page',
             className
-        ].join(' ')} ref={ref} {...props}>
+        ])} ref={ref} {...props}>
             <a href={escapeUrl} className="ds_hide-page__button  ds_button  js-hide-page">
                 <strong>Hide this page</strong>
                 <span className="visually-hidden  js-enabled-text">Or press escape key to hide this page</span>

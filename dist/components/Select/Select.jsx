@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const ErrorMessage_1 = __importDefault(require("../ErrorMessage"));
 const HintText_1 = __importDefault(require("../../common/HintText"));
+const clsx_1 = __importDefault(require("clsx"));
 const Select = function ({ children, className, defaultValue, errorMessage, hasError, hintText, id, label, name, onBlur, onChange, placeholder, width, ...props }) {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
@@ -29,14 +30,14 @@ const Select = function ({ children, className, defaultValue, errorMessage, hasE
     }
     return (<>
             <label className="ds_label" htmlFor={id}>{label}</label>
-            {hintText && <HintText_1.default id={hintTextId} text={hintText}/>}
+            {hintText && <HintText_1.default id={hintTextId}>{hintText}</HintText_1.default>}
             {errorMessage && <ErrorMessage_1.default id={errorMessageId}>{errorMessage}</ErrorMessage_1.default>}
-            <div className={[
+            <div className={(0, clsx_1.default)([
             "ds_select-wrapper",
             hasError && 'ds_input--error',
             width && `ds_input--${width}`,
             className
-        ].join(' ')} {...props}>
+        ])} {...props}>
                 <select aria-describedby={describedbys.join(' ')} aria-invalid={hasError} className="ds_select" defaultValue={defaultValue} id={id} name={name || id} onBlur={handleBlur} onChange={handleChange}>
                     <option value="">{placeholder}</option>
                     {children}

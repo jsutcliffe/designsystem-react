@@ -5,18 +5,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
 const FileIcon_1 = __importDefault(require("../../common/FileIcon"));
+const clsx_1 = __importDefault(require("clsx"));
 const FileDownload = ({ className, cover, icon = 'Generic', isHighlighted, fileSize, fileType, fileUrl, title, ...props }) => {
     const hasMetadata = !!fileType || !!fileSize;
     const metaContainerId = `file-download-${(0, react_1.useId)()}`;
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_file-download',
             isHighlighted && 'ds_file-download--highlighted',
             className
-        ].join(' ')} {...props}>
+        ])} {...props}>
             <div className="ds_file-download__thumbnail">
                 <a className="ds_file-download__thumbnail-link" aria-hidden="true" tabIndex={-1} href={fileUrl}>
                     {cover ?
-            <img alt="" className="ds_file-download__thumbnail-image" src={cover}/>
+            <img alt="" className="ds_file-download__thumbnail-image  ds_file-download__thumbnail-image--outlined" src={cover}/>
             :
                 <FileIcon_1.default ariaLabel="" className="ds_file-download__thumbnail-image" icon={icon}/>}
                 </a>

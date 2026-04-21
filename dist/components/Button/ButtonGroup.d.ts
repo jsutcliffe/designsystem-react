@@ -1,5 +1,6 @@
+import { ButtonGroupProps } from "./types";
 declare const ButtonGroup: {
-    ({ children, className, isInline, ...props }: SGDS.Component.ButtonGroup): import("react").JSX.Element;
+    ({ children, className, isInline, isWrap, ...props }: ButtonGroupProps): import("react").JSX.Element;
     displayName: string;
 };
 export default ButtonGroup;

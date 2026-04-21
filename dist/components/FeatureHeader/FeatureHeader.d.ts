@@ -1,12 +1,14 @@
+import React from 'react';
+import { FeatureHeaderProps, FeatureHeaderPrimaryProps } from './types';
 declare const FeatureHeader: {
-    ({ backgroundColour, children, className, isFullWidth, isTopAligned, isWideText, ...props }: any): import("react").JSX.Element;
+    ({ backgroundColor, children, className, hasCoverImage, hasNoImagePadding, id, isFullWidth, isWideText, isTopAlignImage, tagName, ...props }: FeatureHeaderProps): React.JSX.Element;
     displayName: string;
-    Content: {
-        ({ children, className, ...props }: any): import("react").JSX.Element;
+    Primary: {
+        ({ children, title, ...props }: FeatureHeaderPrimaryProps): React.JSX.Element;
         displayName: string;
     };
-    Media: {
-        ({ children, className, isCover, noPadding, ...props }: any): import("react").JSX.Element;
+    Secondary: {
+        ({ children, ...props }: React.AllHTMLAttributes<HTMLDivElement>): React.JSX.Element;
         displayName: string;
     };
 };

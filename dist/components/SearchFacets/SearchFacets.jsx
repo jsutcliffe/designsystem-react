@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const Icon_1 = __importDefault(require("../../common/Icon"));
 const icons_1 = require("../../../src/images/icons");
+const clsx_1 = __importDefault(require("clsx"));
 const FacetsItem = ({ accessibleName, joinContent, onClick, title, ...props }) => {
     accessibleName = accessibleName ? accessibleName : title;
     return (<dd className="ds_facet-wrapper" {...props}>
@@ -78,10 +79,10 @@ const Facets = ({ children, className, ...props }) => {
     react_1.Children.forEach(children, child => {
         processChild(child);
     });
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             "ds_facets",
             className
-        ].join(' ')} {...props}>
+        ])} {...props}>
             <p className="visually-hidden">There {facetCount === 1 ? 'is' : 'are'} {facetCount} search {facetCount === 1 ? 'filter' : 'filters'} applied</p>
             <dl className="ds_facets__list">
                 {children}

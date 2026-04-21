@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
-// @ts-ignore
 const side_navigation_1 = __importDefault(require("@scottish-government/design-system/src/components/side-navigation/side-navigation"));
+const clsx_1 = __importDefault(require("clsx"));
 const SideNavigationList = function ({ children, isRoot }) {
     return (<ul className="ds_side-navigation__list" id={isRoot ? 'side-navigation-root' : undefined}>
             {children}
@@ -13,10 +13,10 @@ const SideNavigationList = function ({ children, isRoot }) {
 };
 const SideNavigationItem = function ({ children, href, isCurrent = false, linkComponent, title }) {
     const LINK_CLASS = 'ds_side-navigation__link';
-    return (<li className={[
+    return (<li className={(0, clsx_1.default)([
             'ds_side-navigation__item',
             children && 'ds_side-navigation__item--has-children'
-        ].join(' ')}>
+        ])}>
             {isCurrent ?
             <span className={LINK_CLASS + ' ds_current'}>{title}</span> :
             linkComponent ? linkComponent({ className: LINK_CLASS, href, children: title }) :
@@ -28,14 +28,17 @@ const SideNavigationItem = function ({ children, href, isCurrent = false, linkCo
 const SideNavigation = function ({ ariaLabel = 'Sections', children, className, ...props }) {
     const ref = (0, react_1.useRef)(null);
     (0, react_1.useEffect)(() => {
-        if (ref.current && children) {
-            new side_navigation_1.default(ref.current).init();
+        /* istanbul ignore else */
+        if (ref.current) {
+            if (children) {
+                new side_navigation_1.default(ref.current).init();
+            }
         }
     }, [ref]);
-    return (<nav aria-label={ariaLabel} className={[
+    return (<nav aria-label={ariaLabel} className={(0, clsx_1.default)([
             'ds_side-navigation',
             className
-        ].join(' ')} data-module="ds-side-navigation" ref={ref} {...props}>
+        ])} data-module="ds-side-navigation" ref={ref} {...props}>
             <input type="checkbox" className="fully-hidden  js-toggle-side-navigation" id="show-side-navigation" aria-controls="side-navigation-root"/>
             <label className="ds_side-navigation__expand  ds_link" htmlFor="show-side-navigation">
                 <span className="visually-hidden">Show all</span> Pages in this section

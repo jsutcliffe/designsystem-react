@@ -38,14 +38,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const WrapperTag_1 = __importDefault(require("../../common/WrapperTag"));
-// @ts-ignore
 const tabs_1 = __importDefault(require("@scottish-government/design-system/src/components/tabs/tabs"));
+const clsx_1 = __importDefault(require("clsx"));
 const TabItem = ({ isBorderless, children, className, id, tabLabel, ...props }) => {
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_tabs__content',
             !isBorderless && 'ds_tabs__content--bordered',
             className
-        ].join(' ')} id={id} {...props}>
+        ])} data-label={tabLabel} id={id} {...props}>
             {children}
         </div>);
 };
@@ -58,6 +58,7 @@ const Tabs = ({ baseId = 'tabs', children, className, headingLevel = 'h2', isBor
     const ref = (0, react_1.useRef)(null);
     const headingId = `${baseId}-heading`;
     (0, react_1.useEffect)(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new tabs_1.default(ref.current).init();
         }
@@ -76,11 +77,11 @@ const Tabs = ({ baseId = 'tabs', children, className, headingLevel = 'h2', isBor
             return <TabListItem href={`#${child.props.id}`}>{child.props.tabLabel}</TabListItem>;
         }
     });
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_tabs',
             isManual && 'ds_tabs--manual',
             className
-        ].join(' ')} ref={ref} {...props}>
+        ])} ref={ref} {...props}>
             <WrapperTag_1.default id={headingId} className="ds_tabs__title" tagName={headingLevel}>
                 {title}
             </WrapperTag_1.default>

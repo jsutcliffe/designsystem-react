@@ -6,11 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
 const Icon_1 = __importDefault(require("../Icon"));
 const ScreenReaderText_1 = __importDefault(require("../ScreenReaderText"));
+const clsx_1 = __importDefault(require("clsx"));
 const Buttons = ({ children }) => {
     return (<div className="ds_button-group">{children}</div>);
 };
 const AbstractNotificationBanner = ({ children, className, hasColourIcon, hasInverseIcon, icon, isDismissable, title = 'Information', ...props }) => {
-    let content = [];
+    const content = [];
     let buttons;
     react_1.Children.forEach(children, (child) => {
         const thisChild = child;
@@ -21,23 +22,23 @@ const AbstractNotificationBanner = ({ children, className, hasColourIcon, hasInv
             content.push(thisChild);
         }
     });
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_notification',
             className
-        ].join(' ')} data-module="ds-notification" {...props}>
+        ])} data-module="ds-notification" {...props}>
             <div className="ds_wrapper">
-                <div className={[
+                <div className={(0, clsx_1.default)([
             'ds_notification__content',
             isDismissable && 'ds_notification__content--has-close'
-        ].join(' ')}>
+        ])}>
                     <h2 className="visually-hidden">{title}</h2>
 
                     {icon &&
-            <span className={[
+            <span className={(0, clsx_1.default)([
                     'ds_notification__icon',
                     hasInverseIcon && 'ds_notification__icon--inverse',
                     hasColourIcon && 'ds_notification__icon--colour'
-                ].join(' ')} aria-hidden="true">
+                ])} aria-hidden="true">
                             <Icon_1.default icon={icon}/>
                         </span>}
 

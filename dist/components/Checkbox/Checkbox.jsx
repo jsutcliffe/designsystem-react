@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
 const context_1 = require("../../utils/context");
 const HintText_1 = __importDefault(require("../../common/HintText"));
+const clsx_1 = __importDefault(require("clsx"));
 const Checkbox = ({ checked, hintText, id, isSmall, isExclusive, label, name, onBlur, onChange }) => {
     const hintTextId = `hint-text-${id}`;
     const behaviour = isExclusive && 'exclusive';
@@ -22,14 +23,14 @@ const Checkbox = ({ checked, hintText, id, isSmall, isExclusive, label, name, on
     isSmall = isSmall || (0, react_1.useContext)(context_1.CheckboxRadioContext).isSmall;
     return (<>
             {isExclusive && <p className="ds_checkbox-separator">or</p>}
-            <div className={[
+            <div className={(0, clsx_1.default)([
             'ds_checkbox',
             isSmall && 'ds_checkbox--small'
-        ].join(' ')}>
+        ])}>
 
                 <input aria-describedby={hintText ? hintTextId : undefined} className="ds_checkbox__input" data-behaviour={behaviour} defaultChecked={!!checked} id={id} name={name || id} onBlur={handleBlur} onChange={handleChange} type="checkbox"/>
                 <label className="ds_checkbox__label" htmlFor={id}>{label}</label>
-                {hintText && <HintText_1.default id={hintTextId} text={hintText}/>}
+                {hintText && <HintText_1.default id={hintTextId}>{hintText}</HintText_1.default>}
             </div>
         </>);
 };

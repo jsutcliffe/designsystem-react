@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
+const clsx_1 = __importDefault(require("clsx"));
 const ErrorSummaryItem = ({ children, fragmentId, linkComponent }) => {
     const HREF = '#' + fragmentId;
     function processChildren(children) {
@@ -20,10 +24,10 @@ const ErrorSummaryItem = ({ children, fragmentId, linkComponent }) => {
 };
 const ErrorSummary = ({ children, className, title = 'There is a problem', ...props }) => {
     const summaryTitleId = (0, react_1.useId)();
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_error-summary',
             className
-        ].join(' ')} aria-labelledby={summaryTitleId} role="alert" {...props}>
+        ])} aria-labelledby={summaryTitleId} role="alert" {...props}>
             <h2 className="ds_error-summary__title" id={summaryTitleId}>{title}</h2>
 
             <ul className="ds_error-summary__list">

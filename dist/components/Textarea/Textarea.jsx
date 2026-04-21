@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
-// @ts-ignore
-const character_count_1 = __importDefault(require("@scottish-government/design-system/src/forms/character-count/character-count"));
+const character_count_1 = __importDefault(require("@scottish-government/design-system/src/components/character-count/character-count"));
 const ConditionalWrapper_1 = __importDefault(require("../../common/ConditionalWrapper"));
 const ErrorMessage_1 = __importDefault(require("../ErrorMessage"));
 const HintText_1 = __importDefault(require("../../common/HintText"));
+const clsx_1 = __importDefault(require("clsx"));
 const Textarea = ({ className, countThreshold, errorMessage, hasError, hintText, id, label, maxlength, name, onBlur, onChange, placeholder, rows = 4, value, ...props }) => {
     const errorMessageId = `error-message-${id}`;
     const hintTextId = `hint-text-${id}`;
@@ -23,6 +23,7 @@ const Textarea = ({ className, countThreshold, errorMessage, hasError, hintText,
     }
     ;
     (0, react_1.useEffect)(() => {
+        /* istanbul ignore else */
         if (ref.current) {
             new character_count_1.default(ref.current).init();
         }
@@ -39,14 +40,14 @@ const Textarea = ({ className, countThreshold, errorMessage, hasError, hintText,
     }
     return (<ConditionalWrapper_1.default condition={typeof maxlength !== 'undefined' && maxlength > 0} wrapper={(children) => <div ref={ref} data-threshold={countThreshold} data-module="ds-character-count">{children}</div>}>
             <label className="ds_label" htmlFor={id}>{label}</label>
-            {hintText && <HintText_1.default id={hintTextId} text={hintText}/>}
+            {hintText && <HintText_1.default id={hintTextId}>{hintText}</HintText_1.default>}
             {errorMessage && <ErrorMessage_1.default id={errorMessageId}>{errorMessage}</ErrorMessage_1.default>}
 
-            <textarea aria-describedby={describedbys.join(' ')} aria-invalid={hasError} className={[
+            <textarea aria-describedby={describedbys.join(' ')} aria-invalid={hasError} className={(0, clsx_1.default)([
             'ds_input',
             hasError && 'ds_input--error',
             className
-        ].join(' ')} defaultValue={value} id={id} maxLength={maxlength} name={name || id} onBlur={handleBlur} onChange={handleChange} placeholder={placeholder} rows={rows} {...props}/>
+        ])} defaultValue={value} id={id} maxLength={maxlength} name={name || id} onBlur={handleBlur} onChange={handleChange} placeholder={placeholder} rows={rows} {...props}/>
 
         </ConditionalWrapper_1.default>);
 };

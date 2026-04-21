@@ -7,6 +7,7 @@ const react_1 = require("react");
 const ConditionalWrapper_1 = __importDefault(require("../../common/ConditionalWrapper"));
 const AspectBox_1 = __importDefault(require("../AspectBox"));
 const PageMetadata_1 = __importDefault(require("../PageMetadata"));
+const clsx_1 = __importDefault(require("clsx"));
 const SearchResultLinkHrefContext = (0, react_1.createContext)('');
 const SearchResultContent = ({ children }) => {
     const otherChildren = [];
@@ -58,10 +59,10 @@ const SearchResultMeta = ({ children }) => {
 };
 const SearchResult = ({ children, href, isPromoted, linkComponent, promotedTitle = 'Recommended', title, ...props }) => {
     const LINK_CLASS = 'ds_search-result__link';
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_search-result',
-            isPromoted ? 'ds_search-result--promoted' : ''
-        ].join(' ')} {...props}>
+            isPromoted && 'ds_search-result--promoted'
+        ])} {...props}>
             <ConditionalWrapper_1.default condition={!!isPromoted} wrapper={(children) => <div className="ds_search-result--promoted-content">
                     <header className="ds_search-result--promoted-title">{promotedTitle}</header>
                     {children}
@@ -82,12 +83,10 @@ SearchResult.Content = SearchResultContent;
 SearchResult.Context = SearchResultContext;
 SearchResult.ContextItem = SearchResultContextItem;
 SearchResult.Media = SearchResultMedia;
-SearchResult.Meta = SearchResultMeta;
-SearchResult.MetaItem = PageMetadata_1.default.Item;
+SearchResult.Metadata = SearchResultMeta;
 SearchResultContent.displayName = 'SearchResult.Content';
 SearchResultContext.displayName = 'SearchResult.Context';
 SearchResultContextItem.displayName = 'SearchResult.ContextItem';
 SearchResultMedia.displayName = 'SearchResult.Media';
-SearchResultMeta.displayName = 'SearchResult.Meta';
-SearchResult.MetaItem.displayName = 'SearchResult.MetaItem';
+SearchResultMeta.displayName = 'SearchResult.Metadata';
 exports.default = SearchResult;

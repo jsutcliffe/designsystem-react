@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
 const HintText_1 = __importDefault(require("../../common/HintText"));
 const context_1 = require("../../utils/context");
+const clsx_1 = __importDefault(require("clsx"));
 const RadioButton = ({ checked, hintText, id, isSmall, label, name, onBlur, onChange }) => {
     const hintTextId = `hint-text-${id}`;
     function handleBlur(event) {
@@ -20,13 +21,13 @@ const RadioButton = ({ checked, hintText, id, isSmall, label, name, onBlur, onCh
     }
     isSmall = isSmall || (0, react_1.useContext)(context_1.CheckboxRadioContext).isSmall;
     name = name || (0, react_1.useContext)(context_1.CheckboxRadioContext).name;
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_radio',
             isSmall && 'ds_radio--small'
-        ].join(' ')}>
+        ])}>
             <input aria-describedby={hintText ? hintTextId : undefined} className="ds_radio__input" defaultChecked={!!checked} id={id} name={name} onBlur={handleBlur} onChange={handleChange} type="radio"/>
             <label className="ds_radio__label" htmlFor={id}>{label}</label>
-            {hintText && <HintText_1.default id={hintTextId} text={hintText}/>}
+            {hintText && <HintText_1.default id={hintTextId}>{hintText}</HintText_1.default>}
         </div>);
 };
 RadioButton.displayName = 'RadioButton';

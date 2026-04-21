@@ -1,5 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const clsx_1 = __importDefault(require("clsx"));
 const BreadcrumbItem = ({ children, isHidden, href, linkComponent, ...props }) => {
     const BREADCRUMB_LINK_CLASSNAME = 'ds_breadcrumbs__link';
     function processChildren(children) {
@@ -13,10 +17,10 @@ const BreadcrumbItem = ({ children, isHidden, href, linkComponent, ...props }) =
             return children;
         }
     }
-    return (<li className={[
+    return (<li className={(0, clsx_1.default)([
             'ds_breadcrumbs__item',
             isHidden && 'visually-hidden'
-        ].join(' ')} {...props}>
+        ])} {...props}>
             {processChildren(children)}
         </li>);
 };

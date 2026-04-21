@@ -37,15 +37,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
-// @ts-ignore
-const aspect_box_fallback_1 = __importDefault(require("@scottish-government/design-system/src/components/aspect-box/aspect-box-fallback"));
+const clsx_1 = __importDefault(require("clsx"));
 const AspectBox = ({ children, className, ratio, ...props }) => {
     const ref = (0, react_1.useRef)(null);
-    (0, react_1.useEffect)(() => {
-        if (ref.current) {
-            new aspect_box_fallback_1.default(ref.current).init();
-        }
-    }, [ref]);
     function processChild(child) {
         if (['img', 'svg', 'picture'].includes(child.type)) {
             return react_1.default.cloneElement(child, { className: 'ds_aspect-box__inner' });
@@ -67,11 +61,11 @@ const AspectBox = ({ children, className, ratio, ...props }) => {
             ratioClassName = '';
             break;
     }
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_aspect-box',
             ratioClassName,
             className
-        ].join(' ')} ref={ref} {...props}>
+        ])} ref={ref} {...props}>
             {react_1.Children.map(children, child => processChild(child))}
         </div>);
 };

@@ -39,9 +39,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const ActionLink_1 = __importDefault(require("../../common/ActionLink"));
 const ConditionalWrapper_1 = __importDefault(require("../../common/ConditionalWrapper"));
+const clsx_1 = __importDefault(require("clsx"));
 const Item = ({ children, title }) => {
-    let values = [];
-    let actions = [];
+    const values = [];
+    const actions = [];
     const describedById = (0, react_1.useId)();
     react_1.Children.forEach(children, (child) => {
         const thisChild = child;
@@ -75,11 +76,11 @@ const Value = ({ children }) => {
     return (<q className="ds_summary-list__answer">{children}</q>);
 };
 const SummaryList = ({ children, className, isBorderless, ...props }) => {
-    return (<ol className={[
+    return (<ol className={(0, clsx_1.default)([
             'ds_summary-list',
             isBorderless && 'ds_summary-list--no-border',
             className
-        ].join(' ')} {...props}>
+        ])} {...props}>
            {children}
         </ol>);
 };

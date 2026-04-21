@@ -5,18 +5,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ellipsis = exports.Page = void 0;
 const Icon_1 = __importDefault(require("../../common/Icon"));
+const clsx_1 = __importDefault(require("clsx"));
 const Page = ({ ariaLabel, children, className, href, isCurrent = false, linkComponent, onClick }) => {
     function handleClick(event) {
+        /* istanbul ignore else */
         if (typeof onClick === 'function') {
             onClick(event);
         }
     }
     function processChildren(children) {
-        const classNames = [
+        const classNames = (0, clsx_1.default)([
             'ds_pagination__link',
             className,
-            isCurrent ? 'ds_current' : undefined
-        ].join(' ');
+            isCurrent && 'ds_current'
+        ]);
         const linkProps = {
             'aria-label': ariaLabel,
             href: href,
@@ -77,10 +79,10 @@ const Pagination = ({ ariaLabel = 'Pages', className, onClick, padding = 1, page
     if ((page + padding < totalPages - 1)) {
         includeLast = true;
     }
-    return (<nav className={[
+    return (<nav className={(0, clsx_1.default)([
             'ds_pagination',
             className
-        ].join(' ')} aria-label={ariaLabel} {...props}>
+        ])} aria-label={ariaLabel} {...props}>
             <ul className="ds_pagination__list">
                 {page > 1 && (<exports.Page ariaLabel="Previous page" className="ds_pagination__link--text  ds_pagination__link--icon" data-search="pagination-previous" href={pattern.replace('$1', String(page - 1))} onClick={onClick}>
                         <Icon_1.default icon="ChevronLeft"/>

@@ -37,8 +37,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
-// @ts-ignore
 const skip_links_1 = __importDefault(require("@scottish-government/design-system/src/components/skip-links/skip-links"));
+const clsx_1 = __importDefault(require("clsx"));
 const Link = ({ children, fragmentId }) => {
     return (<li className="ds_skip-links__item">
             <a href={`#${fragmentId}`} className="ds_skip-links__link">{children}</a>
@@ -48,10 +48,10 @@ const SkipLinks = ({ children, mainContentId = 'main-content', mainLinkText = 'S
     (0, react_1.useEffect)(() => {
         skip_links_1.default.init();
     });
-    return (<div className={[
+    return (<div className={(0, clsx_1.default)([
             'ds_skip-links',
-            isStatic && 'ds_skip-links--static',
-        ].join(' ')} {...props}>
+            isStatic && 'ds_skip-links--static'
+        ])} {...props}>
             <ul className="ds_skip-links__list">
                 {children ? children : <Link fragmentId={mainContentId}>{mainLinkText}</Link>}
             </ul>

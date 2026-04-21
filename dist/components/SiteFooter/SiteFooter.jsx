@@ -38,6 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const ConditionalWrapper_1 = __importDefault(require("../../common/ConditionalWrapper"));
+const clsx_1 = __importDefault(require("clsx"));
 const License = ({ children, ...props }) => {
     return (<div className="ds_site-footer__copyright" {...props}>
             {children}
@@ -66,7 +67,7 @@ const Link = ({ children, href, linkComponent, ...props }) => {
 };
 const Org = ({ href, title, children, ...props }) => {
     children = react_1.Children.map(children, child => {
-        let thisChild = child;
+        const thisChild = child;
         if (thisChild && ['img', 'svg', 'picture'].includes(thisChild.type)) {
             return react_1.default.cloneElement(thisChild, { className: 'ds_site-footer__org-logo' });
         }
@@ -81,10 +82,10 @@ const Org = ({ href, title, children, ...props }) => {
         </div>);
 };
 const SiteFooter = ({ children, className, ...props }) => {
-    return (<footer className={[
+    return (<footer className={(0, clsx_1.default)([
             "ds_site-footer",
             className
-        ].join(' ')} {...props}>
+        ])} {...props}>
             <div className="ds_wrapper">
                 <div className="ds_site-footer__content">
                     {children}

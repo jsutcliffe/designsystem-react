@@ -39,7 +39,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const Icon_1 = __importDefault(require("../../common/Icon"));
 const SiteNavigation_1 = __importDefault(require("../SiteNavigation"));
-// @ts-ignore
 const site_navigation_1 = __importDefault(require("@scottish-government/design-system/src/components/site-navigation/site-navigation"));
 const Brand = ({ children, homeUrl = '/', linkComponent, siteTitle }) => {
     function processChildren(children) {
@@ -96,6 +95,7 @@ const SiteHeader = ({ children, ...props }) => {
         }
     });
     (0, react_1.useEffect)(() => {
+        /* istanbul ignore else */
         if (mobileMenuRef.current) {
             new site_navigation_1.default(mobileMenuRef.current).init();
         }
