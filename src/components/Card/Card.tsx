@@ -5,7 +5,7 @@ import AspectBox from '../AspectBox';
 import Metadata from '../PageMetadata';
 import Tag from '../Tag';
 import { CardProps, CardHeaderProps, CardMediaProps, CardStatusTagProps } from "./types";
-import { HeadingLevel, LinkComponent } from '@/src/shared-types';
+import { HeadingLevel, LinkComponent } from '../../shared-types';
 import clsx from 'clsx';
 
 type CardSettingsContextProps = {
@@ -124,7 +124,7 @@ const CardMedia = ({
     ...props
 }: CardMediaProps) => {
     return (
-        <div 
+        <div
             className={clsx([
                 'ds_card__media',
                 isCover && ratio && 'ds_card__media--cover',

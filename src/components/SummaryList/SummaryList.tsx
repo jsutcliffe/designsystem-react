@@ -2,7 +2,7 @@ import React, { Children, useId } from 'react';
 import ActionLink from '../../common/ActionLink';
 import ConditionalWrapper from '../../common/ConditionalWrapper';
 import { SummaryListItemProps, SummaryListProps } from './types';
-import { ActionLinkProps } from '@/src/common/ActionLink/types';
+import { ActionLinkProps } from '../../common/ActionLink/types';
 import clsx from 'clsx';
 
 const Item = ({
