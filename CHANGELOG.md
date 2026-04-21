@@ -6,6 +6,29 @@ Changes are grouped under the labels: `Added`, `Changed`, `Deprecated`, `Fixed`,
 `Removed` and `Security`.
 
 ---
+
+## [1.0.0] - 2026-04-21
+
+### Added
+- Card component
+- FeatureHeader component
+- NotificationTag component
+- New 'isWrap' prop added to ButtonGroup
+### Changed
+- SearchResult.Meta altered to be a clearer implementation of the Metadata component, with Metadata.Item children
+- Use the clsx package to handle className concatenation in components
+- Component updates required by SG Design System v4
+  - AspectBox: remove useEffect (an IE11 fallback)
+  - DatePicker: remove 'iconPath' prop
+  - FileDownload: add outline modifier class to cover images
+### Fixed
+- HideThisPage: pass ref.current to the function call in useEffect
+- SiteSearch: check for presence of an autocomplete element before firing the DS script
+### Security
+- Update dependencies
+
+---
+
 ## [0.13.0] - 2025-12-19
 
 ### Added
