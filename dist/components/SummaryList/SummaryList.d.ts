@@ -1,6 +1,6 @@
 import React from 'react';
 import { SummaryListItemProps, SummaryListProps } from './types';
-import { ActionLinkProps } from '@/src/common/ActionLink/types';
+import { ActionLinkProps } from '../../common/ActionLink/types';
 declare const SummaryList: {
     ({ children, className, isBorderless, ...props }: SummaryListProps): React.JSX.Element;
     Action: {
